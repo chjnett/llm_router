@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adaptive SLM–LLM Routing Architecture v1.0</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121a2f;
+      --panel2:#18233f;
+      --text:#eef3ff;
+      --muted:#aab7d6;
+      --line:#2b3a63;
+      --accent:#7aa2ff;
+      --accent2:#6ee7b7;
+      --warn:#f6c177;
+      --danger:#ff7b8a;
+      --chip:#223257;
+      --ok:#88d498;
+      --shadow:0 14px 40px rgba(0,0,0,.22);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(122,162,255,.12), transparent 30%),
+        radial-gradient(circle at top left, rgba(110,231,183,.08), transparent 25%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    .layout{
+      display:grid;
+      grid-template-columns:280px minmax(0,1fr);
+      min-height:100vh;
+    }
+    aside{
+      position:sticky;
+      top:0;
+      height:100vh;
+      padding:28px 20px;
+      border-right:1px solid var(--line);
+      background:rgba(11,16,32,.88);
+      backdrop-filter:blur(12px);
+      overflow:auto;
+    }
+    .brand{
+      font-weight:800;
+      font-size:1.05rem;
+      letter-spacing:.01em;
+      margin-bottom:6px;
+    }
+    .version{
+      color:var(--accent2);
+      font-size:.85rem;
+      margin-bottom:24px;
+    }
+    nav a{
+      display:block;
+      padding:9px 10px;
+      margin:3px 0;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:10px;
+      transition:.18s ease;
+      font-size:.93rem;
+    }
+    nav a:hover{
+      color:var(--text);
+      background:var(--panel2);
+      transform:translateX(2px);
+    }
+    .sidebar-note{
+      margin-top:24px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--panel);
+      color:var(--muted);
+      font-size:.84rem;
+    }
+    main{
+      width:min(1220px, calc(100vw - 280px));
+      padding:48px clamp(24px,4vw,56px) 90px;
+    }
+    .hero{
+      padding:36px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:linear-gradient(145deg, rgba(24,35,63,.96), rgba(18,26,47,.96));
+      box-shadow:var(--shadow);
+      margin-bottom:34px;
+    }
+    .eyebrow{
+      color:var(--accent2);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:.8rem;
+      font-weight:800;
+    }
+    h1{
+      font-size:clamp(2rem,4vw,3.7rem);
+      line-height:1.06;
+      margin:.4rem 0 1rem;
+      max-width:900px;
+    }
+    .hero p{
+      color:var(--muted);
+      max-width:900px;
+      font-size:1.05rem;
+    }
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:22px;
+    }
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:var(--chip);
+      color:#dbe6ff;
+      border:1px solid #334979;
+      font-size:.83rem;
+    }
+    section{
+      margin-top:34px;
+      scroll-margin-top:24px;
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .section-title .num{
+      width:34px;height:34px;border-radius:10px;
+      display:grid;place-items:center;
+      background:var(--accent);
+      color:#08101f;
+      font-weight:900;
+    }
+    h2{margin:0;font-size:1.55rem}
+    h3{margin-top:28px;font-size:1.08rem}
+    p{color:#dde6fb}
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      background:rgba(18,26,47,.88);
+      box-shadow:0 8px 26px rgba(0,0,0,.12);
+    }
+    .card h3{margin:0 0 8px}
+    .card p{margin:0}
+    .callout{
+      border-left:4px solid var(--accent2);
+      background:rgba(110,231,183,.08);
+      padding:18px 20px;
+      border-radius:0 14px 14px 0;
+      margin:16px 0;
+    }
+    .callout.warn{
+      border-left-color:var(--warn);
+      background:rgba(246,193,119,.08);
+    }
+    code, .formula{
+      font-family:"SFMono-Regular",Consolas,monospace;
+    }
+    .formula{
+      display:block;
+      padding:16px 18px;
+      border:1px solid var(--line);
+      background:#0d1529;
+      border-radius:14px;
+      overflow:auto;
+      color:#dce9ff;
+      margin:12px 0;
+      white-space:pre-wrap;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:14px 0;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:var(--panel);
+    }
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:var(--panel2);
+      color:#dfe8ff;
+      font-size:.9rem;
+    }
+    tr:last-child td{border-bottom:none}
+    td{color:#cfd9f3}
+    .yes{color:var(--ok);font-weight:700}
+    .no{color:var(--danger);font-weight:700}
+    .diagram{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:center;
+      padding:24px;
+      background:#0d1529;
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:auto;
+    }
+    .node{
+      min-width:220px;
+      max-width:680px;
+      width:fit-content;
+      padding:12px 16px;
+      text-align:center;
+      border:1px solid #3b4f7f;
+      background:#172442;
+      border-radius:14px;
+      box-shadow:0 8px 20px rgba(0,0,0,.15);
+    }
+    .node.accent{border-color:#5479c7;background:#1a2c54}
+    .node.green{border-color:#3d806e;background:#123a33}
+    .node.warn{border-color:#8b6b38;background:#3a2d15}
+    .arrow{color:var(--accent);font-size:1.35rem;line-height:1}
+    .split{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:start;
+      gap:16px;
+      width:100%;
+    }
+    .branch{
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+    }
+    .branch .node{min-width:180px;width:100%;max-width:360px}
+    .plus{align-self:center;color:var(--muted);padding-top:22px}
+    .flow-label{
+      color:var(--muted);
+      font-size:.82rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .todo-toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    button{
+      appearance:none;
+      border:1px solid #3c507e;
+      background:#172442;
+      color:var(--text);
+      padding:9px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    button:hover{background:#20315b}
+    .progress-wrap{
+      margin:14px 0 20px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+      background:var(--panel);
+    }
+    .progress{
+      height:10px;
+      background:#0d1529;
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid #2f416d;
+    }
+    .progress > div{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      transition:width .25s ease;
+    }
+    .todo-group{
+      margin:18px 0;
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      background:var(--panel);
+    }
+    .todo-group h3{
+      margin:0;
+      padding:14px 16px;
+      background:var(--panel2);
+      border-bottom:1px solid var(--line);
+    }
+    .todo-item{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:12px;
+      align-items:start;
+      padding:12px 16px;
+      border-bottom:1px solid rgba(43,58,99,.7);
+    }
+    .todo-item:last-child{border-bottom:none}
+    .todo-item input{
+      margin-top:4px;
+      transform:scale(1.15);
+      accent-color:#7aa2ff;
+    }
+    .todo-item label{cursor:pointer;color:#dbe5fb}
+    .todo-item small{color:var(--muted)}
+    .priority{
+      font-size:.72rem;
+      padding:4px 8px;
+      border-radius:999px;
+      background:#27385f;
+      color:#dfe8ff;
+      white-space:nowrap;
+    }
+    .priority.high{background:#4b2430;color:#ffbac3}
+    .priority.mid{background:#47391d;color:#ffda93}
+    .priority.low{background:#193d35;color:#adf3d7}
+    .done label{
+      text-decoration:line-through;
+      color:#8492b4;
+    }
+    footer{
+      margin-top:48px;
+      color:var(--muted);
+      font-size:.85rem;
+      border-top:1px solid var(--line);
+      padding-top:18px;
+    }
+    @media(max-width:980px){
+      .layout{grid-template-columns:1fr}
+      aside{position:relative;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+      nav{display:flex;flex-wrap:wrap;gap:4px}
+      nav a{display:inline-block}
+      main{width:100%;padding:28px 18px 60px}
+      .grid,.grid.three,.split{grid-template-columns:1fr}
+      .plus{padding:0;text-align:center}
+      .hero{padding:24px}
+    }
+    @media print{
+      body{background:white;color:black}
+      aside,.todo-toolbar{display:none}
+      main{width:100%;padding:0}
+      .card,.hero,.diagram,.todo-group,.progress-wrap,table{
+        box-shadow:none;
+        break-inside:avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand">Adaptive SLM–LLM Routing</div>
+    <div class="version">Architecture v1.0 · KSC Scope</div>
+    <nav>
+      <a href="#overview">1. 연구 개요</a>
+      <a href="#stack">2. 구성요소 확정</a>
+      <a href="#online">3. Online Architecture</a>
+      <a href="#offline">4. Offline Loop</a>
+      <a href="#labels">5. Routing Label</a>
+      <a href="#data">6. 데이터 분리</a>
+      <a href="#distill">7. Distillation</a>
+      <a href="#adapt">8. Router Adaptation</a>
+      <a href="#experiments">9. 실험 조건</a>
+      <a href="#metrics">10. 평가 지표</a>
+      <a href="#hypotheses">11. 연구 가설</a>
+      <a href="#scope">12. KSC 범위</a>
+      <a href="#todo">13. TODO</a>
+    </nav>
+    <div class="sidebar-note">
+      <strong>원칙</strong><br/>
+      v1.0 이후에는 새 모듈을 추가하지 않고, 파일럿 결과에 따라 데이터 규모와 하이퍼파라미터만 조정한다.
+    </div>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">KSC → KCI Research Plan</div>
+      <h1>Adaptive SLM–LLM Routing under Evolving Model Capability</h1>
+      <p>
+        Targeted distillation으로 Lower 모델의 capability가 변화했을 때,
+        parametric router와 non-parametric retrieval router가 변화된 routing boundary에
+        어떻게 적응하는지를 비교하는 연구 아키텍처.
+      </p>
+      <div class="badges">
+        <span class="badge">Lower: Qwen2.5-1.5B-Instruct</span>
+        <span class="badge">Upper: Qwen2.5-7B-Instruct</span>
+        <span class="badge">Embedding: Frozen BGE-small</span>
+        <span class="badge">Router: LR vs kNN</span>
+        <span class="badge">KD: LoRA</span>
+        <span class="badge">GPU: RTX 3090 24GB</span>
+      </div>
+    </div>
+
+    <section id="overview">
+      <div class="section-title"><div class="num">1</div><h2>연구 개요</h2></div>
+      <div class="callout">
+        <strong>핵심 연구 질문</strong><br/>
+        Targeted distillation으로 SLM의 capability가 변화했을 때,
+        parametric router와 non-parametric retrieval router가 변화된 모델 능력에
+        어떻게 적응하며 quality–cost trade-off가 어떻게 달라지는가?
+      </div>
+      <div class="formula">Lower capability change
+        ↓
+Capability-induced routing shift
+        ↓
+Router adaptation
+        ↓
+Quality–Cost trade-off 변화</div>
+
+      <div class="grid three">
+        <div class="card">
+          <h3>H1 · Router 비교</h3>
+          <p>Logistic Regression과 frozen embedding 기반 kNN retrieval router의 routing 성능 비교.</p>
+        </div>
+        <div class="card">
+          <h3>H2 · Targeted KD</h3>
+          <p>동일 데이터 예산에서 random KD 대비 cluster-balanced targeted KD가 더 효과적인지 확인.</p>
+        </div>
+        <div class="card">
+          <h3>H3 · 핵심</h3>
+          <p>Lower 개선 후 LR retraining과 kNN pool rebuilding이 routing shift에 어떻게 적응하는지 비교.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="section-title"><div class="num">2</div><h2>구성요소 확정</h2></div>
+      <table>
+        <thead>
+          <tr><th>구성요소</th><th>최종 선택</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lower</td><td>Qwen2.5-1.5B-Instruct</td><td>LoRA로만 업데이트</td></tr>
+          <tr><td>Upper</td><td>Qwen2.5-7B-Instruct</td><td>Frozen teacher</td></tr>
+          <tr><td>Embedding</td><td>BGE-small-en-v1.5</td><td>384-d, frozen</td></tr>
+          <tr><td>Parametric Router</td><td>Logistic Regression</td><td>학습 기반</td></tr>
+          <tr><td>Non-parametric Router</td><td>kNN Retrieval</td><td>Top-k + majority vote</td></tr>
+          <tr><td>Failure Clustering</td><td>K-means</td><td>PCA 없이 embedding 그대로 사용</td></tr>
+          <tr><td>Distillation</td><td>Verified Upper Output → Lower LoRA</td><td>Resolvable failure만 사용</td></tr>
+          <tr><td>Dataset</td><td>MMLU + GSM8K + MBPP</td><td>자동 scorer 중심</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <strong>KSC에서 제외:</strong>
+        MLP, PCA, UMAP, conformal prediction, contrastive retriever tuning,
+        learned retriever, multi-router ensemble, iterative KD, LLM judge, 14B+ teacher.
+      </div>
+    </section>
+
+    <section id="online">
+      <div class="section-title"><div class="num">3</div><h2>Online Serving Architecture</h2></div>
+      <div class="diagram">
+        <div class="node accent">User Query</div>
+        <div class="arrow">↓</div>
+        <div class="node">Frozen BGE-small<br><span class="muted">384-d query embedding</span></div>
+        <div class="arrow">↓</div>
+        <div class="flow-label">실험 조건에 따라 하나만 선택</div>
+        <div class="split">
+          <div class="branch">
+            <div class="node green">Parametric Router<br><strong>Logistic Regression</strong></div>
+            <div class="arrow">↓</div>
+            <div class="node">P(lower-safe | x)<br>threshold τ</div>
+          </div>
+          <div class="plus">VS</div>
+          <div class="branch">
+            <div class="node green">Non-parametric Router<br><strong>kNN Retrieval</strong></div>
+            <div class="arrow">↓</div>
+            <div class="node">Top-k similar queries<br>majority vote</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="node accent">Routing Decision</div>
+        <div class="arrow">↓</div>
+        <div class="split">
+          <div class="branch">
+            <div class="node">Lower<br><strong>Qwen2.5-1.5B</strong></div>
+          </div>
+          <div class="plus">OR</div>
+          <div class="branch">
+            <div class="node">Upper<br><strong>Qwen2.5-7B</strong></div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="node green">Final Response</div>
+      </div>
+    </section>
+
+    <section id="offline">
+      <div class="section-title"><div class="num">4</div><h2>Offline Failure–Distillation–Adaptation Loop</h2></div>
+      <div class="diagram">
+        <div class="node accent">Dataset</div>
+        <div class="arrow">↓</div>
+        <div class="split">
+          <div class="branch">
+            <div class="node">R_train<br><span class="muted">Router training / expert pool</span></div>
+          </div>
+          <div class="plus">+</div>
+          <div class="branch">
+            <div class="node">D_train<br><span class="muted">Distillation source</span></div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="node">Lower / Upper Evaluation + Gold Scoring</div>
+        <div class="arrow">↓</div>
+        <div class="node warn">Resolvable Failures<br><strong>Lower ❌ + Upper ✅</strong></div>
+        <div class="arrow">↓</div>
+        <div class="node">Frozen BGE → L2 Normalize → K-means</div>
+        <div class="arrow">↓</div>
+        <div class="node green">Cluster-balanced Sampling</div>
+        <div class="arrow">↓</div>
+        <div class="node">Verified Upper Responses</div>
+        <div class="arrow">↓</div>
+        <div class="node accent">LoRA SFT → Improved Lower′</div>
+        <div class="arrow">↓</div>
+        <div class="node">Re-evaluate R_train with Lower′</div>
+        <div class="arrow">↓</div>
+        <div class="node warn">Updated Routing Labels<br><span class="muted">Capability-induced routing shift</span></div>
+        <div class="arrow">↓</div>
+        <div class="split">
+          <div class="branch">
+            <div class="node green">LR Retraining</div>
+          </div>
+          <div class="plus">VS</div>
+          <div class="branch">
+            <div class="node green">kNN Pool Rebuilding</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="node accent">Updated Router → Test Set Evaluation</div>
+      </div>
+    </section>
+
+    <section id="labels">
+      <div class="section-title"><div class="num">5</div><h2>Routing Label 정의</h2></div>
+      <table>
+        <thead><tr><th>Lower</th><th>Upper</th><th>분류</th><th>Router Label</th><th>KD</th></tr></thead>
+        <tbody>
+          <tr><td>✅</td><td>✅</td><td>Easy</td><td>Lower</td><td class="no">제외</td></tr>
+          <tr><td>✅</td><td>❌</td><td>Lower-specialized</td><td>Lower</td><td class="no">제외</td></tr>
+          <tr><td>❌</td><td>✅</td><td>Resolvable Failure</td><td>Upper</td><td class="yes">사용</td></tr>
+          <tr><td>❌</td><td>❌</td><td>Unsolvable</td><td>Router train 제외</td><td class="no">제외</td></tr>
+        </tbody>
+      </table>
+
+      <div class="formula">y(x) =
+1  if Lower(x) is correct
+0  if Lower(x) is wrong AND Upper(x) is correct
+
+Both-wrong examples:
+- Router training에서는 제외
+- 최종 test metric에는 포함</div>
+
+      <p class="muted">Router의 질문은 “어느 모델이 더 좋은가?”가 아니라 “이 query를 Lower에게 안전하게 맡길 수 있는가?”이다.</p>
+    </section>
+
+    <section id="data">
+      <div class="section-title"><div class="num">6</div><h2>데이터 분리 원칙</h2></div>
+      <table>
+        <thead><tr><th>Split</th><th>권장 비율</th><th>용도</th></tr></thead>
+        <tbody>
+          <tr><td>R_train</td><td>50%</td><td>LR 학습 / kNN expert pool 구축</td></tr>
+          <tr><td>D_train</td><td>20%</td><td>Resolvable failure 추출 및 distillation</td></tr>
+          <tr><td>Validation</td><td>10%</td><td>threshold τ, k 등 결정</td></tr>
+          <tr><td>Test</td><td>20%</td><td>최종 평가 전용</td></tr>
+        </tbody>
+      </table>
+      <div class="formula">D_train ∩ R_train = ∅
+D_train ∩ Test = ∅
+R_train ∩ Test = ∅</div>
+      <div class="callout warn">
+        Distillation에 사용된 query와 router 학습 query를 분리해
+        “Lower가 외운 문제 때문에 routing label이 바뀐 것”과 실제 capability shift를 구분한다.
+      </div>
+    </section>
+
+    <section id="distill">
+      <div class="section-title"><div class="num">7</div><h2>Targeted Distillation</h2></div>
+      <div class="grid">
+        <div class="card">
+          <h3>Random KD Baseline</h3>
+          <p>Resolvable failure 집합에서 동일한 개수 N을 무작위로 샘플링하여 LoRA.</p>
+        </div>
+        <div class="card">
+          <h3>Cluster-balanced KD</h3>
+          <p>K-means 후 각 cluster에서 균등하게 샘플링하여 다양한 failure mode를 포함.</p>
+        </div>
+      </div>
+      <div class="formula">F_KD = { x | Lower(x)=Wrong ∧ Upper(x)=Correct }
+
+N_random = N_cluster
+
+예시:
+K = 8
+cluster당 50개
+총 N = 400</div>
+
+      <div class="callout">
+        Upper가 틀린 example은 teacher target으로 사용하지 않는다.
+        실제 gold scorer로 정답임이 확인된 Upper response만 LoRA target에 포함한다.
+      </div>
+    </section>
+
+    <section id="adapt">
+      <div class="section-title"><div class="num">8</div><h2>Router Adaptation</h2></div>
+      <div class="grid three">
+        <div class="card">
+          <h3>No Adaptation</h3>
+          <p>Lower′로 개선됐지만 기존 router를 그대로 유지. Adaptation 필요성 검증용 baseline.</p>
+        </div>
+        <div class="card">
+          <h3>LR Retraining</h3>
+          <p>R_train을 Lower′로 재평가한 새 routing label을 사용해 LR을 처음부터 다시 학습.</p>
+        </div>
+        <div class="card">
+          <h3>kNN Pool Rebuild</h3>
+          <p>기존 embedding은 재사용하고, Lower′ 재평가 결과에 따라 expert label만 다시 구축.</p>
+        </div>
+      </div>
+      <div class="formula">Before:
+Lower⁽⁰⁾ → y⁽⁰⁾(x)
+
+After KD:
+Lower⁽¹⁾ → y⁽¹⁾(x)
+
+Possible:
+y⁽⁰⁾(x) ≠ y⁽¹⁾(x)</div>
+    </section>
+
+    <section id="experiments">
+      <div class="section-title"><div class="num">9</div><h2>최종 실험 조건</h2></div>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Lower</th><th>Router</th><th>Distillation</th><th>Adaptation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>B0</td><td>Original</td><td>Always Lower</td><td>없음</td><td>-</td></tr>
+          <tr><td>B1</td><td>Original</td><td>Always Upper</td><td>없음</td><td>-</td></tr>
+          <tr><td>B2</td><td>Original</td><td>Oracle</td><td>없음</td><td>-</td></tr>
+          <tr><td>R-LR</td><td>Original</td><td>LR</td><td>없음</td><td>-</td></tr>
+          <tr><td>R-kNN</td><td>Original</td><td>kNN</td><td>없음</td><td>-</td></tr>
+          <tr><td>KD-R</td><td>Random KD</td><td>LR</td><td>Random</td><td>Retrain</td></tr>
+          <tr><td>KD-C</td><td>Cluster KD</td><td>LR</td><td>Cluster-balanced</td><td>Retrain</td></tr>
+          <tr><td>A-None</td><td>Cluster KD</td><td>Old Router</td><td>Cluster-balanced</td><td>없음</td></tr>
+          <tr><td>A-LR</td><td>Cluster KD</td><td>LR</td><td>Cluster-balanced</td><td>Retrain</td></tr>
+          <tr><td>A-kNN</td><td>Cluster KD</td><td>kNN</td><td>Cluster-balanced</td><td>Pool rebuild</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="metrics">
+      <div class="section-title"><div class="num">10</div><h2>평가 지표</h2></div>
+      <div class="grid three">
+        <div class="card"><h3>Task Accuracy</h3><p>최종 시스템 응답 정확도.</p></div>
+        <div class="card"><h3>Lower Accuracy</h3><p>Distillation 전후 Lower 자체 성능.</p></div>
+        <div class="card"><h3>Resolvable Failure Acc.</h3><p>target failure 영역에서의 개선폭.</p></div>
+        <div class="card"><h3>Lower Coverage</h3><p>전체 query 중 Lower가 처리한 비율.</p></div>
+        <div class="card"><h3>Upper Call Rate</h3><p>비싼 Upper 모델 호출 비율.</p></div>
+        <div class="card"><h3>Unsafe Routing Rate</h3><p>Lower로 보냈으나 Lower가 틀린 비율.</p></div>
+        <div class="card"><h3>Normalized Cost</h3><p>Always-Upper 대비 상대 계산 비용.</p></div>
+        <div class="card"><h3>Routing Accuracy</h3><p>routing label 예측 정확도.</p></div>
+        <div class="card"><h3>Adaptation Gain</h3><p>router update 전후 quality–cost 개선량.</p></div>
+      </div>
+
+      <h3>Threshold 정책</h3>
+      <div class="formula">maximize   Lower Coverage(τ)
+
+subject to
+Quality(τ) ≥ 0.95 × Quality(Always Upper)</div>
+      <p class="muted">최종 논문에는 단일 τ 결과뿐 아니라 quality–cost curve도 함께 제시한다.</p>
+    </section>
+
+    <section id="hypotheses">
+      <div class="section-title"><div class="num">11</div><h2>연구 가설</h2></div>
+      <div class="card">
+        <h3>H1</h3>
+        <p>Frozen query embedding을 사용하는 단순 kNN retrieval router는 parametric LR router와 경쟁 가능한 quality–cost routing 성능을 보이는가?</p>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h3>H2</h3>
+        <p>Cluster-balanced targeted distillation은 동일 데이터 예산의 random distillation보다 SLM의 resolvable failure를 효과적으로 감소시키는가?</p>
+      </div>
+      <div class="card" style="margin-top:12px;border-color:#4f75be">
+        <h3>H3 · Main</h3>
+        <p>SLM capability가 distillation으로 변화한 이후 router adaptation은 quality–cost trade-off를 개선하며, non-parametric pool rebuilding은 parametric retraining에 대한 경쟁력 있는 adaptation 방법인가?</p>
+      </div>
+    </section>
+
+    <section id="scope">
+      <div class="section-title"><div class="num">12</div><h2>KSC 범위와 KCI 확장</h2></div>
+      <div class="grid">
+        <div class="card">
+          <h3>KSC v1.0</h3>
+          <ul>
+            <li>Qwen2.5-1.5B ↔ 7B</li>
+            <li>MMLU / GSM8K / MBPP</li>
+            <li>Frozen BGE-small</li>
+            <li>LR vs kNN</li>
+            <li>Random KD vs Cluster-balanced KD</li>
+            <li>Distillation 1회</li>
+            <li>LR retrain vs kNN pool rebuild</li>
+            <li>3 seeds 권장</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>KCI 확장 후보</h3>
+          <ul>
+            <li>Multi-iteration distillation</li>
+            <li>Model pair 추가</li>
+            <li>xRouteBench / RouterBench 계열</li>
+            <li>Conformal calibration</li>
+            <li>Embedding sensitivity</li>
+            <li>Weighted kNN / learned retrieval</li>
+            <li>Latency / wall-clock update cost</li>
+            <li>통계적 유의성 분석 강화</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="todo">
+      <div class="section-title"><div class="num">13</div><h2>TODO 체크리스트</h2></div>
+
+      <div class="todo-toolbar">
+        <button id="checkAll">전체 완료</button>
+        <button id="clearAll">전체 해제</button>
+        <button id="resetStorage">진행상황 초기화</button>
+      </div>
+
+      <div class="progress-wrap">
+        <div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:8px">
+          <strong>전체 진행률</strong>
+          <span id="progressText" class="muted">0 / 0</span>
+        </div>
+        <div class="progress"><div id="progressBar"></div></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 0 · 환경 및 저장 구조</h3>
+        <div class="todo-item"><input type="checkbox" id="t01"><label for="t01"><strong>프로젝트 디렉토리 구조 확정</strong><br><small>configs / data / outputs / embeddings / routers / distill / results 분리</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t02"><label for="t02"><strong>RTX 3090 환경 점검</strong><br><small>PyTorch CUDA, transformers, accelerate, peft, sentence-transformers, sklearn 설치</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t03"><label for="t03"><strong>모델 로딩 테스트</strong><br><small>Qwen2.5-1.5B / 7B 각각 단독 inference 확인</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t04"><label for="t04"><strong>재현성 설정</strong><br><small>seed, generation params, package version, GPU 정보 기록</small></label><span class="priority mid">MID</span></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 1 · 데이터셋 및 Scorer</h3>
+        <div class="todo-item"><input type="checkbox" id="t05"><label for="t05"><strong>MMLU loader 구현</strong><br><small>prompt format 및 exact choice scoring 고정</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t06"><label for="t06"><strong>GSM8K loader + scorer 구현</strong><br><small>최종 numerical answer extraction 규칙 고정</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t07"><label for="t07"><strong>MBPP loader + scorer 구현</strong><br><small>코드 실행 sandbox / test case 기준 고정</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t08"><label for="t08"><strong>R_train / D_train / Val / Test 분리</strong><br><small>split leakage 없는지 검증</small></label><span class="priority high">HIGH</span></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 2 · Initial Model Evaluation</h3>
+        <div class="todo-item"><input type="checkbox" id="t09"><label for="t09"><strong>Lower inference 캐싱</strong><br><small>dataset별 lower_output.jsonl 생성</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t10"><label for="t10"><strong>Upper inference 캐싱</strong><br><small>dataset별 upper_output.jsonl 생성</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t11"><label for="t11"><strong>4-way outcome 생성</strong><br><small>both-correct / lower-only / upper-only / both-wrong</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t12"><label for="t12"><strong>모델 complementarity 확인</strong><br><small>Resolvable failure 비율 및 Oracle gain 계산</small></label><span class="priority high">HIGH</span></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 3 · Embedding & Baseline Router</h3>
+        <div class="todo-item"><input type="checkbox" id="t13"><label for="t13"><strong>BGE embedding 캐싱</strong><br><small>split별 .npy 저장, L2 normalization 적용</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t14"><label for="t14"><strong>Logistic Regression router 구현</strong><br><small>validation threshold 포함</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t15"><label for="t15"><strong>kNN retrieval router 구현</strong><br><small>Top-k majority vote 및 confidence 계산</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t16"><label for="t16"><strong>Always Lower / Upper / Oracle baseline 구현</strong></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t17"><label for="t17"><strong>초기 quality–cost curve 생성</strong></label><span class="priority mid">MID</span></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 4 · Failure Analysis & Distillation</h3>
+        <div class="todo-item"><input type="checkbox" id="t18"><label for="t18"><strong>F_KD 추출</strong><br><small>Lower wrong AND Upper correct only</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t19"><label for="t19"><strong>K-means clustering 구현</strong><br><small>K 기본값 설정, cluster size 분석</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t20"><label for="t20"><strong>Random KD 샘플 생성</strong><br><small>N 고정</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t21"><label for="t21"><strong>Cluster-balanced KD 샘플 생성</strong><br><small>Random과 동일한 N 보장</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t22"><label for="t22"><strong>Verified teacher target 생성</strong><br><small>Upper 정답 여부 재검증</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t23"><label for="t23"><strong>Lower LoRA 학습</strong><br><small>Random KD / Cluster KD 각각 실행</small></label><span class="priority high">HIGH</span></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 5 · Capability Shift & Router Adaptation</h3>
+        <div class="todo-item"><input type="checkbox" id="t24"><label for="t24"><strong>Lower′ 전체 R_train 재평가</strong></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t25"><label for="t25"><strong>Routing label shift 통계 계산</strong><br><small>Upper→Lower, Lower→Upper 변화율 기록</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t26"><label for="t26"><strong>No Adaptation baseline 평가</strong></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t27"><label for="t27"><strong>LR retraining 수행</strong></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t28"><label for="t28"><strong>kNN expert pool rebuild 수행</strong></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t29"><label for="t29"><strong>Adaptation gain 비교</strong><br><small>NoAdapt vs LR vs kNN</small></label><span class="priority high">HIGH</span></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 6 · 최종 평가 및 논문용 분석</h3>
+        <div class="todo-item"><input type="checkbox" id="t30"><label for="t30"><strong>3 seeds 실행</strong><br><small>LoRA / clustering / sampling stochasticity 중심</small></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t31"><label for="t31"><strong>Task Accuracy 표 생성</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t32"><label for="t32"><strong>Upper Call Rate / Lower Coverage 표 생성</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t33"><label for="t33"><strong>Unsafe Routing Rate 계산</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t34"><label for="t34"><strong>Normalized Cost 비교</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t35"><label for="t35"><strong>Random KD vs Cluster KD 비교 그래프</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t36"><label for="t36"><strong>Capability-induced routing shift 시각화</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t37"><label for="t37"><strong>LR vs kNN adaptation 결과표 작성</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t38"><label for="t38"><strong>Failure case qualitative analysis</strong><br><small>대표 cluster 및 routing shift 예시 정리</small></label><span class="priority low">LOW</span></div>
+      </div>
+
+      <div class="todo-group">
+        <h3>Phase 7 · KSC 제출 준비</h3>
+        <div class="todo-item"><input type="checkbox" id="t39"><label for="t39"><strong>Contribution 3개 문장 확정</strong></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t40"><label for="t40"><strong>Related Work 정리</strong><br><small>RouteLLM / OrchestraLLM / RouteNLP / retrieval router / router benchmark</small></label><span class="priority high">HIGH</span></div>
+        <div class="todo-item"><input type="checkbox" id="t41"><label for="t41"><strong>Architecture figure 제작</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t42"><label for="t42"><strong>Experiment table 제작</strong></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t43"><label for="t43"><strong>Limitation 정리</strong><br><small>single GPU, 2-model pair, frozen embedding, 1-loop KD</small></label><span class="priority mid">MID</span></div>
+        <div class="todo-item"><input type="checkbox" id="t44"><label for="t44"><strong>KCI 확장 항목 별도 문서화</strong></label><span class="priority low">LOW</span></div>
+      </div>
+    </section>
+
+    <footer>
+      Architecture v1.0 · Standalone HTML · TODO 상태는 브라우저 localStorage에 저장됩니다.
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  const boxes = [...document.querySelectorAll('.todo-item input[type="checkbox"]')];
+  const bar = document.getElementById('progressBar');
+  const text = document.getElementById('progressText');
+  const KEY = 'adaptive-routing-v1-todos';
+
+  function load(){
+    try{
+      const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+      boxes.forEach(b => b.checked = !!saved[b.id]);
+    }catch(e){}
+    update();
+  }
+
+  function save(){
+    const state = {};
+    boxes.forEach(b => state[b.id] = b.checked);
+    localStorage.setItem(KEY, JSON.stringify(state));
+    update();
+  }
+
+  function update(){
+    const done = boxes.filter(b => b.checked).length;
+    const total = boxes.length;
+    const pct = total ? Math.round(done/total*100) : 0;
+    bar.style.width = pct + '%';
+    text.textContent = `${done} / ${total} (${pct}%)`;
+    boxes.forEach(b => b.closest('.todo-item').classList.toggle('done', b.checked));
+  }
+
+  boxes.forEach(b => b.addEventListener('change', save));
+
+  document.getElementById('checkAll').addEventListener('click', () => {
+    boxes.forEach(b => b.checked = true);
+    save();
+  });
+
+  document.getElementById('clearAll').addEventListener('click', () => {
+    boxes.forEach(b => b.checked = false);
+    save();
+  });
+
+  document.getElementById('resetStorage').addEventListener('click', () => {
+    localStorage.removeItem(KEY);
+    boxes.forEach(b => b.checked = false);
+    update();
+  });
+
+  load();
+})();
+</script>
+</body>
+</html>
