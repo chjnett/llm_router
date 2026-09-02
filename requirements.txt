@@ -1,0 +1,10 @@
+accelerate>=1.0
+bitsandbytes>=0.45
+datasets>=3.0
+numpy>=1.26
+peft>=0.14
+pyyaml>=6.0
+scikit-learn>=1.5
+torch>=2.4
+transformers>=4.48
+
