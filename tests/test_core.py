@@ -4,6 +4,7 @@ from src.metrics import routing_labels, select_operating_point, system_metrics
 from src.prepare_data import split_rows
 from src.scoring import extract_final_number, gsm8k_correct
 from src.run_selective_consistency import cascade
+from src.run_risk_bound_calibration import binomial_upper
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -59,3 +60,9 @@ def test_selective_consistency_counts_every_model_call():
     # Initial Lower 4 + second Lower 2 + Upper 2*4 = 14; Always Upper = 16.
     assert metrics["normalized_cascade_cost"] == 14 / 16
     assert metrics["task_accuracy"] == 1.0
+
+
+def test_binomial_upper_bound_is_conservative():
+    assert 0.0 < binomial_upper(0, 200) < 0.02
+    assert binomial_upper(7, 200) > 0.05
+    assert binomial_upper(4, 200) < binomial_upper(5, 200)

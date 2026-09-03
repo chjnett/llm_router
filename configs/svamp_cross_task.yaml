@@ -2,6 +2,8 @@ seed: 42
 dataset:
   name: ChilleD/SVAMP
   validation_size: 200
+  risk_selection_size: 250
+  risk_certification_size: 250
   test_size: 300
 models:
   lower: Qwen/Qwen2.5-1.5B-Instruct
