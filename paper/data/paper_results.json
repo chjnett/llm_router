@@ -1,0 +1,49 @@
+{
+  "provenance": {
+    "date": "2026-09-03",
+    "hardware": "NVIDIA GeForce RTX 3090",
+    "lower": "Qwen2.5-1.5B-Instruct (4-bit)",
+    "upper": "Qwen2.5-7B-Instruct (4-bit)",
+    "datasets": ["GSM8K", "SVAMP"],
+    "policy": {"low_threshold": 0.12, "high_threshold": 0.80}
+  },
+  "latency": {
+    "sample_count": 128,
+    "batch_size": 16,
+    "repeats": 2,
+    "full_second_pass_ms": 492.9661933593934,
+    "answer_only_ms": 29.147434375090597,
+    "full_second_pass_tokens": 124.5546875,
+    "answer_only_tokens": 5.3984375,
+    "latency_reduction": 0.9408733605514388
+  },
+  "evaluation": {
+    "risk_certification": {
+      "count": 250,
+      "always_upper": {"accuracy": 0.888, "cost": 1.0},
+      "c3": {"accuracy": 0.888, "unsafe": 0.020, "cost": 1.0077142838591837},
+      "answer_only": {"accuracy": 0.880, "unsafe": 0.028, "cost": 0.7771312276850557},
+      "accuracy_delta_ci95": [-0.024, 0.008],
+      "cost_delta_ci95": [-0.28703567749267717, -0.17375822778023992],
+      "mcnemar_p": 0.625,
+      "unsafe_upper_95": 0.05194700438197349
+    },
+    "official_test": {
+      "count": 300,
+      "always_upper": {"accuracy": 0.880, "cost": 1.0},
+      "c3": {"accuracy": 0.8766666666666667, "unsafe": 0.010, "cost": 1.044523807681973},
+      "answer_only": {"accuracy": 0.8566666666666667, "unsafe": 0.030, "cost": 0.8058154073652165},
+      "accuracy_delta_ci95": [-0.043333333333333335, 0.00008333333333212068],
+      "cost_delta_ci95": [-0.29582461943477933, -0.18265595746374513],
+      "mcnemar_p": 0.14599609375
+    }
+  },
+  "selection_pareto": [
+    {"cost": 0.21428571275510203, "accuracy": 0.724, "label": "lower only"},
+    {"cost": 0.34416087187850525, "accuracy": 0.760, "label": "0.12/0.36"},
+    {"cost": 0.4337319511440593, "accuracy": 0.796, "label": "0.12/0.49"},
+    {"cost": 0.5476577902437707, "accuracy": 0.832, "label": "0.12/0.58"},
+    {"cost": 0.7935873474718295, "accuracy": 0.860, "label": "frozen 0.12/0.80"},
+    {"cost": 0.8181955071875279, "accuracy": 0.872, "label": "0.12/0.82"}
+  ]
+}
