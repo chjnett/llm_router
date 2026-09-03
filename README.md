@@ -46,3 +46,7 @@ and intentionally excluded from Git.
 The active configs use the 1.5B/7B pair and a normalized Upper cost of 4.667. See
 `adaptive_slm_llm_routing_architecture_v1.html` for the unified architecture, experiment
 timeline, negative results, and current performance tables.
+
+For paper writing, use `OVERLEAF_KSC_PAPER_GUIDE.md` as the single source of instructions.
+Publication figures are tracked in `paper/figures/` as PDF, SVG, and PNG, and can be regenerated
+from `paper/data/paper_results.json` with `python -m src.render_paper_figures`.
