@@ -7,6 +7,7 @@ from src.run_selective_consistency import cascade
 from src.run_risk_bound_calibration import binomial_upper
 from src.run_low_cost_verifier import verifier_cascade
 from src.benchmark_verifier_latency import completion_lengths
+from src.analyze_verifier_performance import route_items
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -89,3 +90,15 @@ def test_low_cost_verifier_uses_fractional_second_call_cost():
 def test_completion_lengths_stop_before_eos():
     rows = np.asarray([[10, 11, 2, 2], [20, 21, 22, 23]])
     assert completion_lengths(rows, eos_token_id=2) == [2, 4]
+
+
+def test_performance_analysis_returns_item_level_metrics():
+    inputs = (
+        np.asarray([0.9, 0.5, 0.1]),
+        np.asarray([False, True, False]),
+        np.asarray([True, True, False]),
+        np.asarray([True, True, True]),
+    )
+    items = route_items(inputs, 0.4, 0.8, 1.0, 0.25, 4.0)
+    assert items["correct"].tolist() == [1.0, 1.0, 1.0]
+    assert np.isclose(items["cost"].mean(), (1.0 + 1.25 + 5.0) / 3 / 4)
