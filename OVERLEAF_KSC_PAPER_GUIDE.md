@@ -144,6 +144,7 @@ PDF를 우선 사용하는 이유는 벡터 선과 글자가 확대해도 선명
 \usepackage{amsmath}
 \usepackage{xcolor}
 \usepackage{multirow}
+\usepackage{balance}
 
 \title{출력 신뢰도와 저비용 정답 검증을 이용한 적응형 SLM--LLM 라우팅}
 \author{
@@ -269,7 +270,8 @@ McNemar 검정에서는 유의한 정확도 차이가 관측되지 않았다. �
 
 ```latex
 본 연구의 기여는 다음과 같다. 첫째, 질문 의미와 실제 SLM 출력 confidence를 결합한
-두 임계값 라우팅 구조를 제시한다. 둘째, 전체 재풀이 대신 평균 5.40토큰의 answer-only
+두 임계값 라우팅 구조를 제시한다. 둘째, 전체 재풀이 대신 지연시간 벤치마크 128문항에서
+평균 5.40토큰의 answer-only
 검증을 사용해 동일 GPU에서 두 번째 호출 지연시간을 94.09\% 줄인다. 셋째, 정책 선택과
 평가 split을 분리하고 paired bootstrap 및 McNemar 검정을 통해 정확도--비용 trade-off를
 정량적으로 분석한다. 넷째, 안전 기준의 근소 실패도 함께 보고하여 방법의 적용 범위를
@@ -309,7 +311,8 @@ SLM의 정답 전용 재생성을 이용해 첫 출력과의 숫자 일치를 �
 self-consistency가 동일 프롬프트에서 확률적으로 여러 출력을 표본화해 다수결하는 것과
 달리~\cite{wang2023selfconsistency}, 본 방법은 greedy decoding을 유지하면서 풀이 프롬프트와 정답 전용 프롬프트라는
 서로 다른 두 관점을 사용하고 신뢰도 경계 사례에만 두 번째 호출을 수행한다. 따라서
-별도 가중치의 적재·상주 비용 없이 평균 5.40토큰의 추가 디코딩만 사용한다.
+별도 가중치의 적재·상주 비용 없이 지연시간 벤치마크 128문항에서 평균 5.40토큰의
+추가 디코딩만 사용한다.
 ```
 
 여기서 `독립`이라는 단어는 통계적 독립으로 오해될 수 있으므로 검증 출력에는 쓰지
@@ -451,7 +454,8 @@ split에서 선택하고 certification 전에 고정했다.
 Lower와 Upper는 각각 Qwen2.5-1.5B-Instruct와 Qwen2.5-7B-Instruct를 사용하였다
 ~\cite{yang2024qwen25}. 두 모델은 4-bit로 로드했으며 단일 NVIDIA RTX 3090 24GB에서
 평가하였다. 생성은 greedy decoding을 사용하였다. 첫 답은 최대 256토큰, answer-only
-검증은 최대 64토큰으로 제한했으나 실제 검증 출력은 평균 5.40토큰이었다.
+검증은 최대 64토큰으로 제한하였다. 지연시간 벤치마크 128문항에서는 평균 5.40토큰,
+독립 인증 250문항에서는 평균 6.54토큰이었다.
 ```
 
 ### 10.3 평가 지표
@@ -471,6 +475,13 @@ Lower와 Upper는 각각 Qwen2.5-1.5B-Instruct와 Qwen2.5-7B-Instruct를 사용�
 3. Query-only BGE + logistic/kNN 초기 기준선
 4. C3: confidence + full second-pass consistency
 5. Answer-only: confidence + 짧은 정답 전용 consistency (제안 방법)
+
+본문에서 C3가 표보다 먼저 정의되도록 다음 문장을 실험 설정 끝에 넣는다.
+
+```latex
+비교 기준인 C3는 출력 신뢰도와 두 번째 전체 풀이의 정답 일치 여부를 결합한
+선택적 일관성 정책이며, 제안 방법과 동일한 첫 번째 SLM 및 상위 LLM을 사용한다.
+```
 
 공간이 부족한 KSC 단문에서는 3번은 서론의 AUC 한 줄로 줄이고, 결과표에는 C3,
 Answer-only, Always Upper만 남긴다.
@@ -730,6 +741,11 @@ cascade 비용을 Always-Upper 대비 19.42--22.29\% 절감하였다. 동일 문
   year={2023}
 }
 ```
+
+마지막 참고문헌 페이지의 한쪽 단만 채워지는 경우 `packages.tex` 또는 preamble에
+`\usepackage{balance}`를 추가하고, 참고문헌 바로 앞에 `\balance`를 넣는다. 마지막
+페이지의 두 column 높이를 맞추는 조판용 설정이며 논문 내용이나 수치에는 영향을 주지
+않는다.
 
 ---
 
