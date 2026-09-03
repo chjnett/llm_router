@@ -1,9 +1,9 @@
 # Adaptive SLM–LLM Routing: KSC Pilot
 
-This repository turns the original HTML research plan into a reproducible GSM8K pilot.
-The primary claim under test is whether retraining a logistic-regression router or rebuilding
-a kNN expert pool recovers the quality–cost frontier after targeted LoRA changes the lower
-model's capability.
+This repository implements a performance-focused SLM–LLM routing study on GSM8K and SVAMP.
+The current main method uses output-aware confidence and a short independent answer-only
+verification pass to decide whether to accept Qwen2.5-1.5B-Instruct or escalate to
+Qwen2.5-7B-Instruct.
 
 ## Guardrails
 
@@ -14,6 +14,10 @@ model's capability.
   rate, and cost normalized to always-upper.
 - Random and cluster-balanced distillation use the same budget and training schedule.
 - Final comparisons are repeated over three router/distillation seeds.
+- Policy selection and risk certification use disjoint SVAMP splits.
+- The answer-only policy is frozen before certification and official-test diagnostics.
+- Safety remains a reported secondary metric; the 95% unsafe-risk upper bound of 5.195%
+  narrowly misses the prespecified 5% target and is not presented as a safety guarantee.
 
 ## First commands
 
@@ -22,9 +26,23 @@ conda run -n llm-practice python -m pytest -q
 conda run -n llm-practice python -m src.prepare_data --config configs/pilot_gsm8k.yaml
 ```
 
+## Performance-focused reproduction
+
+After the cached GSM8K/SVAMP model outputs and confidence features are available:
+
+```powershell
+conda run -n llm-practice python -m src.run_low_cost_verifier
+conda run -n llm-practice python -m src.benchmark_verifier_latency --limit 128 --batch-size 16 --repeats 2
+conda run -n llm-practice python -m src.analyze_verifier_performance --draws 10000
+```
+
+The RTX 3090 benchmark compares the full and answer-only second passes on the same 128
+questions in ABBA order after warmup. The paired analysis keeps the selected thresholds fixed
+and reports bootstrap confidence intervals and an exact McNemar test.
+
 Generated data, model outputs, embeddings, adapters, and results are stored below `artifacts/`
 and intentionally excluded from Git.
 
-The checked-in pilot config uses a 1.5B/3B model pair because this workstation currently has
-insufficient free disk for the 7B source checkpoint. The final KSC confirmation run should
-switch `upper` to Qwen2.5-7B-Instruct and restore the normalized parameter-cost ratio to 4.667.
+The active configs use the 1.5B/7B pair and a normalized Upper cost of 4.667. See
+`adaptive_slm_llm_routing_architecture_v1.html` for the unified architecture, experiment
+timeline, negative results, and current performance tables.

@@ -1,6 +1,62 @@
-# KSC Pilot Results
+# KSC Pilot and Performance-focused Results
 
-## Scope
+## Current main result
+
+The current paper direction is performance-first: preserve most Upper-model quality while
+reducing cascade latency and normalized inference cost. Safety is reported as a secondary
+limitation rather than weakened after observing the result.
+
+| Fixed method / split | Accuracy | Unsafe | Normalized cost | Cost reduction |
+|---|---:|---:|---:|---:|
+| C3 / risk certification (250) | 88.80% | 2.00% | 1.008 | -0.77% |
+| Answer-only / risk certification (250) | 88.00% | 2.80% | 0.777 | 22.29% |
+| C3 / official test (300) | 87.67% | 1.00% | 1.045 | -4.45% |
+| Answer-only / official test (300) | 85.67% | 3.00% | 0.806 | 19.42% |
+
+The answer-only policy uses thresholds 0.12/0.80 selected on a separate 250-row split. Its
+exact one-sided 95% unsafe-risk upper bound on the disjoint certification split is 5.195%,
+which misses the prespecified 5% criterion by 0.195 percentage points. This is a near-miss,
+not a safety certificate.
+
+### Same-GPU latency benchmark
+
+- Hardware: NVIDIA RTX 3090; 4-bit Qwen2.5-1.5B-Instruct
+- Protocol: identical 128 questions, batch size 16, two repeats per condition, ABBA order
+- Full second pass: 492.97 ms/item and 124.55 generated tokens/item
+- Answer-only verifier: 29.15 ms/item and 5.40 generated tokens/item
+- Reduction: 94.09% latency; throughput increased from 2.03 to 34.32 items/s
+
+### Paired statistical comparison against C3
+
+| Split | Accuracy delta | Paired bootstrap 95% CI | McNemar p | Cost delta | Paired bootstrap 95% CI |
+|---|---:|---:|---:|---:|---:|
+| Risk certification | -0.80%p | [-2.40, +0.80]%p | 0.625 | -23.06%p | [-28.70, -17.38]%p |
+| Official test | -2.00%p | [-4.33, +0.01]%p | 0.146 | -23.87%p | [-29.58, -18.27]%p |
+
+The paired tests show a clear cost reduction and no statistically significant accuracy
+difference at these sample sizes. This does not establish accuracy equivalence or
+non-inferiority. The defensible claim is that answer-only verification improves the observed
+performance-cost frontier; larger fresh samples are required for a formal non-inferiority or
+safety claim.
+
+## KSC 초록 초안
+
+대규모 언어 모델은 높은 추론 성능을 제공하지만 모든 요청을 대형 모델에 할당하면 계산
+비용과 지연시간이 증가한다. 본 연구는 소형 모델의 질문 임베딩뿐 아니라 실제 생성
+출력의 confidence와 짧은 독립 검증 결과를 이용하는 적응형 SLM–LLM 라우팅 방법을
+제안한다. 제안 방법은 Qwen2.5-1.5B가 먼저 답을 생성하고, 경계 사례에 대해서만 설명을
+제외한 answer-only 검증을 수행한 후 두 숫자 답의 일치 여부에 따라 Qwen2.5-7B로
+escalation한다. GSM8K에서 학습한 confidence router를 SVAMP로 전이하여 분리된 정책
+선택·인증 split과 공식 test에서 평가하였다. RTX 3090 동일 조건 실험에서 answer-only
+검증은 기존 두 번째 전체 풀이보다 문항당 지연시간을 492.97 ms에서 29.15 ms로 94.09%
+감소시켰다. 실측 지연시간으로 환산한 cascade 비용은 독립 인증 split과 공식 test에서
+Always-Upper 대비 각각 22.29%와 19.42% 감소했으며, 정확도는 각각 88.00%와 85.67%를
+기록하였다. C3 기준선과의 exact McNemar 검정에서는 유의한 정확도 차이가 관측되지
+않았다(p=0.625, p=0.146). 한편 95% unsafe-risk 상한은 5.195%로 사전 설정한 5% 기준을
+근소하게 충족하지 못했다. 결과적으로 제안 방법은 관측된 성능–비용 frontier를
+개선하지만, 안전 보장과 정확도 비열등성의 확증에는 더 큰 독립 표본이 필요하다.
+
+## Historical 3B pilot scope
 
 - Date: 2026-09-02
 - Hardware: NVIDIA RTX 3090 24 GB
@@ -80,4 +136,3 @@ The confirmation run should:
    transfer perfectly to test in this pilot.
 6. Add at least one second task family for the final paper to test whether routing is learning
    difficulty rather than GSM8K-specific lexical patterns.
-
