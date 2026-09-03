@@ -1,0 +1,14 @@
+{
+  "protocol": "one-shot fresh recertification; no threshold selection on these rows",
+  "count": 500,
+  "source_count": 1496,
+  "source_available_after_exclusion": 688,
+  "pilot_ids_excluded": 2000,
+  "prior_holdout_ids_excluded": 600,
+  "pilot_overlap": 0,
+  "prior_holdout_overlap": 0,
+  "policy_frozen_before_inference": {
+    "low_threshold": 0.12,
+    "high_threshold": 0.86
+  }
+}

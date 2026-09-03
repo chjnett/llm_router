@@ -33,7 +33,7 @@
     <div class="summary-strip">
       <div class="summary-item"><b>문제</b><span>질문 의미만 보는 BGE router는 “Lower가 실제로 풀 수 있는가”를 잘 구분하지 못했다. Pilot AUC는 0.589였다.</span></div>
       <div class="summary-item"><b>현재 해법</b><span>Lower 답의 confidence와 두 번의 숫자 답 일치를 이용한다. Pilot에서 Upper 품질의 98%를 유지하며 비용을 13.73% 줄였다.</span></div>
-      <div class="summary-item"><b>현재 결론</b><span>Answer-only verifier는 실측 latency를 94.09% 줄였고, 보수적 비용 모델에서도 16.95%를 절감했다. 위험 상한 5.195%는 안전 보장이 아닌 한계로 공개한다.</span></div>
+      <div class="summary-item"><b>현재 결론</b><span>Answer-only verifier는 SVAMP에서 비용을 줄였지만, 새 GSM8K 500문항에서는 안전·품질만 통과하고 비용이 Upper 대비 11.23% 증가했다. 검증기 일치율의 과제 의존성이 핵심 한계다.</span></div>
     </div>
     <div class="read-path"><b>권장 읽기 순서</b><span>30초 요약</span><i>→</i><span>피봇 구조</span><i>→</i><span>Confidence 결과</span><i>→</i><span>실시간 상태</span><i>→</i><span>로드맵</span></div>
   </section>
@@ -112,6 +112,11 @@
     <h3 style="margin-top:20px">후속 진단 · Selection safety-margin ladder</h3>
     <div class="grid" style="margin-top:8px"><div class="card good"><h3>Fresh 후보</h3><div class="value">0.12 / 0.86</div><p>selection unsafe 1/250로 제한</p></div><div class="card good"><h3>인증 진단 Accuracy</h3><div class="value">88.40%</div><p>Upper 88.80%의 99.55%</p></div><div class="card good"><h3>인증 진단 Cost</h3><div class="value">0.838</div><p>Always Upper 대비 16.16% 절감</p></div><div class="card warn"><h3>공식 test 위험 상한</h3><div class="value">5.177%</div><p>여전히 5%를 근소하게 초과</p></div></div>
     <div class="callout" style="margin-top:15px"><strong>판정</strong><div><b>0.12/0.86은 다음 fresh holdout용 보수적 후보로 채택할 가치가 있다.</b> 기존 인증 분할에서는 unsafe 4/250, 95% 상한 3.624%, 비용 0.838로 세 조건을 모두 통과했다. 그러나 이 결과를 본 뒤 선택한 후보이므로 재인증으로 주장할 수 없으며, 새로운 독립 표본에서 한 번 더 고정 평가해야 한다.</div></div>
+    <h3 style="margin-top:20px">새 독립 재인증 · GSM8K 미사용 500문항</h3>
+    <div class="grid" style="margin-top:8px"><div class="card good"><h3>품질 유지율</h3><div class="value">97.03%</div><p>84.80% / Upper 87.40% · 통과</p></div><div class="card good"><h3>95% 위험 상한</h3><div class="value">4.343%</div><p>unsafe 14/500 · 5% 기준 통과</p></div><div class="card warn"><h3>정규화 비용</h3><div class="value">1.112</div><p>Upper 단독보다 11.23% 증가 · 실패</p></div><div class="card warn"><h3>답 일치율</h3><div class="value">10.0%</div><p>SVAMP 37~41%에서 급락</p></div></div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>고정 정책</th><th class="num">Accuracy</th><th class="num">Upper Accuracy</th><th class="num">Unsafe</th><th class="num">Risk upper 95%</th><th class="num">Cost</th><th>최종 gate</th></tr></thead><tbody><tr class="focus"><td>0.12 / 0.86 · 500</td><td class="num">84.80%</td><td class="num">87.40%</td><td class="num">2.80%</td><td class="num"><b>4.343%</b></td><td class="num"><b>1.112</b></td><td>안전·품질 통과 / 비용 실패</td></tr></tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>실패 원인과 해석</strong><div>표본은 기존 파일럿 2,000문항과 종전 holdout 600문항에 대해 ID 중복 0건이다. 계산 오류나 숫자 파싱 누락도 없었다. 다만 Answer-only 검증기 정확도가 SVAMP의 약 42%에서 GSM8K <b>9.2%</b>로 떨어졌고, 답 일치율도 10.0%에 그쳤다. 그 결과 94.8%가 검증 구간에 진입하면서도 Lower 채택률은 11.4%뿐이라 Upper 호출 비용을 상쇄하지 못했다. 이는 아키텍처 폐기 근거가 아니라, <b>추론 과정 없이 답만 생성하는 검증이 복잡한 산술 과제에 일반화되지 않는다는 경계 조건</b>이다.</div></div>
+    <div class="callout" style="margin-top:15px"><strong>다음 결정</strong><div>현재 500문항을 본 뒤 0.12/0.86 결과를 다시 쓰지는 않는다. 다음 실험은 구조를 크게 바꾸기 전에, 짧은 내부 추론 후 답만 출력하는 verifier와 현재 Answer-only verifier를 동일 표본의 선택 분할에서 비교한다. 비용 절감 가능성과 일치율이 회복될 때만 남은 독립 표본으로 재인증한다.</div></div>
   </section>
 
   <section id="contrastive">
@@ -225,7 +230,8 @@
       <tr class="focus"><td>S</td><td>Overleaf PDF 4쪽 생성 및 코드·결과·조판 대조 검수</td><td>완료</td><td><span class="tag done">핵심 결과 일치</span></td></tr>
       <tr class="focus"><td>T</td><td>KSC 논문·발표자료·회색조 Figure 최종 정리</td><td>완료</td><td><span class="tag done">논문 작업 종료</span></td></tr>
       <tr class="focus"><td>U</td><td>Answer-only selection safety-margin ladder · 0~6 unsafe 후보 진단</td><td>완료</td><td><span class="tag done">0.12/0.86 fresh 후보</span></td></tr>
-      <tr><td>V</td><td>새 독립 표본에서 0.12/0.86 고정 정책의 5% risk 재인증</td><td>추가 4~8시간</td><td><span class="tag live">다음</span></td></tr>
+      <tr class="focus"><td>V</td><td>새 독립 GSM8K 500문항에서 0.12/0.86 고정 정책 재인증</td><td>완료</td><td><span class="tag done">안전·품질 통과 · 비용 실패</span></td></tr>
+      <tr><td>W</td><td>짧은 내부 추론 verifier의 일치율·비용 회복 가능성 검증</td><td>약 1~3시간</td><td><span class="tag live">다음</span></td></tr>
     </tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>논문 산출물</strong><div><b>paper/overleaf/main_single.tex</b>을 Overleaf의 main.tex에 통째로 붙여넣고 <b>paper/figures/*.pdf</b> 네 개만 업로드하면 된다. 자세한 수정·검수 방법은 <b>OVERLEAF_KSC_PAPER_GUIDE.md</b>에 정리했다.</div></div>
   </section>

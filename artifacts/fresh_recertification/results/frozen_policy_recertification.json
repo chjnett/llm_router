@@ -1,0 +1,45 @@
+{
+  "protocol": "one-shot fresh holdout; policy frozen before inference; no holdout tuning",
+  "policy": {
+    "low_threshold": 0.12,
+    "high_threshold": 0.86
+  },
+  "count": 500,
+  "always_upper_accuracy": 0.874,
+  "quality_target_95pct_of_upper": 0.8302999999999999,
+  "accuracy": 0.848,
+  "quality_retention_vs_upper": 0.9702517162471396,
+  "unsafe_count": 14,
+  "unsafe_rate": 0.028,
+  "unsafe_upper_bound_95": 0.04342734347331631,
+  "normalized_cost": 1.112296867140144,
+  "cost_reduction_vs_upper": -0.11229686714014409,
+  "lower_coverage": 0.114,
+  "number_agreement_rate": 0.1,
+  "answer_only_generated_tokens_mean": 7.578,
+  "answer_only_generated_tokens_p95": 10.0,
+  "bootstrap_10000": {
+    "accuracy": [
+      0.816,
+      0.878
+    ],
+    "unsafe_rate": [
+      0.014,
+      0.044
+    ],
+    "normalized_cost": [
+      1.0841955071875278,
+      1.1384489070690689
+    ],
+    "always_upper_accuracy": [
+      0.844,
+      0.902
+    ]
+  },
+  "deployment_gate": {
+    "risk_upper_5pct_pass": true,
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": false,
+    "overall_pass": false
+  }
+}
