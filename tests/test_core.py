@@ -6,6 +6,7 @@ from src.scoring import extract_final_number, gsm8k_correct
 from src.run_selective_consistency import cascade
 from src.run_risk_bound_calibration import binomial_upper
 from src.run_low_cost_verifier import verifier_cascade
+from src.benchmark_verifier_latency import completion_lengths
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -83,3 +84,8 @@ def test_low_cost_verifier_uses_fractional_second_call_cost():
     # Costs are 1, 1.25, and 5: mean 2.4167, normalized by Upper cost 4.
     assert np.isclose(metrics["normalized_cascade_cost"], (1.0 + 1.25 + 5.0) / 3 / 4)
     assert metrics["task_accuracy"] == 1.0
+
+
+def test_completion_lengths_stop_before_eos():
+    rows = np.asarray([[10, 11, 2, 2], [20, 21, 22, 23]])
+    assert completion_lengths(rows, eos_token_id=2) == [2, 4]
