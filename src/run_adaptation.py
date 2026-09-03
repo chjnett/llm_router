@@ -11,9 +11,9 @@ from .common import load_config, read_jsonl, write_json
 from .metrics import routing_labels, select_operating_point, system_metrics
 
 
-def load_condition(name: str, split: str):
+def load_condition(name: str, upper_name: str, split: str):
     lower_rows = {row["id"]: row for row in read_jsonl(Path("artifacts/inference") / name / f"{split}.jsonl")}
-    upper_rows = {row["id"]: row for row in read_jsonl(Path("artifacts/inference/upper") / f"{split}.jsonl")}
+    upper_rows = {row["id"]: row for row in read_jsonl(Path("artifacts/inference") / upper_name / f"{split}.jsonl")}
     embeddings = np.load(Path("artifacts/embeddings") / f"{split}.npz")
     ids = embeddings["ids"].tolist()
     return (
@@ -60,12 +60,14 @@ def evaluate(model, threshold, test, costs):
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/pilot_gsm8k.yaml")
+    parser.add_argument("--lower-name", default="lower")
+    parser.add_argument("--upper-name", default="upper")
     parser.add_argument("--improved", default="cluster_seed_42")
     parser.add_argument("--output", default="artifacts/results/adaptation_cluster_seed_42.json")
     args = parser.parse_args()
     cfg = load_config(args.config)
-    old = {split: load_condition("lower", split) for split in ("router_train", "validation", "test")}
-    new = {split: load_condition(args.improved, split) for split in ("router_train", "validation", "test")}
+    old = {split: load_condition(args.lower_name, args.upper_name, split) for split in ("router_train", "validation", "test")}
+    new = {split: load_condition(args.improved, args.upper_name, split) for split in ("router_train", "validation", "test")}
     results = {"condition": args.improved, "label_shift": {}, "lr": {}, "knn": {}}
     for split in ("router_train", "validation", "test"):
         old_labels, old_eligible = routing_labels(old[split][1], old[split][2])

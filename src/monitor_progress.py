@@ -23,20 +23,28 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-name", required=True)
     parser.add_argument("--phase", required=True)
+    parser.add_argument("--split", action="append", dest="splits")
+    parser.add_argument("--data-dir", default="artifacts/data")
+    parser.add_argument("--inference-dir", default="artifacts/inference")
     parser.add_argument("--interval", type=float, default=5.0)
     args = parser.parse_args()
 
     root = Path("artifacts")
-    run_dir = root / "inference" / args.output_name
+    run_dir = Path(args.inference_dir) / args.output_name
     status_path = root / "live_status.json"
     log_path = root / "live_log.txt"
-    total = sum(SPLITS.values())
+    selected_splits = args.splits or list(SPLITS)
+    expected = {}
+    for name in selected_splits:
+        data_path = Path(args.data_dir) / f"{name}.jsonl"
+        expected[name] = count_rows(data_path) if data_path.exists() else SPLITS[name]
+    total = sum(expected.values())
     started = time.monotonic()
     previous_count = -1
     samples: list[tuple[float, int]] = []
 
     while True:
-        counts = {split: count_rows(run_dir / f"{split}.jsonl") for split in SPLITS}
+        counts = {split: count_rows(run_dir / f"{split}.jsonl") for split in expected}
         completed = sum(counts.values())
         now = time.monotonic()
         samples.append((now, completed))
@@ -49,7 +57,7 @@ def main() -> None:
                 rate = gained / duration
         remaining = (total - completed) / rate if rate else None
         stamp = datetime.now(timezone.utc).astimezone().strftime("%H:%M:%S")
-        active = next((name for name in SPLITS if counts[name] < SPLITS[name]), "complete")
+        active = next((name for name in expected if counts[name] < expected[name]), "complete")
         status = {
             "phase": args.phase,
             "state": "COMPLETE" if completed >= total else "RUNNING",

@@ -38,12 +38,18 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/pilot_gsm8k.yaml")
     parser.add_argument("--output", default="artifacts/data")
+    parser.add_argument("--arrow-file", help="Load a local Hugging Face Arrow file without Hub discovery")
     args = parser.parse_args()
     cfg = load_config(args.config)
     set_seed(cfg["seed"])
-    from datasets import load_dataset
+    if args.arrow_file:
+        from datasets import Dataset
 
-    dataset = load_dataset(cfg["dataset"]["name"], cfg["dataset"]["config"], split="train")
+        dataset = Dataset.from_file(args.arrow_file)
+    else:
+        from datasets import load_dataset
+
+        dataset = load_dataset(cfg["dataset"]["name"], cfg["dataset"]["config"], split="train")
     rows = [dict(row) for row in dataset]
     max_examples = cfg["dataset"].get("max_examples")
     if max_examples:

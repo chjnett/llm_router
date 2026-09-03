@@ -2,93 +2,189 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adaptive SLM–LLM Routing · KSC Pilot Report</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Adaptive SLM–LLM Routing · Unified Architecture</title>
   <style>
-    :root{--ink:#172033;--muted:#64748b;--line:#e5eaf1;--panel:#f8fafc;--blue:#2563eb;--blue-bg:#eff6ff;--green:#15803d;--green-bg:#f0fdf4;--amber:#b45309;--amber-bg:#fffbeb;--red:#b91c1c;--red-bg:#fff1f2}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font:14px/1.6 Inter,Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{max-width:1180px;margin:auto;padding:0 28px 80px}
-    header{padding:58px 0 30px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}h1{max-width:850px;margin:10px 0 12px;font-size:38px;line-height:1.18;letter-spacing:-.045em}.lead{max-width:760px;margin:0;color:var(--muted);font-size:16px}.meta,nav{display:flex;gap:8px;overflow:auto}.meta{flex-wrap:wrap;margin-top:22px}.pill,.tag{display:inline-block;border-radius:99px;font-size:11px;font-weight:750}.pill{padding:4px 10px;border:1px solid var(--line);color:var(--muted);background:#fff}.pill.live,.tag.live{color:var(--amber);background:var(--amber-bg)}nav{gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}nav a{color:var(--muted);text-decoration:none;font-size:12px;white-space:nowrap}nav a:hover{color:var(--blue)}.live-panel{border:1px solid var(--line);border-radius:12px;background:#fff;padding:20px}.live-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.live-title{font-size:16px;font-weight:800}.live-summary{margin:8px 0 18px;color:var(--muted);font-size:13px}.progress-item{margin:12px 0}.progress-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}.bar{height:8px;border-radius:99px;background:#edf0f4;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue);border-radius:99px;transition:width .3s}.live-log{max-height:180px;overflow:auto;margin:18px 0 0;padding:14px;border:1px solid var(--line);border-radius:8px;background:#f8fafc;color:#415063;font:11px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap}.refresh{margin-top:12px;border:1px solid var(--line);border-radius:7px;background:#fff;padding:7px 10px;color:var(--blue);font-size:12px;font-weight:700;cursor:pointer}
-    section{padding:38px 0;border-bottom:1px solid var(--line)}h2{margin:0 0 6px;font-size:22px;letter-spacing:-.025em}h3{margin:0;font-size:15px;letter-spacing:-.01em}.note{margin:0 0 20px;color:var(--muted)}.callout{display:flex;gap:12px;padding:17px 18px;border:1px solid #bfdbfe;border-radius:10px;background:var(--blue-bg)}.callout strong{min-width:72px;color:#1d4ed8}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.two{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}.card{min-width:0;padding:17px;border:1px solid var(--line);border-radius:10px;background:#fff}.card.good{border-color:#bbf7d0;background:var(--green-bg)}.card.warn{border-color:#fde68a;background:var(--amber-bg)}.value{margin:7px 0 2px;font-size:29px;font-weight:800;letter-spacing:-.05em}.good .value{color:var(--green)}.warn .value{color:var(--amber)}.card p{margin:0;color:var(--muted);font-size:12px}
-    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{width:100%;min-width:650px;border-collapse:collapse;background:#fff}th{padding:11px 14px;text-align:left;color:var(--muted);background:var(--panel);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:middle}.num{text-align:right;font-variant-numeric:tabular-nums}tr.highlight td{background:#f8fbff;font-weight:650}.tag{padding:2px 7px}.tag.done{color:var(--green);background:var(--green-bg)}.tag.issue{color:var(--red);background:var(--red-bg)}
-    .timeline{border-left:2px solid var(--line);margin:8px 0 0 7px;padding-left:22px}.event{position:relative;padding:0 0 23px}.event:before{content:"";position:absolute;left:-29px;top:5px;width:12px;height:12px;border-radius:50%;background:#cbd5e1}.event.done:before{background:var(--green)}.event.live:before{background:#f59e0b}.event.issue:before{background:#ef4444}.event p{margin:4px 0 0;color:var(--muted)}.event strong{font-size:14px}ul{margin:8px 0 0;padding-left:18px;color:var(--muted)}li{margin:7px 0}.footer{padding-top:28px;color:var(--muted);font-size:12px}code{font-size:.9em}
-    @media(max-width:800px){.shell{padding:0 18px 55px}.grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}h1{font-size:31px}header{padding-top:38px}}@media(max-width:460px){.grid{grid-template-columns:1fr}}
+    :root{--ink:#172033;--muted:#64748b;--line:#e3e8ef;--soft:#f7f9fc;--blue:#2563eb;--blue-soft:#eff6ff;--green:#15803d;--green-soft:#f0fdf4;--amber:#b45309;--amber-soft:#fffbeb;--red:#b91c1c;--red-soft:#fff1f2;--purple:#7c3aed;--purple-soft:#f5f3ff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:white;color:var(--ink);font:14px/1.62 Inter,Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{max-width:1180px;margin:auto;padding:0 28px 72px}
+    header{padding:56px 0 28px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}h1{max-width:920px;margin:10px 0 13px;font-size:40px;line-height:1.14;letter-spacing:-.045em}.lead{max-width:850px;margin:0;color:var(--muted);font-size:16px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.chip,.tag{display:inline-flex;align-items:center;border-radius:99px;font-size:11px;font-weight:750}.chip{padding:5px 10px;border:1px solid var(--line);color:var(--muted)}.tag{padding:2px 8px}.done{color:var(--green);background:var(--green-soft)}.live{color:var(--amber);background:var(--amber-soft)}.planned{color:var(--purple);background:var(--purple-soft)}
+    nav{position:sticky;top:0;z-index:10;display:flex;gap:20px;overflow:auto;padding:14px 0;border-bottom:1px solid var(--line);background:rgba(255,255,255,.94);backdrop-filter:blur(10px)}nav a{color:var(--muted);text-decoration:none;font-size:12px;white-space:nowrap}nav a:hover{color:var(--blue)}
+    section{padding:38px 0;border-bottom:1px solid var(--line)}h2{margin:0 0 6px;font-size:23px;letter-spacing:-.03em}h3{margin:0;font-size:15px}.note{margin:0 0 20px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{padding:17px;border:1px solid var(--line);border-radius:11px;background:white}.card.good{background:var(--green-soft);border-color:#bbf7d0}.card.warn{background:var(--amber-soft);border-color:#fde68a}.card.purple{background:var(--purple-soft);border-color:#ddd6fe}.value{margin:6px 0 1px;font-size:28px;font-weight:820;letter-spacing:-.05em}.card p{margin:0;color:var(--muted);font-size:12px}.callout{display:flex;gap:14px;padding:17px 18px;border:1px solid #bfdbfe;border-radius:10px;background:var(--blue-soft)}.callout strong{min-width:76px;color:#1d4ed8}
+    .flow{display:grid;grid-template-columns:repeat(7,minmax(110px,1fr));gap:20px;align-items:stretch;margin-top:20px}.node{position:relative;min-height:116px;padding:15px;border:1px solid var(--line);border-radius:11px;background:white}.node:not(:last-child):after{content:"→";position:absolute;right:-17px;top:40%;color:#94a3b8;font-size:18px;font-weight:800}.node .n{color:var(--blue);font-size:10px;font-weight:850;letter-spacing:.08em}.node b{display:block;margin:5px 0;font-size:14px}.node small{display:block;color:var(--muted);line-height:1.45}.node.contrast{border-color:#c4b5fd;background:var(--purple-soft)}.node.route{border-color:#bfdbfe;background:var(--blue-soft)}.node.lower{border-color:#bbf7d0;background:var(--green-soft)}.node.upper{border-color:#fde68a;background:var(--amber-soft)}
+    .loop{margin-top:16px;padding:14px 18px;border:1px dashed #a78bfa;border-radius:10px;color:#5b21b6;background:#faf8ff}.loop b{color:var(--purple)}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{width:100%;min-width:680px;border-collapse:collapse}th{padding:10px 13px;text-align:left;background:var(--soft);color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.05em;text-transform:uppercase}td{padding:11px 13px;border-top:1px solid var(--line)}.num{text-align:right;font-variant-numeric:tabular-nums}tr.focus td{background:#f8fbff;font-weight:650}code{font-size:.9em}.formula{padding:18px;border:1px solid #ddd6fe;border-radius:10px;background:var(--purple-soft);font:14px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;color:#5b21b6;overflow:auto}
+    .live-panel{padding:20px;border:1px solid var(--line);border-radius:11px}.live-head,.progress-label{display:flex;justify-content:space-between;gap:12px}.live-title{font-weight:800}.live-summary{margin:7px 0 16px;color:var(--muted);font-size:12px}.progress-item{margin:11px 0}.progress-label{margin-bottom:5px;font-size:11px}.bar{height:7px;background:#edf1f5;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue);transition:width .3s}.log{max-height:190px;overflow:auto;margin:17px 0 0;padding:13px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:#475569;font:11px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap}.refresh{margin-top:11px;padding:7px 10px;border:1px solid var(--line);border-radius:7px;background:white;color:var(--blue);font-weight:750;cursor:pointer}
+    .steps{counter-reset:step;display:grid;gap:10px}.step{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:9px}.step:before{counter-increment:step;content:counter(step);display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:var(--soft);font-weight:800}.step p{margin:2px 0 0;color:var(--muted);font-size:12px}.term{position:relative;display:inline;border-bottom:1px dashed #7c3aed;color:#5b21b6;cursor:help;outline:none}.term:after{content:attr(data-tip);position:absolute;z-index:30;left:50%;bottom:calc(100% + 9px);width:250px;padding:10px 12px;border:1px solid #ddd6fe;border-radius:8px;background:#2e2350;color:white;font-size:11px;font-weight:500;line-height:1.5;letter-spacing:0;box-shadow:0 10px 28px rgba(30,41,59,.18);opacity:0;visibility:hidden;transform:translate(-50%,5px);transition:.15s;pointer-events:none}.term:before{content:"";position:absolute;z-index:31;left:50%;bottom:calc(100% + 3px);border:6px solid transparent;border-top-color:#2e2350;opacity:0;visibility:hidden;transform:translateX(-50%);transition:.15s}.term:hover:after,.term:hover:before,.term:focus:after,.term:focus:before{opacity:1;visibility:visible}.summary-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.summary-item{padding:18px;border-left:3px solid var(--blue);background:var(--soft);border-radius:5px 10px 10px 5px}.summary-item b{display:block;margin-bottom:5px}.summary-item span{color:var(--muted);font-size:12px}.read-path{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-size:12px}.read-path i{font-style:normal;color:#94a3b8}.loss{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:1px;margin-top:15px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--line)}.loss>div{padding:15px;background:white}.loss .total{background:var(--blue-soft)}.loss b{display:block}.loss small{color:var(--muted)}.tip-guide{margin-top:12px;color:var(--muted);font-size:11px}.tip-guide .term{font-weight:750}.footer{padding-top:28px;color:var(--muted);font-size:12px}
+    @media(max-width:980px){.flow{grid-template-columns:repeat(2,1fr)}.node:after{display:none}.loss{grid-template-columns:1fr 1fr}}@media(max-width:760px){.shell{padding:0 18px 52px}.grid,.two,.summary-strip{grid-template-columns:1fr 1fr}h1{font-size:32px}}@media(max-width:480px){.grid,.two,.flow,.summary-strip,.loss{grid-template-columns:1fr}.step{grid-template-columns:32px 1fr}.step .tag{grid-column:2}}
   </style>
 </head>
-<body>
-<main class="shell">
+<body><main class="shell">
   <header>
-    <div class="eyebrow">KSC pilot · experiment report</div>
-    <h1>Adaptive SLM–LLM Routing<br>under evolving model capability</h1>
-    <p class="lead">Targeted distillation으로 Lower 모델의 역량이 변할 때 routing boundary가 얼마나 이동하고, LR 재학습과 kNN pool rebuild가 품질–비용 균형을 얼마나 회복하는지 검증한다.</p>
-    <div class="meta"><span class="pill">RTX 3090 · 24GB</span><span class="pill">GSM8K · n=2,000</span><span class="pill">Lower · Qwen2.5-1.5B</span><span class="pill">Frozen BGE-small</span><span class="pill">7B concise evaluation complete</span></div>
+    <div class="eyebrow">Unified research architecture · KSC pilot</div>
+    <h1>Capability-aware Adaptive SLM–LLM Routing</h1>
+    <p class="lead">Lower가 먼저 짧은 답을 생성하고, 질문 의미와 <span class="term" tabindex="0" data-tip="모델이 자신의 출력에 얼마나 확신하는지를 log-probability, entropy, 답 형식 등으로 수치화한 값입니다.">출력 신뢰도</span>를 함께 사용해 그대로 채택하거나 Upper로 escalation한다. Lower가 학습으로 변하면 가벼운 재보정으로 routing boundary를 갱신하는 성능 중심 구조다.</p>
+    <div class="chips"><span class="chip">RTX 3090 · 24GB</span><span class="chip">GSM8K pilot · n=2,000</span><span class="chip">Fresh holdout · n=600</span><span class="chip">Lower-first cascade</span><span class="chip">Output confidence</span><span class="chip">Upper · Qwen2.5-7B 4-bit</span><span class="chip">C3 · main</span><span class="chip">C4 · safety ablation</span></div><div class="tip-guide">점선이 있는 <span class="term" tabindex="0" data-tip="이런 형태로 핵심 용어의 쉬운 설명이 표시됩니다.">보라색 용어</span>에 마우스를 올리면 설명이 나옵니다.</div>
   </header>
-  <nav><a href="#now">현재 상태</a><a href="#summary">핵심 결과</a><a href="#upper7b">현재 7B 기준선</a><a href="#live">실시간 실행</a><a href="#design">설계</a><a href="#baseline">이전 3B 파일럿</a><a href="#kd">이전 KD</a><a href="#adaptation">이전 adaptation</a><a href="#pivot">Pivot log</a><a href="#next">남은 검증</a></nav>
-  <section id="now">
-    <h2>현재 위치 · 한눈에 보기</h2><p class="note">아래 ‘현재 7B 실험’이 이번 실행의 기준입니다. 3B 표는 설계 검증용 과거 파일럿으로 분리했습니다.</p>
-    <div class="grid"><div class="card good"><h3>7B teacher 기준선</h3><div class="value">완료</div><p>Lower 63.25% · Upper 86.00%</p></div><div class="card good"><h3>KD sample 선정</h3><div class="value">완료</div><p>Resolvable failure 103개 중 32개</p></div><div class="card good"><h3>LoRA 학습</h3><div class="value">6 / 6</div><p>Random·cluster × 3 seeds</p></div><div class="card warn"><h3>다음 측정</h3><div class="value">Test</div><p>각 adapter 400문항 성능 비교</p></div></div>
-    <div class="callout" style="margin-top:18px"><strong>읽는 법</strong><div><b>현재 단계:</b> 7B concise teacher와 동일한 간결 출력 규칙으로 Lower를 다시 측정하고 KD 학습까지 마쳤다. 이제 test 결과가 나와야 targeted KD의 효과(H2)와 routing 재적응(H3)을 현재 조건에서 판정할 수 있다.</div></div>
-  </section>
-  <section id="summary">
-    <h2>핵심 요약</h2><p class="note">현재 7B 실행과 이전 3B 파일럿을 구분해 해석한다. 현재 실행의 KD/재적응 최종 성능은 아직 test 측정 전이다.</p>
-    <div class="grid">
-      <div class="card good"><h3>현재 Lower 정확도</h3><div class="value">63.25%</div><p>간결 프롬프트 · 7B와 동일 규칙</p></div>
-      <div class="card good"><h3>7B Upper 정확도</h3><div class="value">86.0%</div><p>간결 프롬프트 · test</p></div>
-      <div class="card warn"><h3>현재 KD test</h3><div class="value">대기</div><p>LoRA 6개 학습 완료 · 평가 예정</p></div>
-      <div class="card"><h3>이전 3B label shift</h3><div class="value">22.89%</div><p>파일럿에서 관측 · 현재값은 재측정 예정</p></div>
+  <nav><a href="#start">30초 요약</a><a href="#overview">피봇 구조</a><a href="#confidence">Confidence routing</a><a href="#auxiliary">C4 보조 목표</a><a href="#contrastive">Contrastive ablation</a><a href="#matrix">실험 설계</a><a href="#results">현재 결과</a><a href="#live">실시간</a><a href="#roadmap">로드맵</a></nav>
+
+  <section id="start">
+    <h2>먼저 읽기 · 30초 연구 요약</h2><p class="note">아래 세 문장만 이해하면 현재 연구의 문제, 해법, 다음 검증을 파악할 수 있다.</p>
+    <div class="summary-strip">
+      <div class="summary-item"><b>문제</b><span>질문 의미만 보는 BGE router는 “Lower가 실제로 풀 수 있는가”를 잘 구분하지 못했다. Pilot AUC는 0.589였다.</span></div>
+      <div class="summary-item"><b>현재 해법</b><span>Lower 답의 confidence와 두 번의 숫자 답 일치를 이용한다. Pilot에서 Upper 품질의 98%를 유지하며 비용을 13.73% 줄였다.</span></div>
+      <div class="summary-item"><b>현재 결론</b><span>겹치지 않는 fresh 600문항에서 C3가 재통과했다. C4는 안전성을 높이지만 비용이 늘어 safety ablation으로 남긴다.</span></div>
     </div>
-    <div class="callout" style="margin-top:18px"><strong>현재 결론</strong><div>3B 파일럿에서는 H3가 부분 지지됐다. 현재 7B 조건에서는 KD test와 router 재학습 결과가 나오기 전까지 결론을 보류한다.</div></div>
+    <div class="read-path"><b>권장 읽기 순서</b><span>30초 요약</span><i>→</i><span>피봇 구조</span><i>→</i><span>Confidence 결과</span><i>→</i><span>실시간 상태</span><i>→</i><span>로드맵</span></div>
   </section>
-  <section id="design">
-    <h2>고정된 실험 설계</h2><p class="note">데이터 누수와 평가 낙관성을 줄이기 위해 split·threshold·metric을 고정했다.</p>
-    <div class="two"><div class="table-wrap"><table><thead><tr><th>Split</th><th class="num">비율</th><th class="num">문항</th><th>용도</th></tr></thead><tbody>
-      <tr><td>Router train</td><td class="num">50%</td><td class="num">1,000</td><td>LR 학습 · kNN expert pool</td></tr><tr><td>Distill train</td><td class="num">20%</td><td class="num">400</td><td>Resolvable failure 추출 · LoRA</td></tr><tr><td>Validation</td><td class="num">10%</td><td class="num">200</td><td>k·threshold 선택</td></tr><tr><td>Test</td><td class="num">20%</td><td class="num">400</td><td>최종 평가 전용</td></tr>
-    </tbody></table></div><div class="card"><h3>평가 원칙</h3><ul><li>모든 split ID는 상호 배타적</li><li>Both-wrong은 학습에서 제외, metric에는 포함</li><li>Quality floor: validation Always-Upper의 95%</li><li>Accuracy·coverage·unsafe routing·cost 동시 보고</li></ul></div></div>
+
+  <section id="overview">
+    <h2>1. 피봇 아키텍처 · Lower-first confidence cascade</h2><p class="note">질문만 보고 미리 결정하지 않는다. 저렴한 Lower 초안을 관찰한 뒤 불확실한 요청만 Upper로 보낸다.</p>
+    <div class="flow">
+      <div class="node"><span class="n">01 · INPUT</span><b>User Query</b><small>수학·코드·지식 문제 원문</small></div>
+      <div class="node lower"><span class="n">02 · DRAFT</span><b><span class="term" tabindex="0" data-tip="작고 빠른 모델이 짧은 풀이와 답을 먼저 생성합니다. 이 출력은 채택되거나 Upper 판단의 근거가 됩니다.">Lower draft</span></b><small>Qwen2.5-1.5B · 항상 먼저 실행</small></div>
+      <div class="node contrast"><span class="n">03 · OBSERVE</span><b>Confidence features</b><small>log-probability · entropy · margin · 형식 · 길이</small></div>
+      <div class="node route"><span class="n">04 · CALIBRATE</span><b><span class="term" tabindex="0" data-tip="검증 데이터에서 목표 품질을 만족하도록 신뢰도 점수와 threshold를 확률적으로 보정합니다.">Selective Router</span></b><small>BGE + confidence · quality floor 적용</small></div>
+      <div class="node lower"><span class="n">05A · ACCEPT</span><b>Accept Lower</b><small>신뢰도가 충분하면 저비용 답변 채택</small></div>
+      <div class="node upper"><span class="n">05B · ESCALATE</span><b><span class="term" tabindex="0" data-tip="Lower 답변이 불확실하면 더 정확하고 비싼 Upper 모델에 다시 요청하는 과정입니다.">Upper escalation</span></b><small>불확실한 요청만 Qwen2.5-7B 처리</small></div>
+      <div class="node contrast"><span class="n">06 · RECALIBRATE</span><b>Drift adaptation</b><small>KD 후 confidence와 threshold만 빠르게 갱신</small></div>
+    </div>
+    <div class="loop"><b>닫힌 적응 루프</b> · Upper만 맞힌 <span class="term" tabindex="0" data-tip="Lower는 틀렸지만 Upper는 맞혀서, 학습으로 Lower가 개선될 가능성이 있는 문제입니다.">resolvable failure</span> → targeted KD → Lower <span class="term" tabindex="0" data-tip="학습 뒤 Lower가 풀 수 있는 문제 범위가 달라지는 현상입니다.">capability shift</span> → confidence calibration drift 측정 → 작은 calibration set으로 threshold 재보정</div>
   </section>
-  <section id="baseline">
-    <h2>완료 · 3B Upper baseline</h2><p class="note">Pilot pair: Qwen2.5-1.5B ↔ Qwen2.5-3B. 비용은 parameter count 비례로 정규화했다.</p>
-    <div class="table-wrap"><table><thead><tr><th>System</th><th class="num">Test accuracy</th><th class="num">Lower coverage</th><th class="num">Upper call</th><th class="num">Normalized cost</th><th>해석</th></tr></thead><tbody>
-      <tr><td>Always Lower</td><td class="num">65.00%</td><td class="num">100.00%</td><td class="num">0.00%</td><td class="num">0.500</td><td>최저 비용 baseline</td></tr><tr><td>Always Upper</td><td class="num">76.25%</td><td class="num">0.00%</td><td class="num">100.00%</td><td class="num">1.000</td><td>품질 기준선</td></tr><tr><td>Oracle</td><td class="num">86.00%</td><td class="num">65.00%</td><td class="num">35.00%</td><td class="num">0.675</td><td>개선 여지 상한</td></tr><tr class="highlight"><td>LR router</td><td class="num">74.00%</td><td class="num">14.25%</td><td class="num">85.75%</td><td class="num">0.929</td><td>안전하지만 coverage 낮음</td></tr><tr class="highlight"><td>kNN · k=3</td><td class="num">72.25%</td><td class="num">45.25%</td><td class="num">54.75%</td><td class="num">0.774</td><td>더 낮은 비용, 품질 손실</td></tr>
-    </tbody></table></div><p class="note" style="margin-top:12px">Frozen BGE + LR의 eligible routing AUC는 0.549였다. 단일 GSM8K 도메인에서 query embedding만으로 correctness를 분리하는 능력은 약했다.</p>
+
+  <section id="confidence">
+    <h2>2. 핵심 제안 · Output-aware Confidence Routing</h2><p class="note">Query-only routing의 정보 한계를 Lower 출력에서 얻는 직접적인 불확실성 신호로 보완한다.</p>
+    <div class="grid"><div class="card"><h3>Token confidence</h3><div class="value">log p</div><p>평균·최소 log-probability</p></div><div class="card"><h3>Distribution</h3><div class="value">H(p)</div><p>entropy · top-1/top-2 margin</p></div><div class="card"><h3>Output validity</h3><div class="value">0 / 1</div><p>Final answer 형식·숫자 추출 성공</p></div><div class="card"><h3>Semantic context</h3><div class="value">BGE</div><p>질문 임베딩은 보조 특징으로 유지</p></div></div>
+    <div class="two" style="margin-top:15px"><div class="card good"><h3>성능 목표</h3><ul><li>Always Upper 품질의 95~98% 유지</li><li>Upper 호출률 또는 cost 10% 이상 절감</li><li>Unsafe routing 5% 이하</li><li>Query-only AUC 0.589 → 최소 0.65</li></ul></div><div class="card warn"><h3>60분 타당성 gate</h3><ul><li>기존 2k pilot 출력 재사용</li><li>Lower confidence scoring pass 10~20분</li><li>Feature router + calibration 10~15분</li><li>기준 미달이면 전체 GPU sweep 중단</li></ul></div></div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>비교 조건</th><th>평가 데이터</th><th class="num">Accuracy</th><th class="num">Unsafe</th><th class="num">Cascade cost</th><th>판정</th></tr></thead><tbody><tr><td>C0 · Query-only LR</td><td>Pilot test 400</td><td class="num">82.75%</td><td class="num">5.25%</td><td class="num">0.853*</td><td>기존 baseline</td></tr><tr><td>C1 · Confidence LR</td><td>Pilot test 400</td><td class="num">80.50%</td><td class="num">9.00%</td><td class="num">0.641*</td><td>AUC 0.722, 안전성 부족</td></tr><tr><td>C3 · Frozen consistency</td><td>Pilot test 400</td><td class="num">84.25%</td><td class="num">4.25%</td><td class="num">0.863</td><td>탐색 gate 통과</td></tr><tr class="focus"><td>C3 · Frozen consistency</td><td><b>Fresh test 400</b></td><td class="num"><b>86.00%</b></td><td class="num"><b>4.50%</b></td><td class="num"><b>0.845</b></td><td>사전 고정 gate 재통과</td></tr><tr><td>C4 · Auxiliary head · 3-seed mean</td><td>Fresh test 400</td><td class="num">86.08%</td><td class="num">3.92%</td><td class="num">0.870</td><td>안전성↑, 비용 이점↓</td></tr></tbody></table><p class="note">* C0/C1은 이전 선택식 비용이며, C3/C4는 첫 Lower·선택적 두 번째 Lower·Upper 호출을 모두 합산한 실제 cascade 비용이다.</p></div>
+    <div class="grid" style="margin-top:15px"><div class="card good"><h3>Fresh Upper 품질 유지</h3><div class="value">98.57%</div><p>86.00 / 87.25</p></div><div class="card good"><h3>Fresh cost 절감</h3><div class="value">15.54%</div><p>모든 cascade 호출 비용 포함</p></div><div class="card good"><h3>Fresh unsafe</h3><div class="value">4.50%</div><p>목표 5% 이하 재통과</p></div><div class="card good"><h3>Fresh Lower 채택률</h3><div class="value">53.25%</div><p>Upper 호출률 46.75%</p></div></div>
+    <div class="callout" style="margin-top:15px"><strong>C3 결론</strong><div><b>성능 중심 연구 가설이 독립 holdout에서도 재현됐다.</b> Pilot 2,000개와 ID 중복이 없는 fresh test 400개에 임계값 0.20/0.75를 그대로 적용했다. 품질·비용·안전 3개 gate를 다시 통과했으므로 C3를 현재 핵심 방법으로 유지한다.</div></div>
   </section>
-  <section id="upper7b">
-    <h2>현재 기준선 · 7B concise pair</h2><p class="note">Qwen2.5-7B-Instruct를 4-bit로 실행했다. “세 줄 이하 풀이 + Final answer” 규칙을 Lower와 Upper에 동일 적용했다. 비용은 1.5B : 7B = 1 : 4.667로 정규화했다.</p>
-    <div class="table-wrap"><table><thead><tr><th>System</th><th class="num">Test accuracy</th><th class="num">Lower coverage</th><th class="num">Upper call</th><th class="num">Normalized cost</th><th>해석</th></tr></thead><tbody>
-      <tr><td>Always Lower</td><td class="num">63.25%</td><td class="num">100.00%</td><td class="num">0.00%</td><td class="num">0.214</td><td>비용 기준선</td></tr>
-      <tr><td>Always Upper · 7B concise</td><td class="num">86.00%</td><td class="num">0.00%</td><td class="num">100.00%</td><td class="num">1.000</td><td>새 품질 기준선</td></tr>
-      <tr><td>Oracle</td><td class="num">89.50%</td><td class="num">63.25%</td><td class="num">36.75%</td><td class="num">0.503</td><td>개선 여지 상한</td></tr>
-      <tr class="highlight"><td>LR router</td><td class="num">82.75%</td><td class="num">18.75%</td><td class="num">81.25%</td><td class="num">0.853</td><td>현재 LR 기준</td></tr>
-      <tr class="highlight"><td>kNN · k=15</td><td class="num">80.75%</td><td class="num">16.00%</td><td class="num">84.00%</td><td class="num">0.874</td><td>validation 선택값</td></tr>
-      <tr><td>kNN · k=3</td><td class="num">76.50%</td><td class="num">36.50%</td><td class="num">63.50%</td><td class="num">0.713</td><td>비용 우선 선택</td></tr>
+
+  <section id="auxiliary">
+    <h2>2B. Safety ablation · Output-aware router 보조 학습 목표</h2><p class="note">Fresh C3 재검증 뒤 실행했으며, fresh test는 가중치·임계값 선택에 사용하지 않았다.</p>
+    <div class="loss">
+      <div class="total"><b>L<sub>total</sub> = L<sub>BCE</sub> + 0.2L<sub>rank</sub> + 0.1L<sub>Brier</sub></b><small>고정 가중치로 3 seeds를 실행했다.</small></div>
+      <div><b><span class="term" tabindex="0" data-tip="Lower 답이 맞을 확률을 직접 분류하도록 학습하는 기본 손실입니다.">BCE</span> · 정답 예측</b><small>Lower correct / incorrect를 직접 구분</small></div>
+      <div><b><span class="term" tabindex="0" data-tip="맞힌 답의 confidence가 틀린 답보다 높도록 두 점수의 순서를 학습합니다.">Pairwise ranking</span></b><small>성공 출력 점수 &gt; 실패 출력 점수</small></div>
+      <div><b><span class="term" tabindex="0" data-tip="예측 확률과 실제 정답의 제곱 오차로, confidence의 확률적 의미를 개선합니다.">Brier calibration</span></b><small>예측 confidence와 실제 성공률의 간격 축소</small></div>
+    </div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>방법</th><th class="num">Fresh accuracy</th><th class="num">Unsafe</th><th class="num">Cost 절감</th><th class="num">AUC</th><th class="num">ECE</th><th>역할</th></tr></thead><tbody>
+      <tr class="focus"><td>C3 · LR + consistency</td><td class="num">86.00%</td><td class="num">4.50%</td><td class="num"><b>15.54%</b></td><td class="num">—</td><td class="num">—</td><td>주 방법</td></tr>
+      <tr><td>C4 · auxiliary · 3-seed mean</td><td class="num">86.08%</td><td class="num"><b>3.92%</b></td><td class="num">12.98%</td><td class="num">0.742</td><td class="num">0.068</td><td>Safety ablation</td></tr>
     </tbody></table></div>
-    <div class="callout" style="margin-top:14px"><strong>해석</strong><div>장문 프롬프트 7B는 72.00%였지만, 간결 형식으로 바꾸자 86.00%가 됐다. 모델 평가에서 출력 형식과 token budget은 모델 크기만큼 중요한 실험 변수다.</div></div>
+    <div class="callout" style="margin-top:15px"><strong>C4 판정</strong><div>세 seed 모두 gate를 통과했다. C3보다 unsafe가 0.58%p 낮아졌지만 비용 절감도 2.56%p 감소했고 정확도 차이는 0.08%p에 불과하다. 따라서 보조 목표는 핵심 성능 개선이 아니라 <b>안전성 우선 운용점</b>으로 보고한다.</div></div>
   </section>
-  <section id="kd">
-    <h2>이전 3B 파일럿 · Targeted distillation</h2><p class="note">아래는 3B pair에서 완료한 설계 검증 결과다. 현재 7B pair는 103개 failure 중 32개를 선택했고, LoRA 6개 학습까지 완료했다.</p>
-    <div class="table-wrap"><table><thead><tr><th>Method</th><th class="num">Seed 42</th><th class="num">Seed 43</th><th class="num">Seed 44</th><th class="num">Mean</th><th class="num">Sample SD</th><th>판정</th></tr></thead><tbody>
-      <tr><td>Original Lower</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">65.00%</td><td class="num">—</td><td>기준</td></tr><tr><td>Random KD</td><td class="num">68.50%</td><td class="num">66.50%</td><td class="num">72.25%</td><td class="num"><b>69.08%</b></td><td class="num">2.92%</td><td><span class="tag done">개선</span></td></tr><tr><td>Cluster-balanced KD</td><td class="num">70.00%</td><td class="num">65.50%</td><td class="num">70.25%</td><td class="num">68.58%</td><td class="num">2.67%</td><td><span class="tag issue">H2 미지지</span></td></tr>
+
+  <section id="contrastive">
+    <h2>3. Ablation · 라우팅 전용 <span class="term" tabindex="0" data-tip="같은 성격의 데이터는 가깝게, 다른 성격의 데이터는 멀게 배치하도록 표현 공간을 학습하는 방법입니다.">대조 학습</span></h2><p class="note">세 가지 파일럿이 Frozen BGE AUC를 넘지 못해 핵심 방법이 아니라 query-only representation의 한계를 보여주는 비교 실험으로 유지한다.</p>
+    <div class="two">
+      <div class="card"><h3><span class="term" tabindex="0" data-tip="임베딩 모델의 가중치를 바꾸지 않고 그대로 사용하는 방식입니다.">Frozen semantic embedding</span>의 한계</h3><p style="margin-top:8px">같은 주제의 쉬운 문제와 어려운 문제를 가깝게 배치한다. 현재 파일럿의 LR <span class="term" tabindex="0" data-tip="라우팅 가능한 문제와 Upper가 필요한 문제를 얼마나 잘 순위화하는지 나타냅니다. 0.5는 무작위, 1.0은 완벽한 분리입니다.">routing AUC</span>는 약 0.59로 분리력이 낮다.</p><ul><li>주제 유사성은 높지만 난이도는 다를 수 있음</li><li>kNN neighborhood가 routing label과 불일치</li><li>Lower가 바뀌어도 공간은 그대로 남음</li></ul></div>
+      <div class="card purple"><h3>Capability-aware embedding</h3><p style="margin-top:8px">같은 routing label은 가깝게, 의미가 유사하지만 label이 다른 <span class="term" tabindex="0" data-tip="겉으로는 매우 비슷하지만 정답 라벨은 반대라서 모델이 구분하기 어려운 학습 사례입니다.">hard negative</span>는 멀게 학습한다.</p><ul><li>Positive: Lower-success ↔ Lower-success</li><li>Positive: Upper-needed ↔ Upper-needed</li><li>Hard negative: 의미는 가깝지만 routing label은 반대</li></ul></div>
+    </div>
+    <div class="formula" style="margin-top:15px">L_total = L_supervised-contrastive + λ · L_routing-classification<br>label = 1 if Lower correct; label = 0 if Lower wrong and Upper correct<br>both-wrong examples are excluded from representation training</div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>설계 선택</th><th>권장안</th><th>이유</th></tr></thead><tbody>
+      <tr><td>Encoder update</td><td><span class="term" tabindex="0" data-tip="전체 모델 대신 작은 추가 가중치만 학습하여 메모리와 시간을 줄이는 미세조정 방식입니다.">LoRA</span> 또는 마지막 1~2 layer</td><td>1,000개 pilot에서 full fine-tuning <span class="term" tabindex="0" data-tip="학습 데이터에는 잘 맞지만 새로운 데이터에서는 성능이 떨어지는 현상입니다.">과적합</span> 방지</td></tr>
+      <tr><td>Positive sampling</td><td>동일 label + 의미 neighborhood</td><td>무관한 문제까지 강제로 collapse하는 현상 완화</td></tr>
+      <tr><td>Negative sampling</td><td>Frozen BGE 기반 hard negative + random mix</td><td>난이도 경계를 직접 학습하면서 전역 안정성 유지</td></tr>
+      <tr><td>검증</td><td>Frozen BGE와 동일 LR/kNN 조건 비교</td><td>representation 개선 효과만 분리</td></tr>
     </tbody></table></div>
-    <div class="grid" style="margin-top:14px"><div class="card"><h3>Random coverage</h3><div class="value">7 / 5 / 7</div><p>Seed 42 / 43 / 44 cluster</p></div><div class="card"><h3>Balanced coverage</h3><div class="value">8 / 8 / 8</div><p>모든 seed에서 8 cluster</p></div><div class="card warn"><h3>KD budget</h3><div class="value">16</div><p>작은 budget은 큰 분산 유발</p></div><div class="card"><h3>다음 조치</h3><div class="value">↑ n</div><p>전체 GSM8K로 failure pool 확대</p></div></div>
   </section>
-  <section id="adaptation">
-    <h2>이전 3B 파일럿 · Capability shift & router adaptation</h2><p class="note">Cluster KD seed 42를 대표 capability-shift 조건으로 사용했다. 현재 7B pair에는 adapter test가 끝난 뒤 같은 절차를 적용한다.</p>
-    <div class="table-wrap"><table><thead><tr><th>Split</th><th class="num">Lower before</th><th class="num">Lower after</th><th class="num">Label shift</th></tr></thead><tbody><tr><td>Router train</td><td class="num">61.60%</td><td class="num">66.00%</td><td class="num">25.13%</td></tr><tr><td>Validation</td><td class="num">64.00%</td><td class="num">69.00%</td><td class="num">21.82%</td></tr><tr class="highlight"><td>Test</td><td class="num">65.00%</td><td class="num">70.00%</td><td class="num">22.89%</td></tr></tbody></table></div>
-    <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Condition</th><th class="num">Test accuracy</th><th class="num">Lower coverage</th><th class="num">Upper call</th><th class="num">Normalized cost</th></tr></thead><tbody>
-      <tr><td>LR · old router / old Lower</td><td class="num">74.00%</td><td class="num">14.25%</td><td class="num">85.75%</td><td class="num">0.929</td></tr><tr><td>LR · no adaptation / new Lower</td><td class="num">75.00%</td><td class="num">14.25%</td><td class="num">85.75%</td><td class="num">0.929</td></tr><tr class="highlight"><td>LR · retrained</td><td class="num">74.50%</td><td class="num">46.50%</td><td class="num">53.50%</td><td class="num"><b>0.768</b></td></tr><tr><td>kNN · old pool / old Lower</td><td class="num">72.25%</td><td class="num">45.25%</td><td class="num">54.75%</td><td class="num">0.774</td></tr><tr><td>kNN · no adaptation / new Lower</td><td class="num">73.50%</td><td class="num">45.25%</td><td class="num">54.75%</td><td class="num">0.774</td></tr><tr class="highlight"><td>kNN · pool rebuilt</td><td class="num">73.50%</td><td class="num">53.75%</td><td class="num">46.25%</td><td class="num"><b>0.731</b></td></tr>
+
+  <section id="loop">
+    <h2>4. Capability shift 이후 적응 루프</h2><p class="note">Lower가 좋아지거나 나빠지면 기존 confidence calibration도 낡는다. 전체 encoder 재학습보다 가벼운 재보정을 우선한다.</p>
+    <div class="steps">
+      <div class="step"><div><b>Teacher failure mining</b><p>Lower 오답·Upper 정답인 resolvable failure를 추출한다.</p></div><span class="tag done">완료</span></div>
+      <div class="step"><div><b>Targeted LoRA distillation</b><p>Random과 cluster-balanced sampling을 같은 예산·epoch로 비교한다.</p></div><span class="tag done">완료</span></div>
+      <div class="step"><div><b>Capability labels refresh</b><p>새 Lower로 router train·validation·test 정답 여부를 다시 생성한다.</p></div><span class="tag done">완료</span></div>
+      <div class="step"><div><b>Routing encoder adaptation · phase 1</b><p>Frozen BGE 위 128차원 SupCon projection을 3 seeds로 학습해 baseline과 비교했다.</p></div><span class="tag done">완료</span></div>
+      <div class="step"><div><b>Router rebuild</b><p>LR retraining과 kNN expert pool rebuild 후 품질–비용 균형을 재측정한다.</p></div><span class="tag done">완료</span></div>
+    </div>
+  </section>
+
+  <section id="matrix">
+    <h2>5. 누수 없는 실험 설계</h2><p class="note">모든 학습과 calibration은 test를 보지 않고 수행하며, 최종 평가는 동일 test로 고정한다.</p>
+    <div class="table-wrap"><table><thead><tr><th>Split</th><th class="num">문항</th><th>사용처</th><th>금지 사항</th></tr></thead><tbody>
+      <tr><td>Router train</td><td class="num">1,000</td><td>SupCon, LR, kNN pool</td><td>최종 metric 보고 금지</td></tr>
+      <tr><td>Distill train</td><td class="num">400</td><td>Failure mining, Lower LoRA</td><td>Router threshold 선택 금지</td></tr>
+      <tr><td>Validation</td><td class="num">200</td><td>k, threshold, λ, temperature 선택</td><td>Encoder gradient 학습 금지</td></tr>
+      <tr><td>Test</td><td class="num">400</td><td>최종 accuracy·cost·coverage</td><td>모든 모델 선택 금지</td></tr>
+      <tr class="focus"><td>Fresh validation</td><td class="num">200</td><td>고정 C3 정책의 분포 이동 참고치</td><td>임계값 재선택 금지</td></tr>
+      <tr class="focus"><td>Fresh test</td><td class="num">400</td><td>사전 고정 C3·C4 최종 재검증</td><td>모든 튜닝 금지 · pilot ID 중복 0</td></tr>
+    </tbody></table></div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>Experiment</th><th>Embedding</th><th>Router</th><th>Lower</th><th>검증 질문</th></tr></thead><tbody>
+      <tr><td>E0</td><td>Frozen BGE</td><td>LR / kNN</td><td>Base</td><td>현재 baseline</td></tr>
+      <tr><td>E1</td><td>Routing SupCon</td><td>LR / kNN</td><td>Base</td><td>H4: 전용 임베딩이 routing 분리력을 높이는가?</td></tr>
+      <tr><td>E2</td><td>Frozen BGE</td><td>Old / rebuild</td><td>KD</td><td>H3: router rebuild만으로 균형이 회복되는가?</td></tr>
+      <tr class="focus"><td>E3</td><td><span class="term" tabindex="0" data-tip="Supervised Contrastive Learning의 약자입니다. 정답 라벨을 사용해 임베딩 거리를 학습합니다.">Routing SupCon</span> · refreshed</td><td>LR / kNN rebuild</td><td>KD</td><td>Encoder까지 적응할 때 추가 회복이 있는가?</td></tr>
     </tbody></table></div>
   </section>
-  <section id="pivot">
-    <h2>Pivot log · 7B 전환에서 얻은 교훈</h2><p class="note">모델 크기만 키우는 것으로는 충분하지 않았다. 생성 형식은 평가 설계의 일부다.</p>
-    <div class="timeline"><div class="event done"><strong>3B pilot 완료</strong><p>3B Upper test accuracy 76.25%. H3의 routing shift와 adaptation 효과 확인.</p></div><div class="event issue"><strong>7B + 장문 풀이 프롬프트</strong><p>256-token 상한에서 풀이가 잘림. 7B test accuracy 72.00%로 3B보다 낮게 관측.</p></div><div class="event done"><strong>원인 진단</strong><p>숫자 추출 실패가 아니라, 풀이가 끝나기 전 잘려 intermediate number가 답으로 채점됨을 확인.</p></div><div class="event done"><strong>간결 출력 정책으로 전환 · 완료</strong><p>세 줄 이하 풀이 + 마지막 줄 <code>Final answer: &lt;number&gt;</code>. 50문항 스모크 48/50 = 96.00%, 전체 2,000문항 test accuracy 86.00%.</p></div></div>
+
+  <section id="results">
+    <h2>6. 현재까지 확인된 결과</h2><p class="note">Query-only와 contrastive의 한계를 확인한 뒤 output confidence와 selective consistency로 피봇했고, pilot 성능 gate를 통과했다.</p>
+    <div class="grid"><div class="card"><h3>Full-data Lower</h3><div class="value">61.43%</div><p>test 1,496 완료 · pilot 63.25%</p></div><div class="card good"><h3>Upper · pilot</h3><div class="value">86.00%</div><p>7B concise · full-data는 gate 후 조건부</p></div><div class="card"><h3>Frozen BGE LR</h3><div class="value">82.75%</div><p>pilot coverage 18.75% · cost 0.853</p></div><div class="card warn"><h3>Routing AUC</h3><div class="value">0.589</div><p>query-only 방식의 한계 기준선</p></div></div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>KD method</th><th class="num">Seed 42</th><th class="num">Seed 43</th><th class="num">Seed 44</th><th class="num">Mean</th><th class="num">SD</th><th>판정</th></tr></thead><tbody>
+      <tr><td>Base Lower</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">63.25%</td><td class="num">—</td><td>기준</td></tr>
+      <tr class="focus"><td>Random KD</td><td class="num">67.00%</td><td class="num">66.00%</td><td class="num">62.50%</td><td class="num">65.17%</td><td class="num">2.36%</td><td>소폭 개선</td></tr>
+      <tr><td>Cluster-balanced KD</td><td class="num">60.00%</td><td class="num">64.75%</td><td class="num">55.00%</td><td class="num">59.92%</td><td class="num">4.88%</td><td>H2 미지지</td></tr>
+    </tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>해석</strong><div>Cluster coverage 자체는 성능을 보장하지 않았다. 현재 결과는 sampling보다 <b>routing representation</b>과 failure 품질이 더 중요한 변수일 가능성을 보여준다. 따라서 contrastive encoder는 자연스러운 다음 실험이다.</div></div>
+    <h3 style="margin:24px 0 10px">H3 · Random KD seed 42 이후 router adaptation</h3>
+    <div class="grid"><div class="card good"><h3>Lower test</h3><div class="value">63.25 → 67.00%</div><p>+3.75%p capability gain</p></div><div class="card warn"><h3>Routing label shift</h3><div class="value">27.97%</div><p>common eligible test examples</p></div><div class="card"><h3>LR retrain</h3><div class="value">84.00%</div><p>cost 0.876 · 더 안전하지만 비쌈</p></div><div class="card good"><h3>kNN rebuild</h3><div class="value">0.613</div><p>normalized cost · accuracy 76.50%</p></div></div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>Condition</th><th class="num">Test accuracy</th><th class="num">Lower coverage</th><th class="num">Upper call</th><th class="num">Unsafe all</th><th class="num">Normalized cost</th></tr></thead><tbody>
+      <tr><td>LR · old router / old Lower</td><td class="num">82.75%</td><td class="num">18.75%</td><td class="num">81.25%</td><td class="num">5.25%</td><td class="num">0.853</td></tr>
+      <tr><td>LR · no adaptation / new Lower</td><td class="num">83.25%</td><td class="num">18.75%</td><td class="num">81.25%</td><td class="num">4.75%</td><td class="num">0.853</td></tr>
+      <tr class="focus"><td>LR · retrained</td><td class="num">84.00%</td><td class="num">15.75%</td><td class="num">84.25%</td><td class="num">3.50%</td><td class="num">0.876</td></tr>
+      <tr><td>kNN · old pool / old Lower</td><td class="num">76.50%</td><td class="num">36.50%</td><td class="num">63.50%</td><td class="num">13.50%</td><td class="num">0.713</td></tr>
+      <tr><td>kNN · no adaptation / new Lower</td><td class="num">78.50%</td><td class="num">36.50%</td><td class="num">63.50%</td><td class="num">11.50%</td><td class="num">0.713</td></tr>
+      <tr class="focus"><td>kNN · pool rebuilt</td><td class="num">76.50%</td><td class="num">49.25%</td><td class="num">50.75%</td><td class="num">15.25%</td><td class="num">0.613</td></tr>
+    </tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>H3 판정</strong><div><b>부분 지지.</b> LR retraining은 unsafe routing을 4.75%에서 3.50%로 낮추고 정확도를 높였지만 비용이 증가했다. kNN rebuild는 비용을 0.713에서 0.613으로 줄였지만 no-adaptation 대비 정확도가 2.0%p 감소했다. 품질과 비용의 동시 회복은 아직 달성하지 못했다.</div></div>
+    <h3 style="margin:24px 0 10px">H4 phase 1 · Contrastive projection 결과</h3>
+    <div class="table-wrap"><table><thead><tr><th>Embedding + LR</th><th class="num">Seed 42 AUC</th><th class="num">Seed 43 AUC</th><th class="num">Seed 44 AUC</th><th class="num">Mean AUC</th><th class="num">Mean test accuracy</th><th>판정</th></tr></thead><tbody>
+      <tr class="focus"><td>Frozen BGE baseline</td><td class="num">0.589</td><td class="num">0.589</td><td class="num">0.589</td><td class="num">0.589</td><td class="num">82.75%</td><td>기준</td></tr>
+      <tr><td>SupCon projection · 128d</td><td class="num">0.564</td><td class="num">0.555</td><td class="num">0.572</td><td class="num">0.564</td><td class="num">83.33%</td><td>H4 미지지</td></tr>
+      <tr><td>SupCon + semantic hard negatives</td><td class="num">0.576</td><td class="num">0.576</td><td class="num">0.565</td><td class="num">0.572</td><td class="num">83.83%</td><td>개선되나 baseline 미달</td></tr>
+      <tr><td>BGE last-2 layers + hard negatives</td><td class="num">0.553</td><td class="num">0.590</td><td class="num">0.563</td><td class="num">0.568</td><td class="num">84.75%</td><td>정확도↑, 분리력·비용 악화</td></tr>
+    </tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>H4 최종 판정</strong><div><b>현재 2k 파일럿에서는 미지지.</b> Hard-negative projection과 BGE last-2 fine-tuning 모두 Frozen BGE의 평균 AUC 0.589를 넘지 못했다. BGE fine-tuning은 test accuracy를 2.0%p 높였지만 평균 cost가 0.914로 증가해 더 많은 질문을 Upper로 보낸 결과다. 데이터 확대와 label-noise 분석 전 추가 튜닝은 중단한다.</div></div>
+    <h3 style="margin:24px 0 10px">Paired statistics · KD vs Base Lower</h3>
+    <div class="table-wrap"><table><thead><tr><th>Adapter</th><th class="num">Accuracy Δ</th><th class="num">Bootstrap 95% CI</th><th class="num">McNemar p</th><th>해석</th></tr></thead><tbody>
+      <tr><td>Random · seed 42</td><td class="num">+3.75%p</td><td class="num">[−1.50, +8.75]</td><td class="num">0.184</td><td>유의하지 않음</td></tr>
+      <tr><td>Random · seed 43</td><td class="num">+2.75%p</td><td class="num">[−2.50, +8.25]</td><td class="num">0.371</td><td>유의하지 않음</td></tr>
+      <tr><td>Random · seed 44</td><td class="num">−0.75%p</td><td class="num">[−6.00, +4.50]</td><td class="num">0.856</td><td>유의하지 않음</td></tr>
+      <tr><td>Cluster · seed 42</td><td class="num">−3.25%p</td><td class="num">[−8.50, +2.00]</td><td class="num">0.267</td><td>유의하지 않음</td></tr>
+      <tr><td>Cluster · seed 43</td><td class="num">+1.50%p</td><td class="num">[−4.00, +7.00]</td><td class="num">0.656</td><td>유의하지 않음</td></tr>
+      <tr class="focus"><td>Cluster · seed 44</td><td class="num">−8.25%p</td><td class="num">[−14.00, −2.75]</td><td class="num">0.006</td><td>유의한 악화</td></tr>
+    </tbody></table></div>
+    <div class="grid" style="margin-top:15px"><div class="card warn"><h3>6-seed 완전 일치</h3><div class="value">48.25%</div><p>나머지 절반 이상에서 adapter 정답 여부가 갈림</p></div><div class="card warn"><h3>Base label 불일치</h3><div class="value">31.38%</div><p>eligible examples 평균</p></div><div class="card"><h3>3 vs 3 분할</h3><div class="value">44</div><p>400개 test 중 완전한 의견 분할</p></div><div class="card"><h3>Bootstrap</h3><div class="value">10k</div><p>paired resampling draws</p></div></div>
+    <div class="callout" style="margin-top:15px"><strong>통계 결론</strong><div>Random KD의 평균 상승만으로 개선을 주장할 수 없다. 작은 distillation set이 문제별 정답 여부를 크게 흔들어 routing label 자체가 불안정하다. 전체 데이터 확장에서는 단일 추론 정답 대신 반복 추론 성공확률 또는 confidence-smoothed label을 사용하는 것이 우선이다.</div></div>
   </section>
-  <section id="live"><h2>실시간 실행 상태</h2><div class="live-panel"><div class="live-head"><div class="live-title" id="live-title">상태 로딩 중</div><span class="tag live" id="live-state">LIVE</span></div><div class="live-summary" id="live-summary">캐시된 배치 결과를 5초마다 읽습니다.</div><div id="live-bars"></div><pre class="live-log" id="live-log">로그를 불러오는 중…</pre><button class="refresh" onclick="loadLiveStatus()">지금 새로고침</button></div></section>
-  <section id="next"><h2>남은 실행과 KSC 제출 조건</h2><div class="two"><div class="card"><h3>현재부터 이어서 실행 <span class="tag live">LIVE</span></h3><ol><li>6개 adapter × test 400문항 추론</li><li>Random vs cluster-balanced KD의 평균·분산 비교</li><li>대표 조건의 router train/validation 추론 후 H3 adaptation 재평가</li></ol><p style="margin-top:10px">예상: adapter test 약 15분, representative adaptation 약 10~15분</p></div><div class="card"><h3>KSC급 주장으로 확장하려면</h3><ul><li>전체 GSM8K(7,473)로 failure pool 확장</li><li>Bootstrap CI와 paired significance test</li><li>두 번째 task family 추가</li><li>장문/간결 프롬프트를 명시적 ablation으로 보고</li></ul></div></div></section>
+
+  <section id="live"><h2>7. 실시간 실행 상태</h2><p class="note">캐시 파일을 5초마다 읽어 현재 phase와 진행률을 표시한다.</p><div class="live-panel"><div class="live-head"><div class="live-title" id="live-title">상태 로딩 중</div><span class="tag live" id="live-state">LIVE</span></div><div class="live-summary" id="live-summary">모니터 파일을 확인합니다.</div><div id="live-bars"></div><pre class="log" id="live-log">로그를 불러오는 중…</pre><button class="refresh" onclick="loadLiveStatus()">지금 새로고침</button></div></section>
+
+  <section id="roadmap">
+    <h2>8. 실행 로드맵과 예상 시간</h2><p class="note">Lower 전체 추론 뒤 60분짜리 confidence-router gate를 먼저 실행하고, 통과할 때만 전체 Upper와 후속 sweep으로 확장한다.</p>
+    <div class="table-wrap"><table><thead><tr><th>단계</th><th>내용</th><th>예상 시간</th><th>상태</th></tr></thead><tbody>
+      <tr><td>A</td><td>H3 입력 추론 + LR/kNN adaptation 결과</td><td>완료</td><td><span class="tag done">완료</span></td></tr>
+      <tr><td>B</td><td>SupCon projection phase 1 구현·단위 검증</td><td>완료</td><td><span class="tag done">완료</span></td></tr>
+      <tr><td>C</td><td>Projection 3 seeds 학습·재임베딩·baseline 비교</td><td>완료</td><td><span class="tag done">완료</span></td></tr>
+      <tr><td>D</td><td>Semantic hard-negative weighting + phase 2 재실험</td><td>완료</td><td><span class="tag done">완료</span></td></tr>
+      <tr><td>E</td><td>BGE 마지막 2개 layer fine-tuning · phase 3</td><td>완료</td><td><span class="tag done">완료</span></td></tr>
+      <tr><td>F</td><td>Bootstrap·McNemar·label stability 분석</td><td>완료</td><td><span class="tag done">완료</span></td></tr>
+      <tr class="focus"><td>G</td><td>Output-aware C1 confidence scoring + router gate</td><td>완료</td><td><span class="tag done">부분 통과</span></td></tr>
+      <tr class="focus"><td>H</td><td>Risk-controlled calibration + selective consistency</td><td>완료</td><td><span class="tag done">pilot gate 통과</span></td></tr>
+      <tr class="focus"><td>I</td><td>고정된 C3 정책을 겹치지 않는 fresh 600문항에서 재검증</td><td>완료</td><td><span class="tag done">3개 gate 재통과</span></td></tr>
+      <tr class="focus"><td>J</td><td>C4 BCE + ranking + Brier · 3-seed safety ablation</td><td>완료</td><td><span class="tag done">3 seeds 통과</span></td></tr>
+      <tr><td>K</td><td>두 번째 task에서 C3 일반화 검증</td><td>약 4~10 GPU 시간</td><td><span class="tag live">다음</span></td></tr>
+      <tr><td>KSC 확장</td><td>두 번째 task 재현 시 통계 검정·최종 ablation 표와 논문 서술 완성</td><td>추가 8~16시간</td><td><span class="tag planned">조건부</span></td></tr>
+    </tbody></table></div>
+  </section>
+
   <script>
     const fmt=s=>s==null?'계산 중':s<60?`${s}초`:`${Math.ceil(s/60)}분`;
-    async function loadLiveStatus(){try{const r=await fetch(`artifacts/live_status.json?t=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw 0;const x=await r.json(), adapter=x.phase==='adapter_test_evaluation', training=x.phase==='targeted_kd_lora_training', totals=(training?Object.fromEntries(Object.keys(x.counts).map(k=>[k,1])):adapter?Object.fromEntries(Object.keys(x.counts).map(k=>[k,400])):{router_train:1000,distill_train:400,validation:200,test:400});document.querySelector('#live-title').textContent=`${x.phase} · ${x.state}`;document.querySelector('#live-state').textContent=x.state;document.querySelector('#live-summary').textContent=`${x.completed.toLocaleString()} / ${x.total.toLocaleString()} 완료 · 현재 ${x.active_split} · ${(training||adapter)?'adapter 평가를 감시 중':`${x.rate_per_minute||0}/min · ETA ${fmt(x.eta_seconds)}`} · ${x.updated_at}`;document.querySelector('#live-bars').innerHTML=Object.entries(totals).map(([k,total])=>{const n=x.counts[k]||0;return `<div class="progress-item"><div class="progress-label"><span>${k}${k===x.active_split?' ←':''}</span><span>${n}/${total}</span></div><div class="bar"><i style="width:${Math.min(100,n/total*100)}%"></i></div></div>`}).join('');const log=await fetch(`artifacts/live_log.txt?t=${Date.now()}`,{cache:'no-store'});if(log.ok){const t=await log.text();document.querySelector('#live-log').textContent=t.split('\n').slice(-12).join('\n');}}catch(e){document.querySelector('#live-summary').textContent='모니터 파일을 기다리는 중입니다. 페이지를 새로고침해도 됩니다.';}}
+    function totalsFor(x){if(x.phase==='targeted_kd_lora_training')return Object.fromEntries(Object.keys(x.counts).map(k=>[k,1]));if(x.phase==='adapter_test_evaluation')return Object.fromEntries(Object.keys(x.counts).map(k=>[k,400]));if(x.phase==='router_adaptation_inputs')return {router_train:1000,validation:200,test:400};return Object.fromEntries(Object.entries(x.counts).map(([k,v])=>[k,Math.max(v,1)]));}
+    async function loadLiveStatus(){try{const r=await fetch(`artifacts/live_status.json?t=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw Error();const x=await r.json(),totals=totalsFor(x);document.querySelector('#live-title').textContent=`${x.phase} · ${x.state}`;document.querySelector('#live-state').textContent=x.state;document.querySelector('#live-summary').textContent=`${x.completed.toLocaleString()} / ${x.total.toLocaleString()} 완료 · 현재 ${x.active_split} · ETA ${fmt(x.eta_seconds)} · ${x.updated_at}`;document.querySelector('#live-bars').innerHTML=Object.entries(totals).map(([k,total])=>{const n=x.counts[k]||0;return `<div class="progress-item"><div class="progress-label"><span>${k}${k===x.active_split?' ←':''}</span><span>${n}/${total}</span></div><div class="bar"><i style="width:${Math.min(100,n/total*100)}%"></i></div></div>`}).join('');const log=await fetch(`artifacts/live_log.txt?t=${Date.now()}`,{cache:'no-store'});if(log.ok){const t=await log.text();document.querySelector('#live-log').textContent=t.split('\n').slice(-12).join('\n')}}catch(e){document.querySelector('#live-summary').textContent='모니터 파일을 기다리는 중입니다. 페이지를 새로고침해도 됩니다.'}}
     loadLiveStatus();setInterval(loadLiveStatus,5000);
   </script>
-  <div class="footer">Last updated: 2026-09-02 · “완료”는 <code>artifacts/</code>의 재현 가능한 결과이며, “진행 중”은 최종 주장과 분리해 표기했다.</div>
-</main>
-</body>
-</html>
+  <div class="footer">Adaptive SLM–LLM Routing unified architecture · Last updated 2026-09-03 · 결과와 계획을 분리 표기함.</div>
+</main></body></html>

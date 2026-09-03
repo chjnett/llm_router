@@ -15,10 +15,10 @@ from .metrics import routing_labels, select_operating_point, system_metrics
 SPLITS = ("router_train", "validation", "test")
 
 
-def load_split(split: str, lower_name: str = "lower", upper_name: str = "upper"):
+def load_split(split: str, lower_name: str = "lower", upper_name: str = "upper", embedding_dir: str = "artifacts/embeddings"):
     lower_rows = read_jsonl(Path("artifacts/inference") / lower_name / f"{split}.jsonl")
     upper_rows = read_jsonl(Path("artifacts/inference") / upper_name / f"{split}.jsonl")
-    embedding_file = np.load(Path("artifacts/embeddings") / f"{split}.npz")
+    embedding_file = np.load(Path(embedding_dir) / f"{split}.npz")
     lower = {row["id"]: row for row in lower_rows}
     upper = {row["id"]: row for row in upper_rows}
     ids = embedding_file["ids"].tolist()
@@ -45,9 +45,10 @@ def main() -> None:
     parser.add_argument("--output", default="artifacts/results/baseline_routers.json")
     parser.add_argument("--lower-name", default="lower")
     parser.add_argument("--upper-name", default="upper")
+    parser.add_argument("--embedding-dir", default="artifacts/embeddings")
     args = parser.parse_args()
     cfg = load_config(args.config)
-    data = {split: load_split(split, args.lower_name, args.upper_name) for split in SPLITS}
+    data = {split: load_split(split, args.lower_name, args.upper_name, args.embedding_dir) for split in SPLITS}
     _, x_train, lower_train, upper_train = data["router_train"]
     y_train, eligible = routing_labels(lower_train, upper_train)
     x_train, y_train = x_train[eligible], y_train[eligible]

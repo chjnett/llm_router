@@ -107,6 +107,8 @@ def main() -> None:
     parser.add_argument("--limit", type=int)
     parser.add_argument("--adapter")
     parser.add_argument("--output-name")
+    parser.add_argument("--data-dir", default="artifacts/data")
+    parser.add_argument("--inference-dir", default="artifacts/inference")
     parser.add_argument("--max-new-tokens", type=int)
     parser.add_argument("--batch-size", type=int)
     parser.add_argument("--concise", action="store_true")
@@ -115,11 +117,11 @@ def main() -> None:
     set_seed(cfg["seed"])
     splits = args.splits or ["router_train", "distill_train", "validation", "test"]
     for split in splits:
-        rows = read_jsonl(Path("artifacts/data") / f"{split}.jsonl")
+        rows = read_jsonl(Path(args.data_dir) / f"{split}.jsonl")
         if args.limit:
             rows = rows[: args.limit]
         output_name = args.output_name or args.model
-        output_path = Path("artifacts/inference") / output_name / f"{split}.jsonl"
+        output_path = Path(args.inference_dir) / output_name / f"{split}.jsonl"
         existing = read_jsonl(output_path) if output_path.exists() else []
         completed = {row["id"] for row in existing}
         rows = [row for row in rows if row["id"] not in completed]

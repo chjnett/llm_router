@@ -3,6 +3,7 @@ import numpy as np
 from src.metrics import routing_labels, select_operating_point, system_metrics
 from src.prepare_data import split_rows
 from src.scoring import extract_final_number, gsm8k_correct
+from src.run_selective_consistency import cascade
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -44,3 +45,17 @@ def test_operating_point_respects_quality_floor():
     ]
     assert select_operating_point(points, 1.0, 0.95)["normalized_cost"] == 0.5
 
+
+def test_selective_consistency_counts_every_model_call():
+    probability = np.array([0.9, 0.5, 0.5, 0.1])
+    agreement = np.array([0, 1, 0, 1], dtype=bool)
+    lower = np.array([1, 1, 0, 0], dtype=bool)
+    upper = np.ones(4, dtype=bool)
+    cfg = {"cost": {"lower": 1.0, "upper": 4.0}}
+    metrics = cascade(probability, agreement, lower, upper, 0.2, 0.75, cfg)
+    assert metrics["direct_accept_rate"] == 0.25
+    assert metrics["second_pass_rate"] == 0.5
+    assert metrics["upper_call_rate"] == 0.5
+    # Initial Lower 4 + second Lower 2 + Upper 2*4 = 14; Always Upper = 16.
+    assert metrics["normalized_cascade_cost"] == 14 / 16
+    assert metrics["task_accuracy"] == 1.0
