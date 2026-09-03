@@ -1,0 +1,329 @@
+{
+  "protocol": "selection-only unsafe-count ladder; certification/test used only as retrospective diagnostics",
+  "measured_verifier_cost_lower_equivalents": 0.05912663944856128,
+  "selection_quality_target": 0.8408,
+  "selection_upper_accuracy": 0.864,
+  "ladder": [
+    {
+      "selection_unsafe_cap": 0,
+      "selected": {
+        "low_threshold": 0.59,
+        "high_threshold": 0.86,
+        "count": 250,
+        "accuracy": 0.864,
+        "unsafe_count": 0,
+        "unsafe_rate": 0.0,
+        "unsafe_upper_95": 0.011911419714980633,
+        "normalized_cost": 0.9368741096751674,
+        "lower_coverage": 0.284
+      },
+      "risk_certification_diagnostic": {
+        "always_upper_accuracy": 0.888,
+        "count": 250,
+        "accuracy": 0.888,
+        "unsafe_count": 2,
+        "unsafe_rate": 0.008,
+        "unsafe_upper_95": 0.02496768176927198,
+        "normalized_cost": 0.988265949959469,
+        "lower_coverage": 0.232
+      },
+      "official_test_diagnostic": {
+        "always_upper_accuracy": 0.88,
+        "count": 300,
+        "accuracy": 0.8666666666666667,
+        "unsafe_count": 4,
+        "unsafe_rate": 0.013333333333333334,
+        "unsafe_upper_95": 0.030250395419737855,
+        "normalized_cost": 0.9570339765787522,
+        "lower_coverage": 0.2633333333333333
+      },
+      "retrospective_gate": {
+        "risk_upper_5pct_pass": true,
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": false,
+        "all_pass": false
+      }
+    },
+    {
+      "selection_unsafe_cap": 1,
+      "selected": {
+        "low_threshold": 0.12,
+        "high_threshold": 0.86,
+        "count": 250,
+        "accuracy": 0.872,
+        "unsafe_count": 1,
+        "unsafe_rate": 0.004,
+        "unsafe_upper_95": 0.018833965611186224,
+        "normalized_cost": 0.826499587045377,
+        "lower_coverage": 0.4
+      },
+      "risk_certification_diagnostic": {
+        "always_upper_accuracy": 0.888,
+        "count": 250,
+        "accuracy": 0.884,
+        "unsafe_count": 4,
+        "unsafe_rate": 0.016,
+        "unsafe_upper_95": 0.03623796513686767,
+        "normalized_cost": 0.8383982270927607,
+        "lower_coverage": 0.388
+      },
+      "official_test_diagnostic": {
+        "always_upper_accuracy": 0.88,
+        "count": 300,
+        "accuracy": 0.8566666666666667,
+        "unsafe_count": 9,
+        "unsafe_rate": 0.03,
+        "unsafe_upper_95": 0.05176606189949998,
+        "normalized_cost": 0.8231578070493257,
+        "lower_coverage": 0.4033333333333333
+      },
+      "retrospective_gate": {
+        "risk_upper_5pct_pass": true,
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": true,
+        "all_pass": true
+      }
+    },
+    {
+      "selection_unsafe_cap": 2,
+      "selected": {
+        "low_threshold": 0.12,
+        "high_threshold": 0.82,
+        "count": 250,
+        "accuracy": 0.872,
+        "unsafe_count": 2,
+        "unsafe_rate": 0.008,
+        "unsafe_upper_95": 0.02496768176927198,
+        "normalized_cost": 0.8181955071875279,
+        "lower_coverage": 0.408
+      },
+      "risk_certification_diagnostic": {
+        "always_upper_accuracy": 0.888,
+        "count": 250,
+        "accuracy": 0.88,
+        "unsafe_count": 6,
+        "unsafe_rate": 0.024,
+        "unsafe_upper_95": 0.04681743080651248,
+        "normalized_cost": 0.805688707424446,
+        "lower_coverage": 0.42
+      },
+      "official_test_diagnostic": {
+        "always_upper_accuracy": 0.88,
+        "count": 300,
+        "accuracy": 0.8566666666666667,
+        "unsafe_count": 9,
+        "unsafe_rate": 0.03,
+        "unsafe_upper_95": 0.05176606189949998,
+        "normalized_cost": 0.8095288405208612,
+        "lower_coverage": 0.4166666666666667
+      },
+      "retrospective_gate": {
+        "risk_upper_5pct_pass": true,
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": true,
+        "all_pass": true
+      }
+    },
+    {
+      "selection_unsafe_cap": 3,
+      "selected": {
+        "low_threshold": 0.12,
+        "high_threshold": 0.82,
+        "count": 250,
+        "accuracy": 0.872,
+        "unsafe_count": 2,
+        "unsafe_rate": 0.008,
+        "unsafe_upper_95": 0.02496768176927198,
+        "normalized_cost": 0.8181955071875279,
+        "lower_coverage": 0.408
+      },
+      "risk_certification_diagnostic": {
+        "always_upper_accuracy": 0.888,
+        "count": 250,
+        "accuracy": 0.88,
+        "unsafe_count": 6,
+        "unsafe_rate": 0.024,
+        "unsafe_upper_95": 0.04681743080651248,
+        "normalized_cost": 0.805688707424446,
+        "lower_coverage": 0.42
+      },
+      "official_test_diagnostic": {
+        "always_upper_accuracy": 0.88,
+        "count": 300,
+        "accuracy": 0.8566666666666667,
+        "unsafe_count": 9,
+        "unsafe_rate": 0.03,
+        "unsafe_upper_95": 0.05176606189949998,
+        "normalized_cost": 0.8095288405208612,
+        "lower_coverage": 0.4166666666666667
+      },
+      "retrospective_gate": {
+        "risk_upper_5pct_pass": true,
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": true,
+        "all_pass": true
+      }
+    },
+    {
+      "selection_unsafe_cap": 4,
+      "selected": {
+        "low_threshold": 0.12,
+        "high_threshold": 0.81,
+        "count": 250,
+        "accuracy": 0.864,
+        "unsafe_count": 4,
+        "unsafe_rate": 0.016,
+        "unsafe_upper_95": 0.03623796513686767,
+        "normalized_cost": 0.8018914273296787,
+        "lower_coverage": 0.424
+      },
+      "risk_certification_diagnostic": {
+        "always_upper_accuracy": 0.888,
+        "count": 250,
+        "accuracy": 0.876,
+        "unsafe_count": 7,
+        "unsafe_rate": 0.028,
+        "unsafe_upper_95": 0.05194700438197347,
+        "normalized_cost": 0.7894353075429049,
+        "lower_coverage": 0.436
+      },
+      "official_test_diagnostic": {
+        "always_upper_accuracy": 0.88,
+        "count": 300,
+        "accuracy": 0.8566666666666667,
+        "unsafe_count": 9,
+        "unsafe_rate": 0.03,
+        "unsafe_upper_95": 0.05176606189949998,
+        "normalized_cost": 0.8093176739529103,
+        "lower_coverage": 0.4166666666666667
+      },
+      "retrospective_gate": {
+        "risk_upper_5pct_pass": false,
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": true,
+        "all_pass": false
+      }
+    },
+    {
+      "selection_unsafe_cap": 5,
+      "selected": {
+        "low_threshold": 0.12,
+        "high_threshold": 0.8,
+        "count": 250,
+        "accuracy": 0.86,
+        "unsafe_count": 5,
+        "unsafe_rate": 0.02,
+        "unsafe_upper_95": 0.04158982878282098,
+        "normalized_cost": 0.7935873474718295,
+        "lower_coverage": 0.432
+      },
+      "risk_certification_diagnostic": {
+        "always_upper_accuracy": 0.888,
+        "count": 250,
+        "accuracy": 0.88,
+        "unsafe_count": 7,
+        "unsafe_rate": 0.028,
+        "unsafe_upper_95": 0.05194700438197347,
+        "normalized_cost": 0.7771312276850557,
+        "lower_coverage": 0.448
+      },
+      "official_test_diagnostic": {
+        "always_upper_accuracy": 0.88,
+        "count": 300,
+        "accuracy": 0.8566666666666667,
+        "unsafe_count": 9,
+        "unsafe_rate": 0.03,
+        "unsafe_upper_95": 0.05176606189949998,
+        "normalized_cost": 0.8058154073652165,
+        "lower_coverage": 0.42
+      },
+      "retrospective_gate": {
+        "risk_upper_5pct_pass": false,
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": true,
+        "all_pass": false
+      }
+    },
+    {
+      "selection_unsafe_cap": 6,
+      "selected": {
+        "low_threshold": 0.12,
+        "high_threshold": 0.8,
+        "count": 250,
+        "accuracy": 0.86,
+        "unsafe_count": 5,
+        "unsafe_rate": 0.02,
+        "unsafe_upper_95": 0.04158982878282098,
+        "normalized_cost": 0.7935873474718295,
+        "lower_coverage": 0.432
+      },
+      "risk_certification_diagnostic": {
+        "always_upper_accuracy": 0.888,
+        "count": 250,
+        "accuracy": 0.88,
+        "unsafe_count": 7,
+        "unsafe_rate": 0.028,
+        "unsafe_upper_95": 0.05194700438197347,
+        "normalized_cost": 0.7771312276850557,
+        "lower_coverage": 0.448
+      },
+      "official_test_diagnostic": {
+        "always_upper_accuracy": 0.88,
+        "count": 300,
+        "accuracy": 0.8566666666666667,
+        "unsafe_count": 9,
+        "unsafe_rate": 0.03,
+        "unsafe_upper_95": 0.05176606189949998,
+        "normalized_cost": 0.8058154073652165,
+        "lower_coverage": 0.42
+      },
+      "retrospective_gate": {
+        "risk_upper_5pct_pass": false,
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": true,
+        "all_pass": false
+      }
+    }
+  ],
+  "retrospective_candidate_for_fresh_holdout": {
+    "selection_unsafe_cap": 1,
+    "selected": {
+      "low_threshold": 0.12,
+      "high_threshold": 0.86,
+      "count": 250,
+      "accuracy": 0.872,
+      "unsafe_count": 1,
+      "unsafe_rate": 0.004,
+      "unsafe_upper_95": 0.018833965611186224,
+      "normalized_cost": 0.826499587045377,
+      "lower_coverage": 0.4
+    },
+    "risk_certification_diagnostic": {
+      "always_upper_accuracy": 0.888,
+      "count": 250,
+      "accuracy": 0.884,
+      "unsafe_count": 4,
+      "unsafe_rate": 0.016,
+      "unsafe_upper_95": 0.03623796513686767,
+      "normalized_cost": 0.8383982270927607,
+      "lower_coverage": 0.388
+    },
+    "official_test_diagnostic": {
+      "always_upper_accuracy": 0.88,
+      "count": 300,
+      "accuracy": 0.8566666666666667,
+      "unsafe_count": 9,
+      "unsafe_rate": 0.03,
+      "unsafe_upper_95": 0.05176606189949998,
+      "normalized_cost": 0.8231578070493257,
+      "lower_coverage": 0.4033333333333333
+    },
+    "retrospective_gate": {
+      "risk_upper_5pct_pass": true,
+      "quality_floor_pass": true,
+      "cost_reduction_10pct_pass": true,
+      "all_pass": true
+    }
+  },
+  "fresh_holdout_required": true
+}
