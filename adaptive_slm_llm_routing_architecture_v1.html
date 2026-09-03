@@ -23,16 +23,16 @@
     <div class="eyebrow">Unified research architecture · KSC pilot</div>
     <h1>Capability-aware Adaptive SLM–LLM Routing</h1>
     <p class="lead">Lower가 먼저 짧은 답을 생성하고, 질문 의미와 <span class="term" tabindex="0" data-tip="모델이 자신의 출력에 얼마나 확신하는지를 log-probability, entropy, 답 형식 등으로 수치화한 값입니다.">출력 신뢰도</span>를 함께 사용해 그대로 채택하거나 Upper로 escalation한다. Lower가 학습으로 변하면 가벼운 재보정으로 routing boundary를 갱신하는 성능 중심 구조다.</p>
-    <div class="chips"><span class="chip">RTX 3090 · 24GB</span><span class="chip">GSM8K pilot · n=2,000</span><span class="chip">Fresh holdout · n=600</span><span class="chip">SVAMP official test · n=300</span><span class="chip">Lower-first cascade</span><span class="chip">C3 · main</span><span class="chip">C4 · safety ablation</span><span class="chip">L2 · risk certified</span></div><div class="tip-guide">점선이 있는 <span class="term" tabindex="0" data-tip="이런 형태로 핵심 용어의 쉬운 설명이 표시됩니다.">보라색 용어</span>에 마우스를 올리면 설명이 나옵니다.</div>
+    <div class="chips"><span class="chip">RTX 3090 · 24GB</span><span class="chip">GSM8K pilot · n=2,000</span><span class="chip">Fresh holdout · n=600</span><span class="chip">SVAMP official test · n=300</span><span class="chip">Lower-first cascade</span><span class="chip">C3 · main</span><span class="chip">L2 · risk certified</span><span class="chip">M · cost pass / risk near-miss</span></div><div class="tip-guide">점선이 있는 <span class="term" tabindex="0" data-tip="이런 형태로 핵심 용어의 쉬운 설명이 표시됩니다.">보라색 용어</span>에 마우스를 올리면 설명이 나옵니다.</div>
   </header>
-  <nav><a href="#start">30초 요약</a><a href="#overview">피봇 구조</a><a href="#confidence">Confidence routing</a><a href="#auxiliary">C4 보조 목표</a><a href="#cross-task">SVAMP 일반화</a><a href="#risk-control">Risk 인증</a><a href="#contrastive">Contrastive ablation</a><a href="#matrix">실험 설계</a><a href="#results">현재 결과</a><a href="#live">실시간</a><a href="#roadmap">로드맵</a></nav>
+  <nav><a href="#start">30초 요약</a><a href="#overview">피봇 구조</a><a href="#confidence">Confidence routing</a><a href="#auxiliary">C4 보조 목표</a><a href="#cross-task">SVAMP 일반화</a><a href="#risk-control">Risk 인증</a><a href="#verifier">저비용 verifier</a><a href="#contrastive">Contrastive ablation</a><a href="#matrix">실험 설계</a><a href="#results">현재 결과</a><a href="#live">실시간</a><a href="#roadmap">로드맵</a></nav>
 
   <section id="start">
     <h2>먼저 읽기 · 30초 연구 요약</h2><p class="note">아래 세 문장만 이해하면 현재 연구의 문제, 해법, 다음 검증을 파악할 수 있다.</p>
     <div class="summary-strip">
       <div class="summary-item"><b>문제</b><span>질문 의미만 보는 BGE router는 “Lower가 실제로 풀 수 있는가”를 잘 구분하지 못했다. Pilot AUC는 0.589였다.</span></div>
       <div class="summary-item"><b>현재 해법</b><span>Lower 답의 confidence와 두 번의 숫자 답 일치를 이용한다. Pilot에서 Upper 품질의 98%를 유지하며 비용을 13.73% 줄였다.</span></div>
-      <div class="summary-item"><b>현재 결론</b><span>품질·비용 일반화와 95% 안전 인증을 각각 달성했다. 그러나 안전 인증 정책은 비용 이점이 사라져, 다음 병목은 두 번째 Lower 호출 비용이다.</span></div>
+      <div class="summary-item"><b>현재 결론</b><span>Answer-only verifier가 비용을 16.95% 줄였지만 95% 위험 상한은 5.195%로 기준을 0.195%p 넘었다. 비용 병목은 해결됐고 새 데이터 안전 재인증이 남았다.</span></div>
     </div>
     <div class="read-path"><b>권장 읽기 순서</b><span>30초 요약</span><i>→</i><span>피봇 구조</span><i>→</i><span>Confidence 결과</span><i>→</i><span>실시간 상태</span><i>→</i><span>로드맵</span></div>
   </section>
@@ -94,6 +94,14 @@
     <div class="grid" style="margin-top:15px"><div class="card good"><h3>인증 unsafe</h3><div class="value">2.00%</div><p>5 / 250</p></div><div class="card good"><h3>95% risk 상한</h3><div class="value">4.16%</div><p>목표 5% 이하 인증</p></div><div class="card warn"><h3>인증 cascade cost</h3><div class="value">1.008</div><p>Always Upper보다 0.77% 비쌈</p></div><div class="card"><h3>인증 Upper 호출률</h3><div class="value">74.8%</div><p>첫 Lower 비용 때문에 break-even 실패</p></div></div>
     <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>평가</th><th class="num">Accuracy</th><th class="num">Unsafe</th><th class="num">Risk upper 95%</th><th class="num">Cost</th><th>판정</th></tr></thead><tbody><tr class="focus"><td>독립 risk certification · 250</td><td class="num">88.80%</td><td class="num">2.00%</td><td class="num"><b>4.16%</b></td><td class="num">1.008</td><td>안전 인증 통과 · 비용 실패</td></tr><tr><td>공식 test 진단 · 300</td><td class="num">87.67%</td><td class="num">1.00%</td><td class="num">—</td><td class="num">1.045</td><td>안전 재현 · 비용 실패</td></tr></tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>L2 결론</strong><div><b>안전성과 비용의 동시 달성이 현재 구조의 핵심 문제다.</b> 엄격한 risk certificate는 Upper 호출을 늘리고, 모든 요청에 먼저 수행하는 Lower와 선택적 두 번째 Lower 비용 때문에 Always Upper보다 비싸진다. 다음 실험은 threshold sweep이 아니라 두 번째 생성을 32~64 token answer-only verifier 또는 단일-pass logit consistency로 대체해 인증된 안전성을 유지하면서 break-even을 회복하는 것이다.</div></div>
+  </section>
+
+  <section id="verifier">
+    <h2>2E. M · 64-token Answer-only Verifier</h2><p class="note">기존 두 번째 Lower는 평균 436~450자의 긴 풀이를 생성했다. 이를 설명 없이 숫자 한 줄만 반환하는 독립 verifier로 교체하고, 정책 선택 250 / 독립 인증 250 규칙을 그대로 유지했다.</p>
+    <div class="flow" style="grid-template-columns:repeat(4,1fr)"><div class="node"><span class="n">01 · FIRST PASS</span><b>Lower concise</b><small>기존 출력 confidence 계산</small></div><div class="node route"><span class="n">02 · VERIFY</span><b>평균 6.54 tokens</b><small>p95 9 tokens · 설명 없이 숫자만</small></div><div class="node contrast"><span class="n">03 · AGREE / ESCALATE</span><b>Verifier 호출 85.6%</b><small>숫자 일치 시 Lower 채택</small></div><div class="node upper"><span class="n">04 · DECIDE</span><b>Cost pass · Risk near-miss</b><small>세 기준 동시 통과는 실패</small></div></div>
+    <div class="grid" style="margin-top:15px"><div class="card good"><h3>인증 Accuracy</h3><div class="value">88.00%</div><p>품질 floor 통과</p></div><div class="card good"><h3>비용 절감</h3><div class="value">16.95%</div><p>가정 verifier cost 0.35 Lower</p></div><div class="card warn"><h3>95% risk 상한</h3><div class="value">5.195%</div><p>목표를 0.195%p 초과</p></div><div class="card"><h3>관측 unsafe</h3><div class="value">2.80%</div><p>7 / 250</p></div></div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>평가</th><th class="num">Accuracy</th><th class="num">Unsafe</th><th class="num">Risk upper 95%</th><th class="num">Cost</th><th>판정</th></tr></thead><tbody><tr class="focus"><td>독립 risk certification · 250</td><td class="num">88.00%</td><td class="num">2.80%</td><td class="num"><b>5.195%</b></td><td class="num">0.830</td><td>품질·비용 통과 · 안전 근소 실패</td></tr><tr><td>공식 test 진단 · 300</td><td class="num">85.67%</td><td class="num">3.00%</td><td class="num">—</td><td class="num">0.863</td><td>품질·비용 통과 · 인증용 아님</td></tr></tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>정직한 해석</strong><div><b>비용 병목은 해결됐지만 배포 gate는 아직 실패다.</b> 인증 split을 본 뒤 threshold를 바꾸면 인증이 무효가 되므로 재튜닝하지 않는다. 또한 0.35 Lower라는 verifier 비용은 6.54-token 출력에 근거한 보수적 모델링 값이지 실측 FLOPs가 아니다. 비용 10% 절감의 손익분기 verifier 비용은 0.729 Lower-call이며, 다음 단계는 사전 고정된 정책을 새 데이터에서 재인증하고 실제 latency/token 비용을 측정하는 것이다.</div></div>
   </section>
 
   <section id="contrastive">
@@ -198,7 +206,8 @@
       <tr class="focus"><td>J</td><td>C4 BCE + ranking + Brier · 3-seed safety ablation</td><td>완료</td><td><span class="tag done">3 seeds 통과</span></td></tr>
       <tr class="focus"><td>K</td><td>SVAMP 공식 test에서 C3/C4 cross-task 일반화 검증</td><td>완료</td><td><span class="tag done">품질·비용 통과 · 안전 부분 실패</span></td></tr>
       <tr class="focus"><td>L</td><td>독립 250/250 split + 95% exact-binomial risk certification</td><td>완료</td><td><span class="tag done">안전 통과 · 비용 실패</span></td></tr>
-      <tr><td>M</td><td>32~64 token answer-only verifier 또는 single-pass consistency로 2차 호출 비용 축소</td><td>약 1~3 GPU 시간</td><td><span class="tag live">다음</span></td></tr>
+      <tr class="focus"><td>M</td><td>64-token answer-only verifier + 비용 민감도</td><td>완료</td><td><span class="tag done">비용 통과 · risk 0.195%p 초과</span></td></tr>
+      <tr><td>N</td><td>정책 사전 고정 후 새 표본 risk 재인증 + 실제 latency/token 비용 측정</td><td>선택에 따라 1~4시간</td><td><span class="tag live">인터뷰 대기</span></td></tr>
       <tr><td>KSC 확장</td><td>인증 안전성 + 비용 −10% 동시 달성 후 최종 통계·ablation 표 완성</td><td>추가 4~8시간</td><td><span class="tag planned">조건부</span></td></tr>
     </tbody></table></div>
   </section>
