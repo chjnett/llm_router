@@ -15,6 +15,11 @@
 > 익명 심사 여부, 제출 파일 형식, 저자 표기 규칙**만 마지막에 다시 확인한다. 결과를 본
 > 뒤 실험 기준을 바꾸지 않는 것과 마찬가지로, 형식을 추측해서 확정하지 않는다.
 
+> **심사 피드백 반영 상태:** 통계표 수치는 원본 결과와 대조했으며 값은 바꾸지 않았다.
+> 표 2는 열 넘침을 막도록 축소 조판하고, Figure 2는 양단 폭으로 배치한다. 또한
+> self-consistency와의 차이, 별도 검증 모델을 쓰지 않는 이유, 위험 제약 최적화의 후속
+> 절차를 본문에 명시했다.
+
 ---
 
 ## 1. 논문의 한 문장 정의
@@ -64,6 +69,22 @@
 - Output-Aware Answer Verification for Cost-Efficient SLM–LLM Cascades
 
 제목에는 “safe”, “certified”, “guaranteed”를 넣지 않는다.
+
+### 국문 용어 통일표
+
+영문은 첫 등장 때만 괄호로 병기하고 이후에는 아래 국문 표현을 쓴다. C3,
+Always-Upper처럼 실험 방법을 식별하는 고유 이름은 표 안에서 유지해도 된다.
+
+| 원 표현 | 본문 권장 표현 |
+|---|---|
+| confidence | 신뢰도(confidence) → 이후 `신뢰도` |
+| answer-only verifier | 정답 전용(answer-only) 검증 → 이후 `정답 전용 검증` |
+| escalation | 상위 모델 전달 |
+| split | 분할 |
+| routing score | 라우팅 점수 |
+| normalized cost | 정규화 비용 |
+| unsafe routing | 위험 라우팅 |
+| latency | 지연시간 |
 
 ---
 
@@ -277,15 +298,22 @@ trade-off를 최적화하였다~\cite{chen2024frugalgpt}. RouteLLM은 인간 선
 ### 8.2 출력 검증과 선택적 예측
 
 GSM8K 원 논문은 후보 풀이의 verifier가 수학 추론 성능을 개선할 수 있음을 보였다.
-Selective Generation은 생성 모델에서 위험 통제의 필요성을 다룬다. 본 연구의 verifier는
-후보를 점수화하는 별도 대형 verifier가 아니라 **동일 SLM의 매우 짧은 독립 답 생성**이다.
+Selective Generation은 생성 모델에서 위험 통제의 필요성을 다룬다. 본 연구의 검증기는
+후보를 점수화하는 별도 대형 모델이 아니라 **동일 SLM의 매우 짧은 별도 프롬프트 답 생성**이다.
 
 ```latex
 GSM8K 연구는 생성 후보를 평가하는 verifier의 효과를 보였다~\cite{cobbe2021gsm8k}.
 선택적 생성 연구는 신뢰할 수 없는 출력을 거부하거나 선택할 때 위험 통제가 필요함을
-보였다~\cite{lee2024selective}. 본 연구는 별도의 verifier 모델을 학습하지 않고 동일
-SLM의 answer-only 재생성을 이용해 첫 출력과의 숫자 일치를 확인한다.
+보였다~\cite{lee2024selective}. 본 연구는 별도의 검증 모델을 학습하지 않고 동일
+SLM의 정답 전용 재생성을 이용해 첫 출력과의 숫자 일치를 확인한다. 전통적
+self-consistency가 동일 프롬프트에서 확률적으로 여러 출력을 표본화해 다수결하는 것과
+달리~\cite{wang2023selfconsistency}, 본 방법은 greedy decoding을 유지하면서 풀이 프롬프트와 정답 전용 프롬프트라는
+서로 다른 두 관점을 사용하고 신뢰도 경계 사례에만 두 번째 호출을 수행한다. 따라서
+별도 가중치의 적재·상주 비용 없이 평균 5.40토큰의 추가 디코딩만 사용한다.
 ```
+
+여기서 `독립`이라는 단어는 통계적 독립으로 오해될 수 있으므로 검증 출력에는 쓰지
+않는다. 데이터 분할에만 `독립 인증 분할`이라는 표현을 사용한다.
 
 ### 8.3 의미 임베딩과 능력 경계
 
@@ -453,17 +481,18 @@ Answer-only, Always Upper만 남긴다.
 
 ### 11.1 Figure 2 — latency와 token
 
-결과 절의 첫 번째 그림으로 배치한다.
+결과 절의 첫 번째 그림으로 배치한다. 두 개의 패널이 한 column에서 과도하게 축소되지
+않도록 양단 폭 `figure*`를 사용한다.
 
 ```latex
-\begin{figure}[t]
+\begin{figure*}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/fig2_latency_tokens.pdf}
-  \caption{동일 RTX 3090에서 full second pass와 answer-only verifier의 문항당 생성
+  \includegraphics[width=0.88\textwidth]{figures/fig2_latency_tokens.pdf}
+  \caption{동일 RTX 3090에서 두 번째 전체 풀이와 정답 전용 검증의 문항당
   지연시간 및 생성 토큰 수 비교. 128문항을 batch size 16, 조건별 2회 ABBA 순서로
   측정하였다.}
   \label{fig:latency}
-\end{figure}
+\end{figure*}
 ```
 
 설명 문단:
@@ -535,22 +564,25 @@ Test  & Always Upper & 88.00 & -- & 1.000 \\
 ```latex
 \begin{table}[t]
 \centering
-\caption{Answer-only와 C3의 paired 비교}
+\caption{정답 전용 검증과 C3의 대응 비교(단위: \%p)}
 \label{tab:paired}
 \small
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2.5pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrr}
 \toprule
-Split & $\Delta$Acc. (95\% CI) & $p_{McN}$ & $\Delta$Cost (95\% CI) \\
+분할 & $\Delta$정확도 [95\% CI] & $p_{McN}$ & $\Delta$비용 [95\% CI] \\
 \midrule
 Cert. & $-0.8$ [$-2.4,0.8$] & .625 & $-23.06$ [$-28.70,-17.38$] \\
 Test  & $-2.0$ [$-4.33,0.01$] & .146 & $-23.87$ [$-29.58,-18.27$] \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 ```
 
-CI와 delta는 percentage point 기준임을 caption 또는 본문에 쓴다. cost CI가 0을
+두 행의 값은 결과 JSON과 다시 대조한 값이며, 인증 분할은 `-0.8 [-2.4, 0.8]`, 공식
+테스트는 `-2.0 [-4.33, 0.01]`이다. 신뢰구간과 차이는 %p 기준임을 caption 또는 본문에 쓴다. 비용 신뢰구간이 0을
 포함하지 않는다고 “통계적으로 비용이 감소했다”고 쓸 수 있지만, latency 반복이 2회뿐인
 점도 제한사항에 남긴다.
 
@@ -593,6 +625,19 @@ CI와 delta는 percentage point 기준임을 caption 또는 본문에 쓴다. co
 후속 연구에서는 더 큰 사전 등록 표본과 다양한 모델·도메인에서 비열등성 및 위험
 통제를 재평가할 필요가 있다.
 ```
+
+위 제한사항 직후에는 사후적으로 5% 기준을 완화하지 않고, 다음과 같은 위험 제약
+최적화를 후속 방법으로 제시한다.
+
+```latex
+후속 연구에서는 정책 선택 분할에서
+$\min_{\tau_l,\tau_h}\widetilde{C}(\tau_l,\tau_h)$를 최적화하되 위험률의 단측
+신뢰상한이 목표 $\alpha$ 이하라는 제약을 동시에 적용하고, 고정된 임계값을 새로운 독립
+분할에서 다시 인증할 예정이다.
+```
+
+핵심은 현재 공식 테스트 결과를 보고 임계값을 다시 고르는 것이 아니다. 새 정책 선택
+분할에서 임계값을 고정하고, 그 뒤에 열지 않은 인증 분할에서 다시 평가해야 한다.
 
 ---
 
@@ -676,6 +721,13 @@ cascade 비용을 Always-Upper 대비 19.42--22.29\% 절감하였다. 동일 문
   number={4},
   pages={404--413},
   year={1934}
+}
+
+@inproceedings{wang2023selfconsistency,
+  title={Self-Consistency Improves Chain of Thought Reasoning in Language Models},
+  author={Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc V. and Chi, Ed H. and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
+  booktitle={International Conference on Learning Representations},
+  year={2023}
 }
 ```
 

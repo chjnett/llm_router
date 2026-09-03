@@ -21,16 +21,16 @@ Affiliation\\
 \abstract{
 대규모 언어 모델은 높은 추론 성능을 제공하지만 모든 요청을 대형 모델에 할당하면
 계산 비용과 지연시간이 증가한다. 본 연구는 소형 모델의 질문 임베딩뿐 아니라 실제
-생성 출력의 confidence와 짧은 독립 검증 결과를 이용하는 적응형 SLM--LLM 라우팅
+생성 출력의 신뢰도(confidence)와 짧은 정답 전용(answer-only) 검증 결과를 이용하는 적응형 SLM--LLM 라우팅
 방법을 제안한다. 제안 방법은 Qwen2.5-1.5B가 먼저 답을 생성하고, 경계 사례에 대해서만
-설명을 제외한 answer-only 검증을 수행한 후 두 숫자 답의 일치 여부에 따라
-Qwen2.5-7B로 escalation한다. GSM8K에서 학습한 confidence router를 SVAMP로 전이하여
-분리된 정책 선택 및 인증 split과 공식 test에서 평가하였다. RTX 3090 동일 조건
-실험에서 answer-only 검증은 기존 두 번째 전체 풀이보다 문항당 지연시간을
-492.97 ms에서 29.15 ms로 94.09\% 감소시켰다. 실측 지연시간으로 환산한 cascade
-비용은 독립 인증 split과 공식 test에서 Always-Upper 대비 각각 22.29\%와 19.42\%
+설명을 제외한 정답 전용 검증을 수행한 후 두 숫자 답의 일치 여부에 따라
+Qwen2.5-7B로 전달한다. GSM8K에서 학습한 신뢰도 라우터를 SVAMP로 전이하여
+분리된 정책 선택 및 인증 분할과 공식 테스트에서 평가하였다. RTX 3090 동일 조건
+실험에서 정답 전용 검증은 기존 두 번째 전체 풀이보다 문항당 지연시간을
+492.97 ms에서 29.15 ms로 94.09\% 감소시켰다. 실측 지연시간으로 환산한 계단식
+비용은 독립 인증 분할과 공식 테스트에서 항상 상위 모델(Always-Upper) 대비 각각 22.29\%와 19.42\%
 감소했으며, 정확도는 각각 88.00\%와 85.67\%를 기록하였다. C3 기준선과의 exact
-McNemar 검정에서는 유의한 정확도 차이가 관측되지 않았다. 한편 95\% unsafe-risk
+McNemar 검정에서는 유의한 정확도 차이가 관측되지 않았다. 한편 95\% 위험
 상한은 5.195\%로 사전 설정한 5\% 기준을 근소하게 충족하지 못했다. 결과적으로
 제안 방법은 관측된 성능--비용 frontier를 개선하지만, 안전 보장과 정확도 비열등성의
 확증에는 더 큰 독립 표본이 필요하다.
@@ -48,19 +48,19 @@ McNemar 검정에서는 유의한 정확도 차이가 관측되지 않았다. �
 
 기존 LLM 라우팅은 질문 임베딩, 선호 데이터 또는 별도의 분류기를 이용해 강한 모델의
 필요성을 예측한다~\cite{chen2024frugalgpt,ong2025routellm}. 그러나 의미적으로 유사한
-질문도 SLM 관점의 난이도가 다를 수 있으며, query-only 표현은 SLM이 실제로 생성한
+질문도 SLM 관점의 난이도가 다를 수 있으며, 질의 전용(query-only) 표현은 SLM이 실제로 생성한
 답의 불확실성과 자기 일관성을 직접 반영하지 못한다. 또한 경계 사례마다 전체 풀이를
-두 번 생성하면 검증 자체의 decode 비용이 커져 cascade의 경제성이 약해진다.
+두 번 생성하면 검증 자체의 디코딩 비용이 커져 계단식 구조의 경제성이 약해진다.
 
-본 연구는 첫 번째 SLM 출력에서 계산한 confidence와 독립 answer-only 검증을 결합한다.
+본 연구는 첫 번째 SLM 출력에서 계산한 신뢰도와 별도 프롬프트 기반 정답 전용 검증을 결합한다.
 라우터가 확실한 사례는 첫 답을 즉시 채택하고, 경계 사례는 동일 SLM이 숫자 답만 짧게
-재생성하도록 한다. 두 답이 일치하면 SLM 출력을 채택하고, 불일치하거나 confidence가
-낮으면 Upper LLM으로 escalation한다.
+재생성하도록 한다. 두 답이 일치하면 SLM 출력을 채택하고, 불일치하거나 신뢰도가
+낮으면 상위 LLM으로 전달한다.
 
-본 연구의 기여는 다음과 같다. 첫째, 질문 의미와 실제 SLM 출력 confidence를 결합한
-두 임계값 라우팅 구조를 제시한다. 둘째, 전체 재풀이 대신 평균 5.40토큰의 answer-only
+본 연구의 기여는 다음과 같다. 첫째, 질문 의미와 실제 SLM 출력 신뢰도를 결합한
+두 임계값 라우팅 구조를 제시한다. 둘째, 전체 재풀이 대신 평균 5.40토큰의 정답 전용
 검증을 사용해 동일 GPU에서 두 번째 호출 지연시간을 94.09\% 줄인다. 셋째, 정책 선택과
-평가 split을 분리하고 paired bootstrap 및 McNemar 검정을 통해 정확도--비용 trade-off를
+평가 분할을 분리하고 대응 부트스트랩 및 McNemar 검정을 통해 정확도--비용 상충 관계를
 정량적으로 분석한다. 넷째, 안전 기준의 근소 실패도 함께 보고하여 방법의 적용 범위를
 명확히 한다.
 
@@ -70,27 +70,32 @@ FrugalGPT는 이질적인 비용 구조를 가진 모델을 cascade로 결합하
 trade-off를 최적화하였다~\cite{chen2024frugalgpt}. RouteLLM은 인간 선호 데이터와
 증강을 이용해 강한 모델과 약한 모델 사이의 라우터를 학습하였다~\cite{ong2025routellm}.
 이들과 달리 본 연구는 입력 표현만으로 모델을 선택하지 않고, 약한 모델이 생성한
-출력의 confidence와 독립적인 짧은 숫자 검증을 라우팅 신호로 사용한다.
+출력 신뢰도와 별도 프롬프트의 짧은 숫자 검증을 라우팅 신호로 사용한다.
 
 GSM8K 연구는 생성 후보를 평가하는 verifier의 효과를 보였다~\cite{cobbe2021gsm8k}.
 선택적 생성 연구는 신뢰할 수 없는 출력을 선택하거나 거부할 때 위험 통제가 필요함을
-보였다~\cite{lee2024selective}. 본 연구는 별도의 verifier 모델을 학습하지 않고 동일
-SLM의 answer-only 재생성을 이용해 첫 출력과의 숫자 일치를 확인한다. 범용 임베딩은
+보였다~\cite{lee2024selective}. 본 연구는 별도의 검증 모델을 학습하지 않고 동일
+SLM의 정답 전용 재생성을 이용해 첫 출력과의 숫자 일치를 확인한다. 전통적
+self-consistency가 동일 프롬프트에서 확률적으로 여러 출력을 표본화해 다수결하는 것과
+달리~\cite{wang2023selfconsistency}, 본 방법은 greedy decoding을 유지하면서 풀이
+프롬프트와 정답 전용 프롬프트라는 서로 다른 두 관점을 사용하고 신뢰도 경계 사례에만
+두 번째 호출을 수행한다. 따라서
+별도 가중치의 적재·상주 비용 없이 평균 5.40토큰의 추가 디코딩만 사용한다. 범용 임베딩은
 의미적 유사성을 효과적으로 표현하지만~\cite{xiao2023bge}, 같은 주제의 질문도 SLM이
 해결할 수 있는 난이도는 다를 수 있다. 초기 GSM8K 실험에서 frozen BGE 기반 logistic
-router의 AUC는 0.589였고, 출력 confidence 기반 router는 0.722를 기록하였다.
+라우터의 AUC는 0.589였고, 출력 신뢰도 기반 라우터는 0.722를 기록하였다.
 
 \section{제안 방법}
 
 그림~\ref{fig:architecture}는 제안 라우팅 구조를 보여준다. Lower SLM의 첫 출력으로
-routing score를 계산하고, 높은 confidence의 요청은 즉시 채택한다. 경계 사례는 숫자
-한 줄만 생성하는 독립 검증을 수행하며, 첫 답과 검증 답이 다르면 Upper LLM으로
+라우팅 점수를 계산하고, 높은 신뢰도의 요청은 즉시 채택한다. 경계 사례는 숫자
+한 줄만 생성하는 별도 프롬프트 검증을 수행하며, 첫 답과 검증 답이 다르면 상위 LLM으로
 전달한다.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{figures/fig1_architecture.pdf}
-  \caption{출력 confidence와 answer-only 검증을 결합한 제안 라우팅 구조.}
+  \caption{출력 신뢰도와 정답 전용 검증을 결합한 제안 라우팅 구조.}
   \label{fig:architecture}
 \end{figure}
 
@@ -103,14 +108,14 @@ routing score를 계산하고, 높은 confidence의 요청은 즉시 채택한�
 q_i = \sigma(\mathbf{w}^{\top}\mathbf{x}_i+b).
 \end{equation}
 
-정책 선택 split에서 고정한 두 임계값은 $\tau_l=0.12$, $\tau_h=0.80$이다.
+정책 선택 분할에서 고정한 두 임계값은 $\tau_l=0.12$, $\tau_h=0.80$이다.
 
 \begin{equation}
 \pi(q_i)=
 \begin{cases}
 \text{accept Lower}, & q_i \ge \tau_h,\\
-\text{answer-only verify}, & \tau_l \le q_i < \tau_h,\\
-\text{escalate Upper}, & q_i < \tau_l.
+\text{정답 전용 검증}, & \tau_l \le q_i < \tau_h,\\
+\text{상위 모델 전달}, & q_i < \tau_l.
 \end{cases}
 \end{equation}
 
@@ -129,8 +134,8 @@ C_i=C_L+I_i^{(v)}C_V+I_i^{(U)}C_U, \qquad
 \widetilde{C}=\frac{1}{N}\sum_{i=1}^{N}\frac{C_i}{C_U}.
 \end{equation}
 
-기준 비용은 $C_L=1$, $C_U=4.667$이며, 동일 GPU에서 측정한 answer-only/full-pass
-latency 비율에 따라 $C_V=0.0591$을 사용한다. 추가로 $C_V=0.35$인 보수적 비용
+기준 비용은 $C_L=1$, $C_U=4.667$이며, 동일 GPU에서 측정한 정답 전용/전체 풀이
+지연시간 비율에 따라 $C_V=0.0591$을 사용한다. 추가로 $C_V=0.35$인 보수적 비용
 민감도도 확인한다.
 
 \section{실험 설정}
@@ -138,57 +143,57 @@ latency 비율에 따라 $C_V=0.0591$을 사용한다. 추가로 $C_V=0.35$인 �
 라우터 학습에는 GSM8K를 사용하고, 교차 과제 평가는 SVAMP에서 수행하였다
 ~\cite{cobbe2021gsm8k,patel2021svamp}. GSM8K pilot 2,000문항은 router train 1,000,
 distillation 400, validation 200, test 400으로 분리하였다. SVAMP train 700문항은
-초기 validation 200, 정책 선택 250, 독립 risk certification 250으로 겹치지 않게
-분리했으며, 공식 test 300문항은 최종 진단에만 사용하였다. 모든 split은 고정 seed
+초기 검증 200, 정책 선택 250, 독립 위험 인증 250으로 겹치지 않게
+분리했으며, 공식 테스트 300문항은 최종 진단에만 사용하였다. 모든 분할은 고정 seed
 42와 문항 ID로 관리하였다.
 
 Lower와 Upper는 각각 Qwen2.5-1.5B-Instruct와 Qwen2.5-7B-Instruct를 사용하였다
 ~\cite{yang2024qwen25}. 두 모델은 4-bit로 로드하고 단일 NVIDIA RTX 3090 24GB에서
-greedy decoding으로 평가하였다. 첫 답은 최대 256토큰, answer-only 검증은 최대
+greedy decoding으로 평가하였다. 첫 답은 최대 256토큰, 정답 전용 검증은 최대
 64토큰으로 제한하였다.
 
-평가 지표는 최종 accuracy, Upper-call rate, unsafe routing, Always-Upper 대비
-normalized cost이다. latency는 워밍업 뒤 동일 128문항을 batch size 16으로 조건별
-2회 ABBA 순서로 측정하였다. 통계 분석은 동일 문항에 대한 10,000회 paired bootstrap
-신뢰구간과 exact McNemar 검정을 사용하였다. unsafe 위험에는 독립 250문항의 단측
+평가 지표는 최종 정확도, 상위 모델 호출률, 위험 라우팅, Always-Upper 대비
+정규화 비용이다. 지연시간은 워밍업 뒤 동일 128문항을 batch size 16으로 조건별
+2회 ABBA 순서로 측정하였다. 통계 분석은 동일 문항에 대한 10,000회 대응 부트스트랩
+신뢰구간과 정확 McNemar 검정을 사용하였다. 위험률에는 독립 250문항의 단측
 95\% Clopper--Pearson 상한을 사용하였다~\cite{clopper1934use}.
 
 \section{실험 결과}
 
-그림~\ref{fig:latency}에서 answer-only 검증은 두 번째 전체 풀이의 평균 124.55토큰을
+그림~\ref{fig:latency}에서 정답 전용 검증은 두 번째 전체 풀이의 평균 124.55토큰을
 5.40토큰으로 줄였다. 이에 따라 문항당 지연시간은 492.97 ms에서 29.15 ms로
 94.09\% 감소했고 처리량은 2.03 items/s에서 34.32 items/s로 증가하였다.
 
-\begin{figure}[t]
+\begin{figure*}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/fig2_latency_tokens.pdf}
-  \caption{동일 RTX 3090에서 full second pass와 answer-only verifier의 문항당
+  \includegraphics[width=0.88\textwidth]{figures/fig2_latency_tokens.pdf}
+  \caption{동일 RTX 3090에서 두 번째 전체 풀이와 정답 전용 검증의 문항당
   지연시간 및 생성 토큰 수 비교.}
   \label{fig:latency}
-\end{figure}
+\end{figure*}
 
 \begin{table}[t]
 \centering
-\caption{SVAMP에서 고정 정책의 정확도 및 실측 latency 환산 비용}
+\caption{SVAMP에서 고정 정책의 정확도 및 실측 지연시간 환산 비용}
 \label{tab:main}
 \small
 \setlength{\tabcolsep}{3.2pt}
 \begin{tabular}{llrrr}
 \toprule
-Split & Method & Acc.(\%) & Unsafe(\%) & Cost \\
+분할 & 방법 & 정확도(\%) & 위험률(\%) & 비용 \\
 \midrule
-Cert. & Always Upper & 88.80 & -- & 1.000 \\
+인증 & Always Upper & 88.80 & -- & 1.000 \\
       & C3           & 88.80 & 2.00 & 1.008 \\
       & Answer-only  & 88.00 & 2.80 & \textbf{0.777} \\
 \midrule
-Test  & Always Upper & 88.00 & -- & 1.000 \\
+테스트 & Always Upper & 88.00 & -- & 1.000 \\
       & C3           & 87.67 & 1.00 & 1.045 \\
       & Answer-only  & 85.67 & 3.00 & \textbf{0.806} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-표~\ref{tab:main}에서 제안 방법은 Always-Upper 대비 certification과 공식 test의
+표~\ref{tab:main}에서 제안 방법은 Always-Upper 대비 독립 인증과 공식 테스트의
 정규화 비용을 각각 22.29\%와 19.42\% 줄였다. C3 대비 정확도는 각각 0.8\%p와
 2.0\%p 낮았으나 exact McNemar 검정은 유의하지 않았다. 그러나 이는 정확도 동등성
 또는 비열등성을 입증하지 않는다.
@@ -196,54 +201,59 @@ Test  & Always Upper & 88.00 & -- & 1.000 \\
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.92\columnwidth]{figures/fig3_pareto_frontier.pdf}
-  \caption{정책 선택 split의 성능--비용 Pareto frontier. 보라색 점은 독립 평가 전에
+  \caption{정책 선택 분할의 성능--비용 Pareto frontier. 보라색 점은 독립 평가 전에
   고정한 임계값 0.12/0.80 정책이다.}
   \label{fig:pareto}
 \end{figure}
 
-그림~\ref{fig:pareto}는 threshold 변화에 따라 비용과 정확도가 함께 증가하는 양상을
-보인다. 본 연구는 selection split에서 품질과 unsafe 제약을 만족한 0.12/0.80 정책을
+그림~\ref{fig:pareto}는 임계값 변화에 따라 비용과 정확도가 함께 증가하는 양상을
+보인다. 본 연구는 정책 선택 분할에서 품질과 위험 제약을 만족한 0.12/0.80 정책을
 고정하였다.
 
 \begin{table}[t]
 \centering
-\caption{Answer-only와 C3의 paired 비교(단위: percentage point)}
+\caption{정답 전용 검증과 C3의 대응 비교(단위: \%p)}
 \label{tab:paired}
 \small
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2.5pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrr}
 \toprule
-Split & $\Delta$Acc. (95\% CI) & $p_{McN}$ & $\Delta$Cost (95\% CI) \\
+분할 & $\Delta$정확도 [95\% CI] & $p_{McN}$ & $\Delta$비용 [95\% CI] \\
 \midrule
-Cert. & $-0.8$ [$-2.4,0.8$] & .625 & $-23.06$ [$-28.70,-17.38$] \\
-Test  & $-2.0$ [$-4.33,0.01$] & .146 & $-23.87$ [$-29.58,-18.27$] \\
+인증 & $-0.8$ [$-2.4,0.8$] & .625 & $-23.06$ [$-28.70,-17.38$] \\
+테스트 & $-2.0$ [$-4.33,0.01$] & .146 & $-23.87$ [$-29.58,-18.27$] \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
-독립 certification 250문항에서 answer-only 정책의 unsafe 오류는 7건(2.80\%)이었다.
+독립 인증 250문항에서 정답 전용 정책의 위험 오류는 7건(2.80\%)이었다.
 단측 95\% Clopper--Pearson 상한은 5.195\%로 사전 설정한 5\% 기준을 0.195\%p
 초과하였다. 따라서 본 결과를 5\% 위험 보장으로 해석하지 않는다. 안전 인증을 통과한
 C3 정책은 정규화 비용이 1.008로 Always-Upper보다 높았다.
 
 본 연구에는 네 가지 제한이 있다. 첫째, 산술 문장제와 하나의 Qwen 모델 계열만
-평가하였다. 둘째, 공식 test 300문항은 정확도 비열등성을 검정하기에 충분하지 않다.
-셋째, latency 측정은 단일 RTX 3090과 조건별 2회 반복에 한정되며 API 가격이나 에너지
-소비와 동일하지 않다. 넷째, answer-only 정책은 5\% 위험 인증을 근소하게 통과하지
-못했다.
+평가하였다. 둘째, 공식 테스트 300문항은 정확도 비열등성을 검정하기에 충분하지 않다.
+셋째, 지연시간 측정은 단일 RTX 3090과 조건별 2회 반복에 한정되며 API 가격이나 에너지
+소비와 동일하지 않다. 넷째, 정답 전용 정책은 5\% 위험 인증을 근소하게 통과하지
+못했다. 후속 연구에서는 정책 선택 분할에서
+$\min_{\tau_l,\tau_h}\widetilde{C}(\tau_l,\tau_h)$를 최적화하되 위험률의 단측
+신뢰상한이 목표 $\alpha$ 이하라는 제약을 동시에 적용하고, 고정된 임계값을 새로운 독립
+분할에서 다시 인증할 예정이다.
 
 \section{결론}
 
-본 연구는 SLM의 출력 confidence와 짧은 answer-only 검증을 결합한 적응형 SLM--LLM
-라우팅 방법을 제안하였다. 전체 풀이를 다시 생성하는 C3 방식과 비교해 answer-only
-검증은 동일 GPU에서 두 번째 호출 latency를 94.09\% 줄였으며, 실측 latency 환산
-cascade 비용을 Always-Upper 대비 19.42--22.29\% 절감하였다. 동일 문항 paired
+본 연구는 SLM의 출력 신뢰도와 짧은 정답 전용 검증을 결합한 적응형 SLM--LLM
+라우팅 방법을 제안하였다. 전체 풀이를 다시 생성하는 C3 방식과 비교해 정답 전용
+검증은 동일 GPU에서 두 번째 호출 지연시간을 94.09\% 줄였으며, 실측 지연시간 환산
+계단식 비용을 Always-Upper 대비 19.42--22.29\% 절감하였다. 동일 문항 대응
 검정에서 C3와 유의한 정확도 차이는 관측되지 않았지만 이는 동등성 증명을 의미하지
-않는다. 또한 95\% unsafe-risk 상한은 5.195\%로 사전 안전 기준을 근소하게 초과했다.
-향후에는 더 큰 독립 표본과 다양한 모델 조합에서 비열등성, 위험 통제 및 serving
+않는다. 또한 95\% 위험 상한은 5.195\%로 사전 안전 기준을 근소하게 초과했다.
+향후에는 더 큰 독립 표본과 다양한 모델 조합에서 비열등성, 위험 통제 및 서빙
 환경의 실제 비용을 함께 검증할 예정이다.
 
-\begin{thebibliography}{8}
+\begin{thebibliography}{9}
 
 \bibitem{chen2024frugalgpt}
 L. Chen, M. Zaharia, and J. Zou,
@@ -284,6 +294,11 @@ M. Lee, K. Kim, T. Kim, and S. Park,
 C. J. Clopper and E. S. Pearson,
 ``The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial,''
 \textit{Biometrika}, vol. 26, no. 4, pp. 404--413, 1934.
+
+\bibitem{wang2023selfconsistency}
+X. Wang et al.,
+``Self-Consistency Improves Chain of Thought Reasoning in Language Models,''
+\textit{International Conference on Learning Representations}, 2023.
 
 \end{thebibliography}
 \end{document}
