@@ -94,8 +94,8 @@ def architecture_figure(output_dir: Path):
 
 def latency_figure(data, output_dir: Path):
     latency = data["latency"]
-    fig, axes = plt.subplots(1, 2, figsize=(7.1, 2.75))
-    labels = ["Full second pass", "Answer-only"]
+    fig, axes = plt.subplots(1, 2, figsize=(7.1, 2.55))
+    labels = ["Full pass", "Answer-only"]
     colors = ["#CBD5E1", PURPLE]
     for ax, values, ylabel, reduction in (
         (axes[0], [latency["full_second_pass_ms"], latency["answer_only_ms"]], "Latency per item (ms)", "94.09% lower"),
@@ -103,14 +103,15 @@ def latency_figure(data, output_dir: Path):
     ):
         bars = ax.bar(labels, values, color=colors, width=0.58)
         ax.set_ylabel(ylabel)
+        ax.tick_params(axis="x", labelsize=8)
         ax.grid(axis="y", color=GRID, linewidth=0.8)
         ax.set_axisbelow(True)
         ax.spines[["top", "right"]].set_visible(False)
         for bar, value in zip(bars, values):
             ax.text(bar.get_x() + bar.get_width() / 2, value, f"{value:.1f}", ha="center", va="bottom", weight="bold", color=INK)
         ax.text(0.98, 0.92, reduction, transform=ax.transAxes, ha="right", color=PURPLE, weight="bold")
-    fig.suptitle("Answer-only verification removes most second-pass decode cost", x=0.08, ha="left", weight="bold", color=INK)
-    fig.tight_layout()
+    fig.suptitle("Second-pass latency and output length", x=0.08, ha="left", weight="bold", color=INK)
+    fig.tight_layout(rect=(0, 0, 1, 0.94))
     save_all(fig, output_dir, "fig2_latency_tokens")
 
 
