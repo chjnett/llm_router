@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 from pathlib import Path
 
@@ -32,13 +33,30 @@ def setup_style():
         "ytick.color": MUTED,
         "svg.fonttype": "none",
         "pdf.fonttype": 42,
+        "svg.hashsalt": "llm-router-paper-figures-v1",
     })
 
 
 def save_all(fig, output_dir: Path, stem: str):
     output_dir.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_dir / f"{stem}.svg", bbox_inches="tight", facecolor="white")
-    fig.savefig(output_dir / f"{stem}.pdf", bbox_inches="tight", facecolor="white")
+    fixed_time = datetime.datetime(2026, 9, 3, tzinfo=datetime.timezone.utc)
+    svg_path = output_dir / f"{stem}.svg"
+    fig.savefig(
+        svg_path,
+        bbox_inches="tight",
+        facecolor="white",
+        metadata={"Date": "2026-09-03", "Creator": "llm_router"},
+    )
+    # Matplotlib path definitions contain harmless trailing spaces; normalize them so
+    # generated SVGs pass repository whitespace checks and remain stable in Git.
+    svg_text = svg_path.read_text(encoding="utf-8")
+    svg_path.write_text("\n".join(line.rstrip() for line in svg_text.splitlines()) + "\n", encoding="utf-8")
+    fig.savefig(
+        output_dir / f"{stem}.pdf",
+        bbox_inches="tight",
+        facecolor="white",
+        metadata={"CreationDate": fixed_time, "ModDate": fixed_time, "Creator": "llm_router"},
+    )
     fig.savefig(output_dir / f"{stem}.png", dpi=300, bbox_inches="tight", facecolor="white")
     plt.close(fig)
 
