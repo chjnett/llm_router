@@ -5,6 +5,7 @@ from src.prepare_data import split_rows
 from src.scoring import extract_final_number, gsm8k_correct
 from src.run_selective_consistency import cascade
 from src.run_risk_bound_calibration import binomial_upper
+from src.run_low_cost_verifier import verifier_cascade
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -66,3 +67,19 @@ def test_binomial_upper_bound_is_conservative():
     assert 0.0 < binomial_upper(0, 200) < 0.02
     assert binomial_upper(7, 200) > 0.05
     assert binomial_upper(4, 200) < binomial_upper(5, 200)
+
+
+def test_low_cost_verifier_uses_fractional_second_call_cost():
+    cfg = {"cost": {"lower": 1.0, "verifier": 0.25, "upper": 4.0}}
+    metrics = verifier_cascade(
+        np.asarray([0.9, 0.5, 0.1]),
+        np.asarray([False, True, False]),
+        np.asarray([True, True, False]),
+        np.asarray([True, True, True]),
+        0.4,
+        0.8,
+        cfg,
+    )
+    # Costs are 1, 1.25, and 5: mean 2.4167, normalized by Upper cost 4.
+    assert np.isclose(metrics["normalized_cascade_cost"], (1.0 + 1.25 + 5.0) / 3 / 4)
+    assert metrics["task_accuracy"] == 1.0

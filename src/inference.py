@@ -19,6 +19,10 @@ CONCISE_SYSTEM_PROMPT = (
     "Solve the math problem. Keep the reasoning to at most three short lines. "
     "Your final line must be exactly 'Final answer: <number>'."
 )
+ANSWER_ONLY_SYSTEM_PROMPT = (
+    "Solve the problem independently, but return only one line in the exact form "
+    "'Final answer: <number>'. Do not include reasoning or explanation."
+)
 
 
 def format_prompt(tokenizer, question: str, system_prompt: str = SYSTEM_PROMPT) -> str:
@@ -61,12 +65,13 @@ def infer_rows(
     existing: list[dict] | None = None,
     adapter: str | None = None,
     concise: bool = False,
+    answer_only: bool = False,
 ) -> list[dict]:
     tokenizer, model = load_model(model_id, quantize_4bit, adapter)
     output: list[dict] = list(existing or [])
     for start in range(0, len(rows), batch_size):
         batch = rows[start : start + batch_size]
-        prompt = CONCISE_SYSTEM_PROMPT if concise else SYSTEM_PROMPT
+        prompt = ANSWER_ONLY_SYSTEM_PROMPT if answer_only else (CONCISE_SYSTEM_PROMPT if concise else SYSTEM_PROMPT)
         prompts = [format_prompt(tokenizer, row["question"], prompt) for row in batch]
         encoded = tokenizer(prompts, return_tensors="pt", padding=True).to(model.device)
         with torch.inference_mode():
@@ -78,7 +83,7 @@ def infer_rows(
             )
         new_tokens = generated[:, encoded["input_ids"].shape[1] :]
         texts = tokenizer.batch_decode(new_tokens, skip_special_tokens=True)
-        for row, text in zip(batch, texts):
+        for row, text, tokens in zip(batch, texts, new_tokens):
             output.append(
                 {
                     "id": row["id"],
@@ -87,6 +92,7 @@ def infer_rows(
                     "predicted_number": extract_final_number(text),
                     "correct": gsm8k_correct(text, row["answer"]),
                     "model": model_id,
+                    "generated_tokens": int((tokens != tokenizer.pad_token_id).sum().item()),
                 }
             )
         if output_path is not None:
@@ -112,6 +118,7 @@ def main() -> None:
     parser.add_argument("--max-new-tokens", type=int)
     parser.add_argument("--batch-size", type=int)
     parser.add_argument("--concise", action="store_true")
+    parser.add_argument("--answer-only", action="store_true")
     args = parser.parse_args()
     cfg = load_config(args.config)
     set_seed(cfg["seed"])
@@ -138,6 +145,7 @@ def main() -> None:
             existing,
             args.adapter,
             args.concise,
+            args.answer_only,
         )
         write_jsonl(output_path, predictions)
 

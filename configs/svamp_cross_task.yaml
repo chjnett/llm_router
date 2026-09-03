@@ -10,6 +10,7 @@ models:
   upper: Qwen/Qwen2.5-7B-Instruct
 generation:
   max_new_tokens: 256
+  answer_only_max_new_tokens: 64
   batch_size: 16
 router:
   quality_floor: 0.95
@@ -17,4 +18,5 @@ router:
   high_threshold: 0.75
 cost:
   lower: 1.0
+  verifier: 0.35
   upper: 4.6666667
