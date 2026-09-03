@@ -50,3 +50,5 @@ timeline, negative results, and current performance tables.
 For paper writing, use `OVERLEAF_KSC_PAPER_GUIDE.md` as the single source of instructions.
 Publication figures are tracked in `paper/figures/` as PDF, SVG, and PNG, and can be regenerated
 from `paper/data/paper_results.json` with `python -m src.render_paper_figures`.
+For one-shot Overleaf entry, paste `paper/overleaf/main_single.tex` into the template's
+`main.tex`, then upload the four `paper/figures/*.pdf` files to `figures/`.

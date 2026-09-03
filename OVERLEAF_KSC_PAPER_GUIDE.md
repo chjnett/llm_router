@@ -4,6 +4,10 @@
 논문을 Overleaf에서 작성하기 위한 단일 작업 지침서다. 파일 구성, 논문 주장 범위,
 섹션별 초안, 표·수식·그림 위치, LaTeX 코드, 참고문헌, 최종 검수 순서까지 포함한다.
 
+> **가장 빠른 방법:** `paper/overleaf/main_single.tex`의 내용을 Overleaf `main.tex`에
+> 통째로 붙여넣고 `paper/figures/*.pdf` 네 개를 `figures/` 폴더에 업로드한다. 이 경우
+> section 파일과 `references.bib`를 따로 만들 필요가 없다.
+
 > **형식 확인 상태 (2026-09-03)**  
 > 한국정보과학회 학술대회용 `kcc` LaTeX 템플릿과 Overleaf 공개 템플릿은 확인했다.
 > 다만 KSC 2026의 공식 논문 모집 페이지와 페이지 제한은 아직 검색 결과에서 확인되지
