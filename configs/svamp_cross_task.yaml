@@ -1,0 +1,18 @@
+seed: 42
+dataset:
+  name: ChilleD/SVAMP
+  validation_size: 200
+  test_size: 300
+models:
+  lower: Qwen/Qwen2.5-1.5B-Instruct
+  upper: Qwen/Qwen2.5-7B-Instruct
+generation:
+  max_new_tokens: 256
+  batch_size: 16
+router:
+  quality_floor: 0.95
+  low_threshold: 0.20
+  high_threshold: 0.75
+cost:
+  lower: 1.0
+  upper: 4.6666667
