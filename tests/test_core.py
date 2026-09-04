@@ -12,6 +12,8 @@ from src.model_registry import get_model_spec
 from src.task_harness import adapt_row, extract_choice, score_prediction, system_prompt
 from src.run_model_screening import summarize, validate_rows
 from src.evaluate_model_screening import evaluate_pair
+from src.power_metrics import summarize_power
+from src.run_output_length_ablation import conditions
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -161,3 +163,16 @@ def test_pair_screening_rejects_expensive_lower_model():
     assert result["checks"]["accuracy_gap"]["pass"]
     assert not result["checks"]["measured_cost_ratio"]["pass"]
     assert not result["screening_pass"]
+
+
+def test_power_summary_integrates_gross_energy():
+    result = summarize_power([100.0, 120.0], 2.0)
+    assert result["power_watts_mean"] == 110.0
+    assert result["gross_energy_joules"] == 220.0
+
+
+def test_output_ablation_matrix_is_complete():
+    matrix = conditions("input.jsonl")
+    assert len(matrix) == 20
+    assert sum(row["mode"] == "task" for row in matrix) == 8
+    assert sum(row["tokens"] == 64 for row in matrix) == 12

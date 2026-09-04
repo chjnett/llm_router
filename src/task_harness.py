@@ -52,7 +52,20 @@ def adapt_row(row: dict[str, Any], default_task_type: str = "numeric") -> TaskEx
     )
 
 
-def system_prompt(task_type: str) -> str:
+def system_prompt(task_type: str, prompt_mode: str = "task") -> str:
+    if task_type == "numeric" and prompt_mode == "micro_reasoning":
+        return (
+            "Solve the problem using exactly one compact calculation line with no prose. "
+            "Then write a second line exactly as 'Final answer: <number>'. "
+            "Keep the entire response under 48 tokens."
+        )
+    if task_type == "numeric" and prompt_mode == "answer_only":
+        return (
+            "Solve the problem independently, but return only one line in the exact form "
+            "'Final answer: <number>'. Do not include reasoning or explanation."
+        )
+    if prompt_mode != "task":
+        raise ValueError(f"Prompt mode {prompt_mode!r} is only supported for numeric tasks")
     prompts = {
         "numeric": (
             "Solve the math problem. Keep the reasoning to at most three short lines. "

@@ -14,6 +14,7 @@ import torch
 
 from .inference import format_prompt, load_model
 from .model_registry import MODEL_REGISTRY, get_model_spec
+from .power_metrics import PowerSampler
 from .task_harness import adapt_row, score_prediction, system_prompt
 
 
@@ -25,11 +26,11 @@ def percentile(values: list[float], fraction: float) -> float:
     return float(ordered[index])
 
 
-def summarize(rows: list[dict], elapsed_seconds: float, peak_allocated: int, peak_reserved: int) -> dict:
+def summarize(rows: list[dict], elapsed_seconds: float, peak_allocated: int, peak_reserved: int, power: dict | None = None) -> dict:
     latencies = [float(row["latency_ms"]) for row in rows]
     judged = [row for row in rows if row["correct"] is not None]
     parsed = [row for row in judged if row["parsed_answer"] is not None]
-    return {
+    result = {
         "items": len(rows),
         "judged_items": len(judged),
         "accuracy": sum(bool(row["correct"]) for row in judged) / len(judged) if judged else None,
@@ -42,9 +43,13 @@ def summarize(rows: list[dict], elapsed_seconds: float, peak_allocated: int, pea
         "peak_vram_allocated_gb": peak_allocated / 1024**3,
         "peak_vram_reserved_gb": peak_reserved / 1024**3,
     }
+    result.update(power or {})
+    if result.get("gross_energy_joules") is not None and rows:
+        result["gross_energy_joules_per_item"] = result["gross_energy_joules"] / len(rows)
+    return result
 
 
-def validate_rows(raw_rows: list[dict], task_type: str) -> list:
+def validate_rows(raw_rows: list[dict], task_type: str, prompt_mode: str = "task") -> list:
     examples = [adapt_row(row, task_type) for row in raw_rows]
     ids = [example.id for example in examples]
     if any(not value for value in ids):
@@ -52,7 +57,7 @@ def validate_rows(raw_rows: list[dict], task_type: str) -> list:
     if len(ids) != len(set(ids)):
         raise ValueError("Screening row ids must be unique")
     for example in examples:
-        system_prompt(example.task_type)
+        system_prompt(example.task_type, prompt_mode)
     return examples
 
 
@@ -61,6 +66,7 @@ def main() -> None:
     parser.add_argument("--model-key", choices=sorted(MODEL_REGISTRY), required=True)
     parser.add_argument("--input", required=True)
     parser.add_argument("--task-type", default="numeric", choices=["numeric", "multiple_choice", "exact_match", "code", "instruction_following"])
+    parser.add_argument("--prompt-mode", default="task", choices=["task", "micro_reasoning", "answer_only"])
     parser.add_argument("--output-dir", default="artifacts/model_screening")
     parser.add_argument("--run-name", help="Output subdirectory; defaults to <input-stem>_<task-type>")
     parser.add_argument("--limit", type=int, default=200)
@@ -69,12 +75,13 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--no-4bit", action="store_true")
     parser.add_argument("--allow-cpu", action="store_true", help="Permit an unmeasured CPU-only diagnostic run")
+    parser.add_argument("--no-power-sampling", action="store_true")
     parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
 
     spec = get_model_spec(args.model_key)
     raw_rows = read_jsonl(args.input)[: args.limit]
-    examples = validate_rows(raw_rows, args.task_type)
+    examples = validate_rows(raw_rows, args.task_type, args.prompt_mode)
     if args.validate_only:
         print(f"validated {len(examples)} rows for {args.model_key}/{args.task_type}")
         return
@@ -87,10 +94,13 @@ def main() -> None:
     if torch.cuda.is_available():
         torch.cuda.reset_peak_memory_stats()
     predictions: list[dict] = []
+    power_sampler = None if args.no_power_sampling else PowerSampler()
+    if power_sampler is not None:
+        power_sampler.start()
     started = time.perf_counter()
     for start in range(0, len(examples), args.batch_size):
         batch = examples[start : start + args.batch_size]
-        prompts = [format_prompt(tokenizer, item.prompt, system_prompt(item.task_type)) for item in batch]
+        prompts = [format_prompt(tokenizer, item.prompt, system_prompt(item.task_type, args.prompt_mode)) for item in batch]
         encoded = tokenizer(prompts, return_tensors="pt", padding=True).to(model.device)
         if torch.cuda.is_available():
             torch.cuda.synchronize()
@@ -125,6 +135,7 @@ def main() -> None:
         print(f"{spec.key}: {min(start + args.batch_size, len(examples))}/{len(examples)}", flush=True)
 
     elapsed = time.perf_counter() - started
+    power = power_sampler.stop(elapsed) if power_sampler is not None else {}
     peak_allocated = torch.cuda.max_memory_allocated() if torch.cuda.is_available() else 0
     peak_reserved = torch.cuda.max_memory_reserved() if torch.cuda.is_available() else 0
     run_name = args.run_name or f"{Path(args.input).stem}_{args.task_type}"
@@ -133,12 +144,13 @@ def main() -> None:
     report = {
         "model": spec.to_dict(),
         "task_type": args.task_type,
+        "prompt_mode": args.prompt_mode,
         "input": str(Path(args.input)),
         "seed": args.seed,
         "batch_size": args.batch_size,
         "max_new_tokens": args.max_new_tokens,
         "quantized_4bit": quantize,
-        "metrics": summarize(predictions, elapsed, peak_allocated, peak_reserved),
+        "metrics": summarize(predictions, elapsed, peak_allocated, peak_reserved, power),
     }
     write_json(target / "report.json", report)
     print(target / "report.json")

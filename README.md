@@ -155,6 +155,18 @@ must now be reported separately. The tracked audit summary is
 `paper/data/model_screening_math_200.json`. Runs capped at 128/256 tokens were invalidated by
 truncation; only concise-prompt 512-token results are retained.
 
+The restartable long-run ablation compares task/512, micro-reasoning/64, and answer-only/64
+under batch 8 (200 items) and batch 1 (50 items). It samples gross GPU power every 0.5 seconds,
+writes progress after every condition, skips completed reports on restart, and continues after
+individual failures:
+
+```powershell
+conda run --no-capture-output -n llm-practice python -m src.run_output_length_ablation
+```
+
+Live logs are written to `artifacts/logs/output_length_ablation.log` and the restartable
+aggregate is `artifacts/results/output_length_ablation.json`.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

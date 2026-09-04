@@ -104,6 +104,8 @@ GSM8K validation 200문항, seed 42, batch 8, 기존 concise 프롬프트, 최�
 
 반면 `모델 크기×생성 토큰` compute proxy 비율은 M0 0.380, M1 0.163, M2 0.348이었다. 따라서 기존의 “비용 절감”은 계산량 proxy에서는 가능하지만 wall-clock 응답속도 절감으로 해석할 수 없다. 다음 단계는 비용·지연·energy를 분리하고 Qwen Lower의 concise 512 대 micro-reasoning 64 대 answer-only 64를 비교하는 것이다. 128/256토큰 중간 실행은 길이 상한 도달률이 높아 무효 처리했으며 최종 JSON에는 512토큰 결과만 기록했다.
 
+장기 ablation runner는 Qwen 1.5B/7B와 SmolLM2 360M/1.7B의 baseline을 재측정하고, 세 Lower 모델에 micro-reasoning 64 및 answer-only 64를 적용한다. batch 8×200과 batch 1×50을 합쳐 총 20조건이며, 0.5초 간격 gross GPU power, 문항당 joule, 정확도, 토큰, p50/p95 latency를 함께 기록한다. 각 조건 종료 때 aggregate JSON을 갱신하므로 중단 후 재시작할 수 있다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처
