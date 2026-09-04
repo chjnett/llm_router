@@ -33,7 +33,7 @@
     <div class="summary-strip">
       <div class="summary-item"><b>문제</b><span>질문 의미만 보는 BGE router는 “Lower가 실제로 풀 수 있는가”를 잘 구분하지 못했다. Pilot AUC는 0.589였다.</span></div>
       <div class="summary-item"><b>현재 해법</b><span>Lower 답의 confidence와 두 번의 숫자 답 일치를 이용한다. Pilot에서 Upper 품질의 98%를 유지하며 비용을 13.73% 줄였다.</span></div>
-      <div class="summary-item"><b>현재 결론</b><span>고정 0.60/0.60 정책은 ASDiv와 MAWPS에서 성능·비용·안전을 통과했지만, untouched MATH-500 수치형 317문항에서는 Upper보다 정확도 0.63%p 상승·unsafe 0건에도 비용이 2.93% 증가했다. 어려운 도메인에는 cascade 경제성 guard가 필요하다.</span></div>
+      <div class="summary-item"><b>현재 결론</b><span>고정 0.60/0.60 정책은 MATH-500에서 비용이 2.93% 증가했다. 정답 라벨 없이 라우팅률과 비용만 보는 feasibility guard는 ASDiv·MAWPS에서는 cascade를 유지하고 MATH-500은 Always Upper로 전환해 이 overhead를 제거했다.</span></div>
     </div>
     <div class="read-path"><b>권장 읽기 순서</b><span>30초 요약</span><i>→</i><span>피봇 구조</span><i>→</i><span>Confidence 결과</span><i>→</i><span>실시간 상태</span><i>→</i><span>로드맵</span></div>
   </section>
@@ -144,6 +144,10 @@
     <div class="grid"><div class="card"><h3>수치형 평가 문항</h3><div class="value">317 / 500</div><p>단순 정수·소수만 사전 필터</p></div><div class="card good"><h3>Cascade Accuracy</h3><div class="value">58.99%</div><p>Upper 58.36%보다 +0.63%p</p></div><div class="card good"><h3>Unsafe / 95% 상한</h3><div class="value">0 / 0.94%</div><p>Lower 채택 7건 모두 정답</p></div><div class="card warn"><h3>비용 변화</h3><div class="value">+2.93%</div><p>비용 절감 gate 실패</p></div></div>
     <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>방법</th><th class="num">Accuracy</th><th class="num">Lower 실행률</th><th class="num">Lower 채택률</th><th class="num">Upper 호출률</th><th class="num">Normalized cost</th><th>판정</th></tr></thead><tbody><tr><td>Always Lower</td><td class="num">29.65%</td><td class="num">100%</td><td class="num">100%</td><td class="num">0%</td><td class="num">0.214</td><td>정확도 부족</td></tr><tr><td>Always Upper</td><td class="num">58.36%</td><td class="num">0%</td><td class="num">0%</td><td class="num">100%</td><td class="num">1.000</td><td>기준</td></tr><tr class="focus"><td>고정 ensemble · 0.60/0.60</td><td class="num"><b>58.99%</b></td><td class="num">23.97%</td><td class="num">2.21%</td><td class="num">97.79%</td><td class="num"><b>1.029</b></td><td>품질·안전 통과 · 비용 실패</td></tr></tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>확인적 결론</strong><div><b>0.60/0.60은 범용 정책이 아니다.</b> 쉬운 산술 외부 데이터에서는 비용을 줄였지만 경시 수학에서는 Lower의 정답률과 채택 가능 영역이 작아 cascade overhead를 회수하지 못했다. 이 결과를 보고 threshold를 다시 맞추지 않는다. 다음 단계는 요청군별 예상 채택 이득이 Lower 실행 비용보다 작으면 처음부터 Upper로 보내는 feasibility guard다.</div></div>
+    <h3 style="margin:24px 0 10px">AF · 정답 라벨 없는 cascade feasibility guard</h3>
+    <div class="formula">observed saving = Lower acceptance rate − Lower call rate × (C<sub>L</sub> / C<sub>U</sub>)<br>enable cascade only if Hoeffding 95% lower bound(observed saving) &gt; 0</div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>데이터</th><th class="num">관측 비용 절감</th><th class="num">95% 보수 하한</th><th>Guard 결정</th><th class="num">Guard 적용 비용</th><th>효과</th></tr></thead><tbody><tr class="focus"><td>ASDiv</td><td class="num">12.21%</td><td class="num">9.63%</td><td>Cascade 유지</td><td class="num">0.878</td><td>절감 유지</td></tr><tr class="focus"><td>MAWPS</td><td class="num">16.38%</td><td class="num">9.88%</td><td>Cascade 유지</td><td class="num">0.836</td><td>절감 유지</td></tr><tr><td>MATH-500 numeric</td><td class="num">−2.93%</td><td class="num">−9.80%</td><td>Always Upper</td><td class="num">1.000</td><td>2.93% overhead 제거</td></tr></tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>AF 판정</strong><div><b>세 데이터 모두에서 Upper 대비 비용 증가를 방지했다.</b> 이 guard는 정답 여부가 아니라 실제 Lower 실행·채택 비율만 필요해 unlabeled calibration traffic에도 적용할 수 있다. 다만 기존 외부 결과로 설계한 사후 진단이므로, 다음 단계는 공식을 고정한 뒤 시간 순으로 분리된 새 요청 batch에서 prospective 검증하는 것이다.</div></div>
   </section>
 
   <section id="contrastive">
@@ -267,7 +271,8 @@
       <tr class="focus"><td>AC</td><td>3-seed ensemble + validation exact risk-upper 제약</td><td>완료</td><td><span class="tag done">내부·ASDiv 통과 · MAWPS 안전 실패</span></td></tr>
       <tr class="focus"><td>AD</td><td>Risk-upper 3/4/5% ladder의 외부 강건성 민감도</td><td>완료</td><td><span class="tag done">4% 진단 후보 · 사후 분석</span></td></tr>
       <tr class="focus"><td>AE</td><td>0.60/0.60 완전 고정 후 MATH-500 수치형 확인 평가</td><td>완료</td><td><span class="tag done">품질·안전 통과 · 비용 +2.93%</span></td></tr>
-      <tr><td>AF</td><td>도메인별 cascade break-even feasibility guard</td><td>약 20~40분</td><td><span class="tag live">다음 연구</span></td></tr>
+      <tr class="focus"><td>AF</td><td>정답 라벨 없는 cascade break-even feasibility guard</td><td>완료</td><td><span class="tag done">MATH overhead 2.93% 제거</span></td></tr>
+      <tr><td>AG</td><td>Guard 공식 고정 후 시간 분리 신규 traffic prospective 검증</td><td>새 데이터 필요</td><td><span class="tag live">다음 연구</span></td></tr>
     </tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>논문 산출물</strong><div><b>paper/overleaf/main_single.tex</b>을 Overleaf의 main.tex에 통째로 붙여넣고 <b>paper/figures/*.pdf</b> 네 개만 업로드하면 된다. 자세한 수정·검수 방법은 <b>OVERLEAF_KSC_PAPER_GUIDE.md</b>에 정리했다.</div></div>
   </section>

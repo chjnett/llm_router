@@ -108,6 +108,13 @@ unsafe Lower acceptance (one-sided 95% upper bound 0.94%). However, only 2.21% o
 accepted by Lower and normalized cost rises to 1.029. This confirms that the policy is not
 universally cost-effective and motivates a domain-level cascade feasibility guard.
 
+The diagnostic feasibility guard uses only observable route decisions and model costs:
+`saving = lower_acceptance_rate - lower_call_rate * (C_L / C_U)`. Cascade execution is enabled
+only when a Hoeffding 95% lower bound on this saving is positive. It keeps cascade routing for
+ASDiv and MAWPS, whose conservative saving bounds are 9.63% and 9.88%, and switches the
+MATH-500 numeric subset to Always Upper, removing the observed 2.93% overhead. This guard is a
+post-hoc architectural diagnostic and still requires prospective validation on new traffic.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

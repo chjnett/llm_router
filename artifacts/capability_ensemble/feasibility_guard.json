@@ -1,0 +1,49 @@
+{
+  "protocol": "post-hoc architecture diagnostic; the guard uses only observable route decisions and model cost, not answer correctness",
+  "alpha": 0.05,
+  "lower_to_upper_cost_ratio": 0.21428571275510203,
+  "decision_rule": "enable cascade only when the Hoeffding 95% lower bound on normalized cost reduction is greater than zero",
+  "rows": [
+    {
+      "dataset": "ASDiv",
+      "count": 2249,
+      "lower_call_rate": 0.5900400177856825,
+      "lower_acceptance_rate": 0.24855491329479767,
+      "observed_cost_reduction": 0.12211776752955963,
+      "hoeffding_radius": 0.02580725265042418,
+      "cost_reduction_lower_bound_95": 0.09631051487913546,
+      "guard_decision": "cascade",
+      "guarded_accuracy": 0.889284126278346,
+      "guarded_normalized_cost": 0.8778822324704403,
+      "avoided_cost_overhead": 0.0
+    },
+    {
+      "dataset": "MAWPS",
+      "count": 355,
+      "lower_call_rate": 0.6422535211267606,
+      "lower_acceptance_rate": 0.30140845070422534,
+      "observed_cost_reduction": 0.16378269716010346,
+      "hoeffding_radius": 0.0649564564178014,
+      "cost_reduction_lower_bound_95": 0.09882624074230206,
+      "guard_decision": "cascade",
+      "guarded_accuracy": 0.9183098591549296,
+      "guarded_normalized_cost": 0.8362173028398966,
+      "avoided_cost_overhead": 0.0
+    },
+    {
+      "dataset": "MATH-500-numeric",
+      "count": 317,
+      "lower_call_rate": 0.23974763406940064,
+      "lower_acceptance_rate": 0.022082018927444796,
+      "observed_cost_reduction": -0.029292473720466103,
+      "hoeffding_radius": 0.0687395793485282,
+      "cost_reduction_lower_bound_95": -0.0980320530689943,
+      "guard_decision": "always_upper",
+      "guarded_accuracy": 0.583596214511041,
+      "guarded_normalized_cost": 1.0,
+      "avoided_cost_overhead": 0.02929247372046606
+    }
+  ],
+  "all_guarded_costs_non_increasing": true,
+  "confirmation_requirement": "freeze the guard and evaluate on new traffic or another untouched task"
+}
