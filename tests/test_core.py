@@ -15,6 +15,7 @@ from src.evaluate_model_screening import evaluate_pair
 from src.power_metrics import summarize_power
 from src.run_output_length_ablation import conditions
 from src.analyze_output_length_ablation import analyze
+from src.analyze_answer_only_confidence import select_policy
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -196,3 +197,13 @@ def test_output_ablation_oracle_feasibility_is_only_an_upper_bound():
     result = analyze(payload)
     assert result["latency_candidates"][0]["oracle_latency_saving_margin"] == 0.1
     assert "upper bound" in result["warning"]
+
+
+def test_confidence_policy_counts_lower_overhead_and_upper_fallback():
+    probability = np.asarray([0.9, 0.8, 0.1, 0.0])
+    lower = np.asarray([True, False, False, False])
+    upper = np.asarray([True, True, True, True])
+    selected, _ = select_policy(probability, lower, upper, lower_cost_ratio=0.1, quality_floor=0.75)
+    assert selected is not None
+    assert selected["normalized_latency"] < 1.0
+    assert selected["quality_retention"] >= 0.75
