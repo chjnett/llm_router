@@ -65,11 +65,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/pilot_gsm8k.yaml")
     parser.add_argument("--epochs", type=int, default=8)
+    parser.add_argument("--seed", type=int)
     parser.add_argument("--unsafe-cap", type=float, default=0.03)
     parser.add_argument("--output-root", default="artifacts/capability_pretriage")
     args = parser.parse_args()
     cfg = load_config(args.config)
-    set_seed(int(cfg["seed"]))
+    training_seed = int(args.seed if args.seed is not None else cfg["seed"])
+    set_seed(training_seed)
     questions, confidence, lower, upper = load_training_rows()
     indices = np.arange(len(lower))
     train_idx, validation_idx = train_test_split(
@@ -164,6 +166,8 @@ def main() -> None:
     }, output / "capability_router.pt")
     payload = {
         "protocol": "GSM8K-only training and validation; ASDiv untouched; CE + 0.2 supervised contrastive",
+        "training_seed": training_seed,
+        "split_seed": int(cfg["seed"]),
         "total_rows": len(lower),
         "train_rows": len(train_idx),
         "validation_rows": len(validation_idx),
