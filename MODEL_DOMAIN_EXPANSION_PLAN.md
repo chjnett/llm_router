@@ -106,6 +106,12 @@ GSM8K validation 200문항, seed 42, batch 8, 기존 concise 프롬프트, 최�
 
 장기 ablation runner는 Qwen 1.5B/7B와 SmolLM2 360M/1.7B의 baseline을 재측정하고, 세 Lower 모델에 micro-reasoning 64 및 answer-only 64를 적용한다. batch 8×200과 batch 1×50을 합쳐 총 20조건이며, 0.5초 간격 gross GPU power, 문항당 joule, 정확도, 토큰, p50/p95 latency를 함께 기록한다. 각 조건 종료 때 aggregate JSON을 갱신하므로 중단 후 재시작할 수 있다.
 
+### 출력 길이 ablation 결과
+
+20/20 조건이 실패 없이 완료됐다. Qwen1.5B의 batch 8 기준 baseline→micro→answer-only는 정확도 64.0%→8.0%→11.5%, p50 1084.1→235.8→41.5ms, 에너지 224.1→46.5→11.5J/item이었다. SmolLM2-1.7B는 57.0%→11.0%→8.5%, p50 417.9→175.4→32.3ms였다. 짧은 출력은 비용을 크게 줄였지만 독립 풀이 정확도를 대부분 잃었다.
+
+정답 Lower만 완벽하게 선택하고 나머지는 Upper로 보낸다는 oracle 상한에서는 latency break-even 후보가 세 개뿐이었다. Qwen answer-only batch 8의 최대 절감 여유는 3.5%p, SmolLM2-1.7B answer-only batch 8은 2.3%p, batch 1은 0.6%p다. 이는 달성 결과가 아니라 완벽한 selector를 가정한 상한이므로, 다음 단계는 answer-only 출력의 logprob/entropy 특징이 희소한 정답을 높은 precision으로 식별하는지 교차검증하는 것이다. 이 단계가 실패하면 짧은 Lower 경로도 중단하고 연구 주장을 compute/energy 절감으로 제한한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

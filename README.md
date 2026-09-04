@@ -167,6 +167,14 @@ conda run --no-capture-output -n llm-practice python -m src.run_output_length_ab
 Live logs are written to `artifacts/logs/output_length_ablation.log` and the restartable
 aggregate is `artifacts/results/output_length_ablation.json`.
 
+All 20 ablation conditions completed without a failed run. Short outputs sharply reduce
+latency and gross GPU energy but also collapse standalone Lower accuracy. Under an oracle that
+accepts exactly correct Lower outputs, only three conditions retain positive latency margin:
+Qwen answer-only batch 8 (+3.5 points), SmolLM2-1.7B answer-only batch 8 (+2.3), and the same
+SmolLM2 condition at batch 1 (+0.6). These are upper bounds, not achieved routing results. The
+tracked analysis is `paper/data/output_length_ablation_analysis.json`; the next gate tests
+whether confidence features can identify the rare correct answer-only outputs precisely enough.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

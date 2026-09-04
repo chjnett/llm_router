@@ -14,6 +14,7 @@ from src.run_model_screening import summarize, validate_rows
 from src.evaluate_model_screening import evaluate_pair
 from src.power_metrics import summarize_power
 from src.run_output_length_ablation import conditions
+from src.analyze_output_length_ablation import analyze
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -176,3 +177,22 @@ def test_output_ablation_matrix_is_complete():
     assert len(matrix) == 20
     assert sum(row["mode"] == "task" for row in matrix) == 8
     assert sum(row["tokens"] == 64 for row in matrix) == 12
+
+
+def test_output_ablation_oracle_feasibility_is_only_an_upper_bound():
+    def run(model, mode, accuracy, latency, energy):
+        return {
+            "model": model, "mode": mode, "batch": 8, "limit": 200,
+            "metrics": {
+                "accuracy": accuracy, "generated_tokens_mean": 8,
+                "latency_ms_p50": latency, "gross_energy_joules_per_item": energy,
+                "token_limit_rate": 0.0,
+            },
+        }
+    payload = {"completed": 2, "failures": [], "runs": [
+        run("qwen_7b", "task", 0.8, 100, 100),
+        run("qwen_1_5b", "answer_only", 0.2, 10, 10),
+    ]}
+    result = analyze(payload)
+    assert result["latency_candidates"][0]["oracle_latency_saving_margin"] == 0.1
+    assert "upper bound" in result["warning"]
