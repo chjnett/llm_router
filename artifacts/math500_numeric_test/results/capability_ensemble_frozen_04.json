@@ -1,0 +1,31 @@
+{
+  "protocol": "frozen 3-seed ensemble selected on GSM8K risk upper bound; no MATH-500-numeric retuning",
+  "dataset": "MATH-500-numeric",
+  "test_count": 317,
+  "policy": {
+    "pre_threshold": 0.6,
+    "post_threshold": 0.6
+  },
+  "always_lower_accuracy": 0.29652996845425866,
+  "always_upper_accuracy": 0.583596214511041,
+  "quality_target": 0.554416403785489,
+  "quality_retention_vs_upper": 1.0108108108108107,
+  "unsafe_count": 0,
+  "unsafe_upper_bound_95": 0.009405746166685299,
+  "cost_reduction_vs_upper": -0.02929247372046606,
+  "pre_threshold": 0.6,
+  "post_threshold": 0.6,
+  "accuracy": 0.5899053627760252,
+  "unsafe_rate": 0.0,
+  "lower_coverage": 0.022082018927444796,
+  "lower_call_rate": 0.23974763406940064,
+  "pretriage_upper_rate": 0.7602523659305994,
+  "upper_call_rate": 0.9779179810725552,
+  "normalized_cost": 1.029292473720466,
+  "deployment_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": false,
+    "risk_upper_5pct_pass": true,
+    "overall_pass": false
+  }
+}

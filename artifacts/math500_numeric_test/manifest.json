@@ -1,0 +1,9 @@
+{
+  "protocol": "untouched MATH-500 numeric-answer subset; 0.60/0.60 policy frozen before download; no model or policy tuning",
+  "dataset": "HuggingFaceH4/MATH-500",
+  "source_split": "test",
+  "source_count": 500,
+  "normalized_count": 317,
+  "skipped_non_simple_numeric": 183,
+  "numeric_filter": "^[+-]?(?:\\d{1,3}(?:,\\d{3})+|\\d+)(?:\\.\\d+)?$"
+}

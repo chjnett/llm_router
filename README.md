@@ -100,6 +100,14 @@ cost target at 9.47%. Because this ladder was run after observing the MAWPS fail
 is only a diagnostic candidate. Confirmatory use requires freezing it before a third untouched
 dataset is evaluated.
 
+For confirmatory evaluation, the diagnostic 0.60/0.60 policy is frozen before downloading
+MATH-500. A strict regex retains 317/500 examples whose reference answer is a simple integer
+or decimal, avoiding incorrect conversion of fractions and symbolic expressions. On this
+harder domain, the cascade reaches 58.99% accuracy versus 58.36% for Always Upper and makes no
+unsafe Lower acceptance (one-sided 95% upper bound 0.94%). However, only 2.21% of requests are
+accepted by Lower and normalized cost rises to 1.029. This confirms that the policy is not
+universally cost-effective and motivates a domain-level cascade feasibility guard.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
