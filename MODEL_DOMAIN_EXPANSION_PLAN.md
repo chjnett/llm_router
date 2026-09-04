@@ -90,12 +90,19 @@ Pilot gate를 통과한 셀만 전체 test와 3 seeds로 확장한다. Router �
 ## 7. 가장 먼저 구현할 작업
 
 1. ✅ `ModelSpec` registry와 모델별 chat-template adapter를 추가했다 (`src/model_registry.py`, `src/task_harness.py`, `src/run_model_screening.py`).
-2. 동일 200문항에서 Qwen control과 공개 SmolLM2 M1/M2의 로딩·정확도·latency·VRAM smoke test를 실행한다.
-3. 통과하면 MBPP 격리 실행 scorer를 구현하고 코드 도메인 pilot을 진행한다.
-4. 이후 MMLU → KMMLU → IFEval 순서로 scorer와 pilot을 추가한다.
-5. Gemma와 Llama는 Hugging Face 약관 동의·접근 권한이 확인된 뒤 M3/M4에 포함한다.
+2. ✅ 동일 200문항에서 Qwen control과 공개 SmolLM2 M1/M2의 로딩·정확도·latency·VRAM screening을 실행했다.
+3. 다음으로 비용을 wall-clock latency, `모델 크기×생성 토큰` compute proxy, GPU energy로 분리하고 Lower 출력 길이 ablation을 실행한다.
+4. latency gate를 통과하는 조건이 생기면 MBPP 격리 실행 scorer를 구현하고 코드 도메인 pilot을 진행한다.
+5. 이후 MMLU → KMMLU → IFEval 순서로 scorer와 pilot을 추가한다.
+6. Gemma와 Llama는 Hugging Face 약관 동의·접근 권한이 확인된 뒤 M3/M4에 포함한다.
 
 공통 harness는 기존 `question/answer` JSONL과 새 `prompt/reference/task_type/task_metadata` 스키마를 모두 읽는다. 숫자, 객관식, exact-match는 즉시 자동 채점하고 코드·IFEval은 전용 격리 채점기가 연결되기 전까지 `correct=null`로 저장해 임의 판정을 방지한다. 각 실행은 정확도, 파싱률, 생성 토큰, p50/p95 latency, 처리량, peak allocated/reserved VRAM을 기록한다.
+
+### 첫 screening 결과 · latency 기준 전 조합 중단
+
+GSM8K validation 200문항, seed 42, batch 8, 기존 concise 프롬프트, 최대 512토큰으로 비교했다. Qwen 1.5B/7B 정확도는 64%/86%, SmolLM2 360M/1.7B는 8%/57%로 능력 차이는 모두 충분했다. 그러나 p50 latency 비율은 M0 1.632, M1 1.538, M2 0.673으로 고정 상한 0.50을 모두 실패했다. batch 1의 Qwen 50문항 확인 측정에서도 비율은 1.683이었다. Lower가 더 긴 출력을 생성했고 4-bit 소형 모델의 GPU kernel 효율도 낮아 파라미터 수가 작아도 더 빠르지 않았다.
+
+반면 `모델 크기×생성 토큰` compute proxy 비율은 M0 0.380, M1 0.163, M2 0.348이었다. 따라서 기존의 “비용 절감”은 계산량 proxy에서는 가능하지만 wall-clock 응답속도 절감으로 해석할 수 없다. 다음 단계는 비용·지연·energy를 분리하고 Qwen Lower의 concise 512 대 micro-reasoning 64 대 answer-only 64를 비교하는 것이다. 128/256토큰 중간 실행은 길이 상한 도달률이 높아 무효 처리했으며 최종 JSON에는 512토큰 결과만 기록했다.
 
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 

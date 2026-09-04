@@ -35,6 +35,7 @@ def summarize(rows: list[dict], elapsed_seconds: float, peak_allocated: int, pea
         "accuracy": sum(bool(row["correct"]) for row in judged) / len(judged) if judged else None,
         "parse_success_rate": len(parsed) / len(judged) if judged else None,
         "generated_tokens_mean": statistics.mean(row["generated_tokens"] for row in rows) if rows else 0.0,
+        "token_limit_rate": sum(bool(row.get("hit_token_limit")) for row in rows) / len(rows) if rows else 0.0,
         "latency_ms_p50": percentile(latencies, 0.50),
         "latency_ms_p95": percentile(latencies, 0.95),
         "items_per_second": len(rows) / elapsed_seconds if elapsed_seconds else 0.0,
@@ -64,9 +65,10 @@ def main() -> None:
     parser.add_argument("--run-name", help="Output subdirectory; defaults to <input-stem>_<task-type>")
     parser.add_argument("--limit", type=int, default=200)
     parser.add_argument("--batch-size", type=int, default=8)
-    parser.add_argument("--max-new-tokens", type=int, default=128)
+    parser.add_argument("--max-new-tokens", type=int, default=512)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--no-4bit", action="store_true")
+    parser.add_argument("--allow-cpu", action="store_true", help="Permit an unmeasured CPU-only diagnostic run")
     parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
 
@@ -76,6 +78,8 @@ def main() -> None:
     if args.validate_only:
         print(f"validated {len(examples)} rows for {args.model_key}/{args.task_type}")
         return
+    if not torch.cuda.is_available() and not args.allow_cpu:
+        raise RuntimeError("CUDA is required for comparable screening metrics; use --allow-cpu only for diagnostics")
 
     set_seed(args.seed)
     quantize = spec.default_4bit and not args.no_4bit
@@ -115,6 +119,7 @@ def main() -> None:
                 "parsed_answer": parsed,
                 "correct": correct,
                 "generated_tokens": int((tokens != tokenizer.pad_token_id).sum().item()),
+                "hit_token_limit": int((tokens != tokenizer.pad_token_id).sum().item()) >= args.max_new_tokens,
                 "latency_ms": latency_ms,
             })
         print(f"{spec.key}: {min(start + args.batch_size, len(examples))}/{len(examples)}", flush=True)

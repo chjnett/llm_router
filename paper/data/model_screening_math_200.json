@@ -1,0 +1,22 @@
+{
+  "status": "latency_gate_failed_for_all_pairs",
+  "protocol": "GSM8K validation, 200 items, seed 42, batch 8, concise prompt, max 512 new tokens, RTX 3090",
+  "models": {
+    "smollm2_360m": {"accuracy": 0.08, "tokens_mean": 86.43, "latency_p50_ms": 542.8845, "token_limit_rate": 0.02, "peak_vram_gb": 1.0469},
+    "smollm2_1_7b": {"accuracy": 0.57, "tokens_mean": 112.21, "latency_p50_ms": 353.0304, "token_limit_rate": 0.01, "peak_vram_gb": 6.6465},
+    "qwen_1_5b": {"accuracy": 0.64, "tokens_mean": 138.76, "latency_p50_ms": 855.4304, "token_limit_rate": 0.0, "peak_vram_gb": 1.4297},
+    "qwen_7b": {"accuracy": 0.86, "tokens_mean": 78.3, "latency_p50_ms": 524.3009, "token_limit_rate": 0.0, "peak_vram_gb": 5.7734}
+  },
+  "pairs": {
+    "M0_qwen_same_family": {"accuracy_gap": 0.22, "latency_ratio": 1.6316, "compute_proxy_ratio": 0.3797, "latency_gate_pass": false},
+    "M1_smollm2_same_family": {"accuracy_gap": 0.49, "latency_ratio": 1.5378, "compute_proxy_ratio": 0.1631, "latency_gate_pass": false},
+    "M2_cross_family": {"accuracy_gap": 0.29, "latency_ratio": 0.6733, "compute_proxy_ratio": 0.3480, "latency_gate_pass": false}
+  },
+  "online_latency_check": {
+    "protocol": "first 50 validation items, batch 1, otherwise identical",
+    "qwen_1_5b_p50_ms": 4366.3763,
+    "qwen_7b_p50_ms": 2594.4506,
+    "latency_ratio": 1.6830
+  },
+  "decision": "Do not expand these pairs to new domains under a latency-saving claim. Separate wall-clock latency from compute proxy and test short-output Lower policies first."
+}

@@ -54,7 +54,10 @@ def adapt_row(row: dict[str, Any], default_task_type: str = "numeric") -> TaskEx
 
 def system_prompt(task_type: str) -> str:
     prompts = {
-        "numeric": "Solve the problem carefully. End with exactly 'Final answer: <number>'.",
+        "numeric": (
+            "Solve the math problem. Keep the reasoning to at most three short lines. "
+            "Your final line must be exactly 'Final answer: <number>'."
+        ),
         "multiple_choice": "Choose the correct option. End with exactly 'Final answer: <letter>'.",
         "exact_match": "Answer concisely. End with exactly 'Final answer: <answer>'.",
         "code": "Return only the requested Python code without Markdown fences.",

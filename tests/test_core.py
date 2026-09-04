@@ -9,14 +9,16 @@ from src.run_low_cost_verifier import verifier_cascade
 from src.benchmark_verifier_latency import completion_lengths
 from src.analyze_verifier_performance import route_items
 from src.model_registry import get_model_spec
-from src.task_harness import adapt_row, extract_choice, score_prediction
+from src.task_harness import adapt_row, extract_choice, score_prediction, system_prompt
 from src.run_model_screening import summarize, validate_rows
+from src.evaluate_model_screening import evaluate_pair
 
 
 def test_gsm8k_scoring_uses_final_answer():
     assert extract_final_number("work 3 then 7. Answer: 1,024") == 1024
     assert gsm8k_correct("The answer is \\boxed{42}", "reasoning\n#### 42")
     assert not gsm8k_correct("Answer: 41", "#### 42")
+    assert extract_final_number("Final answer: -$76") == -76
 
 
 def test_splits_are_disjoint_and_complete():
@@ -119,13 +121,43 @@ def test_task_adapter_scores_numeric_and_multiple_choice():
     assert "A. x" in choice.prompt and "B. y" in choice.prompt
     assert extract_choice("Reasoning A. Final answer: B", 2) == "B"
     assert score_prediction("Final answer: B", choice) == ("B", True)
+    assert "at most three short lines" in system_prompt("numeric")
 
 
 def test_screening_validation_and_summary_are_deterministic():
     examples = validate_rows([{"id": "x", "prompt": "2+2", "reference": "4"}], "numeric")
     assert examples[0].prompt == "2+2"
-    rows = [{"latency_ms": 10.0, "correct": True, "parsed_answer": 4, "generated_tokens": 3}]
+    rows = [{"latency_ms": 10.0, "correct": True, "parsed_answer": 4, "generated_tokens": 3, "hit_token_limit": False}]
     report = summarize(rows, elapsed_seconds=0.02, peak_allocated=1024**3, peak_reserved=2 * 1024**3)
     assert report["accuracy"] == 1.0
     assert report["parse_success_rate"] == 1.0
     assert report["peak_vram_reserved_gb"] == 2.0
+    assert report["token_limit_rate"] == 0.0
+
+
+def test_pair_screening_rejects_expensive_lower_model():
+    def report(key, accuracy, latency, tokens, vram):
+        return {
+            "model": {"key": key},
+            "metrics": {
+                "items": 200,
+                "accuracy": accuracy,
+                "latency_ms_p50": latency,
+                "parse_success_rate": 1.0,
+                "peak_vram_reserved_gb": vram,
+                "generated_tokens_mean": tokens,
+                "token_limit_rate": 0.0,
+            },
+        }
+
+    gates = {
+        "minimum_accuracy_gap": 0.05,
+        "maximum_cost_ratio": 0.5,
+        "minimum_parse_success": 0.98,
+        "maximum_peak_vram_gb": 22.0,
+        "maximum_token_limit_rate": 0.05,
+    }
+    result = evaluate_pair(report("small", 0.1, 350, 116, 1), report("large", 0.3, 270, 84, 4), gates)
+    assert result["checks"]["accuracy_gap"]["pass"]
+    assert not result["checks"]["measured_cost_ratio"]["pass"]
+    assert not result["screening_pass"]

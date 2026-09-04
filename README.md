@@ -146,6 +146,15 @@ accuracy, parse success, generated tokens, p50/p95 latency, throughput, and peak
 Code and instruction-following rows deliberately remain unjudged until their official isolated
 scorers are connected.
 
+The first 200-example GSM8K validation screen is complete for M0/M1/M2. Accuracy gaps are
+large enough, but measured batch-8 Lower/Upper latency ratios are 1.632, 1.538, and 0.673;
+all fail the fixed `<0.50` latency gate. A batch-1 Qwen check also fails at 1.683. Smaller
+models produced longer answers and were not faster on this GPU. Compute-proxy ratios based on
+model size times generated tokens remain below 0.40, so compute cost and wall-clock latency
+must now be reported separately. The tracked audit summary is
+`paper/data/model_screening_math_200.json`. Runs capped at 128/256 tokens were invalidated by
+truncation; only concise-prompt 512-token results are retained.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
