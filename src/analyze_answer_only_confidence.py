@@ -78,6 +78,13 @@ def main() -> None:
     probability = cross_validated_probability(features, lower, args.seed)
     ratio = args.lower_latency_ms / args.upper_latency_ms
     selected, curve = select_policy(probability, lower, upper, ratio)
+    risk_certified = [
+        point for point in curve
+        if point["quality_retention"] >= 0.95
+        and point["normalized_latency"] < 1.0
+        and point["unsafe_exact_95_upper"] <= 0.05
+    ]
+    latency_reduction = 1.0 - selected["normalized_latency"] if selected else None
     payload = {
         "protocol": "exploratory stratified out-of-fold confidence; threshold selected on the same OOF predictions",
         "confirmation_required": True,
@@ -91,6 +98,9 @@ def main() -> None:
         "average_precision": float(average_precision_score(lower, probability)),
         "selected_quality_floor_95": selected,
         "latency_break_even_achieved": bool(selected and selected["normalized_latency"] < 1.0),
+        "latency_reduction_at_selected": latency_reduction,
+        "practical_10_percent_reduction_achieved": bool(latency_reduction is not None and latency_reduction >= 0.10),
+        "risk_certified_break_even_achieved": bool(risk_certified),
         "curve": curve,
     }
     write_json(args.output, payload)
@@ -99,4 +109,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

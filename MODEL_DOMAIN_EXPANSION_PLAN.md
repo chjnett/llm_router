@@ -112,6 +112,12 @@ GSM8K validation 200문항, seed 42, batch 8, 기존 concise 프롬프트, 최�
 
 정답 Lower만 완벽하게 선택하고 나머지는 Upper로 보낸다는 oracle 상한에서는 latency break-even 후보가 세 개뿐이었다. Qwen answer-only batch 8의 최대 절감 여유는 3.5%p, SmolLM2-1.7B answer-only batch 8은 2.3%p, batch 1은 0.6%p다. 이는 달성 결과가 아니라 완벽한 selector를 가정한 상한이므로, 다음 단계는 answer-only 출력의 logprob/entropy 특징이 희소한 정답을 높은 precision으로 식별하는지 교차검증하는 것이다. 이 단계가 실패하면 짧은 Lower 경로도 중단하고 연구 주장을 compute/energy 절감으로 제한한다.
 
+### Answer-only confidence gate 결과
+
+200문항의 11개 출력 특징을 stratified 5-fold OOF Logistic Regression으로 평가했다. Qwen1.5B는 AUC 0.722, AP 0.380으로 신호가 있었지만 95% 품질 유지 운용점은 Lower 8%를 채택해 system accuracy 82.0%(Upper 86.0%의 95.35%)와 normalized latency 0.99982를 기록했다. 절감은 0.018%에 불과하고, 채택 16건 중 unsafe가 8건으로 조건부 위험 50%, exact 95% 상한 72.14%였다. 10% 실용 절감과 5% 위험 인증은 모두 실패했다. SmolLM2-1.7B는 AUC 0.618, AP 0.142, normalized latency 1.017로 손익분기도 실패했다. OOF 확률에서 임계값까지 선택한 탐색 결과이므로 Qwen의 미세한 손익분기조차 확인 결과로 주장하지 않는다.
+
+따라서 64-token Answer-only Lower는 중단한다. 다음 최소 실험은 Qwen1.5B의 중간 출력 예산(96/128/192/256)을 concise prompt로 고정해 정확도–latency 곡선을 찾는 것이다. 어느 조건도 품질 유지 95%와 latency 10% 절감을 동시에 만족하지 못하면, 현재 하드웨어에서 wall-clock 성능 개선 주장은 종료하고 compute/energy 절감과 feasibility guard를 중심 결과로 유지한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

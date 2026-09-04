@@ -175,6 +175,14 @@ SmolLM2 condition at batch 1 (+0.6). These are upper bounds, not achieved routin
 tracked analysis is `paper/data/output_length_ablation_analysis.json`; the next gate tests
 whether confidence features can identify the rare correct answer-only outputs precisely enough.
 
+That confidence gate also completed. Qwen1.5B reaches OOF AUC 0.722 and AP 0.380, but its
+95%-quality operating point saves only 0.018% latency and accepts eight unsafe outputs among
+16 Lower acceptances (50%; exact 95% upper bound 72.14%). SmolLM2-1.7B reaches AUC 0.618,
+AP 0.142, and does not break even. Neither condition achieves the 10% practical latency target
+or a 5% risk certificate. These are exploratory OOF results with threshold selection on the
+same OOF predictions. The 64-token Answer-only Lower path is stopped; the next bounded test is
+a concise 96/128/192/256-token Qwen budget sweep.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
