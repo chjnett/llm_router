@@ -1,0 +1,118 @@
+{
+  "protocol": "exploratory nested 5-fold CV; domain adaptation on fresh rows; not an independent certificate",
+  "count": 688,
+  "folds": [
+    {
+      "fold": 1,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.84,
+        "post_threshold": 0.49,
+        "accuracy": 0.8115942028985508,
+        "unsafe_rate": 0.028985507246376812,
+        "lower_coverage": 0.17391304347826086,
+        "lower_call_rate": 0.2463768115942029,
+        "pretriage_upper_rate": 0.7536231884057971,
+        "upper_call_rate": 0.8260869565217391,
+        "normalized_cost": 0.8788819872005325
+      },
+      "test_accuracy": 0.7971014492753623,
+      "test_unsafe_rate": 0.057971014492753624,
+      "test_normalized_cost": 0.9171842647219758
+    },
+    {
+      "fold": 2,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.85,
+        "post_threshold": 0.23,
+        "accuracy": 0.855072463768116,
+        "unsafe_rate": 0.028985507246376812,
+        "lower_coverage": 0.14492753623188406,
+        "lower_call_rate": 0.15942028985507245,
+        "pretriage_upper_rate": 0.8405797101449275,
+        "upper_call_rate": 0.855072463768116,
+        "normalized_cost": 0.8892339542073352
+      },
+      "test_accuracy": 0.8405797101449275,
+      "test_unsafe_rate": 0.050724637681159424,
+      "test_normalized_cost": 0.8592132502292222
+    },
+    {
+      "fold": 3,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.84,
+        "post_threshold": 0.59,
+        "accuracy": 0.7971014492753623,
+        "unsafe_rate": 0.028985507246376812,
+        "lower_coverage": 0.12318840579710146,
+        "lower_call_rate": 0.2028985507246377,
+        "pretriage_upper_rate": 0.7971014492753623,
+        "upper_call_rate": 0.8768115942028986,
+        "normalized_cost": 0.9202898547619048
+      },
+      "test_accuracy": 0.8840579710144928,
+      "test_unsafe_rate": 0.028985507246376812,
+      "test_normalized_cost": 0.9332298133651286
+    },
+    {
+      "fold": 4,
+      "model_train_count": 1413,
+      "policy_selection_count": 138,
+      "test_count": 137,
+      "selected": {
+        "pre_threshold": 0.88,
+        "post_threshold": 0.28,
+        "accuracy": 0.8695652173913043,
+        "unsafe_rate": 0.028985507246376812,
+        "lower_coverage": 0.15942028985507245,
+        "lower_call_rate": 0.17391304347826086,
+        "pretriage_upper_rate": 0.8260869565217391,
+        "upper_call_rate": 0.8405797101449275,
+        "normalized_cost": 0.8778467906240758
+      },
+      "test_accuracy": 0.8029197080291971,
+      "test_unsafe_rate": 0.058394160583941604,
+      "test_normalized_cost": 0.876955161358558
+    },
+    {
+      "fold": 5,
+      "model_train_count": 1413,
+      "policy_selection_count": 138,
+      "test_count": 137,
+      "selected": {
+        "pre_threshold": 0.8,
+        "post_threshold": 0.54,
+        "accuracy": 0.8188405797101449,
+        "unsafe_rate": 0.028985507246376812,
+        "lower_coverage": 0.2028985507246377,
+        "lower_call_rate": 0.3188405797101449,
+        "pretriage_upper_rate": 0.6811594202898551,
+        "upper_call_rate": 0.7971014492753623,
+        "normalized_cost": 0.8654244301538007
+      },
+      "test_accuracy": 0.8394160583941606,
+      "test_unsafe_rate": 0.051094890510948905,
+      "test_normalized_cost": 0.8879040663898407
+    }
+  ],
+  "always_upper_accuracy": 0.8677325581395349,
+  "accuracy": 0.8328488372093024,
+  "quality_retention_vs_upper": 0.9597989949748744,
+  "unsafe_count": 34,
+  "unsafe_rate": 0.04941860465116279,
+  "unsafe_upper_bound_95": 0.06525095485739078,
+  "normalized_cost": 0.8949335545191622,
+  "cost_reduction_vs_upper": 0.10506644548083777,
+  "diagnostic_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": true
+  }
+}

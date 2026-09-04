@@ -1,0 +1,118 @@
+{
+  "protocol": "exploratory nested 5-fold CV; domain adaptation on fresh rows; not an independent certificate",
+  "count": 688,
+  "folds": [
+    {
+      "fold": 1,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.89,
+        "post_threshold": 0.49,
+        "accuracy": 0.8188405797101449,
+        "unsafe_rate": 0.014492753623188406,
+        "lower_coverage": 0.10144927536231885,
+        "lower_call_rate": 0.14492753623188406,
+        "pretriage_upper_rate": 0.855072463768116,
+        "upper_call_rate": 0.8985507246376812,
+        "normalized_cost": 0.9296066250369712
+      },
+      "test_accuracy": 0.8260869565217391,
+      "test_unsafe_rate": 0.028985507246376812,
+      "test_normalized_cost": 0.9653209108067141
+    },
+    {
+      "fold": 2,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.89,
+        "post_threshold": 0.23,
+        "accuracy": 0.8695652173913043,
+        "unsafe_rate": 0.014492753623188406,
+        "lower_coverage": 0.10144927536231885,
+        "lower_call_rate": 0.10869565217391304,
+        "pretriage_upper_rate": 0.8913043478260869,
+        "upper_call_rate": 0.8985507246376812,
+        "normalized_cost": 0.9218426499371487
+      },
+      "test_accuracy": 0.8478260869565217,
+      "test_unsafe_rate": 0.028985507246376812,
+      "test_normalized_cost": 0.9104554863538895
+    },
+    {
+      "fold": 3,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.91,
+        "post_threshold": 0.28,
+        "accuracy": 0.8115942028985508,
+        "unsafe_rate": 0.014492753623188406,
+        "lower_coverage": 0.050724637681159424,
+        "lower_call_rate": 0.057971014492753624,
+        "pretriage_upper_rate": 0.9420289855072463,
+        "upper_call_rate": 0.9492753623188406,
+        "normalized_cost": 0.9616977224785568
+      },
+      "test_accuracy": 0.8985507246376812,
+      "test_unsafe_rate": 0.028985507246376812,
+      "test_normalized_cost": 0.9104554863538895
+    },
+    {
+      "fold": 4,
+      "model_train_count": 1413,
+      "policy_selection_count": 138,
+      "test_count": 137,
+      "selected": {
+        "pre_threshold": 0.96,
+        "post_threshold": 0.01,
+        "accuracy": 0.8695652173913043,
+        "unsafe_rate": 0.014492753623188406,
+        "lower_coverage": 0.09420289855072464,
+        "lower_call_rate": 0.09420289855072464,
+        "pretriage_upper_rate": 0.9057971014492754,
+        "upper_call_rate": 0.9057971014492754,
+        "normalized_cost": 0.9259834367088138
+      },
+      "test_accuracy": 0.8175182481751825,
+      "test_unsafe_rate": 0.029197080291970802,
+      "test_normalized_cost": 0.9483837329547148
+    },
+    {
+      "fold": 5,
+      "model_train_count": 1413,
+      "policy_selection_count": 138,
+      "test_count": 137,
+      "selected": {
+        "pre_threshold": 0.8,
+        "post_threshold": 0.58,
+        "accuracy": 0.8260869565217391,
+        "unsafe_rate": 0.014492753623188406,
+        "lower_coverage": 0.15942028985507245,
+        "lower_call_rate": 0.3188405797101449,
+        "pretriage_upper_rate": 0.6811594202898551,
+        "upper_call_rate": 0.8405797101449275,
+        "normalized_cost": 0.9089026910233658
+      },
+      "test_accuracy": 0.8467153284671532,
+      "test_unsafe_rate": 0.043795620437956206,
+      "test_normalized_cost": 0.9171011466818115
+    }
+  ],
+  "always_upper_accuracy": 0.8677325581395349,
+  "accuracy": 0.8473837209302325,
+  "quality_retention_vs_upper": 0.9765494137353433,
+  "unsafe_count": 22,
+  "unsafe_rate": 0.03197674418604651,
+  "unsafe_upper_bound_95": 0.04534772345454759,
+  "normalized_cost": 0.9303363785395409,
+  "cost_reduction_vs_upper": 0.06966362146045912,
+  "diagnostic_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": false
+  }
+}

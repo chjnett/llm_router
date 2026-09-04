@@ -1,0 +1,56 @@
+{
+  "protocol": "query-only semantic pre-triage before Lower; output-confidence post-router after Lower; selection-only",
+  "selection_count": 500,
+  "selection_unsafe_cap": 0.05,
+  "quality_target": 0.8302999999999999,
+  "upper_accuracy": 0.874,
+  "pretriage_lower_success_auc": 0.5233643299554249,
+  "pretriage_train_auc": 0.8848965703119736,
+  "variants": {
+    "confidence_lr": {
+      "post_lower_success_auc": 0.7329170770797511,
+      "feasible_policy_count": 3932,
+      "selected": {
+        "pre_threshold": 0.83,
+        "post_threshold": 0.47,
+        "accuracy": 0.846,
+        "unsafe_rate": 0.05,
+        "lower_coverage": 0.202,
+        "lower_call_rate": 0.302,
+        "pretriage_upper_rate": 0.698,
+        "upper_call_rate": 0.798,
+        "normalized_cost": 0.8627142852520407
+      },
+      "cost_gate_pass": true
+    },
+    "confidence_extra_trees": {
+      "post_lower_success_auc": 0.7259386634167515,
+      "feasible_policy_count": 4184,
+      "selected": {
+        "pre_threshold": 0.66,
+        "post_threshold": 0.56,
+        "accuracy": 0.842,
+        "unsafe_rate": 0.05,
+        "lower_coverage": 0.23,
+        "lower_call_rate": 0.432,
+        "pretriage_upper_rate": 0.568,
+        "upper_call_rate": 0.77,
+        "normalized_cost": 0.862571427910204
+      },
+      "cost_gate_pass": true
+    }
+  },
+  "frozen_candidate_for_reserved_certification": {
+    "post_model": "confidence_extra_trees",
+    "pre_threshold": 0.66,
+    "post_threshold": 0.56,
+    "accuracy": 0.842,
+    "unsafe_rate": 0.05,
+    "lower_coverage": 0.23,
+    "lower_call_rate": 0.432,
+    "pretriage_upper_rate": 0.568,
+    "upper_call_rate": 0.77,
+    "normalized_cost": 0.862571427910204
+  },
+  "advance_to_reserved_certification": true
+}

@@ -1,0 +1,13 @@
+{
+  "protocol": "final untouched reserve; frozen pre-triage policy; no threshold tuning",
+  "count": 188,
+  "source_available_after_all_exclusions": 188,
+  "excluded_id_count": 3100,
+  "overlap_with_any_prior_split": 0,
+  "frozen_policy": {
+    "pre_model": "semantic logistic regression",
+    "pre_threshold": 0.66,
+    "post_model": "confidence Extra Trees",
+    "post_threshold": 0.56
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "protocol": "all four nested-CV median policies reported; primary remains 3pct policy; no official-test selection",
+  "test_count": 1319,
+  "always_upper_accuracy": 0.8051554207733131,
+  "policies": {
+    "inner_cap_2pct_median": {
+      "pre_threshold": 0.89,
+      "post_threshold": 0.28,
+      "accuracy": 0.7831690674753601,
+      "unsafe_rate": 0.02880970432145565,
+      "lower_coverage": 0.0932524639878696,
+      "lower_call_rate": 0.10462471569370735,
+      "pretriage_upper_rate": 0.8953752843062927,
+      "upper_call_rate": 0.9067475360121304,
+      "normalized_cost": 0.9291671177863564,
+      "unsafe_count": 38,
+      "unsafe_upper_bound_95": 0.037592601739778804,
+      "quality_retention_vs_upper": 0.9726930320150659,
+      "cost_reduction_vs_upper": 0.07083288221364359,
+      "gates": {
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": false,
+        "risk_upper_5pct_pass": true,
+        "overall_pass": false
+      }
+    },
+    "inner_cap_3pct_median_primary": {
+      "pre_threshold": 0.84,
+      "post_threshold": 0.49,
+      "accuracy": 0.7846853677028052,
+      "unsafe_rate": 0.026535253980288095,
+      "lower_coverage": 0.10765731614859743,
+      "lower_call_rate": 0.16679302501895377,
+      "pretriage_upper_rate": 0.8332069749810462,
+      "upper_call_rate": 0.8923426838514026,
+      "normalized_cost": 0.9280840461001686,
+      "unsafe_count": 35,
+      "unsafe_upper_bound_95": 0.03502869077949375,
+      "quality_retention_vs_upper": 0.9745762711864406,
+      "cost_reduction_vs_upper": 0.07191595389983141,
+      "gates": {
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": false,
+        "risk_upper_5pct_pass": true,
+        "overall_pass": false
+      }
+    },
+    "inner_cap_4pct_median": {
+      "pre_threshold": 0.8,
+      "post_threshold": 0.51,
+      "accuracy": 0.7854435178165277,
+      "unsafe_rate": 0.028051554207733132,
+      "lower_coverage": 0.12661106899166036,
+      "lower_call_rate": 0.20545868081880211,
+      "pretriage_upper_rate": 0.7945413191811979,
+      "upper_call_rate": 0.8733889310083397,
+      "normalized_cost": 0.9174157908693198,
+      "unsafe_count": 37,
+      "unsafe_upper_bound_95": 0.0367393864452057,
+      "quality_retention_vs_upper": 0.975517890772128,
+      "cost_reduction_vs_upper": 0.08258420913068021,
+      "gates": {
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": false,
+        "risk_upper_5pct_pass": true,
+        "overall_pass": false
+      }
+    },
+    "inner_cap_5pct_median": {
+      "pre_threshold": 0.85,
+      "post_threshold": 0.39,
+      "accuracy": 0.77710386656558,
+      "unsafe_rate": 0.037149355572403335,
+      "lower_coverage": 0.1243366186504928,
+      "lower_call_rate": 0.15314632297194844,
+      "pretriage_upper_rate": 0.8468536770280516,
+      "upper_call_rate": 0.8756633813495072,
+      "normalized_cost": 0.9084804503233742,
+      "unsafe_count": 49,
+      "unsafe_upper_bound_95": 0.04689833781503862,
+      "quality_retention_vs_upper": 0.9651600753295668,
+      "cost_reduction_vs_upper": 0.09151954967662579,
+      "gates": {
+        "quality_floor_pass": true,
+        "cost_reduction_10pct_pass": false,
+        "risk_upper_5pct_pass": true,
+        "overall_pass": false
+      }
+    }
+  }
+}

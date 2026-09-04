@@ -1,0 +1,118 @@
+{
+  "protocol": "exploratory nested 5-fold CV; domain adaptation on fresh rows; not an independent certificate",
+  "count": 688,
+  "folds": [
+    {
+      "fold": 1,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.79,
+        "post_threshold": 0.54,
+        "accuracy": 0.8043478260869565,
+        "unsafe_rate": 0.036231884057971016,
+        "lower_coverage": 0.1956521739130435,
+        "lower_call_rate": 0.2898550724637681,
+        "pretriage_upper_rate": 0.7101449275362319,
+        "upper_call_rate": 0.8043478260869565,
+        "normalized_cost": 0.8664596268855369
+      },
+      "test_accuracy": 0.8043478260869565,
+      "test_unsafe_rate": 0.043478260869565216,
+      "test_normalized_cost": 0.916666666278468
+    },
+    {
+      "fold": 2,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.67,
+        "post_threshold": 0.51,
+        "accuracy": 0.855072463768116,
+        "unsafe_rate": 0.036231884057971016,
+        "lower_coverage": 0.21014492753623187,
+        "lower_call_rate": 0.3188405797101449,
+        "pretriage_upper_rate": 0.6811594202898551,
+        "upper_call_rate": 0.7898550724637681,
+        "normalized_cost": 0.8581780533422065
+      },
+      "test_accuracy": 0.8405797101449275,
+      "test_unsafe_rate": 0.06521739130434782,
+      "test_normalized_cost": 0.8302277426722864
+    },
+    {
+      "fold": 3,
+      "model_train_count": 1412,
+      "policy_selection_count": 138,
+      "test_count": 138,
+      "selected": {
+        "pre_threshold": 0.83,
+        "post_threshold": 0.53,
+        "accuracy": 0.7971014492753623,
+        "unsafe_rate": 0.036231884057971016,
+        "lower_coverage": 0.15942028985507245,
+        "lower_call_rate": 0.2246376811594203,
+        "pretriage_upper_rate": 0.7753623188405797,
+        "upper_call_rate": 0.8405797101449275,
+        "normalized_cost": 0.8887163557638272
+      },
+      "test_accuracy": 0.8913043478260869,
+      "test_unsafe_rate": 0.036231884057971016,
+      "test_normalized_cost": 0.9016563143670511
+    },
+    {
+      "fold": 4,
+      "model_train_count": 1413,
+      "policy_selection_count": 138,
+      "test_count": 137,
+      "selected": {
+        "pre_threshold": 0.86,
+        "post_threshold": 0.4,
+        "accuracy": 0.8623188405797102,
+        "unsafe_rate": 0.036231884057971016,
+        "lower_coverage": 0.18115942028985507,
+        "lower_call_rate": 0.2246376811594203,
+        "pretriage_upper_rate": 0.7753623188405797,
+        "upper_call_rate": 0.8188405797101449,
+        "normalized_cost": 0.8669772253290449
+      },
+      "test_accuracy": 0.8175182481751825,
+      "test_unsafe_rate": 0.043795620437956206,
+      "test_normalized_cost": 0.8962460893750931
+    },
+    {
+      "fold": 5,
+      "model_train_count": 1413,
+      "policy_selection_count": 138,
+      "test_count": 137,
+      "selected": {
+        "pre_threshold": 0.8,
+        "post_threshold": 0.44,
+        "accuracy": 0.8188405797101449,
+        "unsafe_rate": 0.036231884057971016,
+        "lower_coverage": 0.2463768115942029,
+        "lower_call_rate": 0.3188405797101449,
+        "pretriage_upper_rate": 0.6811594202898551,
+        "upper_call_rate": 0.7536231884057971,
+        "normalized_cost": 0.8219461692842355
+      },
+      "test_accuracy": 0.8248175182481752,
+      "test_unsafe_rate": 0.06569343065693431,
+      "test_normalized_cost": 0.8733055262438553
+    }
+  ],
+  "always_upper_accuracy": 0.8677325581395349,
+  "accuracy": 0.8357558139534884,
+  "quality_retention_vs_upper": 0.9631490787269682,
+  "unsafe_count": 35,
+  "unsafe_rate": 0.050872093023255814,
+  "unsafe_upper_bound_95": 0.06688515018370107,
+  "normalized_cost": 0.8836171092407749,
+  "cost_reduction_vs_upper": 0.11638289075922514,
+  "diagnostic_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": true
+  }
+}

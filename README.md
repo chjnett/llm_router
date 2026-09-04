@@ -1,9 +1,9 @@
 # Adaptive SLM–LLM Routing: KSC Pilot
 
 This repository implements a performance-focused SLM–LLM routing study on GSM8K and SVAMP.
-The current main method uses output-aware confidence and a short independent answer-only
-verification pass to decide whether to accept Qwen2.5-1.5B-Instruct or escalate to
-Qwen2.5-7B-Instruct.
+The paper method uses output-aware confidence and a short independent answer-only verifier.
+The post-paper study additionally evaluates a query pre-triage stage that skips the Lower
+model for clearly difficult requests before applying output-aware post-routing.
 
 ## Guardrails
 
@@ -36,12 +36,31 @@ conda run -n llm-practice python -m src.benchmark_verifier_latency --limit 128 -
 conda run -n llm-practice python -m src.analyze_verifier_performance --draws 10000
 ```
 
-The RTX 3090 benchmark compares the full and answer-only second passes on the same 128
-questions in ABBA order after warmup. The paired analysis keeps the selected thresholds fixed
+The RTX 3090 benchmark compares full, answer-only, and micro-reasoning second passes on the
+same 128 questions in forward/reverse order after warmup. The paired analysis keeps the selected thresholds fixed
 and reports bootstrap confidence intervals and an exact McNemar test.
 
-Generated data, model outputs, embeddings, adapters, and results are stored below `artifacts/`
-and intentionally excluded from Git.
+## Post-paper pre-triage diagnostics
+
+The following commands reproduce the verifier frontier, distribution-adapted nested CV, and
+the frozen official GSM8K test evaluation after their cached inference/features are available:
+
+```powershell
+conda run -n llm-practice python -m src.analyze_micro_verifier_frontier
+conda run -n llm-practice python -m src.select_pretriage_cascade
+conda run -n llm-practice python -m src.cross_validate_adaptive_pretriage --unsafe-cap 0.03
+conda run -n llm-practice python -m src.run_official_adaptive_pretriage
+conda run -n llm-practice python -m src.analyze_official_pretriage_ladder
+```
+
+On the untouched official GSM8K test (1,319 rows), the primary CV-derived policy retains
+97.46% of Always-Upper accuracy and has a 3.50% one-sided 95% unsafe-risk upper bound, while
+reducing normalized cost by 7.19%. It therefore passes quality and risk but misses the
+prespecified 10% cost-reduction target.
+
+Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
+excluded from Git. Small manifests and final JSON result summaries are force-tracked when
+needed for auditability.
 
 The active configs use the 1.5B/7B pair and a normalized Upper cost of 4.667. See
 `adaptive_slm_llm_routing_architecture_v1.html` for the unified architecture, experiment

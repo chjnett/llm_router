@@ -32,17 +32,24 @@ def embed_texts(texts: list[str], model_id: str, batch_size: int = 32) -> np.nda
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/pilot_gsm8k.yaml")
+    parser.add_argument("--data-dir", default="artifacts/data")
+    parser.add_argument("--output-dir", default="artifacts/embeddings")
+    parser.add_argument("--split", action="append", dest="splits")
+    parser.add_argument("--batch-size", type=int, default=32)
     args = parser.parse_args()
     cfg = load_config(args.config)
-    output = Path("artifacts/embeddings")
+    output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    for split in ["router_train", "distill_train", "validation", "test"]:
-        rows = read_jsonl(Path("artifacts/data") / f"{split}.jsonl")
-        vectors = embed_texts([row["question"] for row in rows], cfg["models"]["embedding"])
+    for split in args.splits or ["router_train", "distill_train", "validation", "test"]:
+        rows = read_jsonl(Path(args.data_dir) / f"{split}.jsonl")
+        vectors = embed_texts(
+            [row["question"] for row in rows],
+            cfg["models"]["embedding"],
+            args.batch_size,
+        )
         np.savez_compressed(output / f"{split}.npz", ids=np.array([row["id"] for row in rows]), embeddings=vectors)
         print(split, vectors.shape)
 
 
 if __name__ == "__main__":
     main()
-

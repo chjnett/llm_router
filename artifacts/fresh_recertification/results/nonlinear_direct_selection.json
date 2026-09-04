@@ -1,0 +1,97 @@
+{
+  "protocol": "pilot router_train fit; fresh 500 selection; direct Lower/Upper routing without verifier",
+  "selection_count": 500,
+  "selection_unsafe_cap": 0.05,
+  "upper_accuracy": 0.874,
+  "quality_target": 0.8302999999999999,
+  "variants": {
+    "confidence_lr": {
+      "lower_success_auc": 0.7329170770797511,
+      "feasible_policy_count": 27,
+      "selected": {
+        "threshold": 0.73,
+        "accuracy": 0.836,
+        "unsafe_rate": 0.048,
+        "lower_coverage": 0.216,
+        "upper_call_rate": 0.784,
+        "normalized_cost": 0.9982857127551021
+      },
+      "cost_gate_pass": false
+    },
+    "semantic_lr": {
+      "lower_success_auc": 0.5233643299554249,
+      "feasible_policy_count": 3,
+      "selected": {
+        "threshold": 0.97,
+        "accuracy": 0.842,
+        "unsafe_rate": 0.042,
+        "lower_coverage": 0.082,
+        "upper_call_rate": 0.918,
+        "normalized_cost": 1.1322857127551025
+      },
+      "cost_gate_pass": false
+    },
+    "hybrid_lr": {
+      "lower_success_auc": 0.6054191221890182,
+      "feasible_policy_count": 1,
+      "selected": {
+        "threshold": 0.99,
+        "accuracy": 0.842,
+        "unsafe_rate": 0.04,
+        "lower_coverage": 0.09,
+        "upper_call_rate": 0.91,
+        "normalized_cost": 1.124285712755102
+      },
+      "cost_gate_pass": false
+    },
+    "confidence_extra_trees": {
+      "lower_success_auc": 0.7259386634167515,
+      "feasible_policy_count": 32,
+      "selected": {
+        "threshold": 0.68,
+        "accuracy": 0.836,
+        "unsafe_rate": 0.05,
+        "lower_coverage": 0.22,
+        "upper_call_rate": 0.78,
+        "normalized_cost": 0.994285712755102
+      },
+      "cost_gate_pass": false
+    },
+    "confidence_random_forest": {
+      "lower_success_auc": 0.7280088148383113,
+      "feasible_policy_count": 28,
+      "selected": {
+        "threshold": 0.72,
+        "accuracy": 0.84,
+        "unsafe_rate": 0.048,
+        "lower_coverage": 0.218,
+        "upper_call_rate": 0.782,
+        "normalized_cost": 0.9962857127551021
+      },
+      "cost_gate_pass": false
+    },
+    "confidence_hist_gradient_boosting": {
+      "lower_success_auc": 0.700813035276048,
+      "feasible_policy_count": 11,
+      "selected": {
+        "threshold": 0.89,
+        "accuracy": 0.856,
+        "unsafe_rate": 0.048,
+        "lower_coverage": 0.22,
+        "upper_call_rate": 0.78,
+        "normalized_cost": 0.9942857127551021
+      },
+      "cost_gate_pass": false
+    }
+  },
+  "best_candidate": {
+    "variant": "confidence_extra_trees",
+    "threshold": 0.68,
+    "accuracy": 0.836,
+    "unsafe_rate": 0.05,
+    "lower_coverage": 0.22,
+    "upper_call_rate": 0.78,
+    "normalized_cost": 0.994285712755102
+  },
+  "advance_to_reserved_certification": false
+}

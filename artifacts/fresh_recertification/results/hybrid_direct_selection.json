@@ -1,0 +1,58 @@
+{
+  "protocol": "pilot router_train fit; fresh 500 selection; direct Lower/Upper routing without verifier",
+  "selection_count": 500,
+  "selection_unsafe_cap": 0.05,
+  "upper_accuracy": 0.874,
+  "quality_target": 0.8302999999999999,
+  "variants": {
+    "confidence_lr": {
+      "lower_success_auc": 0.7329170770797511,
+      "feasible_policy_count": 27,
+      "selected": {
+        "threshold": 0.73,
+        "accuracy": 0.836,
+        "unsafe_rate": 0.048,
+        "lower_coverage": 0.216,
+        "upper_call_rate": 0.784,
+        "normalized_cost": 0.9982857127551021
+      },
+      "cost_gate_pass": false
+    },
+    "semantic_lr": {
+      "lower_success_auc": 0.5233643299554249,
+      "feasible_policy_count": 3,
+      "selected": {
+        "threshold": 0.97,
+        "accuracy": 0.842,
+        "unsafe_rate": 0.042,
+        "lower_coverage": 0.082,
+        "upper_call_rate": 0.918,
+        "normalized_cost": 1.1322857127551025
+      },
+      "cost_gate_pass": false
+    },
+    "hybrid_lr": {
+      "lower_success_auc": 0.6054191221890182,
+      "feasible_policy_count": 1,
+      "selected": {
+        "threshold": 0.99,
+        "accuracy": 0.842,
+        "unsafe_rate": 0.04,
+        "lower_coverage": 0.09,
+        "upper_call_rate": 0.91,
+        "normalized_cost": 1.124285712755102
+      },
+      "cost_gate_pass": false
+    }
+  },
+  "best_candidate": {
+    "variant": "confidence_lr",
+    "threshold": 0.73,
+    "accuracy": 0.836,
+    "unsafe_rate": 0.048,
+    "lower_coverage": 0.216,
+    "upper_call_rate": 0.784,
+    "normalized_cost": 0.9982857127551021
+  },
+  "advance_to_reserved_certification": false
+}

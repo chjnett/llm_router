@@ -1,0 +1,12 @@
+{
+  "protocol": "untouched official GSM8K test; model and thresholds frozen before inference",
+  "count": 1319,
+  "source": "gsm8k-test.arrow",
+  "frozen_policy": {
+    "domain_adaptation_rows": 688,
+    "pre_model": "semantic logistic regression",
+    "pre_threshold": 0.84,
+    "post_model": "confidence Extra Trees",
+    "post_threshold": 0.49
+  }
+}

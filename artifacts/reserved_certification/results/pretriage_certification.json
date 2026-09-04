@@ -1,0 +1,30 @@
+{
+  "protocol": "one-shot final reserve; seed, models and thresholds frozen before inference",
+  "policy": {
+    "pre_threshold": 0.66,
+    "post_threshold": 0.56,
+    "post_model": "confidence_extra_trees"
+  },
+  "count": 188,
+  "always_upper_accuracy": 0.851063829787234,
+  "quality_target": 0.8085106382978723,
+  "quality_retention_vs_upper": 0.9375,
+  "unsafe_count": 15,
+  "unsafe_upper_bound_95": 0.12019984537369473,
+  "cost_reduction_vs_upper": 0.1572948335269213,
+  "pre_threshold": 0.66,
+  "post_threshold": 0.56,
+  "accuracy": 0.7978723404255319,
+  "unsafe_rate": 0.0797872340425532,
+  "lower_coverage": 0.2553191489361702,
+  "lower_call_rate": 0.4574468085106383,
+  "pretriage_upper_rate": 0.5425531914893617,
+  "upper_call_rate": 0.7446808510638298,
+  "normalized_cost": 0.8427051664730787,
+  "deployment_gate": {
+    "risk_upper_5pct_pass": false,
+    "quality_floor_pass": false,
+    "cost_reduction_10pct_pass": true,
+    "overall_pass": false
+  }
+}
