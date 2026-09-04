@@ -133,6 +133,19 @@ least 95% quality retention, and capability AUC of at least 0.60. See
 `MODEL_DOMAIN_EXPANSION_PLAN.md` for the fixed order, safety rules, stop gates, and estimated
 4--7 workdays / 32--65 GPU hours.
 
+The common cross-family harness is now available. Validate an input without loading a model,
+then run a measured screening condition as follows:
+
+```powershell
+python -m src.run_model_screening --model-key qwen_1_5b --input artifacts/data/test.jsonl --limit 10 --validate-only
+python -m src.run_model_screening --model-key smollm2_360m --input artifacts/data/test.jsonl --limit 200 --batch-size 16
+```
+
+Outputs are isolated by input/task/model below `artifacts/model_screening/`. Each report records
+accuracy, parse success, generated tokens, p50/p95 latency, throughput, and peak GPU memory.
+Code and instruction-following rows deliberately remain unjudged until their official isolated
+scorers are connected.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

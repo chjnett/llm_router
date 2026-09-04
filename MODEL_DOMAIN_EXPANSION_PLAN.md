@@ -89,11 +89,13 @@ Pilot gate를 통과한 셀만 전체 test와 3 seeds로 확장한다. Router �
 
 ## 7. 가장 먼저 구현할 작업
 
-1. `ModelSpec` registry와 모델별 chat-template adapter를 추가한다.
+1. ✅ `ModelSpec` registry와 모델별 chat-template adapter를 추가했다 (`src/model_registry.py`, `src/task_harness.py`, `src/run_model_screening.py`).
 2. 동일 200문항에서 Qwen control과 공개 SmolLM2 M1/M2의 로딩·정확도·latency·VRAM smoke test를 실행한다.
 3. 통과하면 MBPP 격리 실행 scorer를 구현하고 코드 도메인 pilot을 진행한다.
 4. 이후 MMLU → KMMLU → IFEval 순서로 scorer와 pilot을 추가한다.
 5. Gemma와 Llama는 Hugging Face 약관 동의·접근 권한이 확인된 뒤 M3/M4에 포함한다.
+
+공통 harness는 기존 `question/answer` JSONL과 새 `prompt/reference/task_type/task_metadata` 스키마를 모두 읽는다. 숫자, 객관식, exact-match는 즉시 자동 채점하고 코드·IFEval은 전용 격리 채점기가 연결되기 전까지 `correct=null`로 저장해 임의 판정을 방지한다. 각 실행은 정확도, 파싱률, 생성 토큰, p50/p95 latency, 처리량, peak allocated/reserved VRAM을 기록한다.
 
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 

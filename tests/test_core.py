@@ -8,6 +8,9 @@ from src.run_risk_bound_calibration import binomial_upper
 from src.run_low_cost_verifier import verifier_cascade
 from src.benchmark_verifier_latency import completion_lengths
 from src.analyze_verifier_performance import route_items
+from src.model_registry import get_model_spec
+from src.task_harness import adapt_row, extract_choice, score_prediction
+from src.run_model_screening import summarize, validate_rows
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -102,3 +105,27 @@ def test_performance_analysis_returns_item_level_metrics():
     items = route_items(inputs, 0.4, 0.8, 1.0, 0.25, 4.0)
     assert items["correct"].tolist() == [1.0, 1.0, 1.0]
     assert np.isclose(items["cost"].mean(), (1.0 + 1.25 + 5.0) / 3 / 4)
+
+
+def test_model_registry_resolves_public_cross_family_models():
+    assert get_model_spec("smollm2_360m").family == "smollm2"
+    assert get_model_spec("qwen_7b").model_id == "Qwen/Qwen2.5-7B-Instruct"
+
+
+def test_task_adapter_scores_numeric_and_multiple_choice():
+    numeric = adapt_row({"id": "n1", "question": "1+1?", "answer": "#### 2"})
+    assert score_prediction("Final answer: 2", numeric) == (2.0, True)
+    choice = adapt_row({"id": "m1", "question": "Pick", "choices": ["x", "y"], "answer": 1})
+    assert "A. x" in choice.prompt and "B. y" in choice.prompt
+    assert extract_choice("Reasoning A. Final answer: B", 2) == "B"
+    assert score_prediction("Final answer: B", choice) == ("B", True)
+
+
+def test_screening_validation_and_summary_are_deterministic():
+    examples = validate_rows([{"id": "x", "prompt": "2+2", "reference": "4"}], "numeric")
+    assert examples[0].prompt == "2+2"
+    rows = [{"latency_ms": 10.0, "correct": True, "parsed_answer": 4, "generated_tokens": 3}]
+    report = summarize(rows, elapsed_seconds=0.02, peak_allocated=1024**3, peak_reserved=2 * 1024**3)
+    assert report["accuracy"] == 1.0
+    assert report["parse_success_rate"] == 1.0
+    assert report["peak_vram_reserved_gb"] == 2.0

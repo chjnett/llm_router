@@ -1,0 +1,20 @@
+screening:
+  sample_size: 200
+  seed: 42
+  max_new_tokens: 128
+  gates:
+    minimum_accuracy_gap: 0.05
+    maximum_cost_ratio: 0.50
+    minimum_parse_success: 0.98
+    maximum_peak_vram_gb: 22.0
+models:
+  - lower: qwen_1_5b
+    upper: qwen_7b
+    condition: M0
+  - lower: smollm2_360m
+    upper: smollm2_1_7b
+    condition: M1
+  - lower: smollm2_1_7b
+    upper: qwen_7b
+    condition: M2
+
