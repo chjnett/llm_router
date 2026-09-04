@@ -58,6 +58,25 @@ On the untouched official GSM8K test (1,319 rows), the primary CV-derived policy
 reducing normalized cost by 7.19%. It therefore passes quality and risk but misses the
 prespecified 10% cost-reduction target.
 
+## Capability-aware external evaluation
+
+The next-stage experiment fine-tunes the last two BGE encoder layers to predict whether the
+Lower model can answer a request, using 1,688 GSM8K routing labels only. The two-stage policy
+is selected and frozen on a stratified GSM8K validation split before ASDiv is evaluated.
+
+```powershell
+conda run -n llm-practice python -m src.prepare_asdiv_external_test
+conda run -n llm-practice python -m src.train_adaptive_capability_pretriage
+conda run -n llm-practice python -m src.run_asdiv_capability_pretriage
+```
+
+The frozen policy reaches 88.97% accuracy on 2,249 numeric-answer ASDiv examples, retaining
+98.04% of Always-Upper accuracy while reducing normalized cost by 11.68%. Its observed unsafe
+rate is 3.11% (70/2,249), with a one-sided exact 95% upper bound of 3.78%. All three external
+gates pass. The internal GSM8K validation cost reduction was 9.91%, a 0.089 percentage-point
+near-miss against the 10% promotion rule, so the external result is reported as a one-shot
+diagnostic rather than evidence for a universal guarantee.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

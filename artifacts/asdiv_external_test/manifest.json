@@ -1,0 +1,9 @@
+{
+  "protocol": "untouched ASDiv external test; no ASDiv policy or model tuning",
+  "dataset": "EleutherAI/asdiv",
+  "source_split": "validation",
+  "source_count": 2305,
+  "normalized_count": 2249,
+  "skipped_non_numeric": 56,
+  "license": "cc-by-nc-4.0"
+}
