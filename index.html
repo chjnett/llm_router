@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Capability-aware Adaptive SLM–LLM Routing 연구 문서 모음">
+  <title>LLM Router Research Documents</title>
+  <style>
+    :root { color-scheme: light; --ink:#111; --muted:#626262; --line:#d9d9d9; --paper:#fff; --soft:#f6f6f6; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif; }
+    main { width:min(960px, calc(100% - 40px)); margin:0 auto; padding:72px 0 96px; }
+    header { max-width:720px; margin-bottom:48px; }
+    .eyebrow { margin:0 0 12px; color:var(--muted); font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(34px, 6vw, 62px); line-height:1.08; letter-spacing:-.045em; }
+    .lead { margin:20px 0 0; color:var(--muted); font-size:17px; line-height:1.7; }
+    .summary { display:grid; grid-template-columns:repeat(3, 1fr); border:1px solid var(--line); margin-bottom:28px; }
+    .summary div { padding:18px 20px; border-right:1px solid var(--line); }
+    .summary div:last-child { border-right:0; }
+    .summary b, .summary span { display:block; }
+    .summary b { font-size:18px; }
+    .summary span { margin-top:5px; color:var(--muted); font-size:12px; }
+    .document { display:grid; grid-template-columns:1fr auto; gap:28px; align-items:center; padding:28px; border:1px solid var(--line); text-decoration:none; color:inherit; transition:background .15s ease, border-color .15s ease; }
+    .document:hover, .document:focus-visible { background:var(--soft); border-color:var(--ink); outline:none; }
+    .document h2 { margin:0 0 10px; font-size:22px; letter-spacing:-.025em; }
+    .document p { margin:0; color:var(--muted); line-height:1.65; }
+    .meta { margin-top:16px; font-size:12px; font-weight:700; color:var(--muted); }
+    .arrow { font-size:28px; line-height:1; }
+    footer { margin-top:32px; color:var(--muted); font-size:12px; }
+    @media (max-width:640px) {
+      main { width:min(100% - 28px, 960px); padding-top:44px; }
+      .summary { grid-template-columns:1fr; }
+      .summary div { border-right:0; border-bottom:1px solid var(--line); }
+      .summary div:last-child { border-bottom:0; }
+      .document { padding:22px; gap:16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Research document hub</p>
+      <h1>Capability-aware<br>SLM–LLM Routing</h1>
+      <p class="lead">아키텍처, 실험 결과, 실패 기록과 다음 연구 방향을 한곳에서 확인하는 문서 모음입니다.</p>
+    </header>
+
+    <section class="summary" aria-label="문서 요약">
+      <div><b>1</b><span>현재 공개 문서</span></div>
+      <div><b>KSC Pilot</b><span>연구 단계</span></div>
+      <div><b>2026-09-05</b><span>배포 기준일</span></div>
+    </section>
+
+    <a class="document" href="adaptive_slm_llm_routing_architecture_v1.html">
+      <div>
+        <h2>통합 연구 아키텍처와 실험 현황</h2>
+        <p>Lower-first cascade, 출력 인지 신뢰도, Answer-only verifier, 위험 인증, 모델·도메인 확장 계획과 실제 실험 결과를 정리한 메인 문서입니다.</p>
+        <div class="meta">HTML · 한국어 · 최신 통합본</div>
+      </div>
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+
+    <footer>LLM Router Research · 문서의 수치는 저장소의 실험 결과를 기준으로 합니다.</footer>
+  </main>
+</body>
+</html>
