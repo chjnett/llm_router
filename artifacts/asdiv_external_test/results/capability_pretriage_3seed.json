@@ -1,5 +1,6 @@
 {
   "protocol": "fixed GSM8K split; seeds vary training initialization/sampling only; ASDiv thresholds never retuned",
+  "dataset": "ASDiv",
   "seed_count": 3,
   "rows": [
     {
@@ -7,36 +8,36 @@
       "validation_auc": 0.5953786906290115,
       "validation_cost_reduction": 0.09911242670118336,
       "validation_gate_pass": false,
-      "asdiv_accuracy": 0.8897287683414851,
-      "asdiv_quality_retention": 0.9804017638412542,
-      "asdiv_cost_reduction": 0.11684558314557048,
-      "asdiv_unsafe_rate": 0.031124944419742107,
-      "asdiv_risk_upper_95": 0.03784374059483097,
-      "asdiv_all_gates_pass": true
+      "external_accuracy": 0.8897287683414851,
+      "external_quality_retention": 0.9804017638412542,
+      "external_cost_reduction": 0.11684558314557048,
+      "external_unsafe_rate": 0.031124944419742107,
+      "external_risk_upper_95": 0.03784374059483097,
+      "external_all_gates_pass": true
     },
     {
       "seed": 43,
       "validation_auc": 0.6041078305519898,
       "validation_cost_reduction": 0.12827557148442226,
       "validation_gate_pass": true,
-      "asdiv_accuracy": 0.8875055580257892,
-      "asdiv_quality_retention": 0.9779519843214111,
-      "asdiv_cost_reduction": 0.14676364215184068,
-      "asdiv_unsafe_rate": 0.03601600711427301,
-      "asdiv_risk_upper_95": 0.04316711766079025,
-      "asdiv_all_gates_pass": true
+      "external_accuracy": 0.8875055580257892,
+      "external_quality_retention": 0.9779519843214111,
+      "external_cost_reduction": 0.14676364215184068,
+      "external_unsafe_rate": 0.03601600711427301,
+      "external_risk_upper_95": 0.04316711766079025,
+      "external_all_gates_pass": true
     },
     {
       "seed": 44,
       "validation_auc": 0.5698147808545755,
       "validation_cost_reduction": 0.10312764226844573,
       "validation_gate_pass": true,
-      "asdiv_accuracy": 0.8901734104046243,
-      "asdiv_quality_retention": 0.9808917197452229,
-      "asdiv_cost_reduction": 0.1406021734891244,
-      "asdiv_unsafe_rate": 0.035126722987994664,
-      "asdiv_risk_upper_95": 0.04220178007290214,
-      "asdiv_all_gates_pass": true
+      "external_accuracy": 0.8901734104046243,
+      "external_quality_retention": 0.9808917197452229,
+      "external_cost_reduction": 0.1406021734891244,
+      "external_unsafe_rate": 0.035126722987994664,
+      "external_risk_upper_95": 0.04220178007290214,
+      "external_all_gates_pass": true
     }
   ],
   "summary": {
@@ -52,31 +53,31 @@
       "min": 0.09911242670118336,
       "max": 0.12827557148442226
     },
-    "asdiv_accuracy": {
+    "external_accuracy": {
       "mean": 0.8891359122572995,
       "sample_sd": 0.0014293242568538505,
       "min": 0.8875055580257892,
       "max": 0.8901734104046243
     },
-    "asdiv_quality_retention": {
+    "external_quality_retention": {
       "mean": 0.9797484893026294,
       "sample_sd": 0.0015749878753867246,
       "min": 0.9779519843214111,
       "max": 0.9808917197452229
     },
-    "asdiv_cost_reduction": {
+    "external_cost_reduction": {
       "mean": 0.13473713292884518,
       "sample_sd": 0.015797834954700492,
       "min": 0.11684558314557048,
       "max": 0.14676364215184068
     },
-    "asdiv_unsafe_rate": {
+    "external_unsafe_rate": {
       "mean": 0.034089224840669924,
       "sample_sd": 0.0026053647296942267,
       "min": 0.031124944419742107,
       "max": 0.03601600711427301
     },
-    "asdiv_risk_upper_95": {
+    "external_risk_upper_95": {
       "mean": 0.041070879442841116,
       "sample_sd": 0.0028361572634287417,
       "min": 0.03784374059483097,

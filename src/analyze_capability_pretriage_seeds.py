@@ -35,6 +35,7 @@ def main() -> None:
         "--output",
         default="artifacts/asdiv_external_test/results/capability_pretriage_3seed.json",
     )
+    parser.add_argument("--dataset-name", default="ASDiv")
     args = parser.parse_args()
     if len(args.training_results) != len(args.external_results):
         raise ValueError("training and external result counts must match")
@@ -48,22 +49,22 @@ def main() -> None:
             "validation_auc": float(training["best_validation_auc"]),
             "validation_cost_reduction": 1.0 - float(training["selected_policy"]["normalized_cost"]),
             "validation_gate_pass": bool(training["advance_to_asdiv"]),
-            "asdiv_accuracy": float(external["accuracy"]),
-            "asdiv_quality_retention": float(external["quality_retention_vs_upper"]),
-            "asdiv_cost_reduction": float(external["cost_reduction_vs_upper"]),
-            "asdiv_unsafe_rate": float(external["unsafe_rate"]),
-            "asdiv_risk_upper_95": float(external["unsafe_upper_bound_95"]),
-            "asdiv_all_gates_pass": bool(external["deployment_gate"]["overall_pass"]),
+            "external_accuracy": float(external["accuracy"]),
+            "external_quality_retention": float(external["quality_retention_vs_upper"]),
+            "external_cost_reduction": float(external["cost_reduction_vs_upper"]),
+            "external_unsafe_rate": float(external["unsafe_rate"]),
+            "external_risk_upper_95": float(external["unsafe_upper_bound_95"]),
+            "external_all_gates_pass": bool(external["deployment_gate"]["overall_pass"]),
         })
 
     metric_names = [
         "validation_auc",
         "validation_cost_reduction",
-        "asdiv_accuracy",
-        "asdiv_quality_retention",
-        "asdiv_cost_reduction",
-        "asdiv_unsafe_rate",
-        "asdiv_risk_upper_95",
+        "external_accuracy",
+        "external_quality_retention",
+        "external_cost_reduction",
+        "external_unsafe_rate",
+        "external_risk_upper_95",
     ]
     summary = {}
     for name in metric_names:
@@ -75,11 +76,12 @@ def main() -> None:
             "max": float(values.max()),
         }
     payload = {
-        "protocol": "fixed GSM8K split; seeds vary training initialization/sampling only; ASDiv thresholds never retuned",
+        "protocol": f"fixed GSM8K split; seeds vary training initialization/sampling only; {args.dataset_name} thresholds never retuned",
+        "dataset": args.dataset_name,
         "seed_count": len(rows),
         "rows": rows,
         "summary": summary,
-        "external_all_seeds_pass": all(row["asdiv_all_gates_pass"] for row in rows),
+        "external_all_seeds_pass": all(row["external_all_gates_pass"] for row in rows),
         "internal_all_seeds_pass": all(row["validation_gate_pass"] for row in rows),
     }
     write_json(args.output, payload)

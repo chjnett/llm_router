@@ -1,0 +1,9 @@
+{
+  "protocol": "MAWPS held-out split; no MAWPS model or policy tuning",
+  "dataset": "garrethlee/MAWPS",
+  "source_split": "test",
+  "source_count": 355,
+  "normalized_count": 355,
+  "skipped_non_numeric": 0,
+  "license": "not specified on the selected Hugging Face dataset card"
+}

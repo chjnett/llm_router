@@ -1,0 +1,32 @@
+{
+  "protocol": "fixed-policy external evaluation on MAWPS; capability model and policy selected on GSM8K only",
+  "dataset": "MAWPS",
+  "test_count": 355,
+  "training_rows": 1688,
+  "policy": {
+    "pre_threshold": 0.61,
+    "post_threshold": 0.6
+  },
+  "always_lower_accuracy": 0.8450704225352113,
+  "always_upper_accuracy": 0.9323943661971831,
+  "quality_target": 0.8857746478873239,
+  "quality_retention_vs_upper": 0.9818731117824774,
+  "unsafe_count": 16,
+  "unsafe_upper_bound_95": 0.06765152903042723,
+  "cost_reduction_vs_upper": 0.19919517231963213,
+  "pre_threshold": 0.61,
+  "post_threshold": 0.6,
+  "accuracy": 0.9154929577464789,
+  "unsafe_rate": 0.04507042253521127,
+  "lower_coverage": 0.38028169014084506,
+  "lower_call_rate": 0.8450704225352113,
+  "pretriage_upper_rate": 0.15492957746478872,
+  "upper_call_rate": 0.6197183098591549,
+  "normalized_cost": 0.8008048276803679,
+  "deployment_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": true,
+    "risk_upper_5pct_pass": false,
+    "overall_pass": false
+  }
+}

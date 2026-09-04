@@ -78,6 +78,14 @@ validation split, two of three seeds pass the 10% cost rule; seed 42 is a 0.089 
 near-miss. The result is therefore treated as promising external replication rather than a
 universal guarantee.
 
+The second external benchmark uses the 355-example MAWPS held-out split without threshold
+retuning. Across the same three seeds, accuracy averages 91.92%, quality retention averages
+98.59%, and normalized cost reduction averages 18.22%. The strict risk certificate is less
+stable: only seed 42 stays below the 5% one-sided upper bound (4.73%); seeds 43 and 44 reach
+6.77% and 5.08%. Thus performance and cost generalize to a second dataset, while universal
+safety certification does not. The next experiment targets seed variance with a prespecified
+ensemble or validation risk-upper constraint, not MAWPS-specific threshold tuning.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

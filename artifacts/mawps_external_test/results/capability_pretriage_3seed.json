@@ -1,0 +1,89 @@
+{
+  "protocol": "fixed GSM8K split; seeds vary training initialization/sampling only; MAWPS thresholds never retuned",
+  "dataset": "MAWPS",
+  "seed_count": 3,
+  "rows": [
+    {
+      "seed": 42,
+      "validation_auc": 0.5953786906290115,
+      "validation_cost_reduction": 0.09911242670118336,
+      "validation_gate_pass": false,
+      "external_accuracy": 0.9183098591549296,
+      "external_quality_retention": 0.9848942598187311,
+      "external_cost_reduction": 0.15814889440356428,
+      "external_unsafe_rate": 0.028169014084507043,
+      "external_risk_upper_95": 0.0473124214372454,
+      "external_all_gates_pass": true
+    },
+    {
+      "seed": 43,
+      "validation_auc": 0.6041078305519898,
+      "validation_cost_reduction": 0.12827557148442226,
+      "validation_gate_pass": true,
+      "external_accuracy": 0.9154929577464789,
+      "external_quality_retention": 0.9818731117824774,
+      "external_cost_reduction": 0.19919517231963213,
+      "external_unsafe_rate": 0.04507042253521127,
+      "external_risk_upper_95": 0.06765152903042723,
+      "external_all_gates_pass": false
+    },
+    {
+      "seed": 44,
+      "validation_auc": 0.5698147808545755,
+      "validation_cost_reduction": 0.10312764226844573,
+      "validation_gate_pass": true,
+      "external_accuracy": 0.923943661971831,
+      "external_quality_retention": 0.9909365558912386,
+      "external_cost_reduction": 0.1891348100172463,
+      "external_unsafe_rate": 0.030985915492957747,
+      "external_risk_upper_95": 0.050767953558624214,
+      "external_all_gates_pass": false
+    }
+  ],
+  "summary": {
+    "validation_auc": {
+      "mean": 0.5897671006785256,
+      "sample_sd": 0.01782191826702804,
+      "min": 0.5698147808545755,
+      "max": 0.6041078305519898
+    },
+    "validation_cost_reduction": {
+      "mean": 0.11017188015135045,
+      "sample_sd": 0.01580627150612221,
+      "min": 0.09911242670118336,
+      "max": 0.12827557148442226
+    },
+    "external_accuracy": {
+      "mean": 0.9192488262910797,
+      "sample_sd": 0.004302887976484351,
+      "min": 0.9154929577464789,
+      "max": 0.923943661971831
+    },
+    "external_quality_retention": {
+      "mean": 0.985901309164149,
+      "sample_sd": 0.004614879853933335,
+      "min": 0.9818731117824774,
+      "max": 0.9909365558912386
+    },
+    "external_cost_reduction": {
+      "mean": 0.18215962558014756,
+      "sample_sd": 0.021393670352219327,
+      "min": 0.15814889440356428,
+      "max": 0.19919517231963213
+    },
+    "external_unsafe_rate": {
+      "mean": 0.03474178403755868,
+      "sample_sd": 0.009055071137082588,
+      "min": 0.028169014084507043,
+      "max": 0.04507042253521127
+    },
+    "external_risk_upper_95": {
+      "mean": 0.05524396800876561,
+      "sample_sd": 0.010883283210509716,
+      "min": 0.0473124214372454,
+      "max": 0.06765152903042723
+    }
+  },
+  "external_all_seeds_pass": false,
+  "internal_all_seeds_pass": false
+}
