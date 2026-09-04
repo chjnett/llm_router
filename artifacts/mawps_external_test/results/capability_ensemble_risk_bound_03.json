@@ -1,0 +1,31 @@
+{
+  "protocol": "frozen 3-seed ensemble selected on GSM8K risk upper bound; no MAWPS retuning",
+  "dataset": "MAWPS",
+  "test_count": 355,
+  "policy": {
+    "pre_threshold": 0.62,
+    "post_threshold": 0.53
+  },
+  "always_lower_accuracy": 0.8450704225352113,
+  "always_upper_accuracy": 0.9323943661971831,
+  "quality_target": 0.8857746478873239,
+  "quality_retention_vs_upper": 0.9939577039274925,
+  "unsafe_count": 4,
+  "unsafe_upper_bound_95": 0.02559784886850858,
+  "cost_reduction_vs_upper": 0.1048289742612819,
+  "pre_threshold": 0.62,
+  "post_threshold": 0.53,
+  "accuracy": 0.9267605633802817,
+  "unsafe_rate": 0.011267605633802818,
+  "lower_coverage": 0.16338028169014085,
+  "lower_call_rate": 0.27323943661971833,
+  "pretriage_upper_rate": 0.7267605633802817,
+  "upper_call_rate": 0.8366197183098592,
+  "normalized_cost": 0.8951710257387181,
+  "deployment_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": true,
+    "risk_upper_5pct_pass": true,
+    "overall_pass": true
+  }
+}

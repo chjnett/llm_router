@@ -1,0 +1,110 @@
+{
+  "protocol": "post-hoc sensitivity analysis initiated after observing the MAWPS 5% policy failure; not a confirmatory selection",
+  "rows": [
+    {
+      "validation_risk_limit": 0.03,
+      "policy": {
+        "pre_threshold": 0.62,
+        "post_threshold": 0.53
+      },
+      "validation": {
+        "accuracy": 0.8550295857988166,
+        "cost_reduction": 0.06276415910367095,
+        "unsafe_upper_bound_95": 0.026875476071928174,
+        "all_gates_pass": false
+      },
+      "asdiv": {
+        "accuracy": 0.8977323254779902,
+        "cost_reduction": 0.0774312396266823,
+        "unsafe_upper_bound_95": 0.020076489738813298,
+        "all_gates_pass": false
+      },
+      "mawps": {
+        "accuracy": 0.9267605633802817,
+        "cost_reduction": 0.1048289742612819,
+        "unsafe_upper_bound_95": 0.02559784886850858,
+        "all_gates_pass": true
+      },
+      "both_external_gates_pass": false
+    },
+    {
+      "validation_risk_limit": 0.04,
+      "policy": {
+        "pre_threshold": 0.6,
+        "post_threshold": 0.6
+      },
+      "validation": {
+        "accuracy": 0.8520710059171598,
+        "cost_reduction": 0.09467455672020286,
+        "unsafe_upper_bound_95": 0.038546461744409434,
+        "all_gates_pass": false
+      },
+      "asdiv": {
+        "accuracy": 0.889284126278346,
+        "cost_reduction": 0.12211776752955972,
+        "unsafe_upper_bound_95": 0.03589871608542311,
+        "all_gates_pass": true
+      },
+      "mawps": {
+        "accuracy": 0.9183098591549296,
+        "cost_reduction": 0.1637826971601034,
+        "unsafe_upper_bound_95": 0.0473124214372454,
+        "all_gates_pass": true
+      },
+      "both_external_gates_pass": true
+    },
+    {
+      "validation_risk_limit": 0.05,
+      "policy": {
+        "pre_threshold": 0.59,
+        "post_threshold": 0.6
+      },
+      "validation": {
+        "accuracy": 0.849112426035503,
+        "cost_reduction": 0.12045646733486293,
+        "unsafe_upper_bound_95": 0.04966729473696028,
+        "all_gates_pass": true
+      },
+      "asdiv": {
+        "accuracy": 0.8875055580257892,
+        "cost_reduction": 0.14568379707602475,
+        "unsafe_upper_bound_95": 0.04364939207735616,
+        "all_gates_pass": true
+      },
+      "mawps": {
+        "accuracy": 0.9154929577464789,
+        "cost_reduction": 0.19557344184248338,
+        "unsafe_upper_bound_95": 0.06431870679756477,
+        "all_gates_pass": false
+      },
+      "both_external_gates_pass": false
+    }
+  ],
+  "diagnostic_cross_dataset_candidate": {
+    "validation_risk_limit": 0.04,
+    "policy": {
+      "pre_threshold": 0.6,
+      "post_threshold": 0.6
+    },
+    "validation": {
+      "accuracy": 0.8520710059171598,
+      "cost_reduction": 0.09467455672020286,
+      "unsafe_upper_bound_95": 0.038546461744409434,
+      "all_gates_pass": false
+    },
+    "asdiv": {
+      "accuracy": 0.889284126278346,
+      "cost_reduction": 0.12211776752955972,
+      "unsafe_upper_bound_95": 0.03589871608542311,
+      "all_gates_pass": true
+    },
+    "mawps": {
+      "accuracy": 0.9183098591549296,
+      "cost_reduction": 0.1637826971601034,
+      "unsafe_upper_bound_95": 0.0473124214372454,
+      "all_gates_pass": true
+    },
+    "both_external_gates_pass": true
+  },
+  "confirmation_requirement": "freeze the diagnostic candidate and evaluate once on a third untouched dataset"
+}

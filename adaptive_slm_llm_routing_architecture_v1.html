@@ -137,6 +137,9 @@
     <h3 style="margin:24px 0 10px">AC · 3-seed ensemble + risk-upper 직접 제약</h3>
     <div class="table-wrap"><table><thead><tr><th>평가</th><th class="num">N</th><th class="num">Accuracy</th><th class="num">품질 유지</th><th class="num">비용 절감</th><th class="num">Unsafe</th><th class="num">Risk upper 95%</th><th>판정</th></tr></thead><tbody><tr><td>GSM8K validation 선택</td><td class="num">338</td><td class="num">84.91%</td><td class="num">98.63%</td><td class="num">12.05%</td><td class="num">2.96%</td><td class="num">4.967%</td><td>고정 정책 0.59/0.60 · 통과</td></tr><tr class="focus"><td>ASDiv 외부평가</td><td class="num">2,249</td><td class="num">88.75%</td><td class="num">97.80%</td><td class="num">14.57%</td><td class="num">3.65%</td><td class="num">4.36%</td><td>3개 gate 통과</td></tr><tr><td>MAWPS 외부평가</td><td class="num">355</td><td class="num">91.55%</td><td class="num">98.19%</td><td class="num">19.56%</td><td class="num">4.23%</td><td class="num">6.43%</td><td>위험 상한 실패</td></tr></tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>보수적 해석</strong><div><b>성능–비용 개선은 두 외부 데이터에서 모두 재현됐지만 엄격한 안전 인증은 데이터 규모와 분포에 민감하다.</b> Ensemble AUC는 0.607로 개별 최고 0.604보다 소폭 올랐고 내부 gate도 통과했지만 MAWPS risk는 낮추지 못했다. MAWPS를 보고 임계값을 다시 고르지 않으며, 다음 단계는 validation 위험 상한 3~4%의 사전 정의 ladder와 외부 최악 조건을 함께 보고하는 것이다.</div></div>
+    <h3 style="margin:24px 0 10px">AD · Validation risk-upper 3/4/5% 민감도 분석</h3>
+    <div class="table-wrap"><table><thead><tr><th>Validation 제약</th><th>고정 임계값</th><th class="num">내부 비용 절감</th><th class="num">ASDiv 비용 / risk upper</th><th class="num">MAWPS 비용 / risk upper</th><th>종합</th></tr></thead><tbody><tr><td>3%</td><td>0.62 / 0.53</td><td class="num">6.28%</td><td class="num">7.74% / 2.01%</td><td class="num">10.48% / 2.56%</td><td>안전하지만 ASDiv 비용 실패</td></tr><tr class="focus"><td><b>4%</b></td><td><b>0.60 / 0.60</b></td><td class="num">9.47%</td><td class="num"><b>12.21% / 3.59%</b></td><td class="num"><b>16.38% / 4.73%</b></td><td>두 외부 데이터 3개 gate 통과</td></tr><tr><td>5%</td><td>0.59 / 0.60</td><td class="num">12.05%</td><td class="num">14.57% / 4.36%</td><td class="num">19.56% / 6.43%</td><td>MAWPS 위험 실패</td></tr></tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>해석 주의</strong><div><b>4% 정책은 유망한 진단 후보지만 아직 확정 정책이 아니다.</b> 이 ladder는 최초 MAWPS 5% 정책 실패를 관찰한 뒤 수행한 사후 민감도 분석이다. 따라서 0.60/0.60을 지금 고정하고, 기존 실험에 포함되지 않은 제3 데이터셋에서 단 한 번 평가해야 확인적 근거가 된다.</div></div>
   </section>
 
   <section id="contrastive">
@@ -258,7 +261,8 @@
       <tr class="focus"><td>AA</td><td>Capability-aware pre-router + ASDiv 2,249 one-shot 외부평가</td><td>완료</td><td><span class="tag done">외부 3개 gate 통과</span></td></tr>
       <tr class="focus"><td>AB</td><td>Capability-aware 3-seed + ASDiv/MAWPS 외부 재현</td><td>완료</td><td><span class="tag done">성능·비용 재현 · 안전은 ASDiv 3/3, MAWPS 1/3</span></td></tr>
       <tr class="focus"><td>AC</td><td>3-seed ensemble + validation exact risk-upper 제약</td><td>완료</td><td><span class="tag done">내부·ASDiv 통과 · MAWPS 안전 실패</span></td></tr>
-      <tr><td>AD</td><td>사전 정의 risk-upper 3/4/5% ladder의 외부 강건성 비교</td><td>약 20~40분</td><td><span class="tag live">다음 연구</span></td></tr>
+      <tr class="focus"><td>AD</td><td>Risk-upper 3/4/5% ladder의 외부 강건성 민감도</td><td>완료</td><td><span class="tag done">4% 진단 후보 · 사후 분석</span></td></tr>
+      <tr><td>AE</td><td>0.60/0.60 완전 고정 후 제3 untouched 데이터 확인 평가</td><td>약 30~60분</td><td><span class="tag live">다음 연구</span></td></tr>
     </tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>논문 산출물</strong><div><b>paper/overleaf/main_single.tex</b>을 Overleaf의 main.tex에 통째로 붙여넣고 <b>paper/figures/*.pdf</b> 네 개만 업로드하면 된다. 자세한 수정·검수 방법은 <b>OVERLEAF_KSC_PAPER_GUIDE.md</b>에 정리했다.</div></div>
   </section>

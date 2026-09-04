@@ -93,6 +93,13 @@ risk gates. It also passes all gates on ASDiv (97.80% quality retention, 14.57% 
 4.36% risk upper bound). On MAWPS it retains 98.19% quality and reduces cost by 19.56%, but its
 6.43% risk upper bound still fails. No threshold is retuned using MAWPS.
 
+A post-hoc sensitivity ladder compares validation risk-upper limits of 3%, 4%, and 5%. The
+4% policy (pre/post thresholds 0.60/0.60) passes all external gates on both ASDiv (12.21% cost
+reduction, 3.59% risk upper) and MAWPS (16.38%, 4.73%), while narrowly missing the internal 10%
+cost target at 9.47%. Because this ladder was run after observing the MAWPS failure, 0.60/0.60
+is only a diagnostic candidate. Confirmatory use requires freezing it before a third untouched
+dataset is evaluated.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

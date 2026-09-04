@@ -1,0 +1,31 @@
+{
+  "protocol": "frozen 3-seed ensemble selected on GSM8K risk upper bound; no ASDiv retuning",
+  "dataset": "ASDiv",
+  "test_count": 2249,
+  "policy": {
+    "pre_threshold": 0.62,
+    "post_threshold": 0.53
+  },
+  "always_lower_accuracy": 0.7594486438417074,
+  "always_upper_accuracy": 0.9075144508670521,
+  "quality_target": 0.8621387283236994,
+  "quality_retention_vs_upper": 0.9892209701126898,
+  "unsafe_count": 34,
+  "unsafe_upper_bound_95": 0.020076489738813298,
+  "cost_reduction_vs_upper": 0.0774312396266823,
+  "pre_threshold": 0.62,
+  "post_threshold": 0.53,
+  "accuracy": 0.8977323254779902,
+  "unsafe_rate": 0.01511783014673188,
+  "lower_coverage": 0.12583370386838594,
+  "lower_call_rate": 0.22587816807469988,
+  "pretriage_upper_rate": 0.7741218319253002,
+  "upper_call_rate": 0.874166296131614,
+  "normalized_cost": 0.9225687603733177,
+  "deployment_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": false,
+    "risk_upper_5pct_pass": true,
+    "overall_pass": false
+  }
+}
