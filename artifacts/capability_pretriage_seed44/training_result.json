@@ -1,0 +1,50 @@
+{
+  "protocol": "GSM8K-only training and validation; ASDiv untouched; CE + 0.2 supervised contrastive",
+  "training_seed": 44,
+  "split_seed": 42,
+  "total_rows": 1688,
+  "train_rows": 1350,
+  "validation_rows": 338,
+  "unsafe_cap": 0.03,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.370254939378694,
+      "validation_ce": 0.6712673306465149,
+      "validation_auc": 0.5698147808545755
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.360129065291826,
+      "validation_ce": 0.6749119758605957,
+      "validation_auc": 0.5768200990280579
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.342631924984067,
+      "validation_ce": 0.681076169013977,
+      "validation_auc": 0.5779204107830551
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.3319607030513674,
+      "validation_ce": 0.6971990466117859,
+      "validation_auc": 0.5914175683110214
+    }
+  ],
+  "best_validation_ce": 0.6712673306465149,
+  "best_validation_auc": 0.5698147808545755,
+  "quality_target": 0.8178994082840236,
+  "selected_policy": {
+    "pre_threshold": 0.56,
+    "post_threshold": 0.6,
+    "accuracy": 0.849112426035503,
+    "unsafe_rate": 0.026627218934911243,
+    "lower_coverage": 0.19822485207100593,
+    "lower_call_rate": 0.4437869822485207,
+    "pretriage_upper_rate": 0.5562130177514792,
+    "upper_call_rate": 0.8017751479289941,
+    "normalized_cost": 0.8968723577315543
+  },
+  "advance_to_asdiv": true
+}

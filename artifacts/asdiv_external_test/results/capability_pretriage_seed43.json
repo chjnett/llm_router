@@ -1,0 +1,31 @@
+{
+  "protocol": "one-shot untouched ASDiv; capability model and policy selected on GSM8K only",
+  "test_count": 2249,
+  "training_rows": 1688,
+  "policy": {
+    "pre_threshold": 0.61,
+    "post_threshold": 0.6
+  },
+  "always_lower_accuracy": 0.7594486438417074,
+  "always_upper_accuracy": 0.9075144508670521,
+  "quality_target": 0.8621387283236994,
+  "quality_retention_vs_upper": 0.9779519843214111,
+  "unsafe_count": 81,
+  "unsafe_upper_bound_95": 0.04316711766079025,
+  "cost_reduction_vs_upper": 0.14676364215184068,
+  "pre_threshold": 0.61,
+  "post_threshold": 0.6,
+  "accuracy": 0.8875055580257892,
+  "unsafe_rate": 0.03601600711427301,
+  "lower_coverage": 0.31036016007114275,
+  "lower_call_rate": 0.76345042240996,
+  "pretriage_upper_rate": 0.23654957759004003,
+  "upper_call_rate": 0.6896398399288572,
+  "normalized_cost": 0.8532363578481593,
+  "deployment_gate": {
+    "quality_floor_pass": true,
+    "cost_reduction_10pct_pass": true,
+    "risk_upper_5pct_pass": true,
+    "overall_pass": true
+  }
+}

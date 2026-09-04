@@ -70,12 +70,13 @@ conda run -n llm-practice python -m src.train_adaptive_capability_pretriage
 conda run -n llm-practice python -m src.run_asdiv_capability_pretriage
 ```
 
-The frozen policy reaches 88.97% accuracy on 2,249 numeric-answer ASDiv examples, retaining
-98.04% of Always-Upper accuracy while reducing normalized cost by 11.68%. Its observed unsafe
-rate is 3.11% (70/2,249), with a one-sided exact 95% upper bound of 3.78%. All three external
-gates pass. The internal GSM8K validation cost reduction was 9.91%, a 0.089 percentage-point
-near-miss against the 10% promotion rule, so the external result is reported as a one-shot
-diagnostic rather than evidence for a universal guarantee.
+Across training seeds 42/43/44, the frozen policies average 88.91% accuracy on 2,249
+numeric-answer ASDiv examples and retain 97.97% of Always-Upper accuracy. Mean normalized cost
+reduction is 13.47% (range 11.68--14.68%), and the one-sided exact 95% unsafe-risk upper bounds
+range from 3.78% to 4.32%. All three seeds pass all three external gates. On the fixed GSM8K
+validation split, two of three seeds pass the 10% cost rule; seed 42 is a 0.089 percentage-point
+near-miss. The result is therefore treated as promising external replication rather than a
+universal guarantee.
 
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
