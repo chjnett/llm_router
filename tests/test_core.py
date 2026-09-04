@@ -16,6 +16,7 @@ from src.power_metrics import summarize_power
 from src.run_output_length_ablation import conditions
 from src.analyze_output_length_ablation import analyze
 from src.analyze_answer_only_confidence import select_policy
+from src.run_token_budget_sweep import conditions as token_budget_conditions
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -207,3 +208,10 @@ def test_confidence_policy_counts_lower_overhead_and_upper_fallback():
     assert selected is not None
     assert selected["normalized_latency"] < 1.0
     assert selected["quality_retention"] >= 0.75
+
+
+def test_token_budget_sweep_matrix_has_online_and_batched_conditions():
+    matrix = token_budget_conditions("input.jsonl")
+    assert len(matrix) == 8
+    assert {row["budget"] for row in matrix} == {96, 128, 192, 256}
+    assert {(row["batch"], row["limit"]) for row in matrix} == {(8, 200), (1, 50)}

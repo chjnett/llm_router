@@ -183,6 +183,15 @@ or a 5% risk certificate. These are exploratory OOF results with threshold selec
 same OOF predictions. The 64-token Answer-only Lower path is stopped; the next bounded test is
 a concise 96/128/192/256-token Qwen budget sweep.
 
+Run that restartable sweep with:
+
+```powershell
+conda run --no-capture-output -n llm-practice python -m src.run_token_budget_sweep
+```
+
+It writes live progress to `artifacts/logs/token_budget_sweep.log` and updates
+`artifacts/results/token_budget_sweep.json` after every completed condition.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
