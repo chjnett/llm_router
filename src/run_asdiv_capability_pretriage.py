@@ -28,6 +28,7 @@ def main() -> None:
     parser.add_argument("--config", default="configs/pilot_gsm8k.yaml")
     parser.add_argument("--model-root", default="artifacts/capability_pretriage")
     parser.add_argument("--target-root", default="artifacts/asdiv_external_test")
+    parser.add_argument("--dataset-name", default="ASDiv")
     parser.add_argument(
         "--output",
         default="artifacts/asdiv_external_test/results/capability_pretriage.json",
@@ -87,7 +88,8 @@ def main() -> None:
     }
     gates["overall_pass"] = all(gates.values())
     payload = {
-        "protocol": "one-shot untouched ASDiv; capability model and policy selected on GSM8K only",
+        "protocol": f"fixed-policy external evaluation on {args.dataset_name}; capability model and policy selected on GSM8K only",
+        "dataset": args.dataset_name,
         "test_count": count,
         "training_rows": len(train_lower),
         "policy": {
