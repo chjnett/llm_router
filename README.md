@@ -115,6 +115,24 @@ ASDiv and MAWPS, whose conservative saving bounds are 9.63% and 9.88%, and switc
 MATH-500 numeric subset to Always Upper, removing the observed 2.93% overhead. This guard is a
 post-hoc architectural diagnostic and still requires prospective validation on new traffic.
 
+## Model-family and domain expansion roadmap
+
+The next study phase tests whether the method is specific to Qwen and arithmetic. It first
+adds a common model/task/scorer/latency harness, then screens each model pair on only 200
+examples before authorizing expensive full evaluation. The planned model conditions are the
+Qwen2.5 1.5B/7B control, public SmolLM2 360M/1.7B, SmolLM2 1.7B/Qwen2.5 7B cross-family
+routing, Gemma 3 1B/4B after accepting its terms, and Llama 3.2 1B/Llama 3.1 8B after model
+access approval.
+
+Domain expansion proceeds from executable Python (MBPP, then HumanEval) to English knowledge
+(MMLU), Korean knowledge (KMMLU), and deterministic instruction following (IFEval). Each task
+uses a reproducible task-specific scorer rather than a free-form LLM judge. Full test and
+three-seed runs are permitted only when a 200-example pilot has an Upper--Lower accuracy gap
+of at least 5 percentage points, measured `C_L/C_U < 0.50`, at least 98% output parsing, at
+least 95% quality retention, and capability AUC of at least 0.60. See
+`MODEL_DOMAIN_EXPANSION_PLAN.md` for the fixed order, safety rules, stop gates, and estimated
+4--7 workdays / 32--65 GPU hours.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

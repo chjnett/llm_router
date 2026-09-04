@@ -150,6 +150,19 @@
     <div class="callout" style="margin-top:15px"><strong>AF 판정</strong><div><b>세 데이터 모두에서 Upper 대비 비용 증가를 방지했다.</b> 이 guard는 정답 여부가 아니라 실제 Lower 실행·채택 비율만 필요해 unlabeled calibration traffic에도 적용할 수 있다. 다만 기존 외부 결과로 설계한 사후 진단이므로, 다음 단계는 공식을 고정한 뒤 시간 순으로 분리된 새 요청 batch에서 prospective 검증하는 것이다.</div></div>
   </section>
 
+  <section id="expansion-plan">
+    <h2>2J. 다음 연구 · 모델 family × 도메인 일반화</h2><p class="note">현재 증거는 Qwen 계열과 수학에 집중되어 있다. 다음 목표는 모델과 채점 방식을 동시에 바꿔 output-aware routing 및 feasibility guard의 적용 조건을 규명하는 것이다.</p>
+    <div class="two"><div class="card good"><h3>유지할 핵심</h3><ul><li>Lower 출력 기반 confidence</li><li>95% exact risk upper bound</li><li>실측 latency 기반 비용</li><li>정답 라벨 없는 feasibility guard</li></ul></div><div class="card warn"><h3>해결할 한계</h3><ul><li>생성 모델이 Qwen 한 family뿐</li><li>대부분 숫자 정답 수학 문제</li><li>코드·지식·한국어·지시 준수 미검증</li><li>범용 router와 family별 router 비교 없음</li></ul></div></div>
+    <h3 style="margin:24px 0 10px">모델 행렬 · 200문항 screening 후 확장</h3>
+    <div class="table-wrap"><table><thead><tr><th>ID</th><th>Lower</th><th>Upper</th><th>검증 목적</th><th>실행 조건</th></tr></thead><tbody><tr class="focus"><td>M0</td><td>Qwen2.5-1.5B</td><td>Qwen2.5-7B</td><td>기존 control 재현</td><td>항상 포함</td></tr><tr class="focus"><td>M1</td><td>SmolLM2 360M</td><td>SmolLM2 1.7B</td><td>공개 non-Qwen same-family</td><td>즉시 실행 가능</td></tr><tr class="focus"><td>M2</td><td>SmolLM2 1.7B</td><td>Qwen2.5-7B</td><td>cross-family cascade</td><td>즉시 실행 가능</td></tr><tr><td>M3</td><td>Gemma 3 1B IT</td><td>Gemma 3 4B IT</td><td>Google 계열 재현</td><td>약관 동의 후</td></tr><tr><td>M4</td><td>Llama 3.2 1B</td><td>Llama 3.1 8B</td><td>Meta 계열 재현</td><td>접근 승인 후</td></tr></tbody></table></div>
+    <h3 style="margin:24px 0 10px">도메인 행렬 · 자유 judge 없이 자동 채점</h3>
+    <div class="table-wrap"><table><thead><tr><th>도메인</th><th>Screening</th><th>확인 평가</th><th>정답 판정</th><th>우선순위</th></tr></thead><tbody><tr><td>수학</td><td>ASDiv + MATH-500</td><td>기존 전체 결과</td><td>숫자 exact match</td><td>Control</td></tr><tr class="focus"><td>Python 코드</td><td>MBPP · 200</td><td>MBPP test + HumanEval</td><td>격리 unit test</td><td>1순위</td></tr><tr class="focus"><td>영문 지식</td><td>MMLU · 200</td><td>subject-stratified test</td><td>A/B/C/D exact match</td><td>1순위</td></tr><tr><td>한국어 지식</td><td>KMMLU · 200</td><td>subject-stratified test</td><td>보기 exact match</td><td>2순위</td></tr><tr><td>지시 준수</td><td>IFEval · 200</td><td>전체 541</td><td>공식 strict/loose verifier</td><td>2순위</td></tr></tbody></table></div>
+    <h3 style="margin:24px 0 10px">실행 gate</h3>
+    <div class="flow" style="grid-template-columns:repeat(4,1fr)"><div class="node"><span class="n">01 · HARNESS</span><b>모델·Task adapter</b><small>공통 schema와 자동 scorer</small></div><div class="node route"><span class="n">02 · SCREEN</span><b>각 셀 200문항</b><small>VRAM·품질 차이·비용비 확인</small></div><div class="node contrast"><span class="n">03 · PILOT</span><b>통과 셀만 도메인 확장</b><small>품질 95% · 비용 10% · risk 보고</small></div><div class="node upper"><span class="n">04 · CONFIRM</span><b>전체 test · 3 seeds</b><small>선택/인증/test 완전 분리</small></div></div>
+    <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>중단 기준</th><th>기준값</th><th>이유</th></tr></thead><tbody><tr><td>모델쌍 품질 간격</td><td>Upper−Lower ≥ 5%p</td><td>능력 차이가 없으면 routing 이득이 작음</td></tr><tr><td>실측 비용비</td><td>C<sub>L</sub>/C<sub>U</sub> &lt; 0.50</td><td>Lower overhead 회수 가능성 확보</td></tr><tr><td>출력 파싱</td><td>성공률 ≥ 98%</td><td>형식 오류를 성능 차이로 오판하지 않음</td></tr><tr><td>GPU 메모리</td><td>Peak ≤ 22GB</td><td>RTX 3090 안정 실행 여유</td></tr><tr><td>도메인 pilot</td><td>품질 유지 ≥95%, AUC ≥0.60</td><td>전체 3-seed 확장 전 조기 중단</td></tr></tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>예상 규모</strong><div>공통 harness부터 전체 통계까지 <b>약 4~7 작업일, GPU 32~65시간</b>이다. 가장 먼저 공개 가중치 SmolLM2 M1/M2를 수학 200문항에서 screening하고, 통과할 때만 MBPP → MMLU → KMMLU → IFEval로 확장한다. Gemma·Llama는 모델 약관 동의 후 추가한다. 상세 계획은 <b>MODEL_DOMAIN_EXPANSION_PLAN.md</b>에 고정했다.</div></div>
+  </section>
+
   <section id="contrastive">
     <h2>3. Ablation · 라우팅 전용 <span class="term" tabindex="0" data-tip="같은 성격의 데이터는 가깝게, 다른 성격의 데이터는 멀게 배치하도록 표현 공간을 학습하는 방법입니다.">대조 학습</span></h2><p class="note">세 가지 파일럿이 Frozen BGE AUC를 넘지 못해 핵심 방법이 아니라 query-only representation의 한계를 보여주는 비교 실험으로 유지한다.</p>
     <div class="two">
@@ -272,7 +285,12 @@
       <tr class="focus"><td>AD</td><td>Risk-upper 3/4/5% ladder의 외부 강건성 민감도</td><td>완료</td><td><span class="tag done">4% 진단 후보 · 사후 분석</span></td></tr>
       <tr class="focus"><td>AE</td><td>0.60/0.60 완전 고정 후 MATH-500 수치형 확인 평가</td><td>완료</td><td><span class="tag done">품질·안전 통과 · 비용 +2.93%</span></td></tr>
       <tr class="focus"><td>AF</td><td>정답 라벨 없는 cascade break-even feasibility guard</td><td>완료</td><td><span class="tag done">MATH overhead 2.93% 제거</span></td></tr>
-      <tr><td>AG</td><td>Guard 공식 고정 후 시간 분리 신규 traffic prospective 검증</td><td>새 데이터 필요</td><td><span class="tag live">다음 연구</span></td></tr>
+      <tr><td>AG</td><td>Guard 공식 고정 후 시간 분리 신규 traffic prospective 검증</td><td>새 데이터 필요</td><td><span class="tag">보류</span></td></tr>
+      <tr class="focus"><td>AH</td><td>ModelSpec registry + 공통 task/scorer/latency harness</td><td>1~2일</td><td><span class="tag live">다음 구현</span></td></tr>
+      <tr><td>AI</td><td>Qwen control + SmolLM2 M1/M2 · 수학 200문항 screening</td><td>GPU 5~10시간</td><td><span class="tag">계획</span></td></tr>
+      <tr><td>AJ</td><td>MBPP/HumanEval 격리 코드 실행 평가</td><td>GPU 6~12시간</td><td><span class="tag">계획</span></td></tr>
+      <tr><td>AK</td><td>MMLU → KMMLU → IFEval 도메인 확장</td><td>GPU 12~24시간</td><td><span class="tag">계획</span></td></tr>
+      <tr><td>AL</td><td>통과 셀만 전체 test · 3 seeds · 통계 검증</td><td>1~3일</td><td><span class="tag">계획</span></td></tr>
     </tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>논문 산출물</strong><div><b>paper/overleaf/main_single.tex</b>을 Overleaf의 main.tex에 통째로 붙여넣고 <b>paper/figures/*.pdf</b> 네 개만 업로드하면 된다. 자세한 수정·검수 방법은 <b>OVERLEAF_KSC_PAPER_GUIDE.md</b>에 정리했다.</div></div>
   </section>
