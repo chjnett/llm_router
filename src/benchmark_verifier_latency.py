@@ -11,7 +11,13 @@ import numpy as np
 import torch
 
 from .common import load_config, read_jsonl, set_seed, write_json
-from .inference import ANSWER_ONLY_SYSTEM_PROMPT, SYSTEM_PROMPT, format_prompt, load_model
+from .inference import (
+    ANSWER_ONLY_SYSTEM_PROMPT,
+    MICRO_REASONING_SYSTEM_PROMPT,
+    SYSTEM_PROMPT,
+    format_prompt,
+    load_model,
+)
 
 
 def completion_lengths(token_rows, eos_token_id: int | None) -> list[int]:
@@ -94,13 +100,14 @@ def main() -> None:
     run_condition(tokenizer, model, questions[: args.batch_size], ANSWER_ONLY_SYSTEM_PROMPT, args.batch_size, 16)
     conditions = {
         "full_second_pass": (SYSTEM_PROMPT, cfg["generation"]["max_new_tokens"]),
-        "answer_only_verifier": (ANSWER_ONLY_SYSTEM_PROMPT, cfg["generation"]["answer_only_max_new_tokens"]),
+        "answer_only_verifier": (ANSWER_ONLY_SYSTEM_PROMPT, cfg["generation"].get("answer_only_max_new_tokens", 64)),
+        "micro_reasoning_verifier": (MICRO_REASONING_SYSTEM_PROMPT, 64),
     }
     runs = {name: [] for name in conditions}
     order = []
     for repeat in range(args.repeats):
-        pair = ["full_second_pass", "answer_only_verifier"]
-        order.extend(pair if repeat % 2 == 0 else reversed(pair))
+        condition_names = list(conditions)
+        order.extend(condition_names if repeat % 2 == 0 else reversed(condition_names))
     for index, name in enumerate(order, start=1):
         prompt, max_tokens = conditions[name]
         result = run_condition(tokenizer, model, questions, prompt, args.batch_size, max_tokens)
@@ -110,8 +117,9 @@ def main() -> None:
     summary = {name: summarize(values) for name, values in runs.items()}
     full_ms = summary["full_second_pass"]["milliseconds_per_item"]["median"]
     verifier_ms = summary["answer_only_verifier"]["milliseconds_per_item"]["median"]
+    micro_ms = summary["micro_reasoning_verifier"]["milliseconds_per_item"]["median"]
     payload = {
-        "protocol": "same model, questions, batch size, quantization and GPU; ABBA order after warmup",
+        "protocol": "same model, questions, batch size, quantization and GPU; forward/reverse order after warmup",
         "model": cfg["models"]["lower"],
         "device": torch.cuda.get_device_name(0),
         "sample_count": len(rows),
@@ -121,6 +129,8 @@ def main() -> None:
         "summary": summary,
         "answer_only_latency_ratio_vs_full_second_pass": verifier_ms / full_ms,
         "answer_only_latency_reduction": 1.0 - verifier_ms / full_ms,
+        "micro_reasoning_latency_ratio_vs_full_second_pass": micro_ms / full_ms,
+        "micro_reasoning_latency_reduction": 1.0 - micro_ms / full_ms,
     }
     write_json(args.output, payload)
     print(args.output)

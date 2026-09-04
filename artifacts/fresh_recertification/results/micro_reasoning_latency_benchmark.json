@@ -1,0 +1,142 @@
+{
+  "protocol": "same model, questions, batch size, quantization and GPU; forward/reverse order after warmup",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "device": "NVIDIA GeForce RTX 3090",
+  "sample_count": 128,
+  "batch_size": 16,
+  "repeats_per_condition": 2,
+  "runs": {
+    "full_second_pass": [
+      {
+        "items": 128,
+        "elapsed_seconds": 68.09546550002415,
+        "milliseconds_per_item": 531.9958242189387,
+        "gpu_generate_milliseconds_per_item": 531.7824812502749,
+        "generated_tokens_total": 23101,
+        "generated_tokens_mean": 180.4765625,
+        "items_per_second": 1.879714002394985
+      },
+      {
+        "items": 128,
+        "elapsed_seconds": 68.90836669999408,
+        "milliseconds_per_item": 538.3466148437037,
+        "gpu_generate_milliseconds_per_item": 538.1533039064834,
+        "generated_tokens_total": 23101,
+        "generated_tokens_mean": 180.4765625,
+        "items_per_second": 1.8575393109703615
+      }
+    ],
+    "answer_only_verifier": [
+      {
+        "items": 128,
+        "elapsed_seconds": 4.551224599999841,
+        "milliseconds_per_item": 35.55644218749876,
+        "gpu_generate_milliseconds_per_item": 35.35408125003414,
+        "generated_tokens_total": 846,
+        "generated_tokens_mean": 6.609375,
+        "items_per_second": 28.12429867776784
+      },
+      {
+        "items": 128,
+        "elapsed_seconds": 4.880520999984583,
+        "milliseconds_per_item": 38.129070312379554,
+        "gpu_generate_milliseconds_per_item": 37.93093046897411,
+        "generated_tokens_total": 846,
+        "generated_tokens_mean": 6.609375,
+        "items_per_second": 26.226708173247147
+      }
+    ],
+    "micro_reasoning_verifier": [
+      {
+        "items": 128,
+        "elapsed_seconds": 14.390822599991225,
+        "milliseconds_per_item": 112.42830156243144,
+        "gpu_generate_milliseconds_per_item": 112.23477968701445,
+        "generated_tokens_total": 2118,
+        "generated_tokens_mean": 16.546875,
+        "items_per_second": 8.89455756337918
+      },
+      {
+        "items": 128,
+        "elapsed_seconds": 14.46165720000863,
+        "milliseconds_per_item": 112.98169687506743,
+        "gpu_generate_milliseconds_per_item": 112.7900593751292,
+        "generated_tokens_total": 2118,
+        "generated_tokens_mean": 16.546875,
+        "items_per_second": 8.85099115749498
+      }
+    ]
+  },
+  "summary": {
+    "full_second_pass": {
+      "elapsed_seconds": {
+        "mean": 68.50191610000911,
+        "median": 68.50191610000911
+      },
+      "milliseconds_per_item": {
+        "mean": 535.1712195313212,
+        "median": 535.1712195313212
+      },
+      "gpu_generate_milliseconds_per_item": {
+        "mean": 534.9678925783792,
+        "median": 534.9678925783792
+      },
+      "generated_tokens_mean": {
+        "mean": 180.4765625,
+        "median": 180.4765625
+      },
+      "items_per_second": {
+        "mean": 1.8686266566826732,
+        "median": 1.8686266566826732
+      }
+    },
+    "answer_only_verifier": {
+      "elapsed_seconds": {
+        "mean": 4.715872799992212,
+        "median": 4.715872799992212
+      },
+      "milliseconds_per_item": {
+        "mean": 36.84275624993916,
+        "median": 36.84275624993916
+      },
+      "gpu_generate_milliseconds_per_item": {
+        "mean": 36.642505859504126,
+        "median": 36.642505859504126
+      },
+      "generated_tokens_mean": {
+        "mean": 6.609375,
+        "median": 6.609375
+      },
+      "items_per_second": {
+        "mean": 27.175503425507493,
+        "median": 27.175503425507493
+      }
+    },
+    "micro_reasoning_verifier": {
+      "elapsed_seconds": {
+        "mean": 14.426239899999928,
+        "median": 14.426239899999928
+      },
+      "milliseconds_per_item": {
+        "mean": 112.70499921874944,
+        "median": 112.70499921874944
+      },
+      "gpu_generate_milliseconds_per_item": {
+        "mean": 112.51241953107183,
+        "median": 112.51241953107183
+      },
+      "generated_tokens_mean": {
+        "mean": 16.546875,
+        "median": 16.546875
+      },
+      "items_per_second": {
+        "mean": 8.87277436043708,
+        "median": 8.87277436043708
+      }
+    }
+  },
+  "answer_only_latency_ratio_vs_full_second_pass": 0.0688429327014341,
+  "answer_only_latency_reduction": 0.9311570672985658,
+  "micro_reasoning_latency_ratio_vs_full_second_pass": 0.2105961514848489,
+  "micro_reasoning_latency_reduction": 0.7894038485151511
+}

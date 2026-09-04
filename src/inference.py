@@ -23,6 +23,11 @@ ANSWER_ONLY_SYSTEM_PROMPT = (
     "Solve the problem independently, but return only one line in the exact form "
     "'Final answer: <number>'. Do not include reasoning or explanation."
 )
+MICRO_REASONING_SYSTEM_PROMPT = (
+    "Solve the problem using exactly one compact calculation line with no prose. "
+    "Then write a second line exactly as 'Final answer: <number>'. "
+    "Keep the entire response under 48 tokens."
+)
 
 
 def format_prompt(tokenizer, question: str, system_prompt: str = SYSTEM_PROMPT) -> str:
@@ -66,12 +71,21 @@ def infer_rows(
     adapter: str | None = None,
     concise: bool = False,
     answer_only: bool = False,
+    micro_reasoning: bool = False,
 ) -> list[dict]:
     tokenizer, model = load_model(model_id, quantize_4bit, adapter)
     output: list[dict] = list(existing or [])
     for start in range(0, len(rows), batch_size):
         batch = rows[start : start + batch_size]
-        prompt = ANSWER_ONLY_SYSTEM_PROMPT if answer_only else (CONCISE_SYSTEM_PROMPT if concise else SYSTEM_PROMPT)
+        prompt = (
+            MICRO_REASONING_SYSTEM_PROMPT
+            if micro_reasoning
+            else ANSWER_ONLY_SYSTEM_PROMPT
+            if answer_only
+            else CONCISE_SYSTEM_PROMPT
+            if concise
+            else SYSTEM_PROMPT
+        )
         prompts = [format_prompt(tokenizer, row["question"], prompt) for row in batch]
         encoded = tokenizer(prompts, return_tensors="pt", padding=True).to(model.device)
         with torch.inference_mode():
@@ -119,6 +133,7 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int)
     parser.add_argument("--concise", action="store_true")
     parser.add_argument("--answer-only", action="store_true")
+    parser.add_argument("--micro-reasoning", action="store_true")
     args = parser.parse_args()
     cfg = load_config(args.config)
     set_seed(cfg["seed"])
@@ -146,6 +161,7 @@ def main() -> None:
             args.adapter,
             args.concise,
             args.answer_only,
+            args.micro_reasoning,
         )
         write_jsonl(output_path, predictions)
 

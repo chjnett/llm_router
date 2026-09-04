@@ -1,0 +1,86 @@
+{
+  "protocol": "selection-only verifier prompt frontier; no use of the remaining 188-row certification reserve",
+  "count": 500,
+  "selection_unsafe_cap": 0.03,
+  "variants": {
+    "lower_answer_only": {
+      "verifier_cost_lower_equivalents": {
+        "value": 0.0688429327014341,
+        "source": "measured_latency"
+      },
+      "upper_accuracy": 0.874,
+      "quality_target": 0.8302999999999999,
+      "diagnostics": {
+        "accuracy": 0.092,
+        "agreement_rate": 0.1,
+        "agreement_precision": 0.76,
+        "generated_tokens_mean": 7.578,
+        "generated_tokens_p95": 10.0,
+        "final_answer_format_rate": 0.86
+      },
+      "feasible_policy_count": 1762,
+      "best_selection_policy": {
+        "low_threshold": 0.7,
+        "high_threshold": 0.74,
+        "accuracy": 0.848,
+        "unsafe_rate": 0.03,
+        "normalized_cost": 1.0333773649658557,
+        "lower_coverage": 0.182
+      },
+      "cost_gate_pass": false
+    },
+    "lower_micro_equation": {
+      "verifier_cost_lower_equivalents": {
+        "value": 0.2105961514848489,
+        "source": "measured_latency"
+      },
+      "upper_accuracy": 0.874,
+      "quality_target": 0.8302999999999999,
+      "diagnostics": {
+        "accuracy": 0.124,
+        "agreement_rate": 0.118,
+        "agreement_precision": 0.847457627118644,
+        "generated_tokens_mean": 15.402,
+        "generated_tokens_p95": 44.049999999999955,
+        "final_answer_format_rate": 0.962
+      },
+      "feasible_policy_count": 1887,
+      "best_selection_policy": {
+        "low_threshold": 0.7,
+        "high_threshold": 0.74,
+        "accuracy": 0.848,
+        "unsafe_rate": 0.03,
+        "normalized_cost": 1.0356251659905085,
+        "lower_coverage": 0.182
+      },
+      "cost_gate_pass": false
+    },
+    "lower_reasoning_128": {
+      "verifier_cost_lower_equivalents": {
+        "value": 0.6728740747153803,
+        "source": "token_ratio_estimate"
+      },
+      "upper_accuracy": 0.874,
+      "quality_target": 0.8302999999999999,
+      "diagnostics": {
+        "accuracy": 0.306,
+        "agreement_rate": 0.27,
+        "agreement_precision": 0.8592592592592593,
+        "generated_tokens_mean": 121.438,
+        "generated_tokens_p95": 128.0,
+        "final_answer_format_rate": 0.212
+      },
+      "feasible_policy_count": 1139,
+      "best_selection_policy": {
+        "low_threshold": 0.63,
+        "high_threshold": 0.74,
+        "accuracy": 0.852,
+        "unsafe_rate": 0.03,
+        "normalized_cost": 1.0151045506843375,
+        "lower_coverage": 0.226
+      },
+      "cost_gate_pass": false
+    }
+  },
+  "advance_to_reserved_certification": false
+}

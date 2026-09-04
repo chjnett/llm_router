@@ -1,0 +1,76 @@
+{
+  "protocol": "train on pilot router_train; select one seed and threshold on fresh 500; no verifier call",
+  "selection_count": 500,
+  "upper_accuracy": 0.874,
+  "quality_target": 0.8302999999999999,
+  "selection_unsafe_cap": 0.09,
+  "seeds": {
+    "42": {
+      "final_train_loss": {
+        "epoch": 300,
+        "total": 0.6015306115150452,
+        "bce": 0.5045619010925293,
+        "ranking": 0.40117546916007996,
+        "brier": 0.16733574867248535
+      },
+      "lower_success_auc": 0.7082422077163225,
+      "feasible_policy_count": 20,
+      "selected": {
+        "threshold": 0.8,
+        "accuracy": 0.834,
+        "unsafe_rate": 0.056,
+        "lower_coverage": 0.258,
+        "upper_call_rate": 0.742,
+        "normalized_cost": 0.9562857127551021
+      }
+    },
+    "43": {
+      "final_train_loss": {
+        "epoch": 300,
+        "total": 0.5901867747306824,
+        "bce": 0.49817392230033875,
+        "ranking": 0.37765416502952576,
+        "brier": 0.16482022404670715
+      },
+      "lower_success_auc": 0.7063556987595786,
+      "feasible_policy_count": 16,
+      "selected": {
+        "threshold": 0.84,
+        "accuracy": 0.838,
+        "unsafe_rate": 0.048,
+        "lower_coverage": 0.208,
+        "upper_call_rate": 0.792,
+        "normalized_cost": 1.006285712755102
+      }
+    },
+    "44": {
+      "final_train_loss": {
+        "epoch": 300,
+        "total": 0.6082432866096497,
+        "bce": 0.5088604092597961,
+        "ranking": 0.4125552475452423,
+        "brier": 0.16871806979179382
+      },
+      "lower_success_auc": 0.7210137064057831,
+      "feasible_policy_count": 21,
+      "selected": {
+        "threshold": 0.79,
+        "accuracy": 0.832,
+        "unsafe_rate": 0.06,
+        "lower_coverage": 0.292,
+        "upper_call_rate": 0.708,
+        "normalized_cost": 0.9222857127551018
+      }
+    }
+  },
+  "frozen_candidate_for_reserved_certification": {
+    "seed": 44,
+    "threshold": 0.79,
+    "accuracy": 0.832,
+    "unsafe_rate": 0.06,
+    "lower_coverage": 0.292,
+    "upper_call_rate": 0.708,
+    "normalized_cost": 0.9222857127551018
+  },
+  "advance_to_reserved_certification": false
+}
