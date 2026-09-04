@@ -1,0 +1,33 @@
+{
+  "protocol": "fixed GSM8K validation; mean probability over seeds 42/43/44; exact one-sided 95% unsafe-risk bound constrained during selection",
+  "ensemble_size": 3,
+  "model_roots": [
+    "artifacts/capability_pretriage",
+    "artifacts/capability_pretriage_seed43",
+    "artifacts/capability_pretriage_seed44"
+  ],
+  "validation_count": 338,
+  "quality_target": 0.8178994082840236,
+  "risk_limit": 0.05,
+  "per_seed_validation_auc": [
+    0.5953786906290115,
+    0.6041078305519898,
+    0.5698147808545755
+  ],
+  "ensemble_validation_auc": 0.6068952869979828,
+  "feasible_policy_count": 5753,
+  "selected_policy": {
+    "pre_threshold": 0.59,
+    "post_threshold": 0.6,
+    "accuracy": 0.849112426035503,
+    "unsafe_rate": 0.029585798816568046,
+    "lower_coverage": 0.22189349112426035,
+    "lower_call_rate": 0.47337278106508873,
+    "pretriage_upper_rate": 0.5266272189349113,
+    "upper_call_rate": 0.7781065088757396,
+    "normalized_cost": 0.8795435326651371,
+    "unsafe_count": 10,
+    "unsafe_upper_bound_95": 0.04966729473696028
+  },
+  "promotion_gate": true
+}

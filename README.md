@@ -86,6 +86,13 @@ stable: only seed 42 stays below the 5% one-sided upper bound (4.73%); seeds 43 
 safety certification does not. The next experiment targets seed variance with a prespecified
 ensemble or validation risk-upper constraint, not MAWPS-specific threshold tuning.
 
+The three-seed mean-probability ensemble is selected on the fixed GSM8K validation split by
+directly requiring a one-sided exact 95% unsafe-risk upper bound at or below 5%. The selected
+0.59/0.60 policy improves capability AUC to 0.607 and passes the internal quality, cost, and
+risk gates. It also passes all gates on ASDiv (97.80% quality retention, 14.57% cost reduction,
+4.36% risk upper bound). On MAWPS it retains 98.19% quality and reduces cost by 19.56%, but its
+6.43% risk upper bound still fails. No threshold is retuned using MAWPS.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
