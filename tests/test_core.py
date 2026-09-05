@@ -348,7 +348,7 @@ def test_kmmlu_adapter_converts_one_based_answer():
     assert converted["id"] == "kmmlu-test-Math-7"
 
 
-def test_korean_model_pair_is_public_and_non_qwen():
+def test_korean_model_candidates_are_public_and_include_non_qwen():
     lower = get_model_spec("hyperclovax_0_5b")
     upper = get_model_spec("exaone_2_4b")
     assert lower.access == upper.access == "public"

@@ -18,7 +18,7 @@ def main() -> None:
         payload = json.load(handle)
     indexed = {row["model"]: row for row in payload["runs"]}
     lower_row = indexed["hyperclovax_0_5b"]
-    upper_row = indexed["exaone_2_4b"]
+    upper_row = indexed["qwen_7b"]
     lower = lower_row["metrics"]
     upper = upper_row["metrics"]
     lower_predictions = read_jsonl(Path(lower_row["report"]).with_name("predictions.jsonl"))
@@ -41,7 +41,7 @@ def main() -> None:
         "protocol": "exploratory 50-item KMMLU compatibility screen",
         "confirmation_required": True,
         "lower": "hyperclovax_0_5b",
-        "upper": "exaone_2_4b",
+        "upper": "qwen_7b",
         "sample_count": len(lower_predictions),
         "lower_accuracy": lower["accuracy"],
         "upper_accuracy": upper["accuracy"],
