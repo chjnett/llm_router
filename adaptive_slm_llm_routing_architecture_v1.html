@@ -298,7 +298,7 @@
       <tr class="focus"><td>AI-3</td><td>Answer-only confidence로 희소 정답 선택 가능성 검증</td><td>완료</td><td><span class="tag done">AUC 신호 · 실용 비용/위험 실패</span></td></tr>
       <tr class="focus"><td>AI-4</td><td>Qwen concise 중간 출력 예산 96/128/192/256 sweep · 총 8조건</td><td>8/8 완료 · 오류 0</td><td><span class="tag done">256 online 압축만 통과 · cascade 후보 0</span></td></tr>
       <tr class="focus"><td>AJ</td><td>MMLU 200 객관식 · M0/M1/M2 짧은 출력 latency screening</td><td>8/8 완료 · 오류 0</td><td><span class="tag done">출력 교란 확인 · 전 조합 비용 gate 실패</span></td></tr>
-      <tr class="focus"><td>AI-6</td><td>Qwen1.5B FP16 대 4-bit serving precision ablation · MMLU/수학</td><td>GPU 약 30~90분</td><td><span class="tag live">다음 실행</span></td></tr>
+      <tr class="focus"><td>AI-6</td><td>Qwen1.5B FP16 대 4-bit serving precision ablation · MMLU/수학</td><td>4조건 · 로그: artifacts/logs/qwen_precision_ablation.log</td><td><span class="tag live">백그라운드 실행 중</span></td></tr>
       <tr><td>AK</td><td>AI-6 통과 시 confidence routing → KMMLU → IFEval</td><td>GPU 8~16시간</td><td><span class="tag">조건부 계획</span></td></tr>
       <tr><td>AK-2</td><td>MBPP/HumanEval 격리 코드 실행 평가</td><td>GPU 6~12시간</td><td><span class="tag">MMLU 후 계획</span></td></tr>
       <tr><td>AL</td><td>통과 셀만 전체 test · 3 seeds · 통계 검증</td><td>1~3일</td><td><span class="tag">계획</span></td></tr>
