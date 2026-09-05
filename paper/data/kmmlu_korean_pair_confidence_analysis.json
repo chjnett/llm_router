@@ -1,0 +1,2057 @@
+{
+  "dataset": "HAERAE-HUB/KMMLU",
+  "pair": "HyperCLOVAX-SEED-0.5B / Qwen2.5-7B",
+  "protocol": "exploratory 5-fold OOF logistic confidence; threshold selected on the same OOF predictions",
+  "confirmation_required": true,
+  "result": {
+    "rows": 200,
+    "features": [
+      "prob_a",
+      "prob_b",
+      "prob_c",
+      "prob_d",
+      "max_probability",
+      "probability_margin",
+      "normalized_entropy",
+      "logit_spread"
+    ],
+    "lower_accuracy": 0.345,
+    "upper_accuracy": 0.485,
+    "lower_latency_ratio": 0.09409716093833378,
+    "routing_auc": 0.5240623962827746,
+    "average_precision": 0.4268968379961951,
+    "selected_quality_floor_95": {
+      "threshold": 0.5750000000000001,
+      "acceptance_rate": 0.195,
+      "system_accuracy": 0.465,
+      "quality_retention": 0.9587628865979382,
+      "unsafe_count": 8,
+      "unsafe_rate_given_accept": 0.20512820512820512,
+      "unsafe_exact_95_upper": 0.3397857822120107,
+      "normalized_latency": 0.8990971609383338
+    },
+    "practical_10_percent_reduction_achieved": true,
+    "best_practical_point": {
+      "threshold": 0.5750000000000001,
+      "acceptance_rate": 0.195,
+      "system_accuracy": 0.465,
+      "quality_retention": 0.9587628865979382,
+      "unsafe_count": 8,
+      "unsafe_rate_given_accept": 0.20512820512820512,
+      "unsafe_exact_95_upper": 0.3397857822120107,
+      "normalized_latency": 0.8990971609383338
+    },
+    "curve": [
+      {
+        "threshold": 0.0,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.005,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.01,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.015,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.02,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.025,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.03,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.035,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.04,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.045,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.05,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.055,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.06,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.065,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.07,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.075,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.08,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.085,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.09,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.095,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.1,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.105,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.11,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.115,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.12,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.125,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.13,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.135,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.14,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.145,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.15,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.155,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.16,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.165,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.17,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.17500000000000002,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.18,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.185,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.19,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.195,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.2,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.20500000000000002,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.21,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.215,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.22,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.225,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.23,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.23500000000000001,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.24,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.245,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.25,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.255,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.26,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.265,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.27,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.275,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.28,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.28500000000000003,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.29,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.295,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.3,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.305,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.31,
+        "acceptance_rate": 1.0,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26,
+        "unsafe_exact_95_upper": 0.31599947775907883,
+        "normalized_latency": 0.09409716093833387
+      },
+      {
+        "threshold": 0.315,
+        "acceptance_rate": 0.995,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.2613065326633166,
+        "unsafe_exact_95_upper": 0.3175258767214847,
+        "normalized_latency": 0.09909716093833387
+      },
+      {
+        "threshold": 0.32,
+        "acceptance_rate": 0.995,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.2613065326633166,
+        "unsafe_exact_95_upper": 0.3175258767214847,
+        "normalized_latency": 0.09909716093833387
+      },
+      {
+        "threshold": 0.325,
+        "acceptance_rate": 0.995,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.2613065326633166,
+        "unsafe_exact_95_upper": 0.3175258767214847,
+        "normalized_latency": 0.09909716093833387
+      },
+      {
+        "threshold": 0.33,
+        "acceptance_rate": 0.99,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26262626262626265,
+        "unsafe_exact_95_upper": 0.31906703207941545,
+        "normalized_latency": 0.10409716093833388
+      },
+      {
+        "threshold": 0.335,
+        "acceptance_rate": 0.99,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26262626262626265,
+        "unsafe_exact_95_upper": 0.31906703207941545,
+        "normalized_latency": 0.10409716093833388
+      },
+      {
+        "threshold": 0.34,
+        "acceptance_rate": 0.99,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26262626262626265,
+        "unsafe_exact_95_upper": 0.31906703207941545,
+        "normalized_latency": 0.10409716093833388
+      },
+      {
+        "threshold": 0.34500000000000003,
+        "acceptance_rate": 0.985,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.2639593908629442,
+        "unsafe_exact_95_upper": 0.3206231577407271,
+        "normalized_latency": 0.10909716093833388
+      },
+      {
+        "threshold": 0.35000000000000003,
+        "acceptance_rate": 0.98,
+        "system_accuracy": 0.335,
+        "quality_retention": 0.6907216494845362,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.2653061224489796,
+        "unsafe_exact_95_upper": 0.32219447174021,
+        "normalized_latency": 0.11409716093833389
+      },
+      {
+        "threshold": 0.355,
+        "acceptance_rate": 0.97,
+        "system_accuracy": 0.335,
+        "quality_retention": 0.6907216494845362,
+        "unsafe_count": 52,
+        "unsafe_rate_given_accept": 0.26804123711340205,
+        "unsafe_exact_95_upper": 0.32538355812523856,
+        "normalized_latency": 0.1240971609383339
+      },
+      {
+        "threshold": 0.36,
+        "acceptance_rate": 0.965,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 51,
+        "unsafe_rate_given_accept": 0.26424870466321243,
+        "unsafe_exact_95_upper": 0.32156206554991607,
+        "normalized_latency": 0.1290971609383339
+      },
+      {
+        "threshold": 0.365,
+        "acceptance_rate": 0.945,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 51,
+        "unsafe_rate_given_accept": 0.2698412698412698,
+        "unsafe_exact_95_upper": 0.32809133737656365,
+        "normalized_latency": 0.14909716093833392
+      },
+      {
+        "threshold": 0.37,
+        "acceptance_rate": 0.92,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 51,
+        "unsafe_rate_given_accept": 0.27717391304347827,
+        "unsafe_exact_95_upper": 0.33663368578946534,
+        "normalized_latency": 0.17409716093833383
+      },
+      {
+        "threshold": 0.375,
+        "acceptance_rate": 0.895,
+        "system_accuracy": 0.345,
+        "quality_retention": 0.7113402061855669,
+        "unsafe_count": 50,
+        "unsafe_rate_given_accept": 0.27932960893854747,
+        "unsafe_exact_95_upper": 0.33978654626558014,
+        "normalized_latency": 0.19909716093833385
+      },
+      {
+        "threshold": 0.38,
+        "acceptance_rate": 0.88,
+        "system_accuracy": 0.335,
+        "quality_retention": 0.6907216494845362,
+        "unsafe_count": 50,
+        "unsafe_rate_given_accept": 0.2840909090909091,
+        "unsafe_exact_95_upper": 0.34532582571836573,
+        "normalized_latency": 0.21409716093833386
+      },
+      {
+        "threshold": 0.385,
+        "acceptance_rate": 0.86,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 48,
+        "unsafe_rate_given_accept": 0.27906976744186046,
+        "unsafe_exact_95_upper": 0.340837204720081,
+        "normalized_latency": 0.23409716093833388
+      },
+      {
+        "threshold": 0.39,
+        "acceptance_rate": 0.805,
+        "system_accuracy": 0.34,
+        "quality_retention": 0.7010309278350516,
+        "unsafe_count": 46,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.35005742942276347,
+        "normalized_latency": 0.2890971609383338
+      },
+      {
+        "threshold": 0.395,
+        "acceptance_rate": 0.76,
+        "system_accuracy": 0.35,
+        "quality_retention": 0.7216494845360825,
+        "unsafe_count": 44,
+        "unsafe_rate_given_accept": 0.2894736842105263,
+        "unsafe_exact_95_upper": 0.3560359886220593,
+        "normalized_latency": 0.33409716093833386
+      },
+      {
+        "threshold": 0.4,
+        "acceptance_rate": 0.715,
+        "system_accuracy": 0.35,
+        "quality_retention": 0.7216494845360825,
+        "unsafe_count": 42,
+        "unsafe_rate_given_accept": 0.2937062937062937,
+        "unsafe_exact_95_upper": 0.36271096771683353,
+        "normalized_latency": 0.3790971609383339
+      },
+      {
+        "threshold": 0.405,
+        "acceptance_rate": 0.7,
+        "system_accuracy": 0.355,
+        "quality_retention": 0.7319587628865979,
+        "unsafe_count": 40,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.35514330527217125,
+        "normalized_latency": 0.3940971609383339
+      },
+      {
+        "threshold": 0.41000000000000003,
+        "acceptance_rate": 0.69,
+        "system_accuracy": 0.355,
+        "quality_retention": 0.7319587628865979,
+        "unsafe_count": 40,
+        "unsafe_rate_given_accept": 0.2898550724637681,
+        "unsafe_exact_95_upper": 0.36003001698788517,
+        "normalized_latency": 0.4040971609383339
+      },
+      {
+        "threshold": 0.41500000000000004,
+        "acceptance_rate": 0.665,
+        "system_accuracy": 0.355,
+        "quality_retention": 0.7319587628865979,
+        "unsafe_count": 39,
+        "unsafe_rate_given_accept": 0.2932330827067669,
+        "unsafe_exact_95_upper": 0.3649939660773975,
+        "normalized_latency": 0.42909716093833383
+      },
+      {
+        "threshold": 0.42,
+        "acceptance_rate": 0.645,
+        "system_accuracy": 0.355,
+        "quality_retention": 0.7319587628865979,
+        "unsafe_count": 39,
+        "unsafe_rate_given_accept": 0.3023255813953488,
+        "unsafe_exact_95_upper": 0.3757026214099273,
+        "normalized_latency": 0.44909716093833385
+      },
+      {
+        "threshold": 0.425,
+        "acceptance_rate": 0.62,
+        "system_accuracy": 0.36,
+        "quality_retention": 0.7422680412371134,
+        "unsafe_count": 38,
+        "unsafe_rate_given_accept": 0.3064516129032258,
+        "unsafe_exact_95_upper": 0.38160342596775676,
+        "normalized_latency": 0.4740971609383339
+      },
+      {
+        "threshold": 0.43,
+        "acceptance_rate": 0.605,
+        "system_accuracy": 0.365,
+        "quality_retention": 0.7525773195876289,
+        "unsafe_count": 37,
+        "unsafe_rate_given_accept": 0.30578512396694213,
+        "unsafe_exact_95_upper": 0.3819169532955128,
+        "normalized_latency": 0.4890971609383339
+      },
+      {
+        "threshold": 0.435,
+        "acceptance_rate": 0.585,
+        "system_accuracy": 0.365,
+        "quality_retention": 0.7525773195876289,
+        "unsafe_count": 37,
+        "unsafe_rate_given_accept": 0.3162393162393162,
+        "unsafe_exact_95_upper": 0.3942108059932573,
+        "normalized_latency": 0.5090971609383339
+      },
+      {
+        "threshold": 0.44,
+        "acceptance_rate": 0.56,
+        "system_accuracy": 0.38,
+        "quality_retention": 0.7835051546391752,
+        "unsafe_count": 34,
+        "unsafe_rate_given_accept": 0.30357142857142855,
+        "unsafe_exact_95_upper": 0.38288275875292155,
+        "normalized_latency": 0.5340971609383338
+      },
+      {
+        "threshold": 0.445,
+        "acceptance_rate": 0.55,
+        "system_accuracy": 0.38,
+        "quality_retention": 0.7835051546391752,
+        "unsafe_count": 33,
+        "unsafe_rate_given_accept": 0.3,
+        "unsafe_exact_95_upper": 0.3799337782009776,
+        "normalized_latency": 0.5440971609383338
+      },
+      {
+        "threshold": 0.45,
+        "acceptance_rate": 0.535,
+        "system_accuracy": 0.385,
+        "quality_retention": 0.7938144329896908,
+        "unsafe_count": 32,
+        "unsafe_rate_given_accept": 0.29906542056074764,
+        "unsafe_exact_95_upper": 0.38017500677775223,
+        "normalized_latency": 0.5590971609383338
+      },
+      {
+        "threshold": 0.455,
+        "acceptance_rate": 0.52,
+        "system_accuracy": 0.395,
+        "quality_retention": 0.8144329896907218,
+        "unsafe_count": 30,
+        "unsafe_rate_given_accept": 0.28846153846153844,
+        "unsafe_exact_95_upper": 0.37032266054262397,
+        "normalized_latency": 0.5740971609383339
+      },
+      {
+        "threshold": 0.46,
+        "acceptance_rate": 0.51,
+        "system_accuracy": 0.39,
+        "quality_retention": 0.8041237113402062,
+        "unsafe_count": 30,
+        "unsafe_rate_given_accept": 0.29411764705882354,
+        "unsafe_exact_95_upper": 0.3771446917663925,
+        "normalized_latency": 0.5840971609383339
+      },
+      {
+        "threshold": 0.465,
+        "acceptance_rate": 0.485,
+        "system_accuracy": 0.405,
+        "quality_retention": 0.8350515463917526,
+        "unsafe_count": 27,
+        "unsafe_rate_given_accept": 0.27835051546391754,
+        "unsafe_exact_95_upper": 0.3628648241483861,
+        "normalized_latency": 0.6090971609383339
+      },
+      {
+        "threshold": 0.47000000000000003,
+        "acceptance_rate": 0.475,
+        "system_accuracy": 0.405,
+        "quality_retention": 0.8350515463917526,
+        "unsafe_count": 26,
+        "unsafe_rate_given_accept": 0.2736842105263158,
+        "unsafe_exact_95_upper": 0.35890850731324775,
+        "normalized_latency": 0.6190971609383339
+      },
+      {
+        "threshold": 0.47500000000000003,
+        "acceptance_rate": 0.455,
+        "system_accuracy": 0.415,
+        "quality_retention": 0.8556701030927835,
+        "unsafe_count": 24,
+        "unsafe_rate_given_accept": 0.26373626373626374,
+        "unsafe_exact_95_upper": 0.3504040761724899,
+        "normalized_latency": 0.6390971609383338
+      },
+      {
+        "threshold": 0.48,
+        "acceptance_rate": 0.43,
+        "system_accuracy": 0.415,
+        "quality_retention": 0.8556701030927835,
+        "unsafe_count": 23,
+        "unsafe_rate_given_accept": 0.26744186046511625,
+        "unsafe_exact_95_upper": 0.35712976614158354,
+        "normalized_latency": 0.6640971609383339
+      },
+      {
+        "threshold": 0.485,
+        "acceptance_rate": 0.395,
+        "system_accuracy": 0.415,
+        "quality_retention": 0.8556701030927835,
+        "unsafe_count": 21,
+        "unsafe_rate_given_accept": 0.26582278481012656,
+        "unsafe_exact_95_upper": 0.35976839444496916,
+        "normalized_latency": 0.6990971609383339
+      },
+      {
+        "threshold": 0.49,
+        "acceptance_rate": 0.375,
+        "system_accuracy": 0.415,
+        "quality_retention": 0.8556701030927835,
+        "unsafe_count": 20,
+        "unsafe_rate_given_accept": 0.26666666666666666,
+        "unsafe_exact_95_upper": 0.3634486001355885,
+        "normalized_latency": 0.7190971609383339
+      },
+      {
+        "threshold": 0.495,
+        "acceptance_rate": 0.36,
+        "system_accuracy": 0.415,
+        "quality_retention": 0.8556701030927835,
+        "unsafe_count": 20,
+        "unsafe_rate_given_accept": 0.2777777777777778,
+        "unsafe_exact_95_upper": 0.37751233042306764,
+        "normalized_latency": 0.7340971609383339
+      },
+      {
+        "threshold": 0.5,
+        "acceptance_rate": 0.35,
+        "system_accuracy": 0.415,
+        "quality_retention": 0.8556701030927835,
+        "unsafe_count": 20,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.3875026349693286,
+        "normalized_latency": 0.7440971609383339
+      },
+      {
+        "threshold": 0.505,
+        "acceptance_rate": 0.33,
+        "system_accuracy": 0.42,
+        "quality_retention": 0.865979381443299,
+        "unsafe_count": 19,
+        "unsafe_rate_given_accept": 0.2878787878787879,
+        "unsafe_exact_95_upper": 0.39319395820514375,
+        "normalized_latency": 0.7640971609383338
+      },
+      {
+        "threshold": 0.51,
+        "acceptance_rate": 0.315,
+        "system_accuracy": 0.42,
+        "quality_retention": 0.865979381443299,
+        "unsafe_count": 18,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.39368311419957347,
+        "normalized_latency": 0.7790971609383339
+      },
+      {
+        "threshold": 0.515,
+        "acceptance_rate": 0.29,
+        "system_accuracy": 0.425,
+        "quality_retention": 0.8762886597938144,
+        "unsafe_count": 16,
+        "unsafe_rate_given_accept": 0.27586206896551724,
+        "unsafe_exact_95_upper": 0.3883612757621382,
+        "normalized_latency": 0.8040971609383338
+      },
+      {
+        "threshold": 0.52,
+        "acceptance_rate": 0.285,
+        "system_accuracy": 0.425,
+        "quality_retention": 0.8762886597938144,
+        "unsafe_count": 16,
+        "unsafe_rate_given_accept": 0.2807017543859649,
+        "unsafe_exact_95_upper": 0.39461243279925784,
+        "normalized_latency": 0.809097160938334
+      },
+      {
+        "threshold": 0.525,
+        "acceptance_rate": 0.28,
+        "system_accuracy": 0.43,
+        "quality_retention": 0.8865979381443299,
+        "unsafe_count": 15,
+        "unsafe_rate_given_accept": 0.26785714285714285,
+        "unsafe_exact_95_upper": 0.38208022229093636,
+        "normalized_latency": 0.8140971609383338
+      },
+      {
+        "threshold": 0.53,
+        "acceptance_rate": 0.27,
+        "system_accuracy": 0.44,
+        "quality_retention": 0.9072164948453608,
+        "unsafe_count": 13,
+        "unsafe_rate_given_accept": 0.24074074074074073,
+        "unsafe_exact_95_upper": 0.35526016607021144,
+        "normalized_latency": 0.8240971609383339
+      },
+      {
+        "threshold": 0.535,
+        "acceptance_rate": 0.265,
+        "system_accuracy": 0.44,
+        "quality_retention": 0.9072164948453608,
+        "unsafe_count": 13,
+        "unsafe_rate_given_accept": 0.24528301886792453,
+        "unsafe_exact_95_upper": 0.36142602789580497,
+        "normalized_latency": 0.8290971609383339
+      },
+      {
+        "threshold": 0.54,
+        "acceptance_rate": 0.245,
+        "system_accuracy": 0.45,
+        "quality_retention": 0.9278350515463918,
+        "unsafe_count": 11,
+        "unsafe_rate_given_accept": 0.22448979591836735,
+        "unsafe_exact_95_upper": 0.3441137872531192,
+        "normalized_latency": 0.8490971609383339
+      },
+      {
+        "threshold": 0.545,
+        "acceptance_rate": 0.235,
+        "system_accuracy": 0.45,
+        "quality_retention": 0.9278350515463918,
+        "unsafe_count": 11,
+        "unsafe_rate_given_accept": 0.23404255319148937,
+        "unsafe_exact_95_upper": 0.35752691393942226,
+        "normalized_latency": 0.8590971609383339
+      },
+      {
+        "threshold": 0.55,
+        "acceptance_rate": 0.225,
+        "system_accuracy": 0.45,
+        "quality_retention": 0.9278350515463918,
+        "unsafe_count": 11,
+        "unsafe_rate_given_accept": 0.24444444444444444,
+        "unsafe_exact_95_upper": 0.372016422626654,
+        "normalized_latency": 0.8690971609383339
+      },
+      {
+        "threshold": 0.555,
+        "acceptance_rate": 0.225,
+        "system_accuracy": 0.45,
+        "quality_retention": 0.9278350515463918,
+        "unsafe_count": 11,
+        "unsafe_rate_given_accept": 0.24444444444444444,
+        "unsafe_exact_95_upper": 0.372016422626654,
+        "normalized_latency": 0.8690971609383339
+      },
+      {
+        "threshold": 0.56,
+        "acceptance_rate": 0.22,
+        "system_accuracy": 0.455,
+        "quality_retention": 0.9381443298969073,
+        "unsafe_count": 10,
+        "unsafe_rate_given_accept": 0.22727272727272727,
+        "unsafe_exact_95_upper": 0.3549487980420808,
+        "normalized_latency": 0.8740971609383339
+      },
+      {
+        "threshold": 0.5650000000000001,
+        "acceptance_rate": 0.22,
+        "system_accuracy": 0.455,
+        "quality_retention": 0.9381443298969073,
+        "unsafe_count": 10,
+        "unsafe_rate_given_accept": 0.22727272727272727,
+        "unsafe_exact_95_upper": 0.3549487980420808,
+        "normalized_latency": 0.8740971609383339
+      },
+      {
+        "threshold": 0.5700000000000001,
+        "acceptance_rate": 0.205,
+        "system_accuracy": 0.46,
+        "quality_retention": 0.9484536082474228,
+        "unsafe_count": 9,
+        "unsafe_rate_given_accept": 0.21951219512195122,
+        "unsafe_exact_95_upper": 0.35179936006236284,
+        "normalized_latency": 0.8890971609383339
+      },
+      {
+        "threshold": 0.5750000000000001,
+        "acceptance_rate": 0.195,
+        "system_accuracy": 0.465,
+        "quality_retention": 0.9587628865979382,
+        "unsafe_count": 8,
+        "unsafe_rate_given_accept": 0.20512820512820512,
+        "unsafe_exact_95_upper": 0.3397857822120107,
+        "normalized_latency": 0.8990971609383338
+      },
+      {
+        "threshold": 0.58,
+        "acceptance_rate": 0.185,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 7,
+        "unsafe_rate_given_accept": 0.1891891891891892,
+        "unsafe_exact_95_upper": 0.3261592788160604,
+        "normalized_latency": 0.9090971609383338
+      },
+      {
+        "threshold": 0.585,
+        "acceptance_rate": 0.185,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 7,
+        "unsafe_rate_given_accept": 0.1891891891891892,
+        "unsafe_exact_95_upper": 0.3261592788160604,
+        "normalized_latency": 0.9090971609383338
+      },
+      {
+        "threshold": 0.59,
+        "acceptance_rate": 0.175,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 7,
+        "unsafe_rate_given_accept": 0.2,
+        "unsafe_exact_95_upper": 0.343049685990582,
+        "normalized_latency": 0.9190971609383338
+      },
+      {
+        "threshold": 0.595,
+        "acceptance_rate": 0.165,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 6,
+        "unsafe_rate_given_accept": 0.18181818181818182,
+        "unsafe_exact_95_upper": 0.32762675185040113,
+        "normalized_latency": 0.9290971609383338
+      },
+      {
+        "threshold": 0.6,
+        "acceptance_rate": 0.165,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 6,
+        "unsafe_rate_given_accept": 0.18181818181818182,
+        "unsafe_exact_95_upper": 0.32762675185040113,
+        "normalized_latency": 0.9290971609383338
+      },
+      {
+        "threshold": 0.605,
+        "acceptance_rate": 0.155,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 6,
+        "unsafe_rate_given_accept": 0.1935483870967742,
+        "unsafe_exact_95_upper": 0.34665254378880717,
+        "normalized_latency": 0.9390971609383338
+      },
+      {
+        "threshold": 0.61,
+        "acceptance_rate": 0.155,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 6,
+        "unsafe_rate_given_accept": 0.1935483870967742,
+        "unsafe_exact_95_upper": 0.34665254378880717,
+        "normalized_latency": 0.9390971609383338
+      },
+      {
+        "threshold": 0.615,
+        "acceptance_rate": 0.15,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 5,
+        "unsafe_rate_given_accept": 0.16666666666666666,
+        "unsafe_exact_95_upper": 0.318971181947315,
+        "normalized_latency": 0.9440971609383338
+      },
+      {
+        "threshold": 0.62,
+        "acceptance_rate": 0.145,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 5,
+        "unsafe_rate_given_accept": 0.1724137931034483,
+        "unsafe_exact_95_upper": 0.32887269243481687,
+        "normalized_latency": 0.9490971609383339
+      },
+      {
+        "threshold": 0.625,
+        "acceptance_rate": 0.14,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 5,
+        "unsafe_rate_given_accept": 0.17857142857142858,
+        "unsafe_exact_95_upper": 0.33940197136159084,
+        "normalized_latency": 0.9540971609383339
+      },
+      {
+        "threshold": 0.63,
+        "acceptance_rate": 0.13,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 5,
+        "unsafe_rate_given_accept": 0.19230769230769232,
+        "unsafe_exact_95_upper": 0.3625948619781562,
+        "normalized_latency": 0.9640971609383339
+      },
+      {
+        "threshold": 0.635,
+        "acceptance_rate": 0.13,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 5,
+        "unsafe_rate_given_accept": 0.19230769230769232,
+        "unsafe_exact_95_upper": 0.3625948619781562,
+        "normalized_latency": 0.9640971609383339
+      },
+      {
+        "threshold": 0.64,
+        "acceptance_rate": 0.12,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.16666666666666666,
+        "unsafe_exact_95_upper": 0.34180734940411633,
+        "normalized_latency": 0.9740971609383339
+      },
+      {
+        "threshold": 0.645,
+        "acceptance_rate": 0.115,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.17391304347826086,
+        "unsafe_exact_95_upper": 0.35493240621938843,
+        "normalized_latency": 0.9790971609383339
+      },
+      {
+        "threshold": 0.65,
+        "acceptance_rate": 0.115,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.17391304347826086,
+        "unsafe_exact_95_upper": 0.35493240621938843,
+        "normalized_latency": 0.9790971609383339
+      },
+      {
+        "threshold": 0.655,
+        "acceptance_rate": 0.11,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.18181818181818182,
+        "unsafe_exact_95_upper": 0.3690911343255682,
+        "normalized_latency": 0.9840971609383339
+      },
+      {
+        "threshold": 0.66,
+        "acceptance_rate": 0.11,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.18181818181818182,
+        "unsafe_exact_95_upper": 0.3690911343255682,
+        "normalized_latency": 0.9840971609383339
+      },
+      {
+        "threshold": 0.665,
+        "acceptance_rate": 0.105,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.19047619047619047,
+        "unsafe_exact_95_upper": 0.38440810762765826,
+        "normalized_latency": 0.9890971609383339
+      },
+      {
+        "threshold": 0.67,
+        "acceptance_rate": 0.105,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.19047619047619047,
+        "unsafe_exact_95_upper": 0.38440810762765826,
+        "normalized_latency": 0.9890971609383339
+      },
+      {
+        "threshold": 0.675,
+        "acceptance_rate": 0.1,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2,
+        "unsafe_exact_95_upper": 0.4010281173319746,
+        "normalized_latency": 0.9940971609383339
+      },
+      {
+        "threshold": 0.68,
+        "acceptance_rate": 0.1,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2,
+        "unsafe_exact_95_upper": 0.4010281173319746,
+        "normalized_latency": 0.9940971609383339
+      },
+      {
+        "threshold": 0.685,
+        "acceptance_rate": 0.1,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2,
+        "unsafe_exact_95_upper": 0.4010281173319746,
+        "normalized_latency": 0.9940971609383339
+      },
+      {
+        "threshold": 0.6900000000000001,
+        "acceptance_rate": 0.1,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2,
+        "unsafe_exact_95_upper": 0.4010281173319746,
+        "normalized_latency": 0.9940971609383339
+      },
+      {
+        "threshold": 0.6950000000000001,
+        "acceptance_rate": 0.095,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.21052631578947367,
+        "unsafe_exact_95_upper": 0.4191202289169427,
+        "normalized_latency": 0.9990971609383339
+      },
+      {
+        "threshold": 0.7000000000000001,
+        "acceptance_rate": 0.095,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.21052631578947367,
+        "unsafe_exact_95_upper": 0.4191202289169427,
+        "normalized_latency": 0.9990971609383339
+      },
+      {
+        "threshold": 0.705,
+        "acceptance_rate": 0.09,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2222222222222222,
+        "unsafe_exact_95_upper": 0.4388827582113609,
+        "normalized_latency": 1.0040971609383338
+      },
+      {
+        "threshold": 0.71,
+        "acceptance_rate": 0.085,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.23529411764705882,
+        "unsafe_exact_95_upper": 0.46054935988983303,
+        "normalized_latency": 1.009097160938334
+      },
+      {
+        "threshold": 0.715,
+        "acceptance_rate": 0.08,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.48439642109366915,
+        "normalized_latency": 1.0140971609383338
+      },
+      {
+        "threshold": 0.72,
+        "acceptance_rate": 0.08,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.48439642109366915,
+        "normalized_latency": 1.0140971609383338
+      },
+      {
+        "threshold": 0.725,
+        "acceptance_rate": 0.075,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.26666666666666666,
+        "unsafe_exact_95_upper": 0.510751889594463,
+        "normalized_latency": 1.019097160938334
+      },
+      {
+        "threshold": 0.73,
+        "acceptance_rate": 0.07,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.5400054465239322,
+        "normalized_latency": 1.0240971609383338
+      },
+      {
+        "threshold": 0.735,
+        "acceptance_rate": 0.07,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.5400054465239322,
+        "normalized_latency": 1.0240971609383338
+      },
+      {
+        "threshold": 0.74,
+        "acceptance_rate": 0.07,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.5400054465239322,
+        "normalized_latency": 1.0240971609383338
+      },
+      {
+        "threshold": 0.745,
+        "acceptance_rate": 0.07,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.2857142857142857,
+        "unsafe_exact_95_upper": 0.5400054465239322,
+        "normalized_latency": 1.0240971609383338
+      },
+      {
+        "threshold": 0.75,
+        "acceptance_rate": 0.065,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.3076923076923077,
+        "unsafe_exact_95_upper": 0.5726193394082124,
+        "normalized_latency": 1.029097160938334
+      },
+      {
+        "threshold": 0.755,
+        "acceptance_rate": 0.065,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.3076923076923077,
+        "unsafe_exact_95_upper": 0.5726193394082124,
+        "normalized_latency": 1.029097160938334
+      },
+      {
+        "threshold": 0.76,
+        "acceptance_rate": 0.065,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.3076923076923077,
+        "unsafe_exact_95_upper": 0.5726193394082124,
+        "normalized_latency": 1.029097160938334
+      },
+      {
+        "threshold": 0.765,
+        "acceptance_rate": 0.065,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.3076923076923077,
+        "unsafe_exact_95_upper": 0.5726193394082124,
+        "normalized_latency": 1.029097160938334
+      },
+      {
+        "threshold": 0.77,
+        "acceptance_rate": 0.065,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.3076923076923077,
+        "unsafe_exact_95_upper": 0.5726193394082124,
+        "normalized_latency": 1.029097160938334
+      },
+      {
+        "threshold": 0.775,
+        "acceptance_rate": 0.065,
+        "system_accuracy": 0.47,
+        "quality_retention": 0.9690721649484536,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.3076923076923077,
+        "unsafe_exact_95_upper": 0.5726193394082124,
+        "normalized_latency": 1.029097160938334
+      },
+      {
+        "threshold": 0.78,
+        "acceptance_rate": 0.06,
+        "system_accuracy": 0.465,
+        "quality_retention": 0.9587628865979382,
+        "unsafe_count": 4,
+        "unsafe_rate_given_accept": 0.3333333333333333,
+        "unsafe_exact_95_upper": 0.6091376982290366,
+        "normalized_latency": 1.0340971609383338
+      },
+      {
+        "threshold": 0.785,
+        "acceptance_rate": 0.05,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 2,
+        "unsafe_rate_given_accept": 0.2,
+        "unsafe_exact_95_upper": 0.5069013010632023,
+        "normalized_latency": 1.0440971609383338
+      },
+      {
+        "threshold": 0.79,
+        "acceptance_rate": 0.045,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 2,
+        "unsafe_rate_given_accept": 0.2222222222222222,
+        "unsafe_exact_95_upper": 0.5496416495066101,
+        "normalized_latency": 1.049097160938334
+      },
+      {
+        "threshold": 0.795,
+        "acceptance_rate": 0.045,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 2,
+        "unsafe_rate_given_accept": 0.2222222222222222,
+        "unsafe_exact_95_upper": 0.5496416495066101,
+        "normalized_latency": 1.049097160938334
+      },
+      {
+        "threshold": 0.8,
+        "acceptance_rate": 0.04,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 2,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.5996893891908329,
+        "normalized_latency": 1.0540971609383338
+      },
+      {
+        "threshold": 0.805,
+        "acceptance_rate": 0.04,
+        "system_accuracy": 0.475,
+        "quality_retention": 0.979381443298969,
+        "unsafe_count": 2,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.5996893891908329,
+        "normalized_latency": 1.0540971609383338
+      },
+      {
+        "threshold": 0.81,
+        "acceptance_rate": 0.03,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.16666666666666666,
+        "unsafe_exact_95_upper": 0.5818034092520259,
+        "normalized_latency": 1.0640971609383338
+      },
+      {
+        "threshold": 0.8150000000000001,
+        "acceptance_rate": 0.03,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.16666666666666666,
+        "unsafe_exact_95_upper": 0.5818034092520259,
+        "normalized_latency": 1.0640971609383338
+      },
+      {
+        "threshold": 0.8200000000000001,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.8250000000000001,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.8300000000000001,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.835,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.84,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.845,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.85,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.855,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.86,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.865,
+        "acceptance_rate": 0.02,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.25,
+        "unsafe_exact_95_upper": 0.7513953742698181,
+        "normalized_latency": 1.0740971609383339
+      },
+      {
+        "threshold": 0.87,
+        "acceptance_rate": 0.015,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.3333333333333333,
+        "unsafe_exact_95_upper": 0.8646496378284161,
+        "normalized_latency": 1.079097160938334
+      },
+      {
+        "threshold": 0.875,
+        "acceptance_rate": 0.01,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.5,
+        "unsafe_exact_95_upper": 0.9746794344808963,
+        "normalized_latency": 1.0840971609383339
+      },
+      {
+        "threshold": 0.88,
+        "acceptance_rate": 0.01,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.5,
+        "unsafe_exact_95_upper": 0.9746794344808963,
+        "normalized_latency": 1.0840971609383339
+      },
+      {
+        "threshold": 0.885,
+        "acceptance_rate": 0.01,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.5,
+        "unsafe_exact_95_upper": 0.9746794344808963,
+        "normalized_latency": 1.0840971609383339
+      },
+      {
+        "threshold": 0.89,
+        "acceptance_rate": 0.01,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.5,
+        "unsafe_exact_95_upper": 0.9746794344808963,
+        "normalized_latency": 1.0840971609383339
+      },
+      {
+        "threshold": 0.895,
+        "acceptance_rate": 0.01,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.5,
+        "unsafe_exact_95_upper": 0.9746794344808963,
+        "normalized_latency": 1.0840971609383339
+      },
+      {
+        "threshold": 0.9,
+        "acceptance_rate": 0.01,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.5,
+        "unsafe_exact_95_upper": 0.9746794344808963,
+        "normalized_latency": 1.0840971609383339
+      },
+      {
+        "threshold": 0.905,
+        "acceptance_rate": 0.01,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 0.5,
+        "unsafe_exact_95_upper": 0.9746794344808963,
+        "normalized_latency": 1.0840971609383339
+      },
+      {
+        "threshold": 0.91,
+        "acceptance_rate": 0.005,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 1.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.089097160938334
+      },
+      {
+        "threshold": 0.915,
+        "acceptance_rate": 0.005,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 1.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.089097160938334
+      },
+      {
+        "threshold": 0.92,
+        "acceptance_rate": 0.005,
+        "system_accuracy": 0.48,
+        "quality_retention": 0.9896907216494846,
+        "unsafe_count": 1,
+        "unsafe_rate_given_accept": 1.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.089097160938334
+      },
+      {
+        "threshold": 0.925,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.93,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.935,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.9400000000000001,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.9450000000000001,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.9500000000000001,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.9550000000000001,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.96,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.965,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.97,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.975,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.98,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.985,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.99,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 0.995,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      },
+      {
+        "threshold": 1.0,
+        "acceptance_rate": 0.0,
+        "system_accuracy": 0.485,
+        "quality_retention": 1.0,
+        "unsafe_count": 0,
+        "unsafe_rate_given_accept": 0.0,
+        "unsafe_exact_95_upper": 1.0,
+        "normalized_latency": 1.0940971609383339
+      }
+    ]
+  }
+}

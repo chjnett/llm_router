@@ -44,6 +44,10 @@ def main() -> None:
     parser.add_argument("--latency-ratio", type=float, default=0.24704482170737938)
     parser.add_argument("--certification-size", type=int, default=250)
     parser.add_argument("--output", default="paper/data/mmlu_logit_independent_certification.json")
+    parser.add_argument(
+        "--protocol",
+        default="frozen model/features/threshold from MMLU validation; disjoint subject-balanced MMLU test rows",
+    )
     args = parser.parse_args()
 
     selection = read_jsonl(args.selection_features)
@@ -62,7 +66,7 @@ def main() -> None:
     upper = np.asarray([bool(upper_by_id[row["id"]]["correct"]) for row in independent])
     cut = args.certification_size
     payload = {
-        "protocol": "frozen model/features/threshold from MMLU validation; disjoint subject-balanced MMLU test rows",
+        "protocol": args.protocol,
         "selection_rows": len(selection), "threshold": args.threshold, "latency_ratio": args.latency_ratio,
         "certification": evaluate(probability[:cut], lower[:cut], upper[:cut], args.threshold, args.latency_ratio),
         "final_test": evaluate(probability[cut:], lower[cut:], upper[cut:], args.threshold, args.latency_ratio),
