@@ -301,3 +301,18 @@ def test_mmlu_logit_confidence_feature_schema_is_fixed():
     assert len(FEATURES) == 8
     assert "probability_margin" in FEATURES
     assert "normalized_entropy" in FEATURES
+
+
+def test_independent_certification_uses_fixed_performance_gate():
+    from src.certify_mmlu_logit_confidence import evaluate
+
+    result = evaluate(
+        np.asarray([0.9, 0.8, 0.1, 0.0]),
+        np.asarray([True, True, False, False]),
+        np.asarray([True, False, True, True]),
+        threshold=0.5,
+        latency_ratio=0.25,
+    )
+    assert result["system_accuracy"] == 1.0
+    assert result["normalized_latency"] == 0.75
+    assert result["performance_gate_pass"]

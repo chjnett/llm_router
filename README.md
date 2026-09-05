@@ -249,6 +249,15 @@ The exploratory M0 result retains 95.38% of Upper accuracy with 18.30% lower nor
 latency, but its exact unsafe-risk upper bound is 18.93%. Treat it as selection-only: the
 next step fixes threshold 0.545 and evaluates independent MMLU test certification/final splits.
 
+Run the frozen independent confirmation protocol:
+
+```bash
+python -m src.prepare_mmlu_independent
+python -m src.run_mmlu_logit_confidence_features --input artifacts/data/mmlu_test_independent_500.jsonl --output-dir artifacts/confidence/mmlu_logit_independent --limit 500 --models qwen_1_5b
+python -m src.run_mmlu_independent_upper
+python -m src.certify_mmlu_logit_confidence
+```
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

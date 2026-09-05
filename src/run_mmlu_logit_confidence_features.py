@@ -61,8 +61,9 @@ def main() -> None:
     parser.add_argument("--output-dir", default="artifacts/confidence/mmlu_logit")
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--limit", type=int, default=200)
+    parser.add_argument("--models", nargs="+", choices=MODELS, default=list(MODELS))
     args = parser.parse_args()
-    for model in MODELS:
+    for model in args.models:
         target = Path(args.output_dir) / f"{model}.jsonl"
         if target.exists():
             print(f"SKIP {model}: {target}")
