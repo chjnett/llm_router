@@ -38,8 +38,13 @@ def format_prompt(tokenizer, question: str, system_prompt: str = SYSTEM_PROMPT) 
     return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 
 
-def load_model(model_id: str, quantize_4bit: bool, adapter: str | None = None):
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
+def load_model(
+    model_id: str,
+    quantize_4bit: bool,
+    adapter: str | None = None,
+    trust_remote_code: bool = False,
+):
+    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=trust_remote_code)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
@@ -51,7 +56,9 @@ def load_model(model_id: str, quantize_4bit: bool, adapter: str | None = None):
             bnb_4bit_compute_dtype=torch.float16,
             bnb_4bit_use_double_quant=True,
         )
-    model = AutoModelForCausalLM.from_pretrained(model_id, **kwargs)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id, trust_remote_code=trust_remote_code, **kwargs
+    )
     if adapter:
         from peft import PeftModel
 

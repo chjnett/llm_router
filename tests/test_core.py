@@ -346,3 +346,12 @@ def test_kmmlu_adapter_converts_one_based_answer():
     assert converted["answer"] == 3
     assert converted["choices"] == ["one", "two", "three", "four"]
     assert converted["id"] == "kmmlu-test-Math-7"
+
+
+def test_korean_model_pair_is_public_and_non_qwen():
+    lower = get_model_spec("hyperclovax_0_5b")
+    upper = get_model_spec("exaone_2_4b")
+    assert lower.access == upper.access == "public"
+    assert lower.family != upper.family
+    assert lower.size_billions < upper.size_billions
+    assert upper.trust_remote_code

@@ -13,6 +13,7 @@ class ModelSpec:
     size_billions: float
     access: str = "public"
     default_4bit: bool = True
+    trust_remote_code: bool = False
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -29,6 +30,21 @@ MODEL_REGISTRY = {
         ModelSpec("gemma3_4b", "google/gemma-3-4b-it", "gemma3", 4.0, access="terms"),
         ModelSpec("llama3_2_1b", "meta-llama/Llama-3.2-1B-Instruct", "llama3", 1.0, access="approval"),
         ModelSpec("llama3_1_8b", "meta-llama/Llama-3.1-8B-Instruct", "llama3", 8.0, access="approval"),
+        ModelSpec(
+            "hyperclovax_0_5b",
+            "naver-hyperclovax/HyperCLOVAX-SEED-Text-Instruct-0.5B",
+            "hyperclovax",
+            0.57,
+            default_4bit=False,
+        ),
+        ModelSpec(
+            "exaone_2_4b",
+            "LGAI-EXAONE/EXAONE-3.5-2.4B-Instruct",
+            "exaone3.5",
+            2.4,
+            default_4bit=False,
+            trust_remote_code=True,
+        ),
     )
 }
 
@@ -39,4 +55,3 @@ def get_model_spec(key: str) -> ModelSpec:
     except KeyError as error:
         choices = ", ".join(sorted(MODEL_REGISTRY))
         raise ValueError(f"Unknown model key {key!r}. Available: {choices}") from error
-

@@ -55,7 +55,11 @@ def option_token_ids(tokenizer) -> list[int]:
 def run_condition(output_dir: Path, condition: dict) -> dict:
     spec = get_model_spec(condition["model"])
     examples = [adapt_row(row, "multiple_choice") for row in read_jsonl(condition["input"])[: condition["limit"]]]
-    tokenizer, model = load_model(spec.model_id, condition["quantize_4bit"])
+    tokenizer, model = load_model(
+        spec.model_id,
+        condition["quantize_4bit"],
+        trust_remote_code=spec.trust_remote_code,
+    )
     candidate_ids = option_token_ids(tokenizer)
     if torch.cuda.is_available():
         torch.cuda.reset_peak_memory_stats()
