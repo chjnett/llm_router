@@ -136,6 +136,12 @@ FP16 4조건도 오류 없이 완료됐다. MMLU batch 8/1의 p50은 기존 4-bi
 
 따라서 생성 답변 기반 wall-clock 튜닝은 종료한다. 마지막 최소 진단은 MMLU의 A/B/C/D 후보 토큰 logit을 한 번의 forward로 비교하는 결정론적 option-logit 평가다. 생성 루프와 형식 파싱을 제거한 조건에서도 비용비 0.50을 만족하지 못하면 현재 단일 RTX 3090 환경의 wall-clock routing 주장을 최종 종료한다.
 
+### Option-logit one-forward 결과
+
+8/8 조건이 오류 없이 완료됐다. Batch 8에서 M0 Qwen1.5B FP16/Qwen7B의 p50은 12.14/49.13ms로 비용비 0.247, M2 SmolLM2-1.7B/Qwen7B는 14.17/49.13ms로 0.288이었다. 두 조합 모두 사전 0.50 gate를 처음으로 통과했다. 정답 Lower만 채택하는 oracle에서 M0는 정규화 지연 0.722와 시스템 정확도 74.0%(Upper 65.0%), M2는 0.873과 72.0%를 기록했다. M1은 비용비 0.363이지만 Lower 정확도가 21.5%라 oracle 정규화 지연 1.148로 실패했다.
+
+따라서 M0와 M2의 option probability, top-1 margin, normalized entropy, logit spread를 수집하고 5-fold OOF Logistic Regression으로 실제 선택 가능성을 평가한다. 동일 OOF 예측에서 threshold까지 선택하는 탐색 결과이므로, 95% 품질 유지와 10% latency 절감을 통과해도 독립 split 재인증 전에는 확인 결과로 주장하지 않는다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

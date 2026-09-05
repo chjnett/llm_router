@@ -236,6 +236,15 @@ It writes `paper/data/qwen_precision_ablation_analysis.json`, streams progress t
 `artifacts/logs/mmlu_logit_screening.log`, and updates the eight-condition aggregate at
 `artifacts/results/mmlu_logit_screening.json`.
 
+For option-logit pairs that pass the oracle gate, collect probability features and run the
+exploratory OOF selector:
+
+```bash
+python -m src.analyze_mmlu_logit_screening
+python -m src.run_mmlu_logit_confidence_features
+python -m src.analyze_mmlu_logit_confidence
+```
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

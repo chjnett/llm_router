@@ -293,3 +293,11 @@ def test_mmlu_logit_matrix_uses_best_known_precision():
     matrix = logit_conditions("mmlu.jsonl")
     assert len(matrix) == 8
     assert all(row["quantize_4bit"] == (row["model"] == "qwen_7b") for row in matrix)
+
+
+def test_mmlu_logit_confidence_feature_schema_is_fixed():
+    from src.analyze_mmlu_logit_confidence import FEATURES
+
+    assert len(FEATURES) == 8
+    assert "probability_margin" in FEATURES
+    assert "normalized_entropy" in FEATURES
