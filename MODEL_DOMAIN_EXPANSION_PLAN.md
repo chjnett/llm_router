@@ -164,6 +164,12 @@ Lower 정답 순위 AUC는 selection OOF 0.698, certification 0.729, final test 
 
 사후 threshold 민감도에서 certification과 final test가 동시에 성능 gate를 통과한 연속 구간은 0.48~0.49와 0.59~0.62였다. 이는 확인 결과가 아니며 기존 실패를 재분류하지 않는다. 높은 confidence만 채택하는 보수적 구간의 중앙값 0.60을 새 사전 후보로 고정하고, 기존 700개와 겹치지 않는 MMLU test 500개에서 한 번 더 확인하는 AI-10을 다음 조건부 GPU 단계로 둔다.
 
+### AI-10 비중복 재확인 결과
+
+기존 validation 200과 첫 독립 test 500을 제외하고 seed 2027로 MMLU test 500개를 새로 과목 균형 추출했다. ID 중복은 0개였고 threshold 0.60을 실행 전에 고정했다. Certification-2에서 Lower/Upper 정확도 57.6/73.2%, 채택률 40.8%, 시스템 정확도 69.6%, 품질 유지 95.08%, 지연 절감 16.10%였다. Final-2는 58.0/73.2%, 채택률 37.6%, 시스템 정확도 70.4%, 품질 유지 96.17%, 지연 절감 12.90%였다. 두 분할 모두 성능 gate를 통과해 MMLU one-forward routing의 성능 결과를 confirmed로 승격한다.
+
+Strict risk는 여전히 실패했다. Unsafe exact 95% 상한은 Certification-2 16.06%, Final-2 18.63%다. 따라서 논문에서는 “95% 품질 유지와 10% latency 절감의 독립 재현”과 “5% 조건부 unsafe 인증 실패”를 분리해 보고한다. 다음 단계는 구조와 scorer를 유지한 채 KMMLU 200문항에서 한국어 전이 screening을 수행하는 것이다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처
