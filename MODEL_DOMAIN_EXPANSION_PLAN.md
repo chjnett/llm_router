@@ -170,6 +170,10 @@ Lower 정답 순위 AUC는 selection OOF 0.698, certification 0.729, final test 
 
 Strict risk는 여전히 실패했다. Unsafe exact 95% 상한은 Certification-2 16.06%, Final-2 18.63%다. 따라서 논문에서는 “95% 품질 유지와 10% latency 절감의 독립 재현”과 “5% 조건부 unsafe 인증 실패”를 분리해 보고한다. 다음 단계는 구조와 scorer를 유지한 채 KMMLU 200문항에서 한국어 전이 screening을 수행하는 것이다.
 
+### AI-11 KMMLU 한국어 전이 스크리닝 · 실행 중
+
+2026-09-05에 자연과학·공학·경영·법/사회·건강·한국사를 포함한 20개 과목에서 각 10문항씩, 총 200문항의 결정적 표본을 생성했다. KMMLU 원본 정답은 1~4 인덱스이므로 내부 객관식 스키마에 맞춰 0~3으로 변환하며 단위 테스트로 이 오프셋을 고정했다. MMLU와 동일한 one-forward option-logit 방식으로 Qwen2.5-1.5B FP16, Qwen2.5-7B 4-bit, SmolLM2-360M FP16, SmolLM2-1.7B FP16의 batch 8/1 조건을 실행 중이다. 이 단계는 언어·도메인 전이 가능성을 거르는 screening이며, 결과를 본 뒤 곧바로 확인 주장으로 사용하지 않는다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

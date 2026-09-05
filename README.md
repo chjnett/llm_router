@@ -281,7 +281,10 @@ stops further MMLU threshold tuning.
 AI-10 is confirmed on 500 non-overlapping rows: certification retains 95.08% of Upper quality
 with 16.10% lower latency, and final test retains 96.17% with 12.90% lower latency. Strict 5%
 unsafe-risk certification still fails, so performance and safety claims remain separate. The
-next conditional GPU step copies the fixed option-logit structure to KMMLU.
+The next conditional GPU step copies the fixed option-logit structure to KMMLU. AI-11 is now
+running on a deterministic 200-item KMMLU screening set: 10 test questions from each of 20
+subjects spanning STEM, engineering, business, law/social science, health, and Korean history.
+KMMLU's 1-based answer labels are explicitly converted to the router's 0-based schema.
 
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
