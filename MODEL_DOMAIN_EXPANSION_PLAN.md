@@ -176,6 +176,10 @@ Strict risk는 여전히 실패했다. Unsafe exact 95% 상한은 Certification-
 
 8개 조건은 실패 없이 완료됐다. Batch 8에서 Qwen1.5B/Qwen7B 정확도는 35.0%/48.5%, p50 지연은 16.02/65.89ms로 비용비 0.243이었다. 완벽한 selector를 가정한 oracle 시스템은 정확도 60.0%, 정규화 지연 0.893으로 고정 gate를 통과했다. 나머지 모델쌍과 batch 1 조건은 통과하지 못했다. 따라서 다음 GPU 사용은 M0 batch 8의 option-probability 특징 수집에만 제한하고 OOF confidence policy가 실제 품질 95%와 지연 10%를 동시에 만족하는지 확인한다. 절대 Upper 정확도 48.5%가 낮다는 한계 때문에, 성공하더라도 이 단계는 한국어 전이 가능성의 탐색 결과로만 해석한다.
 
+### AI-12 KMMLU OOF confidence gate · 중단 판정
+
+M0의 8개 option-probability 특징으로 5-fold OOF Logistic Regression을 적용한 결과 AUC 0.654, AP 0.560이었다. Upper 품질의 95%를 유지하는 선택점은 threshold 0.675, 채택률 20.0%, 시스템 정확도 46.5%, 품질 유지 95.88%였으나 정규화 지연은 1.043으로 Always Upper보다 4.3% 느렸다. 채택 40건 중 unsafe 9건이며 exact 95% 상한은 35.98%였다. 따라서 10% 지연 절감 gate와 strict risk를 모두 실패한다. 동일 Qwen/Smol 조합과 동일 confidence 특징으로 KMMLU를 더 돌리지 않는다. 다음 한국어 실험은 한국어 성능이 더 높은 Upper/Lower 후보를 50~200문항 option-logit으로 먼저 선별하고, 비용비와 oracle gate를 통과한 경우에만 confidence 학습으로 확장한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

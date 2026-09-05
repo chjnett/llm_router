@@ -290,6 +290,12 @@ practical oracle candidate: Lower/Upper accuracy is 35.0%/48.5%, latency ratio i
 oracle cascade reaches 60.0% accuracy at normalized latency 0.893. The next exploratory gate is
 OOF confidence fitting for this pair; the low absolute accuracy must remain an explicit limitation.
 
+AI-12 completed that OOF gate. Routing AUC is 0.654, but the 95%-quality operating point accepts
+only 20.0% of requests and has normalized latency 1.043. It is therefore 4.3% slower than Always
+Upper and fails the practical 10% latency-reduction gate. Further KMMLU runs with the same models
+and features are stopped; a stronger Korean-capable model pair must pass a small option-logit
+screening before any new confidence training.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
