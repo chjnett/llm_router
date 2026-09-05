@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 
 from .common import read_jsonl, write_json
+from .prepare_ifeval_screening import clean_kwargs
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,7 +36,7 @@ def score(input_rows: list[dict], prediction_rows: list[dict], loose: bool) -> d
             key=int(metadata["key"]),
             instruction_id_list=list(metadata["instruction_id_list"]),
             prompt=row["prompt"],
-            kwargs=list(metadata["kwargs"]),
+            kwargs=clean_kwargs(list(metadata["kwargs"])),
         )
         response = predictions[row["id"]]
         output = evaluator(example, {row["prompt"]: response})

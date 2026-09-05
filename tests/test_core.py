@@ -18,7 +18,7 @@ from src.analyze_output_length_ablation import analyze
 from src.analyze_answer_only_confidence import select_policy
 from src.run_token_budget_sweep import conditions as token_budget_conditions
 from src.prepare_kmmlu_screening import convert_row
-from src.prepare_ifeval_screening import balanced_sample as sample_ifeval
+from src.prepare_ifeval_screening import balanced_sample as sample_ifeval, clean_kwargs
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -367,3 +367,4 @@ def test_ifeval_sampling_preserves_official_metadata():
     assert {row["id"] for row in sampled} == {"ifeval-1", "ifeval-2"}
     assert all(row["task_type"] == "instruction_following" for row in sampled)
     assert all("instruction_id_list" in row["task_metadata"] for row in sampled)
+    assert clean_kwargs([{"num_words": 3, "language": None, "keywords": []}]) == [{"num_words": 3}]

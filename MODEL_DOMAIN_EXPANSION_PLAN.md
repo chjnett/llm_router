@@ -194,6 +194,12 @@ HyperCLOVAX의 8개 option-probability 특징으로 5-fold OOF Logistic Regressi
 
 기존 200문항을 제외하고 20과목에서 각 25문항씩 새로 뽑아 certification/final test 250개씩 고정했다. Selection 200개로 confidence 모델을 학습하고 threshold 0.575와 latency ratio 0.0941을 변경하지 않았다. Certification은 품질 유지 96.52%, 지연 절감 14.19%로 성능 gate를 통과했다. Final test는 품질 유지 97.66%였으나 채택률 18.0%로 지연 절감 8.59%에 그쳐 10% 기준을 1.41%p 실패했다. Strict unsafe exact 95% 상한도 25.11/27.24%로 실패했다. 따라서 한국어 전이는 유망한 near-miss이지만 confirmed로 승격하지 않으며, 이 결과를 보고 threshold를 다시 고르지 않는다.
 
+### AI-16 IFEval 공식 채점 스크리닝 · Oracle 비용 실패
+
+Google Research 공식 `instruction_following_eval`을 커밋 `932d4685e23f671b9e8c2abc72dd228ba5ff9252`로 고정하고 strict/loose evaluator 테스트 48개와 subtest 91개를 통과시켰다. 541문항 중 9개 주요 제약군을 균형 추출한 50문항에 Qwen2.5-1.5B FP16과 Qwen2.5-7B 4-bit를 최대 768토큰으로 실행했다. Strict prompt 정확도는 48/84%, loose는 54/86%였다. 평균 생성 길이는 Lower 195.36, Upper 217.30토큰이고 token-limit 도달률은 4/6%였다.
+
+Lower p50 지연비가 Upper의 0.703이라 사전 0.50 비용 gate를 실패했다. Lower가 맞힌 모든 요청만 완벽히 채택하는 oracle에서도 strict 정확도는 Upper와 같은 84%이고 정규화 지연은 1.223으로 Always Upper보다 22.3% 느리다. 따라서 200문항 확장과 confidence 학습을 중단한다. 이 결과는 긴 자유 생성에서는 작은 모델도 충분히 짧게 답하지 않아 Lower-first cascade 비용을 회수하지 못하며, feasibility guard가 도메인에 따라 라우팅을 자동 비활성화해야 한다는 증거다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

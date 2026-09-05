@@ -306,6 +306,13 @@ quality, 14.19% latency reduction), while final test retains 97.66% quality but 
 latency. The result is therefore not confirmed. EXAONE-3.5-2.4B was downloaded as a candidate,
 but its remote model code is incompatible with Transformers 5.12; no accuracy result is reported.
 
+AI-16 adds the official Google IFEval strict/loose evaluator pinned at commit `932d4685` and
+validates its vendored tests (`48 passed, 91 subtests passed`). On the balanced 50-item IFEval
+screen, Qwen1.5B/Qwen7B strict
+prompt accuracy is 48%/84% and loose accuracy is 54%/86%. Lower latency is 70.3% of Upper and
+the perfect-selector normalized latency is 1.223, so even an oracle cascade is 22.3% slower than
+Always Upper. The fixed feasibility gate stops expansion to 200 items.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

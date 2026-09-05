@@ -14,6 +14,14 @@ def primary_family(row: dict) -> str:
     return instruction_ids[0].split(":", 1)[0] if instruction_ids else "unknown"
 
 
+def clean_kwargs(values: list[dict]) -> list[dict]:
+    """Restore the sparse kwargs used by the official JSONL from HF's fixed struct."""
+    return [
+        {key: value for key, value in item.items() if value is not None and value != []}
+        for item in values
+    ]
+
+
 def balanced_sample(rows: list[dict], limit: int, seed: int) -> list[dict]:
     rng = random.Random(seed)
     groups: dict[str, list[dict]] = defaultdict(list)
@@ -39,7 +47,7 @@ def balanced_sample(rows: list[dict], limit: int, seed: int) -> list[dict]:
                     "dataset": "google/IFEval",
                     "key": int(row["key"]),
                     "instruction_id_list": list(row["instruction_id_list"]),
-                    "kwargs": list(row["kwargs"]),
+                    "kwargs": clean_kwargs(list(row["kwargs"])),
                     "primary_family": family,
                 },
             })

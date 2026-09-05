@@ -1,0 +1,1697 @@
+{
+  "protocol": "exploratory official IFEval strict/loose screen on 50 rows",
+  "official_evaluator_commit": "932d4685e23f671b9e8c2abc72dd228ba5ff9252",
+  "lower": {
+    "model": {
+      "key": "qwen_1_5b",
+      "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "family": "qwen2.5",
+      "size_billions": 1.5,
+      "access": "public",
+      "default_4bit": true,
+      "trust_remote_code": false
+    },
+    "strict": {
+      "prompt_accuracy": 0.48,
+      "instruction_accuracy": 0.527027027027027,
+      "details": [
+        {
+          "id": "ifeval-2563",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1922",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1800",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1094",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-301",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2225",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3415",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1825",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-281",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1667",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3287",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1305",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2497",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1733",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2309",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2921",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2825",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3672",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2728",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2585",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-218",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2832",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2392",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3305",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2549",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3350",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2475",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2531",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-374",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2070",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2515",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2432",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1259",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2041",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3245",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-163",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2870",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3263",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2136",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3606",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-260",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3682",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1879",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1739",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3409",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3617",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3224",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3126",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3719",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1936",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    "loose": {
+      "prompt_accuracy": 0.54,
+      "instruction_accuracy": 0.5945945945945946,
+      "prompt_correct": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "details": [
+        {
+          "id": "ifeval-2563",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1922",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1800",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1094",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-301",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2225",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3415",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1825",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-281",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1667",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3287",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1305",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2497",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1733",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2309",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2921",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2825",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3672",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2728",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2585",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-218",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2832",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2392",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3305",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2549",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3350",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2475",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2531",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-374",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2070",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2515",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2432",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1259",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2041",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3245",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-163",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2870",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3263",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2136",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3606",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-260",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3682",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1879",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1739",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3409",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3617",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3224",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3126",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3719",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1936",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    "metrics": {
+      "items": 50,
+      "judged_items": 0,
+      "accuracy": null,
+      "parse_success_rate": null,
+      "generated_tokens_mean": 195.36,
+      "token_limit_rate": 0.04,
+      "latency_ms_p50": 3460.330000030808,
+      "latency_ms_p95": 17741.42670002766,
+      "items_per_second": 0.1974055483089032,
+      "peak_vram_allocated_gb": 2.924100875854492,
+      "peak_vram_reserved_gb": 2.953125,
+      "power_samples": 455,
+      "power_watts_mean": 216.89718681318672,
+      "power_watts_max": 234.02,
+      "gross_energy_joules": 54936.95305711031,
+      "gross_energy_joules_per_item": 1098.739061142206
+    }
+  },
+  "upper": {
+    "model": {
+      "key": "qwen_7b",
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "family": "qwen2.5",
+      "size_billions": 7.0,
+      "access": "public",
+      "default_4bit": true,
+      "trust_remote_code": false
+    },
+    "strict": {
+      "prompt_accuracy": 0.84,
+      "instruction_accuracy": 0.8513513513513513,
+      "details": [
+        {
+          "id": "ifeval-2563",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1922",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1800",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1094",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-301",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2225",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3415",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            true,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1825",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-281",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1667",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3287",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1305",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2497",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1733",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2309",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2921",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2825",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3672",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2728",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2585",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-218",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2832",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2392",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3305",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2549",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3350",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2475",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2531",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-374",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-2070",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2515",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2432",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1259",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2041",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3245",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-163",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2870",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3263",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2136",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3606",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-260",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3682",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1879",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1739",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3409",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3617",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3224",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3126",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3719",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1936",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    "loose": {
+      "prompt_accuracy": 0.86,
+      "instruction_accuracy": 0.8918918918918919,
+      "prompt_correct": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "details": [
+        {
+          "id": "ifeval-2563",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1922",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1800",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1094",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-301",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2225",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3415",
+          "follow_all": false,
+          "follow_instruction_list": [
+            true,
+            true,
+            false
+          ]
+        },
+        {
+          "id": "ifeval-1825",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-281",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1667",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false
+          ]
+        },
+        {
+          "id": "ifeval-3287",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1305",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2497",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1733",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2309",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2921",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2825",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3672",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2728",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2585",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-218",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2832",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2392",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3305",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2549",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3350",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2475",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2531",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-374",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2070",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2515",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2432",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1259",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2041",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3245",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-163",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2870",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3263",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-2136",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3606",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-260",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3682",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1879",
+          "follow_all": false,
+          "follow_instruction_list": [
+            false,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1739",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3409",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3617",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3224",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3126",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-3719",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true
+          ]
+        },
+        {
+          "id": "ifeval-1936",
+          "follow_all": true,
+          "follow_instruction_list": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    "metrics": {
+      "items": 50,
+      "judged_items": 0,
+      "accuracy": null,
+      "parse_success_rate": null,
+      "generated_tokens_mean": 217.3,
+      "token_limit_rate": 0.06,
+      "latency_ms_p50": 4923.924800008535,
+      "latency_ms_p95": 25425.675499951467,
+      "items_per_second": 0.12553502380641693,
+      "peak_vram_allocated_gb": 5.335387706756592,
+      "peak_vram_reserved_gb": 5.51953125,
+      "power_samples": 712,
+      "power_watts_mean": 258.294297752809,
+      "power_watts_max": 307.17,
+      "gross_energy_joules": 102877.3843031708,
+      "gross_energy_joules_per_item": 2057.5476860634158
+    }
+  },
+  "latency_ratio": 0.7027584986726056,
+  "oracle_strict_prompt_accuracy": 0.84,
+  "oracle_normalized_latency": 1.2227584986726057,
+  "checks": {
+    "upper_accuracy_advantage_5pp": true,
+    "latency_ratio_below_0_5": false,
+    "oracle_quality_95pct": true,
+    "oracle_latency_10pct_reduction": false,
+    "lower_token_limit_below_10pct": true
+  },
+  "continue_to_200": false
+}
