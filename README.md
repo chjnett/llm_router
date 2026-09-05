@@ -264,6 +264,16 @@ retained 93.62% of Upper quality while reducing latency 26.50%, whereas final te
 gate, do not promote the final-test pass as a confirmed result. Analyze calibration drift before
 spending more GPU time on another domain.
 
+Diagnose the distribution shift without changing the failed frozen policy:
+
+```bash
+python -m src.analyze_mmlu_calibration_drift
+```
+
+The tracked output `paper/data/mmlu_calibration_drift_analysis.json` reports ECE, Brier,
+subject-group behavior, and post-hoc threshold sensitivity. Any robust interval is a candidate
+for a new preregistered evaluation only; it does not replace the failed certification.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

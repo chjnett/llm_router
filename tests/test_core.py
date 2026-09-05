@@ -316,3 +316,16 @@ def test_independent_certification_uses_fixed_performance_gate():
     assert result["system_accuracy"] == 1.0
     assert result["normalized_latency"] == 0.75
     assert result["performance_gate_pass"]
+
+
+def test_expected_calibration_error_detects_perfect_predictions():
+    from src.analyze_mmlu_calibration_drift import contiguous_threshold_ranges, expected_calibration_error
+
+    labels = np.asarray([0, 0, 1, 1], dtype=bool)
+    assert expected_calibration_error(labels, np.asarray([0.0, 0.0, 1.0, 1.0])) == 0.0
+    rows = [
+        {"threshold": 0.50, "both_performance_pass": True},
+        {"threshold": 0.505, "both_performance_pass": True},
+        {"threshold": 0.60, "both_performance_pass": True},
+    ]
+    assert contiguous_threshold_ranges(rows) == [[0.50, 0.505], [0.60, 0.60]]

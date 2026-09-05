@@ -156,6 +156,14 @@ Certification에서 Lower/Upper 정확도는 64.4/75.2%, 채택률 51.2%, 시스
 
 두 독립 분할 모두 23% 이상의 지연 절감은 재현됐다. 따라서 one-forward option-logit 비용 효과는 유지되지만, validation에서 고른 confidence threshold가 과목·난이도 분포 이동에 안정적이지 않은 것이 현재 병목이다. 다음 단계는 GPU 확장이 아니라 subject별 calibration drift, threshold 민감도, calibration error를 CPU에서 분석하고 사전 고정 가능한 보정 규칙을 설계하는 것이다.
 
+### Calibration drift 진단
+
+Lower 정답 순위 AUC는 selection OOF 0.698, certification 0.729, final test 0.755로 개선됐지만 ECE는 0.083, 0.105, 0.129로 악화됐다. Brier score는 0.217, 0.207, 0.201이었다. 즉 분류 순위가 무너진 것이 아니라 확률 수준과 전역 threshold의 calibration이 분할 사이에서 이동했다.
+
+독립 500개를 과목군으로 합쳐 고정 threshold 0.545를 평가하면 STEM과 other는 품질 유지 96.61/97.73%로 통과했지만 humanities와 social sciences는 92.13/94.19%로 실패했다. 과목 구성과 Upper-Lower 오류 상보성 차이가 certification 변동의 주요 원인이다.
+
+사후 threshold 민감도에서 certification과 final test가 동시에 성능 gate를 통과한 연속 구간은 0.48~0.49와 0.59~0.62였다. 이는 확인 결과가 아니며 기존 실패를 재분류하지 않는다. 높은 confidence만 채택하는 보수적 구간의 중앙값 0.60을 새 사전 후보로 고정하고, 기존 700개와 겹치지 않는 MMLU test 500개에서 한 번 더 확인하는 AI-10을 다음 조건부 GPU 단계로 둔다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처
