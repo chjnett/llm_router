@@ -118,6 +118,12 @@ GSM8K validation 200문항, seed 42, batch 8, 기존 concise 프롬프트, 최�
 
 따라서 64-token Answer-only Lower는 중단한다. 다음 최소 실험은 Qwen1.5B의 중간 출력 예산(96/128/192/256)을 concise prompt로 고정해 정확도–latency 곡선을 찾는 것이다. 어느 조건도 품질 유지 95%와 latency 10% 절감을 동시에 만족하지 못하면, 현재 하드웨어에서 wall-clock 성능 개선 주장은 종료하고 compute/energy 절감과 feasibility guard를 중심 결과로 유지한다.
 
+### 중간 출력 예산 sweep 결과
+
+8/8 조건이 오류 없이 완료됐다. Batch 8에서 96/128/192/256토큰의 정확도는 24.5/35.0/56.5/62.0%였고 토큰 상한 도달률은 73.0/52.5/17.5/6.0%였다. 짧은 예산의 속도 개선 대부분은 풀이 절단과 함께 발생했다. 256토큰은 512-token Lower 대비 품질 96.88%를 유지하며 batch 8 p50을 11.11% 줄였지만 상한 도달률 6%로 5% gate를 근소하게 실패했다. Batch 1에서는 동일 품질 유지, p50 10.04% 감소, 상한 도달률 4%로 Lower 압축 gate를 유일하게 통과했다.
+
+그러나 256-token Lower는 Qwen7B 대비 p50이 batch 8에서 1.852배, batch 1에서 1.517배였다. 정답 Lower만 완벽하게 채택하는 oracle에서도 latency와 energy 절감 가능 조건은 0개다. 따라서 같은 수학 도메인의 wall-clock cascade 최적화는 중단한다. 다음 GPU 실험은 MMLU 객관식 200문항에서 모든 모델의 생성을 A/B/C/D 짧은 출력으로 통제해 출력 길이 교란을 제거한다. 모델쌍의 실측 비용비가 0.50 미만일 때만 confidence routing과 후속 도메인으로 확장한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

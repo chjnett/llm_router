@@ -215,3 +215,46 @@ def test_token_budget_sweep_matrix_has_online_and_batched_conditions():
     assert len(matrix) == 8
     assert {row["budget"] for row in matrix} == {96, 128, 192, 256}
     assert {(row["batch"], row["limit"]) for row in matrix} == {(8, 200), (1, 50)}
+
+
+def test_token_budget_analysis_separates_compression_from_cascade_feasibility():
+    from src.analyze_token_budget_sweep import analyze as analyze_budgets
+
+    def baseline(model, batch, limit, accuracy, latency, energy):
+        return {"model": model, "mode": "task", "batch": batch, "limit": limit, "metrics": {
+            "accuracy": accuracy, "latency_ms_p50": latency, "gross_energy_joules_per_item": energy,
+        }}
+
+    baselines = {"runs": [
+        baseline("qwen_1_5b", 1, 50, 0.64, 100.0, 100.0),
+        baseline("qwen_7b", 1, 50, 0.86, 50.0, 120.0),
+    ]}
+    sweep = {"completed": 1, "failures": [], "runs": [{
+        "budget": 256, "batch": 1, "limit": 50,
+        "metrics": {"accuracy": 0.62, "token_limit_rate": 0.04, "latency_ms_p50": 89.0,
+                    "gross_energy_joules_per_item": 90.0},
+    }]}
+    result = analyze_budgets(sweep, baselines)
+    assert len(result["compression_candidates"]) == 1
+    assert result["oracle_latency_candidates"] == []
+
+
+def test_mmlu_balanced_sampler_and_short_answer_matrix():
+    from src.prepare_mmlu_screening import balanced_sample
+    from src.run_mmlu_short_answer_screening import conditions as mmlu_conditions
+
+    rows = [
+        {"question": f"q{i}", "choices": ["a", "b"], "answer": i % 2, "subject": f"s{i % 2}", "_source_index": i}
+        for i in range(8)
+    ]
+    selected = balanced_sample(rows, 6, 42)
+    assert len(selected) == 6
+    assert {row["task_metadata"]["subject"] for row in selected} == {"s0", "s1"}
+    matrix = mmlu_conditions("mmlu.jsonl")
+    assert len(matrix) == 8
+    assert {row["model"] for row in matrix} == {"qwen_1_5b", "qwen_7b", "smollm2_360m", "smollm2_1_7b"}
+    assert {(row["batch"], row["limit"]) for row in matrix} == {(8, 200), (1, 50)}
+
+
+def test_multiple_choice_answer_only_prompt_is_supported():
+    assert "only one line" in system_prompt("multiple_choice", "answer_only")

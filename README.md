@@ -192,6 +192,28 @@ conda run --no-capture-output -n llm-practice python -m src.run_token_budget_swe
 It writes live progress to `artifacts/logs/token_budget_sweep.log` and updates
 `artifacts/results/token_budget_sweep.json` after every completed condition.
 
+Analyze the completed sweep against the fixed 512-token Qwen Lower and Qwen7B baselines:
+
+```bash
+python -m src.analyze_token_budget_sweep
+```
+
+The tracked decision artifact is `paper/data/token_budget_sweep_analysis.json`. The only
+compression-gate pass is the 256-token online condition; no condition is oracle-feasible
+as a wall-clock or energy cascade against Qwen7B. The next GPU screen therefore moves to
+short-answer MMLU instead of spending more compute on the same math prompt.
+
+Prepare and run the restartable short-answer MMLU screen:
+
+```bash
+python -m src.prepare_mmlu_screening
+python -m src.run_mmlu_short_answer_screening
+```
+
+Live progress is written to `artifacts/logs/mmlu_short_answer_screening.log`; the aggregate
+summary is updated at `artifacts/results/mmlu_short_answer_screening.json` after each of the
+eight Qwen/SmolLM2 batch and online conditions.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

@@ -64,6 +64,11 @@ def system_prompt(task_type: str, prompt_mode: str = "task") -> str:
             "Solve the problem independently, but return only one line in the exact form "
             "'Final answer: <number>'. Do not include reasoning or explanation."
         )
+    if task_type == "multiple_choice" and prompt_mode == "answer_only":
+        return (
+            "Choose the correct option internally, but return only one line in the exact form "
+            "'Final answer: <letter>'. Do not include reasoning or explanation."
+        )
     if prompt_mode != "task":
         raise ValueError(f"Prompt mode {prompt_mode!r} is only supported for numeric tasks")
     prompts = {
