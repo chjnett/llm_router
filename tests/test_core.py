@@ -258,3 +258,30 @@ def test_mmlu_balanced_sampler_and_short_answer_matrix():
 
 def test_multiple_choice_answer_only_prompt_is_supported():
     assert "only one line" in system_prompt("multiple_choice", "answer_only")
+
+
+def test_mmlu_analysis_rejects_slow_lower_even_with_accuracy_gap():
+    from src.analyze_mmlu_short_answer import analyze as analyze_mmlu
+
+    def run(model, accuracy, latency, energy, batch=8, limit=200):
+        return {"model": model, "batch": batch, "limit": limit, "metrics": {
+            "accuracy": accuracy, "latency_ms_p50": latency, "gross_energy_joules_per_item": energy,
+            "parse_success_rate": 1.0, "token_limit_rate": 0.0, "peak_vram_reserved_gb": 6.0,
+        }}
+    payload = {"completed": 4, "failures": [], "runs": [
+        run("qwen_1_5b", 0.5, 90, 60), run("qwen_7b", 0.7, 100, 100),
+        run("smollm2_360m", 0.2, 80, 50), run("smollm2_1_7b", 0.4, 70, 70),
+        run("qwen_1_5b", 0.5, 90, 60, 1, 50), run("qwen_7b", 0.7, 100, 100, 1, 50),
+        run("smollm2_360m", 0.2, 80, 50, 1, 50), run("smollm2_1_7b", 0.4, 70, 70, 1, 50),
+    ]}
+    result = analyze_mmlu(payload)
+    assert result["screening_passes"] == []
+
+
+def test_qwen_precision_ablation_covers_domains_and_serving_modes():
+    from src.run_qwen_precision_ablation import conditions as precision_conditions
+
+    matrix = precision_conditions()
+    assert len(matrix) == 4
+    assert {row["domain"] for row in matrix} == {"mmlu", "math"}
+    assert {(row["batch"], row["limit"]) for row in matrix} == {(8, 200), (1, 50)}

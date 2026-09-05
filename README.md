@@ -214,6 +214,17 @@ Live progress is written to `artifacts/logs/mmlu_short_answer_screening.log`; th
 summary is updated at `artifacts/results/mmlu_short_answer_screening.json` after each of the
 eight Qwen/SmolLM2 batch and online conditions.
 
+Analyze the MMLU pair gates, then run the final local serving-precision diagnostic:
+
+```bash
+python -m src.analyze_mmlu_short_answer
+python -m src.run_qwen_precision_ablation
+```
+
+The MMLU analysis is tracked at `paper/data/mmlu_short_answer_screening_analysis.json`.
+The FP16 diagnostic logs to `artifacts/logs/qwen_precision_ablation.log` and compares four
+MMLU/math batch and online conditions with their existing 4-bit baselines.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

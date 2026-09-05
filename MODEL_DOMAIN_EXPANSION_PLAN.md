@@ -124,6 +124,12 @@ GSM8K validation 200문항, seed 42, batch 8, 기존 concise 프롬프트, 최�
 
 그러나 256-token Lower는 Qwen7B 대비 p50이 batch 8에서 1.852배, batch 1에서 1.517배였다. 정답 Lower만 완벽하게 채택하는 oracle에서도 latency와 energy 절감 가능 조건은 0개다. 따라서 같은 수학 도메인의 wall-clock cascade 최적화는 중단한다. 다음 GPU 실험은 MMLU 객관식 200문항에서 모든 모델의 생성을 A/B/C/D 짧은 출력으로 통제해 출력 길이 교란을 제거한다. 모델쌍의 실측 비용비가 0.50 미만일 때만 confidence routing과 후속 도메인으로 확장한다.
 
+### MMLU 짧은 정답 screening 결과
+
+8/8 조건이 오류 없이 완료됐다. Batch 8에서 Qwen1.5B/7B 정확도는 49.5/69.0%, p50은 59.78/65.68ms로 latency 비율 0.910이었다. SmolLM2 360M/1.7B는 정확도 22.5/39.0%, latency 비율 1.424였고, SmolLM2-1.7B/Qwen7B cross-family 비율은 0.753이었다. 평균 출력이 4.6~9.0토큰으로 통제되면서 Qwen 수학의 1.632배 속도 역전은 대부분 사라졌으므로 출력 길이가 주요 교란 변수였음은 확인됐다.
+
+하지만 모든 조합이 사전 고정한 latency 0.50 gate를 실패했고, Lower 정답만 완벽하게 채택하는 oracle에서도 latency와 energy 절감 조건은 0개였다. 다음 최소 GPU 진단은 Qwen1.5B FP16 대 기존 4-bit 비교다. 작은 모델에서 bitsandbytes dequantization overhead를 제거해 MMLU와 256-token 수학의 처리 속도가 회복되는지 확인한다. 이 4조건도 실패하면 현재 Transformers 단일 RTX 3090 환경의 wall-clock routing 주장을 종료하고, compute proxy/에너지 및 다른 serving backend 검증을 별도 연구 질문으로 분리한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

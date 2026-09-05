@@ -1,0 +1,146 @@
+{
+  "completed_runs": 8,
+  "failed_runs": 0,
+  "conditions": [
+    {
+      "pair": "M0",
+      "lower": "qwen_1_5b",
+      "upper": "qwen_7b",
+      "batch_size": 8,
+      "sample_count": 200,
+      "lower_accuracy": 0.495,
+      "upper_accuracy": 0.69,
+      "accuracy_gap_pp": 19.499999999999996,
+      "latency_ratio": 0.9101661063504293,
+      "energy_ratio": 0.6154627029275112,
+      "lower_token_limit_rate": 0.035,
+      "oracle_latency_margin": -0.4151661063504293,
+      "oracle_energy_margin": -0.12046270292751116,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "pair": "M0",
+      "lower": "qwen_1_5b",
+      "upper": "qwen_7b",
+      "batch_size": 1,
+      "sample_count": 50,
+      "lower_accuracy": 0.54,
+      "upper_accuracy": 0.66,
+      "accuracy_gap_pp": 12.0,
+      "latency_ratio": 0.9691017820793955,
+      "energy_ratio": 0.6552186389850706,
+      "lower_token_limit_rate": 0.04,
+      "oracle_latency_margin": -0.4291017820793954,
+      "oracle_energy_margin": -0.11521863898507057,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "pair": "M1",
+      "lower": "smollm2_360m",
+      "upper": "smollm2_1_7b",
+      "batch_size": 8,
+      "sample_count": 200,
+      "lower_accuracy": 0.225,
+      "upper_accuracy": 0.39,
+      "accuracy_gap_pp": 16.5,
+      "latency_ratio": 1.424125421644388,
+      "energy_ratio": 0.8972873094608784,
+      "lower_token_limit_rate": 0.14,
+      "oracle_latency_margin": -1.1991254216443878,
+      "oracle_energy_margin": -0.6722873094608784,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": false,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "pair": "M1",
+      "lower": "smollm2_360m",
+      "upper": "smollm2_1_7b",
+      "batch_size": 1,
+      "sample_count": 50,
+      "lower_accuracy": 0.3,
+      "upper_accuracy": 0.34,
+      "accuracy_gap_pp": 4.0000000000000036,
+      "latency_ratio": 1.232447242773749,
+      "energy_ratio": 0.8369172201299759,
+      "lower_token_limit_rate": 0.1,
+      "oracle_latency_margin": -0.9324472427737489,
+      "oracle_energy_margin": -0.5369172201299759,
+      "checks": {
+        "accuracy_gap": false,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": false,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "pair": "M2",
+      "lower": "smollm2_1_7b",
+      "upper": "qwen_7b",
+      "batch_size": 8,
+      "sample_count": 200,
+      "lower_accuracy": 0.39,
+      "upper_accuracy": 0.69,
+      "accuracy_gap_pp": 29.999999999999993,
+      "latency_ratio": 0.752730979441188,
+      "energy_ratio": 0.5695699092252429,
+      "lower_token_limit_rate": 0.095,
+      "oracle_latency_margin": -0.36273097944118804,
+      "oracle_energy_margin": -0.17956990922524285,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": false,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "pair": "M2",
+      "lower": "smollm2_1_7b",
+      "upper": "qwen_7b",
+      "batch_size": 1,
+      "sample_count": 50,
+      "lower_accuracy": 0.34,
+      "upper_accuracy": 0.66,
+      "accuracy_gap_pp": 32.0,
+      "latency_ratio": 0.6754269330352631,
+      "energy_ratio": 0.6545989709194561,
+      "lower_token_limit_rate": 0.04,
+      "oracle_latency_margin": -0.3354269330352631,
+      "oracle_energy_margin": -0.31459897091945604,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false
+    }
+  ],
+  "screening_passes": [],
+  "decision": "Short answers remove most of the Qwen latency inversion, but no pair reaches the predeclared 0.50 ratio and no pair is oracle-feasible. Test Qwen1.5B FP16 versus its 4-bit result before abandoning local wall-clock routing."
+}
