@@ -274,6 +274,10 @@ The tracked output `paper/data/mmlu_calibration_drift_analysis.json` reports ECE
 subject-group behavior, and post-hoc threshold sensitivity. Any robust interval is a candidate
 for a new preregistered evaluation only; it does not replace the failed certification.
 
+AI-10 freezes the conservative post-hoc candidate threshold at 0.60 and uses 500 new,
+non-overlapping MMLU test rows. This is the final threshold confirmation attempt; a failure
+stops further MMLU threshold tuning.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
