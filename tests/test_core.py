@@ -18,6 +18,7 @@ from src.analyze_output_length_ablation import analyze
 from src.analyze_answer_only_confidence import select_policy
 from src.run_token_budget_sweep import conditions as token_budget_conditions
 from src.prepare_kmmlu_screening import convert_row
+from src.prepare_ifeval_screening import balanced_sample as sample_ifeval
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -355,3 +356,14 @@ def test_korean_model_candidates_are_public_and_include_non_qwen():
     assert lower.family != upper.family
     assert lower.size_billions < upper.size_billions
     assert upper.trust_remote_code
+
+
+def test_ifeval_sampling_preserves_official_metadata():
+    rows = [
+        {"key": 1, "prompt": "one", "instruction_id_list": ["length_constraints:number_words"], "kwargs": [{"num_words": 3}]},
+        {"key": 2, "prompt": "two", "instruction_id_list": ["punctuation:no_comma"], "kwargs": [{}]},
+    ]
+    sampled = sample_ifeval(rows, 2, 42)
+    assert {row["id"] for row in sampled} == {"ifeval-1", "ifeval-2"}
+    assert all(row["task_type"] == "instruction_following" for row in sampled)
+    assert all("instruction_id_list" in row["task_metadata"] for row in sampled)

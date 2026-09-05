@@ -1,8 +1,12 @@
 accelerate>=1.0
+absl-py>=2.1
 bitsandbytes>=0.45
 datasets>=3.0
+immutabledict>=4.2
+langdetect>=1.0.9
 matplotlib>=3.8
 numpy>=1.26
+nltk>=3.9
 peft>=0.14
 pyyaml>=6.0
 scikit-learn>=1.5

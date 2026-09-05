@@ -4,4 +4,4 @@ __pycache__/
 .venv/
 artifacts/
 models/
-
+third_party/nltk_data/
