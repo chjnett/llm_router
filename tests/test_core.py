@@ -17,6 +17,7 @@ from src.run_output_length_ablation import conditions
 from src.analyze_output_length_ablation import analyze
 from src.analyze_answer_only_confidence import select_policy
 from src.run_token_budget_sweep import conditions as token_budget_conditions
+from src.prepare_kmmlu_screening import convert_row
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -329,3 +330,19 @@ def test_expected_calibration_error_detects_perfect_predictions():
         {"threshold": 0.60, "both_performance_pass": True},
     ]
     assert contiguous_threshold_ranges(rows) == [[0.50, 0.505], [0.60, 0.60]]
+
+
+def test_kmmlu_adapter_converts_one_based_answer():
+    row = {
+        "question": "sample",
+        "answer": 4,
+        "A": "one",
+        "B": "two",
+        "C": "three",
+        "D": "four",
+        "Human Accuracy": 0.5,
+    }
+    converted = convert_row(row, "Math", 7)
+    assert converted["answer"] == 3
+    assert converted["choices"] == ["one", "two", "three", "four"]
+    assert converted["id"] == "kmmlu-test-Math-7"
