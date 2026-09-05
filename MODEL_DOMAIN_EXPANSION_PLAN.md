@@ -130,6 +130,12 @@ GSM8K validation 200문항, seed 42, batch 8, 기존 concise 프롬프트, 최�
 
 하지만 모든 조합이 사전 고정한 latency 0.50 gate를 실패했고, Lower 정답만 완벽하게 채택하는 oracle에서도 latency와 energy 절감 조건은 0개였다. 다음 최소 GPU 진단은 Qwen1.5B FP16 대 기존 4-bit 비교다. 작은 모델에서 bitsandbytes dequantization overhead를 제거해 MMLU와 256-token 수학의 처리 속도가 회복되는지 확인한다. 이 4조건도 실패하면 현재 Transformers 단일 RTX 3090 환경의 wall-clock routing 주장을 종료하고, compute proxy/에너지 및 다른 serving backend 검증을 별도 연구 질문으로 분리한다.
 
+### Qwen serving precision 결과와 option-logit 피봇
+
+FP16 4조건도 오류 없이 완료됐다. MMLU batch 8/1의 p50은 기존 4-bit 59.78/228.64ms에서 51.34/159.25ms로 14.1/30.3% 개선됐다. 수학 256-token batch 8/1은 963.60/4195.32ms에서 529.68/1918.57ms로 45.0/54.3% 개선됐다. 그럼에도 Qwen7B 대비 latency 비율은 MMLU 0.782/0.675, 수학 1.018/0.694로 0.50 gate를 모두 실패했다. MMLU parse 성공률도 96.5/94.0%라 98% gate에 미달했다.
+
+따라서 생성 답변 기반 wall-clock 튜닝은 종료한다. 마지막 최소 진단은 MMLU의 A/B/C/D 후보 토큰 logit을 한 번의 forward로 비교하는 결정론적 option-logit 평가다. 생성 루프와 형식 파싱을 제거한 조건에서도 비용비 0.50을 만족하지 못하면 현재 단일 RTX 3090 환경의 wall-clock routing 주장을 최종 종료한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

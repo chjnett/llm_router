@@ -285,3 +285,11 @@ def test_qwen_precision_ablation_covers_domains_and_serving_modes():
     assert len(matrix) == 4
     assert {row["domain"] for row in matrix} == {"mmlu", "math"}
     assert {(row["batch"], row["limit"]) for row in matrix} == {(8, 200), (1, 50)}
+
+
+def test_mmlu_logit_matrix_uses_best_known_precision():
+    from src.run_mmlu_logit_screening import conditions as logit_conditions
+
+    matrix = logit_conditions("mmlu.jsonl")
+    assert len(matrix) == 8
+    assert all(row["quantize_4bit"] == (row["model"] == "qwen_7b") for row in matrix)

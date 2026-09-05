@@ -225,6 +225,17 @@ The MMLU analysis is tracked at `paper/data/mmlu_short_answer_screening_analysis
 The FP16 diagnostic logs to `artifacts/logs/qwen_precision_ablation.log` and compares four
 MMLU/math batch and online conditions with their existing 4-bit baselines.
 
+The final fixed-output diagnostic replaces generation with one-forward option-logit scoring:
+
+```bash
+python -m src.analyze_qwen_precision_ablation
+python -m src.run_mmlu_logit_screening
+```
+
+It writes `paper/data/qwen_precision_ablation_analysis.json`, streams progress to
+`artifacts/logs/mmlu_logit_screening.log`, and updates the eight-condition aggregate at
+`artifacts/results/mmlu_logit_screening.json`.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

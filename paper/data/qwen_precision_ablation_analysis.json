@@ -1,0 +1,88 @@
+{
+  "completed_runs": 4,
+  "failed_runs": 0,
+  "conditions": [
+    {
+      "domain": "mmlu",
+      "batch_size": 8,
+      "sample_count": 200,
+      "accuracy": 0.55,
+      "parse_success_rate": 0.965,
+      "latency_ms_p50": 51.34014999930514,
+      "latency_ratio_vs_4bit": 0.8588318148706654,
+      "latency_ratio_vs_upper": 0.7816796089507063,
+      "energy_ratio_vs_upper": 0.506493856896614,
+      "oracle_latency_margin": -0.23167960895070627,
+      "oracle_energy_margin": 0.043506143103386075,
+      "checks": {
+        "latency_ratio": false,
+        "parse_success": false,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "domain": "mmlu",
+      "batch_size": 1,
+      "sample_count": 50,
+      "accuracy": 0.6,
+      "parse_success_rate": 0.94,
+      "latency_ms_p50": 159.24500004621223,
+      "latency_ratio_vs_4bit": 0.6964793994854745,
+      "latency_ratio_vs_upper": 0.6749594272229605,
+      "energy_ratio_vs_upper": 0.6479457910279256,
+      "oracle_latency_margin": -0.07495942722296056,
+      "oracle_energy_margin": -0.04794579102792562,
+      "checks": {
+        "latency_ratio": false,
+        "parse_success": false,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "domain": "math",
+      "batch_size": 8,
+      "sample_count": 200,
+      "accuracy": 0.585,
+      "parse_success_rate": 1.0,
+      "latency_ms_p50": 529.6773500012932,
+      "latency_ratio_vs_4bit": 0.5496840349155672,
+      "latency_ratio_vs_upper": 1.0181625906270533,
+      "energy_ratio_vs_upper": 0.684549223498585,
+      "oracle_latency_margin": -0.4331625906270533,
+      "oracle_energy_margin": -0.09954922349858508,
+      "checks": {
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false
+    },
+    {
+      "domain": "math",
+      "batch_size": 1,
+      "sample_count": 50,
+      "accuracy": 0.64,
+      "parse_success_rate": 1.0,
+      "latency_ms_p50": 1918.5655000037514,
+      "latency_ratio_vs_4bit": 0.45731056839371187,
+      "latency_ratio_vs_upper": 0.6939439228475198,
+      "energy_ratio_vs_upper": 0.6526910811925516,
+      "oracle_latency_margin": -0.05394392284751981,
+      "oracle_energy_margin": -0.012691081192551579,
+      "checks": {
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false
+    }
+  ],
+  "screening_passes": [],
+  "decision": "FP16 substantially improves Qwen1.5B but does not make a generated-answer cascade latency-feasible. Stop generated-answer wall-clock tuning and test one-forward option-logit scoring on MMLU."
+}
