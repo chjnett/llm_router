@@ -1,0 +1,39 @@
+{
+  "protocol": "frozen model/features/threshold from MMLU validation; disjoint subject-balanced MMLU test rows",
+  "selection_rows": 200,
+  "threshold": 0.545,
+  "latency_ratio": 0.24704482170737938,
+  "certification": {
+    "items": 250,
+    "threshold": 0.545,
+    "lower_accuracy": 0.644,
+    "upper_accuracy": 0.752,
+    "acceptance_rate": 0.512,
+    "system_accuracy": 0.704,
+    "quality_retention": 0.9361702127659574,
+    "normalized_latency": 0.7350448217073793,
+    "latency_reduction": 0.2649551782926207,
+    "unsafe_count": 16,
+    "unsafe_rate_given_accept": 0.125,
+    "unsafe_exact_95_upper": 0.18364647789977578,
+    "performance_gate_pass": false,
+    "strict_risk_gate_pass": false
+  },
+  "final_test": {
+    "items": 250,
+    "threshold": 0.545,
+    "lower_accuracy": 0.652,
+    "upper_accuracy": 0.772,
+    "acceptance_rate": 0.484,
+    "system_accuracy": 0.748,
+    "quality_retention": 0.9689119170984456,
+    "normalized_latency": 0.7630448217073793,
+    "latency_reduction": 0.2369551782926207,
+    "unsafe_count": 10,
+    "unsafe_rate_given_accept": 0.08264462809917356,
+    "unsafe_exact_95_upper": 0.13615105858572782,
+    "performance_gate_pass": true,
+    "strict_risk_gate_pass": false
+  },
+  "overall_decision": "not_confirmed"
+}

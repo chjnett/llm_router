@@ -148,6 +148,14 @@ FP16 4조건도 오류 없이 완료됐다. MMLU batch 8/1의 p50은 기존 4-bi
 
 M0도 strict risk 인증은 실패했다. 채택 86건 중 unsafe가 10건이고 exact 95% 상한은 18.93%다. 또한 모델과 threshold를 같은 OOF 예측에서 선택했으므로 탐색 결과다. 다음 단계는 M0 모델, 8개 특징, Logistic Regression 설정, threshold 0.545를 고정하고 MMLU test에서 추출한 독립 250 certification 및 250 final test로 재평가하는 것이다.
 
+### 독립 MMLU test 250+250 확인 결과
+
+MMLU validation과 겹치지 않는 test 500문항을 seed 2026으로 과목 균형 추출하고, 앞 250개를 certification, 뒤 250개를 final test로 고정했다. 모델, 8개 특징, Logistic Regression 설정, threshold 0.545, latency ratio 0.247을 변경하지 않았다.
+
+Certification에서 Lower/Upper 정확도는 64.4/75.2%, 채택률 51.2%, 시스템 정확도 70.4%, 품질 유지 93.62%, 지연 절감 26.50%였다. 지연 기준은 통과했지만 품질 95%를 실패했다. Final test는 Lower/Upper 65.2/77.2%, 채택률 48.4%, 시스템 정확도 74.8%, 품질 유지 96.89%, 지연 절감 23.70%로 성능 gate를 통과했다. 그러나 사전 평가 순서에서 certification이 실패했으므로 전체 판정은 not confirmed다. Unsafe exact 95% 상한도 certification 18.36%, final 13.62%로 strict 5% 위험 기준을 실패했다.
+
+두 독립 분할 모두 23% 이상의 지연 절감은 재현됐다. 따라서 one-forward option-logit 비용 효과는 유지되지만, validation에서 고른 confidence threshold가 과목·난이도 분포 이동에 안정적이지 않은 것이 현재 병목이다. 다음 단계는 GPU 확장이 아니라 subject별 calibration drift, threshold 민감도, calibration error를 CPU에서 분석하고 사전 고정 가능한 보정 규칙을 설계하는 것이다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

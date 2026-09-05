@@ -258,6 +258,12 @@ python -m src.run_mmlu_independent_upper
 python -m src.certify_mmlu_logit_confidence
 ```
 
+The frozen independent result is intentionally reported as `not_confirmed`: certification
+retained 93.62% of Upper quality while reducing latency 26.50%, whereas final test retained
+96.89% while reducing latency 23.70%. Because certification failed the predeclared 95% quality
+gate, do not promote the final-test pass as a confirmed result. Analyze calibration drift before
+spending more GPU time on another domain.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
