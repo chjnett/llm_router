@@ -142,6 +142,12 @@ FP16 4조건도 오류 없이 완료됐다. MMLU batch 8/1의 p50은 기존 4-bi
 
 따라서 M0와 M2의 option probability, top-1 margin, normalized entropy, logit spread를 수집하고 5-fold OOF Logistic Regression으로 실제 선택 가능성을 평가한다. 동일 OOF 예측에서 threshold까지 선택하는 탐색 결과이므로, 95% 품질 유지와 10% latency 절감을 통과해도 독립 split 재인증 전에는 확인 결과로 주장하지 않는다.
 
+### Option probability confidence 결과
+
+5-fold OOF에서 M0 Qwen의 routing AUC/AP는 0.698/0.761이었다. Threshold 0.545에서 Lower 채택률 43.0%, 시스템 정확도 62.0%(Upper 65.0%의 95.38%), 정규화 지연 0.817로 18.30% 절감을 기록해 성능 gate를 처음 통과했다. M2는 AUC/AP 0.610/0.570, 동일 품질점 정규화 지연 1.118로 비용 gate를 실패했다.
+
+M0도 strict risk 인증은 실패했다. 채택 86건 중 unsafe가 10건이고 exact 95% 상한은 18.93%다. 또한 모델과 threshold를 같은 OOF 예측에서 선택했으므로 탐색 결과다. 다음 단계는 M0 모델, 8개 특징, Logistic Regression 설정, threshold 0.545를 고정하고 MMLU test에서 추출한 독립 250 certification 및 250 final test로 재평가하는 것이다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

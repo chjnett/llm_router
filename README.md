@@ -245,6 +245,10 @@ python -m src.run_mmlu_logit_confidence_features
 python -m src.analyze_mmlu_logit_confidence
 ```
 
+The exploratory M0 result retains 95.38% of Upper accuracy with 18.30% lower normalized
+latency, but its exact unsafe-risk upper bound is 18.93%. Treat it as selection-only: the
+next step fixes threshold 0.545 and evaluates independent MMLU test certification/final splits.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
