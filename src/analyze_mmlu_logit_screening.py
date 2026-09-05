@@ -58,13 +58,23 @@ def analyze(payload: dict) -> dict:
                 "practical_oracle_energy_pass": oracle_energy <= 0.90 and oracle_accuracy >= 0.95 * upper["accuracy"],
             })
     candidates = [row for row in rows if row["screening_pass"] and row["practical_oracle_latency_pass"]]
+    if candidates:
+        candidate_names = ", ".join(
+            f"{row['pair']} batch {row['batch_size']}" for row in candidates
+        )
+        decision = (
+            f"Practical oracle candidates: {candidate_names}. Collect Lower option-probability "
+            "features and run an OOF confidence-policy gate before confirmation."
+        )
+    else:
+        decision = (
+            "No model pair passes both the fixed screening checks and practical oracle latency gate. "
+            "Do not spend GPU time on confidence-policy fitting for this dataset."
+        )
     return {
         "completed_runs": payload.get("completed"), "failed_runs": len(payload.get("failures", [])),
         "conditions": rows, "latency_candidates": candidates,
-        "decision": (
-            "M0 batch 8 and M2 batch 8/1 are practical oracle candidates. "
-            "Collect lower option-probability features and run an OOF confidence-policy gate before any full-domain expansion."
-        ),
+        "decision": decision,
     }
 
 

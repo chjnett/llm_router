@@ -174,6 +174,8 @@ Strict risk는 여전히 실패했다. Unsafe exact 95% 상한은 Certification-
 
 2026-09-05에 자연과학·공학·경영·법/사회·건강·한국사를 포함한 20개 과목에서 각 10문항씩, 총 200문항의 결정적 표본을 생성했다. KMMLU 원본 정답은 1~4 인덱스이므로 내부 객관식 스키마에 맞춰 0~3으로 변환하며 단위 테스트로 이 오프셋을 고정했다. MMLU와 동일한 one-forward option-logit 방식으로 Qwen2.5-1.5B FP16, Qwen2.5-7B 4-bit, SmolLM2-360M FP16, SmolLM2-1.7B FP16의 batch 8/1 조건을 실행 중이다. 이 단계는 언어·도메인 전이 가능성을 거르는 screening이며, 결과를 본 뒤 곧바로 확인 주장으로 사용하지 않는다.
 
+8개 조건은 실패 없이 완료됐다. Batch 8에서 Qwen1.5B/Qwen7B 정확도는 35.0%/48.5%, p50 지연은 16.02/65.89ms로 비용비 0.243이었다. 완벽한 selector를 가정한 oracle 시스템은 정확도 60.0%, 정규화 지연 0.893으로 고정 gate를 통과했다. 나머지 모델쌍과 batch 1 조건은 통과하지 못했다. 따라서 다음 GPU 사용은 M0 batch 8의 option-probability 특징 수집에만 제한하고 OOF confidence policy가 실제 품질 95%와 지연 10%를 동시에 만족하는지 확인한다. 절대 Upper 정확도 48.5%가 낮다는 한계 때문에, 성공하더라도 이 단계는 한국어 전이 가능성의 탐색 결과로만 해석한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

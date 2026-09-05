@@ -284,7 +284,11 @@ unsafe-risk certification still fails, so performance and safety claims remain s
 The next conditional GPU step copies the fixed option-logit structure to KMMLU. AI-11 is now
 running on a deterministic 200-item KMMLU screening set: 10 test questions from each of 20
 subjects spanning STEM, engineering, business, law/social science, health, and Korean history.
-KMMLU's 1-based answer labels are explicitly converted to the router's 0-based schema.
+KMMLU's 1-based answer labels are explicitly converted to the router's 0-based schema. AI-11
+completed all eight GPU conditions without failure. Only the Qwen same-family batch-8 pair is a
+practical oracle candidate: Lower/Upper accuracy is 35.0%/48.5%, latency ratio is 0.243, and the
+oracle cascade reaches 60.0% accuracy at normalized latency 0.893. The next exploratory gate is
+OOF confidence fitting for this pair; the low absolute accuracy must remain an explicit limitation.
 
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when

@@ -1,0 +1,177 @@
+{
+  "completed_runs": 8,
+  "failed_runs": 0,
+  "conditions": [
+    {
+      "pair": "M0",
+      "lower": "qwen_1_5b",
+      "upper": "qwen_7b",
+      "batch_size": 8,
+      "sample_count": 200,
+      "lower_accuracy": 0.35,
+      "upper_accuracy": 0.485,
+      "oracle_system_accuracy": 0.6,
+      "latency_ratio": 0.2431835246118923,
+      "energy_ratio": 0.2346497593188868,
+      "oracle_normalized_latency": 0.8931835246118923,
+      "oracle_normalized_energy": 0.8846497593188868,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": true,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": true,
+      "practical_oracle_latency_pass": true,
+      "practical_oracle_energy_pass": true
+    },
+    {
+      "pair": "M0",
+      "lower": "qwen_1_5b",
+      "upper": "qwen_7b",
+      "batch_size": 1,
+      "sample_count": 50,
+      "lower_accuracy": 0.34,
+      "upper_accuracy": 0.42,
+      "oracle_system_accuracy": 0.5,
+      "latency_ratio": 0.519978207567523,
+      "energy_ratio": 0.2508171379555615,
+      "oracle_normalized_latency": 1.179978207567523,
+      "oracle_normalized_energy": 0.9108171379555614,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false,
+      "practical_oracle_latency_pass": false,
+      "practical_oracle_energy_pass": false
+    },
+    {
+      "pair": "M1",
+      "lower": "smollm2_360m",
+      "upper": "smollm2_1_7b",
+      "batch_size": 8,
+      "sample_count": 200,
+      "lower_accuracy": 0.305,
+      "upper_accuracy": 0.32,
+      "oracle_system_accuracy": 0.495,
+      "latency_ratio": 0.3084385752090828,
+      "energy_ratio": 0.27074409391314813,
+      "oracle_normalized_latency": 1.0034385752090829,
+      "oracle_normalized_energy": 0.9657440939131482,
+      "checks": {
+        "accuracy_gap": false,
+        "latency_ratio": true,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false,
+      "practical_oracle_latency_pass": false,
+      "practical_oracle_energy_pass": false
+    },
+    {
+      "pair": "M1",
+      "lower": "smollm2_360m",
+      "upper": "smollm2_1_7b",
+      "batch_size": 1,
+      "sample_count": 50,
+      "lower_accuracy": 0.36,
+      "upper_accuracy": 0.24,
+      "oracle_system_accuracy": 0.44,
+      "latency_ratio": 1.1659313803309845,
+      "energy_ratio": 1.185497091571114,
+      "oracle_normalized_latency": 1.8059313803309847,
+      "oracle_normalized_energy": 1.8254970915711142,
+      "checks": {
+        "accuracy_gap": false,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false,
+      "practical_oracle_latency_pass": false,
+      "practical_oracle_energy_pass": false
+    },
+    {
+      "pair": "M2",
+      "lower": "smollm2_1_7b",
+      "upper": "qwen_7b",
+      "batch_size": 8,
+      "sample_count": 200,
+      "lower_accuracy": 0.32,
+      "upper_accuracy": 0.485,
+      "oracle_system_accuracy": 0.62,
+      "latency_ratio": 0.7535297860441358,
+      "energy_ratio": 0.7424966987211673,
+      "oracle_normalized_latency": 1.4335297860441356,
+      "oracle_normalized_energy": 1.4224966987211674,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": false,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": false,
+      "practical_oracle_latency_pass": false,
+      "practical_oracle_energy_pass": false
+    },
+    {
+      "pair": "M2",
+      "lower": "smollm2_1_7b",
+      "upper": "qwen_7b",
+      "batch_size": 1,
+      "sample_count": 50,
+      "lower_accuracy": 0.24,
+      "upper_accuracy": 0.42,
+      "oracle_system_accuracy": 0.56,
+      "latency_ratio": 0.4193693089443701,
+      "energy_ratio": 0.29488891512284193,
+      "oracle_normalized_latency": 1.17936930894437,
+      "oracle_normalized_energy": 1.054888915122842,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": true,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": true,
+      "practical_oracle_latency_pass": false,
+      "practical_oracle_energy_pass": false
+    }
+  ],
+  "latency_candidates": [
+    {
+      "pair": "M0",
+      "lower": "qwen_1_5b",
+      "upper": "qwen_7b",
+      "batch_size": 8,
+      "sample_count": 200,
+      "lower_accuracy": 0.35,
+      "upper_accuracy": 0.485,
+      "oracle_system_accuracy": 0.6,
+      "latency_ratio": 0.2431835246118923,
+      "energy_ratio": 0.2346497593188868,
+      "oracle_normalized_latency": 0.8931835246118923,
+      "oracle_normalized_energy": 0.8846497593188868,
+      "checks": {
+        "accuracy_gap": true,
+        "latency_ratio": true,
+        "parse_success": true,
+        "token_limit": true,
+        "vram": true
+      },
+      "screening_pass": true,
+      "practical_oracle_latency_pass": true,
+      "practical_oracle_energy_pass": true
+    }
+  ],
+  "decision": "Practical oracle candidates: M0 batch 8. Collect Lower option-probability features and run an OOF confidence-policy gate before confirmation."
+}
