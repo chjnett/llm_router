@@ -296,6 +296,16 @@ Upper and fails the practical 10% latency-reduction gate. Further KMMLU runs wit
 and features are stopped; a stronger Korean-capable model pair must pass a small option-logit
 screening before any new confidence training.
 
+AI-13 replaces the Lower with Korean-specialized HyperCLOVAX-SEED-Text-Instruct-0.5B while
+retaining cached Qwen2.5-7B as Upper. The 50- and 200-item oracle screens both pass. On 200
+items, Lower/Upper accuracy is 34.5%/48.5%, latency ratio is 0.094, oracle accuracy is 60.5%,
+and oracle normalized latency is 0.749. AI-14's exploratory OOF policy barely passes at
+threshold 0.575 with 95.88% quality retention and 10.09% latency reduction despite AUC 0.524.
+AI-15 freezes that threshold on 500 non-overlapping KMMLU rows. Certification passes (96.52%
+quality, 14.19% latency reduction), while final test retains 97.66% quality but saves only 8.59%
+latency. The result is therefore not confirmed. EXAONE-3.5-2.4B was downloaded as a candidate,
+but its remote model code is incompatible with Transformers 5.12; no accuracy result is reported.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

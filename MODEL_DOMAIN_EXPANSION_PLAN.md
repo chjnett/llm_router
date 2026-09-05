@@ -180,6 +180,20 @@ Strict risk는 여전히 실패했다. Unsafe exact 95% 상한은 Certification-
 
 M0의 8개 option-probability 특징으로 5-fold OOF Logistic Regression을 적용한 결과 AUC 0.654, AP 0.560이었다. Upper 품질의 95%를 유지하는 선택점은 threshold 0.675, 채택률 20.0%, 시스템 정확도 46.5%, 품질 유지 95.88%였으나 정규화 지연은 1.043으로 Always Upper보다 4.3% 느렸다. 채택 40건 중 unsafe 9건이며 exact 95% 상한은 35.98%였다. 따라서 10% 지연 절감 gate와 strict risk를 모두 실패한다. 동일 Qwen/Smol 조합과 동일 confidence 특징으로 KMMLU를 더 돌리지 않는다. 다음 한국어 실험은 한국어 성능이 더 높은 Upper/Lower 후보를 50~200문항 option-logit으로 먼저 선별하고, 비용비와 oracle gate를 통과한 경우에만 confidence 학습으로 확장한다.
 
+### AI-13 한국어 특화 Lower 교체 · Oracle gate 통과
+
+공개 HyperCLOVAX-SEED-Text-Instruct-0.5B를 Lower, 기존 Qwen2.5-7B를 Upper로 사용했다. 50문항 사전 검사는 Lower/Upper 정확도 32/42%, 지연비 0.139, oracle 정확도 58%, oracle 정규화 지연 0.819로 네 gate를 모두 통과했다. 200문항 확장에서도 정확도 34.5/48.5%, 지연비 0.094, oracle 정확도 60.5%, oracle 정규화 지연 0.749로 재현됐다. 한국어 특화 소형 Lower로 바꾸면 비용 여유가 크게 늘고 오류 상보성도 유지된다.
+
+EXAONE-3.5-2.4B도 공개 Upper 후보로 내려받았으나 공식 원격 코드가 Transformers 5.12의 causal mask API와 호환되지 않아 `create_causal_mask(input_embeds=...)` 단계에서 중단됐다. 정확도 결과는 생성되지 않았으며 기존 환경 재현성을 지키기 위해 전역 라이브러리 downgrade는 하지 않았다.
+
+### AI-14 OOF confidence · 경계선 탐색 통과
+
+HyperCLOVAX의 8개 option-probability 특징으로 5-fold OOF Logistic Regression을 적용했다. AUC 0.524, AP 0.427로 분류력은 약했지만 Lower 비용비가 0.094로 작아 threshold 0.575에서 채택률 19.5%, 품질 유지 95.88%, 정규화 지연 0.8991을 기록했다. 10% 지연 절감 기준을 0.09%p 여유로 통과한 탐색 결과이므로 독립 확인 없이는 주장하지 않는다.
+
+### AI-15 비중복 KMMLU 500 확인 · 미확정
+
+기존 200문항을 제외하고 20과목에서 각 25문항씩 새로 뽑아 certification/final test 250개씩 고정했다. Selection 200개로 confidence 모델을 학습하고 threshold 0.575와 latency ratio 0.0941을 변경하지 않았다. Certification은 품질 유지 96.52%, 지연 절감 14.19%로 성능 gate를 통과했다. Final test는 품질 유지 97.66%였으나 채택률 18.0%로 지연 절감 8.59%에 그쳐 10% 기준을 1.41%p 실패했다. Strict unsafe exact 95% 상한도 25.11/27.24%로 실패했다. 따라서 한국어 전이는 유망한 near-miss이지만 confirmed로 승격하지 않으며, 이 결과를 보고 threshold를 다시 고르지 않는다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처
