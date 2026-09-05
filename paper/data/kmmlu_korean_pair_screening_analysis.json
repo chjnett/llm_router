@@ -1,0 +1,19 @@
+{
+  "protocol": "exploratory 50-item KMMLU compatibility screen",
+  "confirmation_required": true,
+  "lower": "hyperclovax_0_5b",
+  "upper": "qwen_7b",
+  "sample_count": 50,
+  "lower_accuracy": 0.32,
+  "upper_accuracy": 0.42,
+  "latency_ratio": 0.13944303352915785,
+  "oracle_accuracy": 0.58,
+  "oracle_normalized_latency": 0.8194430335291578,
+  "checks": {
+    "upper_accuracy_advantage_5pp": true,
+    "latency_ratio_below_0_5": true,
+    "oracle_quality_95pct": true,
+    "oracle_latency_10pct_reduction": true
+  },
+  "continue_to_confidence": true
+}

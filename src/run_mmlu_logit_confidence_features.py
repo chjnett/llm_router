@@ -17,13 +17,17 @@ from .run_mmlu_logit_screening import SYSTEM, option_token_ids
 from .task_harness import adapt_row
 
 
-MODELS = ("qwen_1_5b", "smollm2_1_7b")
+MODELS = ("qwen_1_5b", "smollm2_1_7b", "hyperclovax_0_5b")
 
 
 def collect(model_key: str, input_path: str, output_path: str, batch_size: int = 8, limit: int = 200) -> None:
     spec = get_model_spec(model_key)
     examples = [adapt_row(row, "multiple_choice") for row in read_jsonl(input_path)[:limit]]
-    tokenizer, model = load_model(spec.model_id, quantize_4bit=False)
+    tokenizer, model = load_model(
+        spec.model_id,
+        quantize_4bit=False,
+        trust_remote_code=spec.trust_remote_code,
+    )
     candidate_ids = option_token_ids(tokenizer)
     rows = []
     started = time.perf_counter()

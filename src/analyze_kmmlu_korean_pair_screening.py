@@ -37,8 +37,9 @@ def main() -> None:
         "oracle_quality_95pct": oracle_accuracy >= 0.95 * upper["accuracy"],
         "oracle_latency_10pct_reduction": oracle_normalized_latency <= 0.9,
     }
+    passed = all(checks.values())
     result = {
-        "protocol": "exploratory 50-item KMMLU compatibility screen",
+        "protocol": f"exploratory {len(lower_predictions)}-item KMMLU compatibility screen",
         "confirmation_required": True,
         "lower": "hyperclovax_0_5b",
         "upper": "qwen_7b",
@@ -49,10 +50,10 @@ def main() -> None:
         "oracle_accuracy": oracle_accuracy,
         "oracle_normalized_latency": oracle_normalized_latency,
         "checks": checks,
-        "continue_to_200": all(checks.values()),
+        "continue_to_confidence": passed,
     }
     write_json(args.output, result)
-    print(f"continue_to_200={result['continue_to_200']} -> {args.output}")
+    print(f"continue_to_confidence={passed} -> {args.output}")
 
 
 if __name__ == "__main__":
