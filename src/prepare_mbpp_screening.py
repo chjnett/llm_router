@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import random
+from pathlib import Path
 
 from .common import write_jsonl
 
@@ -25,14 +26,34 @@ def convert_row(row: dict, source_split: str) -> dict:
     }
 
 
-def main() -> None:
-    from datasets import load_dataset
+def load_splits() -> dict:
+    """Prefer completed Arrow cache files to avoid a slow Hub/cache-lock probe."""
+    from datasets import Dataset, config, load_dataset
 
+    cache_root = Path(config.HF_DATASETS_CACHE)
+    candidates = sorted(
+        cache_root.glob("google-research-datasets___mbpp/sanitized/*/*"),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    for candidate in candidates:
+        validation = candidate / "mbpp-validation.arrow"
+        test = candidate / "mbpp-test.arrow"
+        if validation.is_file() and test.is_file():
+            print(f"using completed local MBPP cache: {candidate}")
+            return {
+                "validation": Dataset.from_file(str(validation)),
+                "test": Dataset.from_file(str(test)),
+            }
+    return load_dataset("google-research-datasets/mbpp", "sanitized")
+
+
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default="artifacts/data/mbpp_screening_50.jsonl")
     parser.add_argument("--seed", type=int, default=2031)
     args = parser.parse_args()
-    dataset = load_dataset("google-research-datasets/mbpp", "sanitized")
+    dataset = load_splits()
     rows = [convert_row(dict(row), "validation") for row in dataset["validation"]]
     test_indices = list(range(len(dataset["test"])))
     random.Random(args.seed).shuffle(test_indices)
