@@ -19,13 +19,13 @@ def clean_code(text: str) -> str:
     return FENCE.sub("", text.strip()).strip()
 
 
-def judge(rows: list[dict], predictions: list[dict], timeout: float) -> dict:
+def judge(rows: list[dict], predictions: list[dict], timeout: float, code_field: str = "prediction") -> dict:
     by_id = {row["id"]: row for row in predictions}
     worker = Path(__file__).with_name("mbpp_worker.py")
     details = []
     for row in rows:
         payload = {
-            "code": clean_code(by_id[row["id"]]["prediction"]),
+            "code": clean_code(by_id[row["id"]][code_field]),
             "test_imports": row["task_metadata"]["test_imports"],
             "tests": row["task_metadata"]["test_list"],
         }
@@ -69,6 +69,11 @@ def main() -> None:
         upper_report = json.load(handle)
     lower = judge(rows, lower_predictions, args.timeout)
     upper = judge(rows, upper_predictions, args.timeout)
+    references = [
+        {"id": row["id"], "reference_code": row["task_metadata"]["reference_code"]}
+        for row in rows
+    ]
+    reference = judge(rows, references, args.timeout, code_field="reference_code")
     latency_ratio = lower_report["metrics"]["latency_ms_p50"] / upper_report["metrics"]["latency_ms_p50"]
     oracle = sum(a or b for a, b in zip(lower["correct"], upper["correct"])) / len(rows)
     oracle_latency = latency_ratio + 1.0 - lower["pass_at_1"]
@@ -81,6 +86,7 @@ def main() -> None:
     }
     payload = {
         "protocol": f"exploratory guarded-subprocess MBPP sanitized screen on {len(rows)} rows",
+        "harness_reference_evaluation": reference,
         "lower": {"model": lower_report["model"], "evaluation": lower, "metrics": lower_report["metrics"]},
         "upper": {"model": upper_report["model"], "evaluation": upper, "metrics": upper_report["metrics"]},
         "latency_ratio": latency_ratio,

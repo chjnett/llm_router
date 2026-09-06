@@ -9,12 +9,17 @@ import sys
 
 
 ALLOWED_IMPORTS = {
-    "bisect", "collections", "datetime", "decimal", "fractions", "functools",
+    "bisect", "cmath", "collections", "datetime", "decimal", "fractions", "functools",
     "heapq", "itertools", "math", "operator", "random", "re", "statistics", "string",
+    "sys",
 }
 BLOCKED_NAMES = {
     "breakpoint", "compile", "eval", "exec", "globals", "input", "locals", "open",
     "setattr", "vars", "memoryview",
+}
+BLOCKED_ATTRIBUTES = {
+    "argv", "executable", "exit", "modules", "path", "setprofile", "settrace",
+    "stderr", "stdin", "stdout",
 }
 
 
@@ -29,9 +34,13 @@ def validate_candidate(source: str) -> None:
             root = (node.module or "").split(".", 1)[0]
             if node.level or root not in ALLOWED_IMPORTS:
                 raise PermissionError(f"blocked import: {node.module}")
-        elif isinstance(node, ast.Name) and (node.id in BLOCKED_NAMES or node.id.startswith("__")):
+        elif isinstance(node, ast.Name) and (
+            node.id in BLOCKED_NAMES or (node.id.startswith("__") and node.id != "__name__")
+        ):
             raise PermissionError(f"blocked name: {node.id}")
-        elif isinstance(node, ast.Attribute) and node.attr.startswith("__"):
+        elif isinstance(node, ast.Attribute) and (
+            node.attr.startswith("__") or node.attr in BLOCKED_ATTRIBUTES
+        ):
             raise PermissionError(f"blocked attribute: {node.attr}")
 
 

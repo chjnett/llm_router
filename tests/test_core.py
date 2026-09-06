@@ -373,8 +373,12 @@ def test_ifeval_sampling_preserves_official_metadata():
 
 def test_mbpp_guard_blocks_host_access_and_allows_math():
     validate_candidate("import math\ndef area(x): return math.pi * x * x")
+    validate_candidate("import sys\ndef size(x): return sys.getsizeof(x)")
+    validate_candidate("if __name__ == '__main__':\n    print('safe')")
     import pytest
     with pytest.raises(PermissionError):
         validate_candidate("import os\nos.remove('x')")
     with pytest.raises(PermissionError):
         validate_candidate("open('x', 'w')")
+    with pytest.raises(PermissionError):
+        validate_candidate("import sys\nx = sys.modules['os']")

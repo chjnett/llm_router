@@ -10,18 +10,26 @@ from .common import write_jsonl
 
 
 def convert_row(row: dict, source_split: str) -> dict:
+    tests = list(row["test_list"])
+    prompt = (
+        f"{str(row['prompt']).strip()}\n\n"
+        "Write a complete Python solution that passes these public tests:\n"
+        + "\n".join(tests)
+        + "\n\nReturn only executable Python code. Keep the required function names exactly as shown."
+    )
     return {
         "id": f"mbpp-{source_split}-{int(row['task_id'])}",
-        "prompt": str(row["prompt"]),
-        "reference": {"test_count": len(row["test_list"])},
+        "prompt": prompt,
+        "reference": {"test_count": len(tests)},
         "task_type": "code",
         "split": "screening",
         "task_metadata": {
             "dataset": "google-research-datasets/mbpp",
             "source_split": source_split,
             "task_id": int(row["task_id"]),
+            "reference_code": str(row["code"]),
             "test_imports": list(row["test_imports"]),
-            "test_list": list(row["test_list"]),
+            "test_list": tests,
         },
     }
 
