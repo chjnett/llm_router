@@ -190,6 +190,8 @@
     <h3 style="margin:24px 0 10px">AI-16 · IFEval 공식 strict/loose 스크리닝</h3><div class="table-wrap"><table><thead><tr><th>모델</th><th>Strict 정확도</th><th>Loose 정확도</th><th>평균 생성 토큰</th><th>토큰 상한 도달</th></tr></thead><tbody><tr><td>Qwen2.5-1.5B FP16</td><td>48.0%</td><td>54.0%</td><td>195.36</td><td>4.0%</td></tr><tr><td>Qwen2.5-7B 4-bit</td><td>84.0%</td><td>86.0%</td><td>217.30</td><td>6.0%</td></tr></tbody></table></div>
     <div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>Lower/Upper 지연비</th><th>Oracle strict 정확도</th><th>Oracle 정규화 지연</th><th>200문항 확장</th></tr></thead><tbody><tr><td>0.703</td><td>84.0%</td><td>1.223</td><td>중단</td></tr></tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>도메인 결론</strong><div>공식 evaluator는 고정 커밋으로 vendoring하고 <b>48 tests + 91 subtests</b>를 통과했다. 품질 차이는 충분하지만 긴 자유 생성 때문에 작은 Lower도 Upper 비용의 70.3%를 사용한다. 완벽한 selector조차 22.3% 느리므로 <b>IFEval에서는 Lower-first routing을 feasibility guard가 비활성화해야 한다.</b></div></div>
+    <h3 style="margin:24px 0 10px">AI-17 · MBPP 실행 기반 코드 스크리닝</h3><div class="table-wrap"><table><thead><tr><th>항목</th><th>Qwen2.5-1.5B FP16</th><th>Qwen2.5-7B 4-bit</th><th>해석</th></tr></thead><tbody><tr><td>Pass@1</td><td>50.0%</td><td>86.0%</td><td>Upper 우위 +36%p</td></tr><tr><td>p50 지연</td><td>1073.56ms</td><td>2189.96ms</td><td>지연비 0.490</td></tr><tr><td>Oracle Pass@1</td><td colspan="2">86.0%</td><td>Lower 정답이 모두 Upper 정답의 부분집합</td></tr><tr><td>Oracle 정규화 지연</td><td colspan="2">0.990</td><td>이론적 절감 약 1% · 10% gate 실패</td></tr></tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>채점기 검증과 중단 판정</strong><div>공식 reference code는 <b>50/50 통과</b>했고 timeout·guard rejection은 0이었다. 초기에는 공개 test와 필수 함수명이 prompt에서 빠져 4%/4%라는 무효 결과가 발생했으며, 이는 모델 성능이 아닌 배선 실패로 제외했다. 수정 재실험 결과도 완벽한 selector가 상위 단독보다 약 1%만 빨라 <b>Qwen 조합의 200문항 확장을 중단</b>한다. 다음은 로컬 SmolLM2-360M을 Lower로 한 비-Qwen 초소형 50문항 비용 선별이다.</div></div>
   </section>
 
   <section id="contrastive">
@@ -333,8 +335,8 @@
       <tr><td>AI-14</td><td>한국어 특화 Lower OOF confidence gate</td><td>완료</td><td><span class="tag done">지연 −10.09% 탐색 통과</span></td></tr>
       <tr><td>AI-15</td><td>Threshold 0.575 고정 · 비중복 KMMLU 500 확인</td><td>완료</td><td><span class="tag fail">Certification 통과 · Final 지연 미달</span></td></tr>
       <tr><td>AI-16</td><td>IFEval 50 · 공식 strict/loose evaluator · 768-token 생성</td><td>완료</td><td><span class="tag fail">Oracle 지연 1.223 · 200 확장 중단</span></td></tr>
-      <tr class="focus"><td>AI-17</td><td>MBPP 50 · 격리 unit-test 코드 도메인 screening</td><td>채점 sandbox 구현 후</td><td><span class="tag live">다음 유효 후보</span></td></tr>
-      <tr><td>AK-2</td><td>MBPP/HumanEval 격리 코드 실행 평가</td><td>GPU 6~12시간</td><td><span class="tag">MMLU 후 계획</span></td></tr>
+      <tr><td>AI-17</td><td>MBPP 50 · 검증된 guarded subprocess · Qwen pair</td><td>완료</td><td><span class="tag fail">Oracle 지연 0.990 · 200 확장 중단</span></td></tr>
+      <tr class="focus"><td>AI-18</td><td>MBPP 50 · SmolLM2-360M / Qwen-7B 초소형 Lower</td><td>약 5~10분</td><td><span class="tag live">비-Qwen 비용 후보</span></td></tr>
       <tr><td>AL</td><td>통과 셀만 전체 test · 3 seeds · 통계 검증</td><td>1~3일</td><td><span class="tag">계획</span></td></tr>
     </tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>논문 산출물</strong><div><b>paper/overleaf/main_single.tex</b>을 Overleaf의 main.tex에 통째로 붙여넣고 <b>paper/figures/*.pdf</b> 네 개만 업로드하면 된다. 자세한 수정·검수 방법은 <b>OVERLEAF_KSC_PAPER_GUIDE.md</b>에 정리했다.</div></div>

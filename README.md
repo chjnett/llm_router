@@ -313,6 +313,14 @@ prompt accuracy is 48%/84% and loose accuracy is 54%/86%. Lower latency is 70.3%
 the perfect-selector normalized latency is 1.223, so even an oracle cascade is 22.3% slower than
 Always Upper. The fixed feasibility gate stops expansion to 200 items.
 
+AI-17 validates a guarded MBPP executor against the 50 official reference solutions (50/50,
+no timeout or guard rejection), then evaluates the same 50 prompts with public tests included.
+Qwen1.5B/Qwen7B pass@1 is 50%/86%, and Lower p50 latency is 49.0% of Upper. However every
+Lower success is already an Upper success, so oracle pass@1 remains 86% and oracle normalized
+latency is 0.990. The pre-registered 10% latency-reduction gate fails; expansion to 200 items is
+stopped. An initial prompt-wiring run that omitted public tests produced invalid 4%/4% results
+and is retained only as a documented harness failure, not as model evidence.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

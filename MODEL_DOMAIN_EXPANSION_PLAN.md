@@ -200,6 +200,14 @@ Google Research 공식 `instruction_following_eval`을 커밋 `932d4685e23f671b9
 
 Lower p50 지연비가 Upper의 0.703이라 사전 0.50 비용 gate를 실패했다. Lower가 맞힌 모든 요청만 완벽히 채택하는 oracle에서도 strict 정확도는 Upper와 같은 84%이고 정규화 지연은 1.223으로 Always Upper보다 22.3% 느리다. 따라서 200문항 확장과 confidence 학습을 중단한다. 이 결과는 긴 자유 생성에서는 작은 모델도 충분히 짧게 답하지 않아 Lower-first cascade 비용을 회수하지 못하며, feasibility guard가 도메인에 따라 라우팅을 자동 비활성화해야 한다는 증거다.
 
+### AI-17 MBPP 실행 기반 스크리닝 · 품질 분리 성공, 비용 gate 실패
+
+MBPP sanitized의 validation 43개와 test 고정 표본 7개를 합친 50문항을 사용했다. 공개 unit test를 프롬프트에 포함하고 생성 코드를 AST allowlist, Python `-I -S` 별도 프로세스, 문항별 timeout으로 평가했다. 이 실행기는 OS 보안 경계가 아니므로 신뢰할 수 없는 외부 코드를 실행하는 용도로 해석하지 않는다. 공식 reference code 50개는 50/50 통과했고 timeout과 guard rejection은 모두 0이었다.
+
+Qwen2.5-1.5B FP16 / Qwen2.5-7B 4-bit pass@1은 50/86%, p50은 1073.56/2189.96ms로 Lower/Upper 지연비 0.490이었다. 모델 품질 차이와 0.5 지연비 gate는 통과했지만 Lower 정답 25개가 모두 Upper 정답의 부분집합이라 oracle pass@1은 86%에 머물렀다. Lower-first oracle 정규화 지연은 `0.490 + (1 - 0.50) = 0.990`으로 Always Upper 대비 이론적 절감이 약 1%뿐이며 사전 10% 절감 기준을 실패했다. 따라서 Qwen 조합은 200문항으로 확장하지 않는다.
+
+초기 실행은 공개 test/signature가 생성 prompt에서 누락돼 두 모델 모두 4%라는 비정상 결과를 냈다. 대부분 필수 함수명 불일치 `NameError`였고 공식 reference 검증도 도입 전이므로 모델 결과에서 제외한다. 이 실패를 계기로 공개 test 포함, reference 100% self-check, guard 오탐 0 조건을 평가 전 필수 gate로 고정했다. 다음 저비용 후보는 이미 로컬에 있는 SmolLM2-360M을 Lower로 사용해 비-Qwen·초소형 모델에서 `latency_ratio <= lower_pass@1 - 0.10`이 가능한지 50문항만 선별하는 것이다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처
