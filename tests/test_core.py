@@ -20,6 +20,7 @@ from src.run_token_budget_sweep import conditions as token_budget_conditions
 from src.prepare_kmmlu_screening import convert_row
 from src.prepare_ifeval_screening import balanced_sample as sample_ifeval, clean_kwargs
 from src.mbpp_worker import validate_candidate
+from src.analyze_mbpp_query_pretriage import direct_policy_metrics
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -382,3 +383,14 @@ def test_mbpp_guard_blocks_host_access_and_allows_math():
         validate_candidate("open('x', 'w')")
     with pytest.raises(PermissionError):
         validate_candidate("import sys\nx = sys.modules['os']")
+
+
+def test_mbpp_direct_router_avoids_lower_overhead_on_upper_requests():
+    probability = np.asarray([0.9, 0.8, 0.2, 0.1])
+    lower = np.asarray([True, False, False, False])
+    upper = np.asarray([True, True, True, False])
+    result = direct_policy_metrics(probability, 0.5, lower, upper, latency_ratio=0.25)
+    assert result["accepted"] == 2
+    assert result["unsafe_accepts"] == 1
+    assert result["accuracy"] == 0.5
+    assert result["normalized_latency"] == 0.625

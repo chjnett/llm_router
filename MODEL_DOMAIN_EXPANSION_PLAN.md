@@ -214,6 +214,12 @@ Qwen2.5-1.5B FP16 / Qwen2.5-7B 4-bit pass@1은 50/86%, p50은 1073.56/2189.96ms�
 
 이 결과는 단순히 Lower 파라미터를 1.5B에서 360M으로 줄이는 것만으로 코드 생성 cascade의 선실행 비용을 회수할 수 없음을 보여준다. 다음 코드 도메인 실험은 더 많은 GPU 반복이 아니라, 생성 전에 직접 Upper로 보낼 수 있는 query-only feasibility guard 또는 짧은 구조화 sketch/테스트 예측처럼 Lower 생성량 자체를 줄이는 설계가 먼저 필요하다.
 
+### AI-19 MBPP query-only 직접 라우터 · 분류 신호 실패
+
+Lower 출력을 전혀 생성하지 않고 질문과 공개 unit test 텍스트만으로 Lower 성공 여부를 예측하는 word+character TF-IDF Logistic Regression을 사전 고정했다. 50문항에서 5-fold OOF 확률을 만들고 같은 OOF 예측에서 threshold를 탐색했으므로 확인 결과가 아닌 screening이다. Qwen1.5B 성공 예측 AUC/AP는 0.510/0.574, SmolLM2-360M은 0.511/0.371로 무작위 수준이었다.
+
+Upper 정확도의 95%를 지키는 최저 지연 정책은 두 모델 모두 10%만 Lower로 직접 보냈다. Qwen 정책은 품질 유지 95.35%, 정규화 지연 0.949로 5.10%를 절감했고 Smol 정책은 같은 품질 유지에서 지연 0.939로 6.09%를 절감했다. 10% 지연 조건을 강제하면 두 모델 모두 품질 유지가 90.70%로 하락했다. 따라서 독립 200문항 GPU 확인으로 진행하지 않는다. 다음 후보는 텍스트 표면 특징이 아니라 짧은 1회 forward에서 얻는 Lower 내부 hidden-state/logit 특징이 난이도 신호를 제공하는지 50문항에서 측정하는 것이다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

@@ -327,6 +327,13 @@ is 1.071 because 68% of requests still require Upper. This is slower than Always
 50-item gate again stops expansion. In code generation, completing a Lower program dominates
 latency even when the Lower has only 360M parameters.
 
+AI-19 tests a generation-free direct pre-router using public prompt/test text only. A fixed
+word+character TF-IDF Logistic Regression is evaluated with 5-fold out-of-fold predictions.
+Its AUC is 0.510 for Qwen1.5B success and 0.511 for SmolLM2-360M success. At 95% quality
+retention, both policies accept only 10% of requests and save 5.1%/6.1% latency. Forcing at
+least 10% latency reduction lowers quality retention to 90.7%, so independent 200-item GPU
+confirmation is not started.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
