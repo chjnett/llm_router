@@ -208,6 +208,12 @@ Qwen2.5-1.5B FP16 / Qwen2.5-7B 4-bit pass@1은 50/86%, p50은 1073.56/2189.96ms�
 
 초기 실행은 공개 test/signature가 생성 prompt에서 누락돼 두 모델 모두 4%라는 비정상 결과를 냈다. 대부분 필수 함수명 불일치 `NameError`였고 공식 reference 검증도 도입 전이므로 모델 결과에서 제외한다. 이 실패를 계기로 공개 test 포함, reference 100% self-check, guard 오탐 0 조건을 평가 전 필수 gate로 고정했다. 다음 저비용 후보는 이미 로컬에 있는 SmolLM2-360M을 Lower로 사용해 비-Qwen·초소형 모델에서 `latency_ratio <= lower_pass@1 - 0.10`이 가능한지 50문항만 선별하는 것이다.
 
+### AI-18 MBPP 비-Qwen 초소형 Lower · Oracle 비용 실패
+
+동일한 50문항과 검증된 Qwen2.5-7B Upper 출력을 고정하고 Lower만 SmolLM2-360M FP16으로 교체했다. SmolLM2 pass@1은 32%, p50은 856.54ms로 Upper 대비 지연비 0.391이었다. Lower 정답은 다시 모두 Upper 정답의 부분집합이어서 oracle pass@1은 86%로 동일했고 정규화 지연은 `0.391 + (1 - 0.32) = 1.071`이었다. 완벽한 selector도 Always Upper보다 7.1% 느리므로 200문항 확장을 중단한다.
+
+이 결과는 단순히 Lower 파라미터를 1.5B에서 360M으로 줄이는 것만으로 코드 생성 cascade의 선실행 비용을 회수할 수 없음을 보여준다. 다음 코드 도메인 실험은 더 많은 GPU 반복이 아니라, 생성 전에 직접 Upper로 보낼 수 있는 query-only feasibility guard 또는 짧은 구조화 sketch/테스트 예측처럼 Lower 생성량 자체를 줄이는 설계가 먼저 필요하다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

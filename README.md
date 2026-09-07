@@ -321,6 +321,12 @@ latency is 0.990. The pre-registered 10% latency-reduction gate fails; expansion
 stopped. An initial prompt-wiring run that omitted public tests produced invalid 4%/4% results
 and is retained only as a documented harness failure, not as model evidence.
 
+AI-18 replaces the Lower with the non-Qwen SmolLM2-360M while reusing the fixed Qwen7B Upper
+outputs. SmolLM2 reaches 32% pass@1 with a 0.391 p50 latency ratio, but oracle normalized latency
+is 1.071 because 68% of requests still require Upper. This is slower than Always Upper, so the
+50-item gate again stops expansion. In code generation, completing a Lower program dominates
+latency even when the Lower has only 360M parameters.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

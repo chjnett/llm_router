@@ -1,0 +1,932 @@
+{
+  "protocol": "exploratory guarded-subprocess MBPP sanitized screen on 50 rows",
+  "harness_reference_evaluation": {
+    "pass_at_1": 1.0,
+    "correct": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "timeouts": 0,
+    "guard_rejections": 0,
+    "details": [
+      {
+        "id": "mbpp-test-264",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-425",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-556",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-580",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-594",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-591",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-455",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-564",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-590",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-554",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-578",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-443",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-573",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-572",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-598",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-585",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-559",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-577",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-97",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-592",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-589",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-597",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-582",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-562",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-228",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-568",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-555",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-454",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-596",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-560",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-563",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-557",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-584",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-599",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-565",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-593",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-558",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-583",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-576",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-588",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-569",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-567",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-595",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-586",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-587",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-574",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-581",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-579",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-566",
+        "passed": true
+      },
+      {
+        "id": "mbpp-validation-600",
+        "passed": true
+      }
+    ]
+  },
+  "lower": {
+    "model": {
+      "key": "smollm2_360m",
+      "model_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "family": "smollm2",
+      "size_billions": 0.36,
+      "access": "public",
+      "default_4bit": false,
+      "trust_remote_code": false
+    },
+    "evaluation": {
+      "pass_at_1": 0.32,
+      "correct": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true
+      ],
+      "timeouts": 0,
+      "guard_rejections": 0,
+      "details": [
+        {
+          "id": "mbpp-test-264",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-425",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-556",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-580",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-594",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-591",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-455",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-564",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-590",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-554",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'Split' is not defined"
+        },
+        {
+          "id": "mbpp-validation-578",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-443",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-573",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'reduce' is not defined"
+        },
+        {
+          "id": "mbpp-validation-572",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-598",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-585",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-559",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-577",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-97",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-592",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'sum_Of_product' is not defined"
+        },
+        {
+          "id": "mbpp-validation-589",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-597",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-582",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-562",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'Find_Max_Length' is not defined"
+        },
+        {
+          "id": "mbpp-test-228",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-568",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-555",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-454",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-596",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'sys' is not defined"
+        },
+        {
+          "id": "mbpp-validation-560",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-563",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-557",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-584",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-599",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-565",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-593",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-558",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-583",
+          "passed": false,
+          "error": "RecursionError",
+          "message": "maximum recursion depth exceeded"
+        },
+        {
+          "id": "mbpp-validation-576",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-588",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-569",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-567",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-595",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-586",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-587",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-574",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-581",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'surface_Area' is not defined"
+        },
+        {
+          "id": "mbpp-validation-579",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-566",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-600",
+          "passed": true
+        }
+      ]
+    },
+    "metrics": {
+      "items": 50,
+      "judged_items": 0,
+      "accuracy": null,
+      "parse_success_rate": null,
+      "generated_tokens_mean": 43.16,
+      "token_limit_rate": 0.0,
+      "latency_ms_p50": 856.5425999695435,
+      "latency_ms_p95": 2931.923399970401,
+      "items_per_second": 0.8282479159763714,
+      "peak_vram_allocated_gb": 0.7305159568786621,
+      "peak_vram_reserved_gb": 0.7578125,
+      "power_samples": 109,
+      "power_watts_mean": 113.98522935779815,
+      "power_watts_max": 145.35,
+      "gross_energy_joules": 6881.105714792403,
+      "gross_energy_joules_per_item": 137.62211429584806
+    }
+  },
+  "upper": {
+    "model": {
+      "key": "qwen_7b",
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "family": "qwen2.5",
+      "size_billions": 7.0,
+      "access": "public",
+      "default_4bit": true,
+      "trust_remote_code": false
+    },
+    "evaluation": {
+      "pass_at_1": 0.86,
+      "correct": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "timeouts": 0,
+      "guard_rejections": 0,
+      "details": [
+        {
+          "id": "mbpp-test-264",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-425",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-556",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-580",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-594",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-591",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-455",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-564",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-590",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'cos' is not defined"
+        },
+        {
+          "id": "mbpp-validation-554",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-578",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-443",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-573",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-572",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-598",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-585",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-559",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-577",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-97",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-592",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-589",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-597",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-582",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-562",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-228",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-568",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-555",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-454",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-596",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-560",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-563",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-557",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-584",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-599",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-565",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-593",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-558",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-583",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-576",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-588",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-569",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-567",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-595",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-586",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-587",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-574",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-581",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-validation-579",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-566",
+          "passed": true
+        },
+        {
+          "id": "mbpp-validation-600",
+          "passed": true
+        }
+      ]
+    },
+    "metrics": {
+      "items": 50,
+      "judged_items": 0,
+      "accuracy": null,
+      "parse_success_rate": null,
+      "generated_tokens_mean": 80.72,
+      "token_limit_rate": 0.0,
+      "latency_ms_p50": 2189.9609999964014,
+      "latency_ms_p95": 8232.198700017761,
+      "items_per_second": 0.32177631812946117,
+      "peak_vram_allocated_gb": 5.375073432922363,
+      "peak_vram_reserved_gb": 5.5,
+      "power_samples": 275,
+      "power_watts_mean": 255.25810909090902,
+      "power_watts_max": 282.6,
+      "gross_energy_joules": 39663.905438219714,
+      "gross_energy_joules_per_item": 793.2781087643942
+    }
+  },
+  "latency_ratio": 0.39112230764426903,
+  "oracle_pass_at_1": 0.86,
+  "oracle_normalized_latency": 1.0711223076442689,
+  "checks": {
+    "upper_accuracy_advantage_5pp": true,
+    "latency_ratio_below_0_5": true,
+    "oracle_quality_95pct": true,
+    "oracle_latency_10pct_reduction": false,
+    "token_limit_below_10pct": true
+  },
+  "continue_to_200": false,
+  "security_note": "AST allowlist plus Python -I -S child process and per-item timeout; not an OS security boundary"
+}
