@@ -9,9 +9,9 @@ import sys
 
 
 ALLOWED_IMPORTS = {
-    "bisect", "cmath", "collections", "datetime", "decimal", "fractions", "functools",
+    "array", "bisect", "cmath", "collections", "copy", "datetime", "decimal", "fractions", "functools",
     "heapq", "itertools", "math", "operator", "random", "re", "statistics", "string",
-    "sys",
+    "sys", "typing",
 }
 BLOCKED_NAMES = {
     "breakpoint", "compile", "eval", "exec", "globals", "input", "locals", "open",
@@ -58,7 +58,7 @@ def main() -> None:
     safe_builtins = {
         name: getattr(builtins, name)
         for name in (
-            "abs", "all", "any", "bool", "bytes", "chr", "complex", "dict", "divmod",
+            "abs", "all", "any", "bin", "bool", "bytes", "chr", "complex", "dict", "divmod",
             "enumerate", "filter", "float", "format", "frozenset", "hash", "hex", "int",
             "isinstance", "issubclass", "iter", "len", "list", "map", "max", "min", "next",
             "object", "oct", "ord", "pow", "print", "range", "repr", "reversed", "round",
