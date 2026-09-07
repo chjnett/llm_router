@@ -220,6 +220,12 @@ Lower 출력을 전혀 생성하지 않고 질문과 공개 unit test 텍스트�
 
 Upper 정확도의 95%를 지키는 최저 지연 정책은 두 모델 모두 10%만 Lower로 직접 보냈다. Qwen 정책은 품질 유지 95.35%, 정규화 지연 0.949로 5.10%를 절감했고 Smol 정책은 같은 품질 유지에서 지연 0.939로 6.09%를 절감했다. 10% 지연 조건을 강제하면 두 모델 모두 품질 유지가 90.70%로 하락했다. 따라서 독립 200문항 GPU 확인으로 진행하지 않는다. 다음 후보는 텍스트 표면 특징이 아니라 짧은 1회 forward에서 얻는 Lower 내부 hidden-state/logit 특징이 난이도 신호를 제공하는지 50문항에서 측정하는 것이다.
 
+### AI-20 MBPP Lower hidden-state probe · 탐색 gate 통과
+
+코드를 생성하기 전 Lower prompt forward의 마지막 hidden state와 next-token entropy/margin을 고정 특징으로 사용했다. 5-fold OOF Logistic Regression에서 Qwen1.5B는 AUC 0.798, AP 0.815를 기록했다. Probe p50은 29.17ms로 Upper 전체 생성의 1.33%였고 threshold 0.505에서 34%를 Lower로 보내 품질 유지 95.35%, 예상 정규화 지연 0.835, 예상 절감 16.45%로 사전 성능 gate를 통과했다. 반면 SmolLM2-360M은 AUC 0.496, AP 0.343이고 품질 제약 최저 지연도 0.964라 중단한다.
+
+지연 계산은 Lower로 채택한 요청이 probe의 KV cache를 그대로 이어 코드 생성에 사용하고, 거절 요청만 probe 후 Upper를 호출한다는 아키텍처 가정이다. 아직 end-to-end 구현 실측이 아니며 50문항 OOF에서 모델·threshold를 선택했으므로 확인 결과로 주장하지 않는다. Qwen1.5B, feature schema, Logistic Regression `C=0.01`, seed 2034, threshold 0.505를 고정하고 기존 50문항과 겹치지 않는 MBPP test 200개를 certification/final 100개씩 나눠 다음 단계에서 검증한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

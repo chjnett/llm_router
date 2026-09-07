@@ -1,0 +1,104 @@
+{
+  "protocol": "exploratory 5-fold OOF frozen hidden-state/logit probe; threshold selected on the same OOF predictions",
+  "cost_assumption": "accepted Lower requests reuse probe KV cache; rejected requests pay probe plus Upper",
+  "quality_floor": 0.95,
+  "latency_target": 0.9,
+  "pairs": [
+    {
+      "model": {
+        "key": "qwen_1_5b",
+        "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "family": "qwen2.5",
+        "size_billions": 1.5,
+        "access": "public",
+        "default_4bit": true,
+        "trust_remote_code": false
+      },
+      "items": 50,
+      "feature_dimension": 1540,
+      "probe_latency_ms_p50": 29.174899973440915,
+      "probe_latency_ratio": 0.013322109377056877,
+      "generation_latency_ratio": 0.49021886690817706,
+      "oof_roc_auc": 0.7984,
+      "oof_average_precision": 0.8152814203929162,
+      "selected_policy": {
+        "threshold": 0.505,
+        "accepted": 17,
+        "accept_rate": 0.34,
+        "unsafe_accepts": 3,
+        "accuracy": 0.82,
+        "upper_accuracy": 0.86,
+        "quality_retention": 0.9534883720930232,
+        "normalized_latency": 0.8354670069376378,
+        "latency_reduction": 0.16453299306236224
+      },
+      "best_quality_constrained_policy": {
+        "threshold": 0.505,
+        "accepted": 17,
+        "accept_rate": 0.34,
+        "unsafe_accepts": 3,
+        "accuracy": 0.82,
+        "upper_accuracy": 0.86,
+        "quality_retention": 0.9534883720930232,
+        "normalized_latency": 0.8354670069376378,
+        "latency_reduction": 0.16453299306236224
+      },
+      "oracle_reusing_kv_cache": {
+        "threshold": 0.5,
+        "accepted": 25,
+        "accept_rate": 0.5,
+        "unsafe_accepts": 0,
+        "accuracy": 0.86,
+        "upper_accuracy": 0.86,
+        "quality_retention": 1.0,
+        "normalized_latency": 0.7517704881426169,
+        "latency_reduction": 0.24822951185738307
+      },
+      "gate_pass": true
+    },
+    {
+      "model": {
+        "key": "smollm2_360m",
+        "model_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "family": "smollm2",
+        "size_billions": 0.36,
+        "access": "public",
+        "default_4bit": false,
+        "trust_remote_code": false
+      },
+      "items": 50,
+      "feature_dimension": 964,
+      "probe_latency_ms_p50": 31.23379999306053,
+      "probe_latency_ratio": 0.014262263114782342,
+      "generation_latency_ratio": 0.39112230764426903,
+      "oof_roc_auc": 0.4963235294117647,
+      "oof_average_precision": 0.34269041280944734,
+      "selected_policy": null,
+      "best_quality_constrained_policy": {
+        "threshold": 0.745,
+        "accepted": 4,
+        "accept_rate": 0.08,
+        "unsafe_accepts": 3,
+        "accuracy": 0.82,
+        "upper_accuracy": 0.86,
+        "quality_retention": 0.9534883720930232,
+        "normalized_latency": 0.9644110666771414,
+        "latency_reduction": 0.03558893332285862
+      },
+      "oracle_reusing_kv_cache": {
+        "threshold": 0.5,
+        "accepted": 16,
+        "accept_rate": 0.32,
+        "unsafe_accepts": 0,
+        "accuracy": 0.86,
+        "upper_accuracy": 0.86,
+        "quality_retention": 1.0,
+        "normalized_latency": 0.8148574773642182,
+        "latency_reduction": 0.1851425226357818
+      },
+      "gate_pass": false
+    }
+  ],
+  "continue_to_independent_200": true,
+  "warning": "The 50-item OOF screen is model/threshold selection, not independent confirmation."
+}

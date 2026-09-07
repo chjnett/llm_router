@@ -334,6 +334,13 @@ retention, both policies accept only 10% of requests and save 5.1%/6.1% latency.
 least 10% latency reduction lowers quality retention to 90.7%, so independent 200-item GPU
 confirmation is not started.
 
+AI-20 probes the frozen Lower model once without decoding a program and fits an OOF linear probe
+to its final hidden state plus next-token uncertainty. Qwen1.5B reaches AUC/AP 0.798/0.815; its
+29.17 ms probe selects 34% of requests while retaining 95.35% of Upper accuracy, with projected
+normalized latency 0.835 (16.45% reduction). SmolLM2 remains at AUC 0.496 and fails. This is an
+exploratory selection result and assumes that accepted Qwen requests reuse the probe KV cache;
+the Qwen configuration alone advances to independent MBPP certification.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.
