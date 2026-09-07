@@ -23,6 +23,7 @@ from src.mbpp_worker import validate_candidate
 from src.analyze_mbpp_query_pretriage import direct_policy_metrics
 from src.analyze_mbpp_hidden_pretriage import probe_policy_metrics
 from src.prepare_mbpp_independent import split_independent_rows
+from src.analyze_mbpp_probe_recalibration import select_threshold
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -422,3 +423,13 @@ def test_mbpp_independent_split_excludes_selection_and_is_fixed():
     assert all(row["task_metadata"]["task_id"] not in set(range(7)) for row in first)
     assert sum(row["split"] == "certification" for row in first) == 100
     assert sum(row["split"] == "final" for row in first) == 100
+
+
+def test_mbpp_probe_recalibration_requires_both_gates():
+    probability = np.asarray([0.9, 0.8, 0.2, 0.1])
+    lower = np.asarray([False, False, False, False])
+    upper = np.asarray([True, True, True, True])
+    assert select_threshold(
+        probability, lower, upper, generation_ratio=0.5, probe_ratio=0.02,
+        quality_floor=0.95, latency_target=0.90,
+    ) is None

@@ -1,0 +1,30 @@
+{
+  "protocol": "post-failure diagnostic; threshold selected on certification 100 only; final 100 not used for selection",
+  "fixed_model": "Qwen1.5B last hidden/logit, LR C=0.01, seed=2034 trained on selection 50",
+  "certification_items": 100,
+  "selected_policy": null,
+  "best_quality_constrained_policy": {
+    "threshold": 0.7566099762916565,
+    "accepted": 24,
+    "accept_rate": 0.24,
+    "unsafe_accepts": 5,
+    "accuracy": 0.71,
+    "upper_accuracy": 0.74,
+    "quality_retention": 0.9594594594594594,
+    "normalized_latency": 0.9051862472044001,
+    "latency_reduction": 0.09481375279559989
+  },
+  "best_latency_constrained_policy": {
+    "threshold": 0.75,
+    "accepted": 26,
+    "accept_rate": 0.26,
+    "unsafe_accepts": 6,
+    "accuracy": 0.7,
+    "upper_accuracy": 0.74,
+    "quality_retention": 0.9459459459459459,
+    "normalized_latency": 0.8958083010511576,
+    "latency_reduction": 0.10419169894884239
+  },
+  "continue_to_fresh_reserve_50": false,
+  "warning": "If continued, only the untouched remaining MBPP test reserve may be used for evaluation."
+}

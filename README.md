@@ -347,6 +347,12 @@ projected 21.67%/22.14% latency but retains only 90.54%/87.34% of Upper accuracy
 95% quality gate on both splits. The harness reference solutions pass 200/200 after extending
 the safe stdlib allowlist; the policy is not confirmed and identical GPU repetition is stopped.
 
+AI-22 uses only the certification 100 to test post-failure threshold recalibration while keeping
+the remaining reserve 50 untouched. No threshold satisfies both gates: the quality-safe point
+retains 95.95% quality but saves 9.48% latency, while the 10.42%-saving point retains 94.59%
+quality. Because both are strict near-misses, the reserve GPU run is not started and the MBPP
+hidden-probe branch is closed under the predeclared 95%/10% criteria.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

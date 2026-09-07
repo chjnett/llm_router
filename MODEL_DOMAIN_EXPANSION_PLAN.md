@@ -234,6 +234,12 @@ Certification에서 Lower/Upper pass@1은 62/74%, probe AUC/AP는 0.611/0.754였
 
 실패 원인은 probe 자체의 비용이 아니라 작은 selection에서 선택한 분류 경계의 일반화 붕괴다. 동일 모델·threshold의 GPU 반복은 중단한다. 다음으로 가능한 저비용 분석은 certification 100만 calibration 분할로 사용했을 때 품질 제약과 10% 지연을 동시에 만족하는 threshold가 존재하는지 CPU에서 확인하는 것이다. 존재하지 않으면 코드 도메인 hidden probe 경로를 종료한다. 존재하더라도 이미 관찰한 final 100은 확인용으로 재사용하지 않고 남은 비중복 reserve 50에서만 새 정책을 평가해야 한다.
 
+### AI-22 Certification-only 재보정 · 엄격한 near-miss, 코드 경로 종료
+
+이미 관찰한 final 100을 정책 선택에서 제외하고 certification 100만으로 threshold feasibility를 다시 계산했다. 품질 제약을 만족하는 최저 지연점은 threshold 0.75661, 채택률 24%, 품질 유지 95.95%, 지연 절감 9.48%로 10% 목표에 0.52%p 미달했다. 반대로 지연 조건을 만족하는 최고 품질점은 threshold 0.75, 채택률 26%, 지연 절감 10.42%, 품질 유지 94.59%로 95% 목표에 0.41%p 미달했다.
+
+두 기준을 동시에 만족하는 threshold가 없으므로 남은 비중복 reserve 50은 생성·채점하지 않았다. 이 결과는 경계선 가능성은 보여주지만 기준을 사후 완화하거나 final을 재사용하지 않는다. MBPP hidden-probe 경로는 현재 기준에서 종료하고, 다음 확장은 이미 확인된 MMLU one-forward 구조를 중심으로 다른 객관식 도메인과 비-Qwen 모델 family에 복제하는 방향이 더 타당하다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처
