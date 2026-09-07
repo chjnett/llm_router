@@ -22,6 +22,7 @@ from src.prepare_ifeval_screening import balanced_sample as sample_ifeval, clean
 from src.mbpp_worker import validate_candidate
 from src.analyze_mbpp_query_pretriage import direct_policy_metrics
 from src.analyze_mbpp_hidden_pretriage import probe_policy_metrics
+from src.prepare_mbpp_independent import split_independent_rows
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -406,3 +407,17 @@ def test_mbpp_hidden_probe_cost_reuses_lower_kv_cache():
     )
     assert result["accuracy"] == 1.0
     assert result["normalized_latency"] == 0.75
+
+
+def test_mbpp_independent_split_excludes_selection_and_is_fixed():
+    rows = [
+        {"task_id": index, "prompt": f"p{index}", "code": "def f(): return 1", "test_imports": [], "test_list": ["assert f() == 1"]}
+        for index in range(207)
+    ]
+    first = split_independent_rows(rows, set(range(7)), seed=9)
+    second = split_independent_rows(rows, set(range(7)), seed=9)
+    assert [row["id"] for row in first] == [row["id"] for row in second]
+    assert len(first) == 200
+    assert all(row["task_metadata"]["task_id"] not in set(range(7)) for row in first)
+    assert sum(row["split"] == "certification" for row in first) == 100
+    assert sum(row["split"] == "final" for row in first) == 100
