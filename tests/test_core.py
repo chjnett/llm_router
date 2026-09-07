@@ -21,6 +21,7 @@ from src.prepare_kmmlu_screening import convert_row
 from src.prepare_ifeval_screening import balanced_sample as sample_ifeval, clean_kwargs
 from src.mbpp_worker import validate_candidate
 from src.analyze_mbpp_query_pretriage import direct_policy_metrics
+from src.analyze_mbpp_hidden_pretriage import probe_policy_metrics
 
 
 def test_gsm8k_scoring_uses_final_answer():
@@ -394,3 +395,14 @@ def test_mbpp_direct_router_avoids_lower_overhead_on_upper_requests():
     assert result["unsafe_accepts"] == 1
     assert result["accuracy"] == 0.5
     assert result["normalized_latency"] == 0.625
+
+
+def test_mbpp_hidden_probe_cost_reuses_lower_kv_cache():
+    probability = np.asarray([0.9, 0.1])
+    lower = np.asarray([True, False])
+    upper = np.asarray([True, True])
+    result = probe_policy_metrics(
+        probability, 0.5, lower, upper, generation_ratio=0.4, probe_ratio=0.1
+    )
+    assert result["accuracy"] == 1.0
+    assert result["normalized_latency"] == 0.75
