@@ -198,6 +198,8 @@
     <div class="callout" style="margin-top:15px"><strong>해석</strong><div>완벽한 직접 라우터의 절감 상한은 19~25%지만 TF-IDF 표면 특징은 Lower 성공을 구분하지 못했다. 품질을 지키면 실제 절감은 5~6%에 그친다. 다음 단계는 긴 코드를 생성하지 않고 <b>한 번의 짧은 forward에서 얻는 Lower hidden-state/logit</b>에 난이도 신호가 있는지 확인하는 것이다.</div></div>
     <h3 style="margin:24px 0 10px">AI-20 · Lower 1-forward hidden-state probe</h3><div class="table-wrap"><table><thead><tr><th>Lower</th><th>OOF AUC / AP</th><th>Probe p50</th><th>채택률</th><th>품질 유지</th><th>예상 지연 절감</th><th>판정</th></tr></thead><tbody><tr class="focus"><td>Qwen2.5-1.5B</td><td>0.798 / 0.815</td><td>29.17ms</td><td>34.0%</td><td>95.35%</td><td>16.45%</td><td>독립 확인 진행</td></tr><tr><td>SmolLM2-360M</td><td>0.496 / 0.343</td><td>31.23ms</td><td>품질 제약 10%</td><td>95.35%</td><td>3.56%</td><td>중단</td></tr></tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>중요한 제한</strong><div>Qwen 결과는 50문항 OOF 탐색이며 end-to-end 실측이 아니다. 예상 지연 0.835는 채택 요청에서 <b>probe KV cache를 Lower 코드 생성에 재사용</b>한다고 가정한다. 모델·특징·C=0.01·threshold 0.505를 모두 고정하고 비중복 MBPP test 100+100에서 재현돼야 결과로 승격한다.</div></div>
+    <h3 style="margin:24px 0 10px">AI-21 · Qwen hidden probe 독립 확인</h3><div class="table-wrap"><table><thead><tr><th>분할</th><th>Lower / Upper Pass@1</th><th>Probe AUC / AP</th><th>채택률</th><th>시스템 Pass@1</th><th>품질 유지</th><th>예상 지연 절감</th><th>판정</th></tr></thead><tbody><tr><td>Certification · 100</td><td>62% / 74%</td><td>0.611 / 0.754</td><td>50%</td><td>67%</td><td>90.54%</td><td>21.67%</td><td>품질 실패</td></tr><tr><td>Final · 100</td><td>51% / 79%</td><td>0.582 / 0.580</td><td>51%</td><td>69%</td><td>87.34%</td><td>22.14%</td><td>품질 실패</td></tr></tbody></table></div>
+    <div class="callout" style="margin-top:15px"><strong>확인적 결론</strong><div>채점기는 공식 reference <b>200/200</b>, guard 오탐 0으로 검증됐다. 그러나 selection 50에서 AUC 0.798이던 probe는 새 분할에서 0.611/0.582로 하락했고 고정 threshold가 오답을 과도하게 Lower로 보냈다. 속도는 충분하지만 두 분할 모두 95% 품질을 실패했으므로 <b>AI-20 성능은 확인되지 않았다.</b> 동일 GPU 반복은 중단한다.</div></div>
   </section>
 
   <section id="contrastive">
@@ -345,7 +347,8 @@
       <tr><td>AI-18</td><td>MBPP 50 · SmolLM2-360M / Qwen-7B 초소형 Lower</td><td>완료</td><td><span class="tag fail">Oracle 지연 1.071 · 200 확장 중단</span></td></tr>
       <tr><td>AI-19</td><td>MBPP query-only TF-IDF 직접 라우터 · 5-fold OOF</td><td>완료</td><td><span class="tag fail">AUC 0.51 · 품질/지연 동시 gate 실패</span></td></tr>
       <tr><td>AI-20</td><td>Lower 1-forward hidden-state/logit 난이도 probe · MBPP 50</td><td>완료</td><td><span class="tag done">Qwen OOF AUC 0.798 · 예상 지연 −16.45%</span></td></tr>
-      <tr class="focus"><td>AI-21</td><td>Qwen 설정·threshold 고정 · 비중복 MBPP test 100+100</td><td>약 20~40분</td><td><span class="tag live">독립 확인</span></td></tr>
+      <tr><td>AI-21</td><td>Qwen 설정·threshold 고정 · 비중복 MBPP test 100+100</td><td>완료</td><td><span class="tag fail">품질 90.54% / 87.34% · 확인 실패</span></td></tr>
+      <tr class="focus"><td>AI-22</td><td>Certification-only threshold feasibility · reserve 50 보호</td><td>CPU 약 5분</td><td><span class="tag live">마지막 코드-domain 진단</span></td></tr>
       <tr><td>AL</td><td>통과 셀만 전체 test · 3 seeds · 통계 검증</td><td>1~3일</td><td><span class="tag">계획</span></td></tr>
     </tbody></table></div>
     <div class="callout" style="margin-top:15px"><strong>논문 산출물</strong><div><b>paper/overleaf/main_single.tex</b>을 Overleaf의 main.tex에 통째로 붙여넣고 <b>paper/figures/*.pdf</b> 네 개만 업로드하면 된다. 자세한 수정·검수 방법은 <b>OVERLEAF_KSC_PAPER_GUIDE.md</b>에 정리했다.</div></div>

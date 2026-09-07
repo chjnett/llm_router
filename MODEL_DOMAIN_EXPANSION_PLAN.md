@@ -226,6 +226,14 @@ Upper 정확도의 95%를 지키는 최저 지연 정책은 두 모델 모두 10
 
 지연 계산은 Lower로 채택한 요청이 probe의 KV cache를 그대로 이어 코드 생성에 사용하고, 거절 요청만 probe 후 Upper를 호출한다는 아키텍처 가정이다. 아직 end-to-end 구현 실측이 아니며 50문항 OOF에서 모델·threshold를 선택했으므로 확인 결과로 주장하지 않는다. Qwen1.5B, feature schema, Logistic Regression `C=0.01`, seed 2034, threshold 0.505를 고정하고 기존 50문항과 겹치지 않는 MBPP test 200개를 certification/final 100개씩 나눠 다음 단계에서 검증한다.
 
+### AI-21 MBPP hidden probe 독립 100+100 · 확인 실패
+
+Selection 50과 겹치는 test 7개를 제외하고 MBPP test 200개를 certification/final 각 100개로 고정했다. Qwen1.5B, 마지막 hidden state+logit 특징, Logistic Regression `C=0.01`, seed 2034, threshold 0.505를 바꾸지 않았다. 공식 reference code는 안전한 `array/copy/typing/bin`을 allowlist에 추가한 뒤 200/200 통과했고 guard rejection은 Lower/Upper 모두 0이었다. Lower 한 건은 생성 코드의 timeout으로 오답 처리했다.
+
+Certification에서 Lower/Upper pass@1은 62/74%, probe AUC/AP는 0.611/0.754였다. 50%를 Lower에 배정해 시스템 pass@1 67%, 품질 유지 90.54%, 예상 지연 절감 21.67%였다. Final에서 Lower/Upper는 51/79%, AUC/AP는 0.582/0.580이었다. 51%를 Lower에 배정해 시스템 69%, 품질 유지 87.34%, 예상 지연 절감 22.14%였다. 두 분할 모두 속도 조건은 통과했지만 95% 품질 조건을 크게 실패했으므로 AI-20의 탐색 결과는 확인되지 않았다.
+
+실패 원인은 probe 자체의 비용이 아니라 작은 selection에서 선택한 분류 경계의 일반화 붕괴다. 동일 모델·threshold의 GPU 반복은 중단한다. 다음으로 가능한 저비용 분석은 certification 100만 calibration 분할로 사용했을 때 품질 제약과 10% 지연을 동시에 만족하는 threshold가 존재하는지 CPU에서 확인하는 것이다. 존재하지 않으면 코드 도메인 hidden probe 경로를 종료한다. 존재하더라도 이미 관찰한 final 100은 확인용으로 재사용하지 않고 남은 비중복 reserve 50에서만 새 정책을 평가해야 한다.
+
 새 논문 주장은 “Qwen 수학 라우터”가 아니라 **모델 family와 task 도메인이 바뀌어도 output-aware routing과 feasibility guard가 언제 비용 효율적이며, 언제 자동으로 비활성화되어야 하는가**로 확장한다.
 
 ## 8. 실행 환경과 공식 출처

@@ -341,6 +341,12 @@ normalized latency 0.835 (16.45% reduction). SmolLM2 remains at AUC 0.496 and fa
 exploratory selection result and assumes that accepted Qwen requests reuse the probe KV cache;
 the Qwen configuration alone advances to independent MBPP certification.
 
+AI-21 freezes that Qwen probe, LR configuration, and threshold on 200 non-overlapping MBPP test
+items split 100/100. Certification/final probe AUC drops to 0.611/0.582. The policy saves a
+projected 21.67%/22.14% latency but retains only 90.54%/87.34% of Upper accuracy, failing the
+95% quality gate on both splits. The harness reference solutions pass 200/200 after extending
+the safe stdlib allowlist; the policy is not confirmed and identical GPU repetition is stopped.
+
 Generated data, model outputs, embeddings, and adapters are stored below `artifacts/` and
 excluded from Git. Small manifests and final JSON result summaries are force-tracked when
 needed for auditability.

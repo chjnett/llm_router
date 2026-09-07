@@ -1,0 +1,3367 @@
+{
+  "protocol": "exploratory guarded-subprocess MBPP sanitized screen on 200 rows",
+  "harness_reference_evaluation": {
+    "pass_at_1": 1.0,
+    "correct": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "timeouts": 0,
+    "guard_rejections": 0,
+    "details": [
+      {
+        "id": "mbpp-test-172",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-223",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-247",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-88",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-473",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-392",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-123",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-118",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-234",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-257",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-282",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-63",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-292",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-272",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-237",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-82",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-161",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-248",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-102",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-69",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-444",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-448",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-252",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-94",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-133",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-306",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-399",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-437",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-459",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-479",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-404",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-280",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-475",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-93",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-235",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-126",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-301",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-17",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-284",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-414",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-409",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-417",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-256",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-160",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-240",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-286",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-442",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-95",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-92",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-75",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-474",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-433",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-62",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-163",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-281",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-61",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-393",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-260",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-273",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-389",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-70",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-83",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-472",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-162",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-293",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-388",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-476",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-445",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-410",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-424",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-421",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-310",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-420",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-277",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-396",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-311",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-265",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-232",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-113",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-308",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-226",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-19",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-430",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-84",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-80",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-271",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-165",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-245",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-427",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-307",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-72",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-233",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-309",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-108",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-105",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-116",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-145",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-104",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-446",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-12",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-451",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-103",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-276",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-255",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-139",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-87",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-79",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-170",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-457",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-57",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-464",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-131",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-166",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-441",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-227",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-470",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-267",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-283",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-413",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-249",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-274",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-429",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-460",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-100",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-117",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-14",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-86",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-168",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-230",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-450",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-246",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-287",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-242",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-422",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-439",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-411",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-478",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-89",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-129",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-130",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-266",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-278",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-434",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-390",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-167",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-438",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-400",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-11",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-251",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-238",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-120",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-398",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-90",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-68",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-244",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-391",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-18",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-436",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-305",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-295",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-106",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-115",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-128",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-285",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-16",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-250",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-67",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-401",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-229",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-440",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-412",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-141",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-135",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-465",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-394",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-407",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-290",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-137",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-99",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-58",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-395",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-300",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-101",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-453",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-418",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-461",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-304",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-91",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-269",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-259",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-164",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-477",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-85",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-64",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-294",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-20",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-296",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-279",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-462",
+        "passed": true
+      },
+      {
+        "id": "mbpp-test-408",
+        "passed": true
+      }
+    ]
+  },
+  "lower": {
+    "model": {
+      "key": "qwen_1_5b",
+      "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "family": "qwen2.5",
+      "size_billions": 1.5,
+      "access": "public",
+      "default_4bit": true,
+      "trust_remote_code": false
+    },
+    "evaluation": {
+      "pass_at_1": 0.565,
+      "correct": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "timeouts": 1,
+      "guard_rejections": 0,
+      "details": [
+        {
+          "id": "mbpp-test-172",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-223",
+          "passed": false,
+          "error": "IndexError",
+          "message": "list index out of range"
+        },
+        {
+          "id": "mbpp-test-247",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-88",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-473",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-392",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-123",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-118",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-234",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-257",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-282",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-63",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-292",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-272",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-237",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-82",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-161",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-248",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-102",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-69",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-444",
+          "passed": false,
+          "error": "TypeError",
+          "message": "'>' not supported between instances of 'tuple' and 'int'"
+        },
+        {
+          "id": "mbpp-test-448",
+          "passed": false,
+          "error": "RecursionError",
+          "message": "maximum recursion depth exceeded"
+        },
+        {
+          "id": "mbpp-test-252",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-94",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-133",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-306",
+          "passed": false,
+          "error": "TypeError",
+          "message": "max_sum_increasing_subseq() takes 3 positional arguments but 4 were given"
+        },
+        {
+          "id": "mbpp-test-399",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-437",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-459",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-479",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-404",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-280",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-475",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-93",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-235",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-126",
+          "passed": false,
+          "error": "TypeError",
+          "message": "'int' object is not iterable"
+        },
+        {
+          "id": "mbpp-test-301",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-17",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-284",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-414",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-409",
+          "passed": false,
+          "error": "TypeError",
+          "message": "'int' object is not iterable"
+        },
+        {
+          "id": "mbpp-test-417",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-256",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-160",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-240",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-286",
+          "passed": false,
+          "error": "TypeError",
+          "message": "unsupported operand type(s) for +: 'int' and 'list'"
+        },
+        {
+          "id": "mbpp-test-442",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-95",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-92",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-75",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-474",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-433",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-62",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-163",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-281",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-61",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'count_Substrings' is not defined"
+        },
+        {
+          "id": "mbpp-test-393",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-260",
+          "passed": false,
+          "error": "TimeoutExpired"
+        },
+        {
+          "id": "mbpp-test-273",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-389",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-70",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-83",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-472",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-162",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-293",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-388",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'log2' is not defined"
+        },
+        {
+          "id": "mbpp-test-476",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-445",
+          "passed": false,
+          "error": "TypeError",
+          "message": "can't multiply sequence by non-int of type 'tuple'"
+        },
+        {
+          "id": "mbpp-test-410",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-424",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-421",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-310",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-420",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-277",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-396",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-311",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-265",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-232",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-113",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-308",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-226",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-19",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-430",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-84",
+          "passed": false,
+          "error": "RecursionError",
+          "message": "maximum recursion depth exceeded"
+        },
+        {
+          "id": "mbpp-test-80",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-271",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-165",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-245",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-427",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-307",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'colon_tuplex' is not defined"
+        },
+        {
+          "id": "mbpp-test-72",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-233",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-309",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-108",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-105",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-116",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-145",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-104",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-446",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-12",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-451",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-103",
+          "passed": false,
+          "error": "RecursionError",
+          "message": "maximum recursion depth exceeded"
+        },
+        {
+          "id": "mbpp-test-276",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-255",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-139",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-87",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-79",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-170",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-457",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-57",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-464",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-131",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-166",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-441",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-227",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-470",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-267",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-283",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-413",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-249",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-274",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-429",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-460",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-100",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-117",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-14",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-86",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-168",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-230",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-450",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-246",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-287",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-242",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-422",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-439",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-411",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-478",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-89",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-129",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-130",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-266",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-278",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-434",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-390",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-167",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-438",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-400",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-11",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-251",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-238",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-120",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-398",
+          "passed": false,
+          "error": "ValueError",
+          "message": "invalid literal for int() with base 10: '['"
+        },
+        {
+          "id": "mbpp-test-90",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-68",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-244",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-391",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-18",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-436",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-305",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-295",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-106",
+          "passed": false,
+          "error": "TypeError",
+          "message": "can only concatenate list (not \"tuple\") to list"
+        },
+        {
+          "id": "mbpp-test-115",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-128",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-285",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-16",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-250",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-67",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-401",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-229",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-440",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-412",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-141",
+          "passed": false,
+          "error": "IndexError",
+          "message": "list index out of range"
+        },
+        {
+          "id": "mbpp-test-135",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-465",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-394",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-407",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-290",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-137",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-99",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-58",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-395",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-300",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-101",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-453",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-418",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-461",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-304",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-91",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-269",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-259",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-164",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-477",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-85",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-64",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-294",
+          "passed": false,
+          "error": "ValueError",
+          "message": "invalid literal for int() with base 10: 'Python'"
+        },
+        {
+          "id": "mbpp-test-20",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-296",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'merged_sorted' is not defined"
+        },
+        {
+          "id": "mbpp-test-279",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-462",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-408",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        }
+      ]
+    },
+    "metrics": {
+      "items": 200,
+      "judged_items": 0,
+      "accuracy": null,
+      "parse_success_rate": null,
+      "generated_tokens_mean": 59.4,
+      "token_limit_rate": 0.0,
+      "latency_ms_p50": 924.3695000186563,
+      "latency_ms_p95": 5810.266499989666,
+      "items_per_second": 0.5972613361454465,
+      "peak_vram_allocated_gb": 3.059162139892578,
+      "peak_vram_reserved_gb": 3.099609375,
+      "power_samples": 602,
+      "power_watts_mean": 197.80368770764113,
+      "power_watts_max": 242.48,
+      "gross_energy_joules": 66236.89689481976,
+      "gross_energy_joules_per_item": 331.1844844740988
+    }
+  },
+  "upper": {
+    "model": {
+      "key": "qwen_7b",
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "family": "qwen2.5",
+      "size_billions": 7.0,
+      "access": "public",
+      "default_4bit": true,
+      "trust_remote_code": false
+    },
+    "evaluation": {
+      "pass_at_1": 0.765,
+      "correct": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "timeouts": 0,
+      "guard_rejections": 0,
+      "details": [
+        {
+          "id": "mbpp-test-172",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-223",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-247",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-88",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-473",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-392",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-123",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-118",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-234",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-257",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-282",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-63",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-292",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-272",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-237",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-82",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-161",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-248",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-102",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-69",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-444",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-448",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-252",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-94",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-133",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-306",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-399",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-437",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-459",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-479",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-404",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-280",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-475",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-93",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-235",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-126",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-301",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-17",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-284",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-414",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-409",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-417",
+          "passed": false,
+          "error": "NameError",
+          "message": "name 'itertools' is not defined"
+        },
+        {
+          "id": "mbpp-test-256",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-160",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-240",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-286",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-442",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-95",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-92",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-75",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-474",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-433",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-62",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-163",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-281",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-61",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-393",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-260",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-273",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-389",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-70",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-83",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-472",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-162",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-293",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-388",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-476",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-445",
+          "passed": false,
+          "error": "TypeError",
+          "message": "can't multiply sequence by non-int of type 'tuple'"
+        },
+        {
+          "id": "mbpp-test-410",
+          "passed": false,
+          "error": "TypeError",
+          "message": "'<' not supported between instances of 'int' and 'str'"
+        },
+        {
+          "id": "mbpp-test-424",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-421",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-310",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-420",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-277",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-396",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-311",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-265",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-232",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-113",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-308",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-226",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-19",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-430",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-84",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-80",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-271",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-165",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-245",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-427",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-307",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-72",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-233",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-309",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-108",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-105",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-116",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-145",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-104",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-446",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-12",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-451",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-103",
+          "passed": false,
+          "error": "IndexError",
+          "message": "list assignment index out of range"
+        },
+        {
+          "id": "mbpp-test-276",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-255",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-139",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-87",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-79",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-170",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-457",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-57",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-464",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-131",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-166",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-441",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-227",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-470",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-267",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-283",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-413",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-249",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-274",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-429",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-460",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-100",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-117",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-14",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-86",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-168",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-230",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-450",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-246",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-287",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-242",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-422",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-439",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-411",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-478",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-89",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-129",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-130",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-266",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-278",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-434",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-390",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-167",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-438",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-400",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-11",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-251",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-238",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-120",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-398",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-90",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-68",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-244",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-391",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-18",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-436",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-305",
+          "passed": false,
+          "error": "AttributeError",
+          "message": "'list' object has no attribute 'split'"
+        },
+        {
+          "id": "mbpp-test-295",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-106",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-115",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-128",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-285",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-16",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-250",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-67",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-401",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-229",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-440",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-412",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-141",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-135",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-465",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-394",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-407",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-290",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-137",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-99",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-58",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-395",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-300",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-101",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-453",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-418",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-461",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-304",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-91",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-269",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-259",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-164",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-477",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-85",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-64",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-294",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-20",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-296",
+          "passed": true
+        },
+        {
+          "id": "mbpp-test-279",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-462",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        },
+        {
+          "id": "mbpp-test-408",
+          "passed": false,
+          "error": "AssertionError",
+          "message": ""
+        }
+      ]
+    },
+    "metrics": {
+      "items": 200,
+      "judged_items": 0,
+      "accuracy": null,
+      "parse_success_rate": null,
+      "generated_tokens_mean": 77.075,
+      "token_limit_rate": 0.0,
+      "latency_ms_p50": 1684.2721999855712,
+      "latency_ms_p95": 8746.472999977414,
+      "items_per_second": 0.36605197040566717,
+      "peak_vram_allocated_gb": 5.585241794586182,
+      "peak_vram_reserved_gb": 5.685546875,
+      "power_samples": 987,
+      "power_watts_mean": 277.2015501519759,
+      "power_watts_max": 312.16,
+      "gross_energy_joules": 151454.75099875833,
+      "gross_energy_joules_per_item": 757.2737549937916
+    }
+  },
+  "latency_ratio": 0.5488242933811858,
+  "oracle_pass_at_1": 0.8,
+  "oracle_normalized_latency": 0.9838242933811858,
+  "checks": {
+    "upper_accuracy_advantage_5pp": true,
+    "latency_ratio_below_0_5": false,
+    "oracle_quality_95pct": true,
+    "oracle_latency_10pct_reduction": false,
+    "token_limit_below_10pct": true
+  },
+  "continue_to_200": false,
+  "security_note": "AST allowlist plus Python -I -S child process and per-item timeout; not an OS security boundary"
+}
